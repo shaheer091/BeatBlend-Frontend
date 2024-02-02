@@ -9,20 +9,22 @@ import { UserService } from '../../../services/user.service';
 })
 export class OtpVerificationComponent {
   constructor(private signupService:UserService){}
+  @Input() data:any
   @Input() otp: any;
   enteredOTP: any;
   
   onVerifyOTP(): void {
     console.log(`serverOTP ${this.otp} ,enteredOTP ${this.enteredOTP}`);
+    console.log(this.data);
+    
+    const fulldata={sendedotp:this.otp,enteredotp:this.enteredOTP,...this.data}
+    console.log(fulldata);
+  
     this.signupService
-      .apiVerifyOtp({
-        sendedotp:this.otp,
-        enteredotp:this.enteredOTP,
-      })
+      .apiVerifyOtp(fulldata)
       .subscribe((response) => {
         console.log(response);
         console.log(this.otp);
-        // Handle the response from the server after OTP verification
       });
   }
 }

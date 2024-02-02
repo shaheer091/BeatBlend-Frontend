@@ -94,10 +94,9 @@ export class SignupComponent implements OnInit {
     this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
       console.log(res);
       this.otp = res.otp;
-      // this.data=this.signupForm.va
       if (this.otp) {
-        // Assuming res.otp contains the OTP value
         this.showOtpComponent = true;
+        this.data=this.signupForm.value
         
         // const enteredOTP = prompt('Enter the OTP sent to your email:');
         // if (enteredOTP) {
