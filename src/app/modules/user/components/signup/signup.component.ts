@@ -17,7 +17,8 @@ export class SignupComponent implements OnInit {
   alreadyExist: string = '';
   signupForm!: FormGroup;
   otp = '';
-
+  showOtpComponent: Boolean = false;
+  data!:any
 
   constructor(
     private formBuilder: FormBuilder,
@@ -88,29 +89,20 @@ export class SignupComponent implements OnInit {
       : { mismatchedPasswords: true };
   }
 
-  verifyOTP(serverOTP: any, enteredOTP: any): void {
-    console.log(`serverOTP ${serverOTP} ,enteredOTP ${enteredOTP}`);
-    this.signupService
-      .apiVerifyOtp({
-        enteredOTP: String(enteredOTP),
-        serverOTP: String(serverOTP),
-      })
-      .subscribe((response) => {
-        console.log(response);
-        console.log(serverOTP);
-        // Handle the response from the server after OTP verification
-      });
-  }
+  
   onSubmit() {
     this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
       console.log(res);
       this.otp = res.otp;
+      // this.data=this.signupForm.va
       if (this.otp) {
         // Assuming res.otp contains the OTP value
-        const enteredOTP = prompt('Enter the OTP sent to your email:');
-        if (enteredOTP) {
-          this.verifyOTP(this.otp, enteredOTP);
-        }
+        this.showOtpComponent = true;
+        
+        // const enteredOTP = prompt('Enter the OTP sent to your email:');
+        // if (enteredOTP) {
+        //   this.verifyOTP(this.otp, enteredOTP);
+        // }
       } else {
         this.alreadyExist = res.message;
       }
@@ -119,5 +111,4 @@ export class SignupComponent implements OnInit {
 
     console.log('Form submitted!', this.signupForm.value);
   }
-  
 }
