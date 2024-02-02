@@ -14,9 +14,15 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
+  alreadyExist: string = '';
   signupForm!: FormGroup;
+  otp = '';
 
-  constructor(private formBuilder: FormBuilder,private signupService:UserService) {}
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private signupService: UserService
+  ) {}
   mattta: any = '';
   ngOnInit() {
     this.signupForm = this.formBuilder.group(
@@ -82,15 +88,36 @@ export class SignupComponent implements OnInit {
       : { mismatchedPasswords: true };
   }
 
+  verifyOTP(serverOTP: any, enteredOTP: any): void {
+    console.log(`serverOTP ${serverOTP} ,enteredOTP ${enteredOTP}`);
+    this.signupService
+      .apiVerifyOtp({
+        enteredOTP: String(enteredOTP),
+        serverOTP: String(serverOTP),
+      })
+      .subscribe((response) => {
+        console.log(response);
+        console.log(serverOTP);
+        // Handle the response from the server after OTP verification
+      });
+  }
   onSubmit() {
-    this.signupService.apiCall(this.signupForm.value).subscribe((res)=>{
+    this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
       console.log(res);
-    })
+      this.otp = res.otp;
+      if (this.otp) {
+        // Assuming res.otp contains the OTP value
+        const enteredOTP = prompt('Enter the OTP sent to your email:');
+        if (enteredOTP) {
+          this.verifyOTP(this.otp, enteredOTP);
+        }
+      } else {
+        this.alreadyExist = res.message;
+      }
+    });
+    this.alreadyExist = '';
+
     console.log('Form submitted!', this.signupForm.value);
   }
-}
-
-export function noSpace(control: FormControl): ValidationErrors | null {
-  const isSpace = (control.value || '').includes(' ');
-  return isSpace ? { noSpace: true } : null;
+  
 }
