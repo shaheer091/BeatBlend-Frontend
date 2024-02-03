@@ -1,4 +1,3 @@
-<!-- otp-verification.component.html -->
 <div class="otp-container">
   <div class="otp-card">
     <h4 class="otp-title">OTP Verification</h4>
@@ -10,6 +9,10 @@
       <div class="btn-cont">
         <button type="button" (click)="onVerifyOTP()" class="otp-button">Verify OTP</button>
         <button type="button" (click)="goBck()" class="back-button btn btn-danger">Back</button>
+      </div>
+      <div class="message-container">
+        <span *ngIf="message === 'OTP verified successfully'" class="success-message">{{message}}</span>
+        <span *ngIf="message === 'Invalid OTP'" class="error-message">{{message}}</span>
       </div>
     </form>
   </div>

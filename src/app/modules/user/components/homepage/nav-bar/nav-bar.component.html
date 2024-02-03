@@ -1,33 +1,14 @@
-<!-- navbar.component.html -->
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">BeatBlend Music</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Explore</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Genres</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Playlists</a>
-          </li>
-        </ul>
-      </div>
-      <div class="d-flex">
-        <!-- Add your signup/login buttons or any other elements here -->
-        <button class="btn btn-outline-light me-2" type="button">Login</button>
-        <button class="btn btn-primary" type="button">Sign Up</button>
-      </div>
+<div class="nav-container">
+    <div class="logo"><h1>BeatBlend</h1></div>
+    <ul class="nav-list">
+      <li><a href="#home">HOME</a></li>
+      <li><a href="#playlist">PLAYLIST</a></li>
+      <li><a href="#tickets">TICKETS</a></li>
+      <li><a href="#news">NEWS</a></li>
+      <li><a href="#festivalinfo">FESTIVAL INFO</a></li>
+    </ul>
+    <div class="buttons">
+      <button class="signup-btn" (click)="signup()">Signup</button>
+      <button class="login-btn" (click)="login()">Login</button>
     </div>
-  </nav>
-  
+  </div>

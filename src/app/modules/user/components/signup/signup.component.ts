@@ -84,13 +84,16 @@ export class SignupComponent implements OnInit {
     return null;
   }
 
-  matchPasswords(group: FormGroup) {
-    const password = group.get('password');
-    const confirmPassword = group.get('confirmPassword');
-
-    return password?.value === confirmPassword?.value
-      ? null
-      : { mismatchedPasswords: true };
+  matchPasswords(group: FormGroup): ValidationErrors | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+  
+    if (password !== confirmPassword) {
+      group.get('confirmPassword')?.setErrors({ mismatchedPasswords: true });
+      return { mismatchedPasswords: true };
+    }
+  
+    return null;
   }
 
   
