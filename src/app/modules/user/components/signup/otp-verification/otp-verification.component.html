@@ -1,14 +1,16 @@
 <!-- otp-verification.component.html -->
 <div class="otp-container">
-    <div class="otp-card">
-      <h4 class="otp-title">OTP Verification</h4>
-      <form>
-        <div class="otp-input-group">
-          <label for="enteredOTP">Enter OTP:</label>
-          <input type="text" id="enteredOTP" name="enteredOTP" [(ngModel)]="enteredOTP" class="otp-input" />
-        </div>
+  <div class="otp-card">
+    <h4 class="otp-title">OTP Verification</h4>
+    <form>
+      <div class="otp-input-group">
+        <label for="enteredOTP">Enter OTP:</label>
+        <input type="text" id="enteredOTP" name="enteredOTP" [(ngModel)]="enteredOTP" class="otp-input" />
+      </div>
+      <div class="btn-cont">
         <button type="button" (click)="onVerifyOTP()" class="otp-button">Verify OTP</button>
-      </form>
-    </div>
+        <button type="button" (click)="goBck()" class="back-button btn btn-danger">Back</button>
+      </div>
+    </form>
   </div>
-  
+</div>

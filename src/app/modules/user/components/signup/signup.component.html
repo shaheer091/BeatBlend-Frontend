@@ -32,8 +32,8 @@
                     Email is invalid.
                   </div>
                 </div>
-                <div>
-                  <app-otp-verification *ngIf="showOtpComponent" [otp]="otp" style="position: absolute;" [data]="data"></app-otp-verification>
+                <div class="mainContainer" [ngClass]="{'blur-background':showOtpComponent}">
+                  <app-otp-verification *ngIf="showOtpComponent" [otp]="otp" [data]="data" (hide)="hideComponent($event)"></app-otp-verification>
                 </div>
 
                 <div class="form-outline mb-2">

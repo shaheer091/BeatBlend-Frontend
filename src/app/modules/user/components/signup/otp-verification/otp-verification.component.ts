@@ -1,5 +1,5 @@
 // otp-verification.component.ts
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -12,6 +12,8 @@ export class OtpVerificationComponent {
   @Input() data:any
   @Input() otp: any;
   enteredOTP: any;
+  @Output() hide:EventEmitter<Boolean>=new EventEmitter<Boolean>();
+  
   
   onVerifyOTP(): void {
     console.log(`serverOTP ${this.otp} ,enteredOTP ${this.enteredOTP}`);
@@ -26,5 +28,10 @@ export class OtpVerificationComponent {
         console.log(response);
         console.log(this.otp);
       });
+  }
+
+  goBck(){
+    this.hide.emit(false)
+    console.log('btn clicked');
   }
 }

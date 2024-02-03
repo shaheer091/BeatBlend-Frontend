@@ -20,6 +20,10 @@ export class SignupComponent implements OnInit {
   showOtpComponent: Boolean = false;
   data!:any
 
+  hideComponent(event:Boolean){
+    this.showOtpComponent=event;
+  }
+
   constructor(
     private formBuilder: FormBuilder,
     private signupService: UserService
@@ -91,17 +95,13 @@ export class SignupComponent implements OnInit {
 
   
   onSubmit() {
+    console.log('btn clicked');
     this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
-      console.log(res);
+      console.log('iam here',res);
       this.otp = res.otp;
       if (this.otp) {
         this.showOtpComponent = true;
         this.data=this.signupForm.value
-        
-        // const enteredOTP = prompt('Enter the OTP sent to your email:');
-        // if (enteredOTP) {
-        //   this.verifyOTP(this.otp, enteredOTP);
-        // }
       } else {
         this.alreadyExist = res.message;
       }
