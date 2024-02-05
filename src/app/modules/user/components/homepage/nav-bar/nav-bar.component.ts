@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class NavBarComponent {
   constructor(private router:Router){}
   signup(){
-    this.router.navigate([''])
+    this.router.navigate(['signup'])
   }
   login(){
     this.router.navigate(['login'])

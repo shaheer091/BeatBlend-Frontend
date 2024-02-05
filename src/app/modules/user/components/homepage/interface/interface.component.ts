@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-interface',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./interface.component.css']
 })
 export class InterfaceComponent {
-
+  constructor(private router:Router){}
+  signup(){
+    this.router.navigate(['signup'])
+  }
 }
