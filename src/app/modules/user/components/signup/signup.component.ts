@@ -7,6 +7,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -18,15 +19,16 @@ export class SignupComponent implements OnInit {
   signupForm!: FormGroup;
   otp = '';
   showOtpComponent: Boolean = false;
-  data!:any
+  data!: any;
 
-  hideComponent(event:Boolean){
-    this.showOtpComponent=event;
+  hideComponent(event: Boolean) {
+    this.showOtpComponent = event;
   }
 
   constructor(
     private formBuilder: FormBuilder,
-    private signupService: UserService
+    private signupService: UserService,
+    private router: Router
   ) {}
   mattta: any = '';
   ngOnInit() {
@@ -87,24 +89,23 @@ export class SignupComponent implements OnInit {
   matchPasswords(group: FormGroup): ValidationErrors | null {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
-  
+
     if (password !== confirmPassword) {
       group.get('confirmPassword')?.setErrors({ mismatchedPasswords: true });
       return { mismatchedPasswords: true };
     }
-  
+
     return null;
   }
 
-  
   onSubmit() {
     console.log('btn clicked');
     this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
-      console.log('iam here',res);
+      console.log('iam here', res);
       this.otp = res.otp;
       if (this.otp) {
         this.showOtpComponent = true;
-        this.data=this.signupForm.value
+        this.data = this.signupForm.value;
       } else {
         this.alreadyExist = res.message;
       }

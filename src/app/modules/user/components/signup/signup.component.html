@@ -1,84 +1,106 @@
-<section class="h-screen bg-cover" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-  <div class="flex items-center h-full bg-gradient-to-r from-blue-500 to-purple-500">
-    <div class="container mx-auto rounded-lg">
-      <div class="flex justify-end items-center h-full">
-        <div class="w-full md:w-2/3 lg:w-1/2 xl:w-2/5">
-          <div class="bg-white rounded-lg relative">
-            <div class="p-3">
-              <h4 class="text-uppercase text-center mb-3 text-2xl">Create an account</h4>
+<div class="h-screen w-screen flex flex-col md:flex-row px-16 py-6">
+  <img src="https://i.pinimg.com/564x/70/b9/76/70b9767c1fd5f71c9aba5486774bb08e.jpg"
+    class="hidden md:absolute md:-translate-x-16 md:-translate-y-6 md:h-screen md:w-screen" alt="">
+  <div
+    class=" h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-tr-none opacity-90">
+    <p class="font-black text-4xl md:text-6xl p-5 md:p-5 leading-tight">Sign Up for a <span class="text-red-500">Sonic
+        Adventure</span></p>
+  </div>
+  <div
+    class=" h-full w-full md:w-1/2 bg-white rounded-br-3xl rounded-bl-3xl md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-none opacity-90">
+    <div class="flex flex-col items-center gap-2  mb-10">
+      <p class="font-bold text-xl">Create an Account</p>
+      <p class="font-thin">Already have an account? <a [routerLink]="'login'" class="text-red-500"> Sign In</a></p>
+    </div>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="flex flex-col gap-7">
 
-              <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
+        <!-- username -->
+        <div class="flex items-center flex-col">
+          <input type="text" id="username" class="w-3/5 p-2  rounded" formControlName="username"
+            placeholder="Username" />
+          <div *ngIf="username?.errors?.['required'] && username?.touched"
+            class="text-red-500 text-xs absolute translate-y-11">
+            Username is required.
+          </div>
+          <div *ngIf="username?.errors?.['minlength'] && username?.touched"
+            class="text-red-500 text-xs absolute translate-y-11">
+            Username must be at least 4 characters long.
+          </div>
+          <div class="text-red-500 text-xs absolute translate-y-11" *ngIf="alreadyExist">{{alreadyExist}}</div>
+        </div>
 
-                <div class="mb-2">
-                  <input type="text" id="username" class="w-full p-2 border rounded" formControlName="username" placeholder="Username" />
-                  <div *ngIf="username?.errors?.['required'] && username?.touched" class="text-danger">
-                    Username is required.
-                  </div>
-                  <div *ngIf="username?.errors?.['minlength'] && username?.touched" class="text-danger">
-                    Username must be at least 4 characters long.
-                  </div>
-                  <div class="text-danger" *ngIf="alreadyExist">{{alreadyExist}}</div>
-                </div>
-
-                <div class="mb-2">
-                  <input type="email" id="email" class="w-full p-2 border rounded" formControlName="email" placeholder="Email" />
-                  <div *ngIf="email?.errors?.['required'] && email?.touched" class="text-danger">
-                    Email is required.
-                  </div>
-                  <div *ngIf="email?.errors?.['email'] && email?.touched" class="text-danger">
-                    Email is invalid.
-                  </div>
-                </div>
-
-                <div class="mb-2">
-                  <div class="mainContainer" [ngClass]="{'blur-background':showOtpComponent}">
-                    <app-otp-verification *ngIf="showOtpComponent" [otp]="otp" [data]="data" (hide)="hideComponent($event)"></app-otp-verification>
-                  </div>
-                </div>
-
-                <div class="mb-2">
-                  <input type="password" id="password" class="w-full p-2 border rounded" formControlName="password" placeholder="Password" />
-                  <div *ngIf="password?.errors?.['required'] && password?.touched" class="text-danger">
-                    Password is required.
-                  </div>
-                  <div *ngIf="password?.errors?.['minlength'] && password?.touched" class="text-danger">
-                    Password must be at least 8 characters long.
-                  </div>
-                  <div *ngIf="password?.errors?.['passwordStrength'] && password?.touched" class="text-danger">
-                    Password must contain at least one uppercase letter, one lowercase letter, one digit, and one
-                    special character.
-                  </div>
-                </div>
-
-                <div class="mb-2">
-                  <input type="password" id="confirmPassword" class="w-full p-2 border rounded" formControlName="confirmPassword" placeholder="Repeat password" />
-                  <div *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched" class="text-danger">
-                    Confirm Password is required.
-                  </div>
-                  <div *ngIf="signupForm.get('confirmPassword')?.hasError('mismatchedPasswords') && signupForm.get('confirmPassword')?.touched" class="text-danger">
-                    Passwords do not match.
-                  </div>
-                </div>
-
-                <div class="mb-2">
-                  <input class="mr-1" type="checkbox" id="termsCheckbox" formControlName="terms" />
-                  <label class="text-gray-700" for="termsCheckbox">
-                    Agree to <a href="#!" class="text-blue-500"><u>Terms of service</u></a>
-                  </label>
-                </div>
-
-                <div class="mb-2">
-                  <button type="submit" class="bg-green-500 text-white p-2 w-full rounded" [disabled]="signupForm!.invalid">Register</button>
-                </div>
-
-                <p class="text-center text-gray-500 mt-2 mb-0">Already have an account? <a [routerLink]="'/login'" class="font-bold text-blue-500"><u>Login here</u></a></p>
-
-              </form>
-
-            </div>
+        <!-- email -->
+        <div class="flex items-center flex-col">
+          <input type="email" id="email" class="w-3/5 p-2  rounded" formControlName="email" placeholder="Email" />
+          <div *ngIf="email?.errors?.['required'] && email?.touched"
+            class="text-red-500 text-xs absolute translate-y-11">
+            Email is required.
+          </div>
+          <div *ngIf="email?.errors?.['email'] && email?.touched" class="text-red-500 text-xs absolute translate-y-11">
+            Email is invalid.
           </div>
         </div>
+
+
+
+        <!-- otpComponent -->
+        <div class="">
+          <div class="mainContainer">
+            <app-otp-verification *ngIf="showOtpComponent" [otp]="otp" [data]="data"
+              (hide)="hideComponent($event)"></app-otp-verification>
+          </div>
+        </div>
+
+        <!-- password -->
+        <div class="flex items-center flex-col">
+          <input type="password" id="password" class="w-3/5 p-2  rounded" formControlName="password"
+            placeholder="Password" />
+          <div *ngIf="password?.errors?.['required'] && password?.touched"
+            class="text-red-500 text-xs absolute translate-y-11">
+            Password is required.
+          </div>
+          <div *ngIf="password?.errors?.['minlength'] && password?.touched"
+            class="text-red-500 text-xs absolute translate-y-11 mt-3">
+            Password must be at least 8 characters long.
+          </div>
+          <div *ngIf="password?.errors?.['passwordStrength'] && password?.touched"
+            class="text-red-500 text-xs mt-4 translate-x-3">
+            Password needs uppercase, lowercase, digit, and special character.
+          </div>
+        </div>
+
+        <!-- confirmpassword -->
+        <div class="flex items-center flex-col">
+          <input type="password" id="confirmPassword" class="w-3/5 p-2  rounded" formControlName="confirmPassword"
+            placeholder="Repeat password" />
+          <div *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched"
+            class="text-red-500 text-xs absolute translate-y-11">
+            Confirm Password is required.
+          </div>
+          <div
+            *ngIf="signupForm.get('confirmPassword')?.hasError('mismatchedPasswords') && signupForm.get('confirmPassword')?.touched"
+            class="text-red-500 text-xs absolute translate-y-11">
+            Passwords do not match.
+          </div>
+        </div>
+
+        <!-- terms -->
+        <div class="flex justify-center">
+          <input class="mr-1" type="checkbox" id="termsCheckbox" formControlName="terms" />
+          <label class="text-gray-700" for="termsCheckbox">
+            Agree to <a href="#!" class="text-blue-500"><u>Terms of service</u></a>
+          </label>
+        </div>
+
+        <!-- button -->
+        <div class="flex justify-center">
+          <button type="submit" class="bg-green-500 text-white p-2 w-3/5 rounded"
+            [disabled]="signupForm!.invalid">Register</button>
+        </div>
+
+
       </div>
-    </div>
+    </form>
   </div>
-</section>
+</div>

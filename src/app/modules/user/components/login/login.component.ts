@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.serv.apiLogin(this.loginForm.value).subscribe((res) => {
         console.log(res.message);
         if (res.success) {
-          this.router.navigate(['homepage']);
+          this.router.navigate(['']);
         }else{
           this.message=res.message
         }
