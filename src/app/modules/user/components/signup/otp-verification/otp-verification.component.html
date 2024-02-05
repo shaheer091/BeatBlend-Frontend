@@ -1,19 +1,19 @@
 <div class="otp-container">
   <div class="otp-card">
-    <h4 class="otp-title">OTP Verification</h4>
-    <form>
-      <div class="otp-input-group">
-        <label for="enteredOTP">Enter OTP:</label>
-        <input type="text" id="enteredOTP" name="enteredOTP" [(ngModel)]="enteredOTP" class="otp-input" />
-      </div>
-      <div class="btn-cont">
-        <button type="button" (click)="onVerifyOTP()" class="otp-button">Verify OTP</button>
-        <button type="button" (click)="goBck()" class="back-button btn btn-danger">Back</button>
-      </div>
-      <div class="message-container">
-        <span *ngIf="message === 'OTP verified successfully'" class="success-message">{{message}}</span>
-        <span *ngIf="message === 'Invalid OTP'" class="error-message">{{message}}</span>
-      </div>
-    </form>
+      <h4 class="otp-title text-2xl">OTP Verification</h4>
+      <form>
+          <div class="otp-input-group mt-4">
+              <label for="enteredOTP" class="text-sm">Enter OTP:</label>
+              <input type="text" id="enteredOTP" name="enteredOTP" [(ngModel)]="enteredOTP" class="otp-input p-2 border rounded" />
+          </div>
+          <div class="btn-cont mt-4">
+              <button type="button" (click)="onVerifyOTP()" class="otp-button bg-blue-500 text-white p-2 rounded">Verify OTP</button>
+              <button type="button" (click)="goBck()" class="back-button btn btn-danger bg-red-500 text-white p-2 rounded">Back</button>
+          </div>
+          <div class="message-container mt-4">
+              <span *ngIf="message === 'OTP verified successfully'" class="success-message text-green-500">{{message}}</span>
+              <span *ngIf="message === 'Invalid OTP'" class="error-message text-red-500">{{message}}</span>
+          </div>
+      </form>
   </div>
 </div>

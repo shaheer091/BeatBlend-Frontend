@@ -32,8 +32,8 @@ export class OtpVerificationComponent {
         this.message=response.message || "An unexpected error occurs"
         if(response.success){
           setTimeout(() => {
-            this.router.navigate(['homepage'])
-          }, 5000);
+            this.router.navigate([''])
+          }, 2000);
         }
       });
   }

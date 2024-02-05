@@ -1,7 +1,4 @@
-*{
-    font-family: 'Protest Guerrilla', sans-serif;
 
-}
 
 .nav-container {
     display: flex;
@@ -14,6 +11,8 @@
   .logo h1 {
     color: #fff;
     font-size: 2rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+
   }
   
   .nav-list {

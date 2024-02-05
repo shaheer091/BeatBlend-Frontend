@@ -1,14 +1,31 @@
-<div class="nav-container">
-    <div class="logo"><h1>BeatBlend</h1></div>
-    <ul class="nav-list">
-      <li><a href="#home">HOME</a></li>
-      <li><a href="#playlist">PLAYLIST</a></li>
-      <li><a href="#tickets">TICKETS</a></li>
-      <li><a href="#news">NEWS</a></li>
-      <li><a href="#festivalinfo">FESTIVAL INFO</a></li>
-    </ul>
-    <div class="buttons">
-      <button class="signup-btn" (click)="signup()">Signup</button>
-      <button class="login-btn" (click)="login()">Login</button>
-    </div>
+<div>
+  <div class="h-14 w-screen text-white bg-black items-center p-10 flex flex-row justify-between">
+      <div class="w-1/3">
+          <h1 class="text-2xl font-bold">Beat<span class="text-red-400">Blend</span></h1>
+      </div>
+      <div class="flex md:hidden">
+          <img class="h-10" src="../../../../../../assets/images/hamburger.png" alt="">
+      </div>
+      <div class="w-1/3 hidden md:flex">
+          <ul class="flex flex-row space-x-5 justify-between">
+              <li>Home</li>
+              <li>About</li>
+              <li>Pages</li>
+              <li>News</li>
+              <li>Contact</li>
+          </ul>
+      </div>
+      <div class="w-1/3 ml-16 hidden md:flex md:justify-center">
+          <ul class="flex flex-row justify-around space-x-5">
+              <div class="flex flex-row space-x-5">
+                  <li>Help</li>
+                  <li>|</li>
+                  <li>Login</li>
+              </div>
+              <div class="space-x-5">
+                  <li>Signup</li>
+              </div>
+          </ul>
+      </div>
   </div>
+</div>
