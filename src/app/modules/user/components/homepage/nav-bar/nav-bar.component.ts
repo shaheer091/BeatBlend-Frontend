@@ -8,10 +8,17 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent {
   constructor(private router:Router){}
+
+  showSide:Boolean=false;
   signup(){
     this.router.navigate(['signup'])
   }
   login(){
     this.router.navigate(['login'])
   }
+  showSideBar(){
+    this.showSide=!this.showSide;
+    console.log('btn clicked');
+  }
+  
 }

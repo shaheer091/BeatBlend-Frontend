@@ -1,12 +1,12 @@
+<!-- otpComponent -->
 <app-otp-verification class="z-10" *ngIf="showOtpComponent" [otp]="otp" [data]="data"
   (hide)="hideComponent($event)"></app-otp-verification>
 
-<div  class="h-screen w-screen flex flex-col md:flex-row px-16 py-6">
-  <!-- <img src="https://i.pinimg.com/564x/70/b9/76/70b9767c1fd5f71c9aba5486774bb08e.jpg"
-    class="md:absolute md:-translate-x-16 md:-translate-y-6 md:h-screen md:w-screen" alt=""> -->
+<div  class="h-screen w-screen flex flex-col md:flex-row md:px-16 md:py-6">
+  
   <div
-    class=" h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-tr-none">
-    <p class="font-black text-4xl md:text-6xl p-5 md:p-8 leading-tight">Sign Up for a <span class="text-red-500">Sonic
+    class=" h-1/5 flex items-center justify-center md:h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-tr-none">
+    <p class="font-black text-4xl md:text-6xl p-5 md:p-8 leading-tight flex flex-col">Sign Up for a <span class="text-red-500">Sonic
         Adventure</span></p>
   </div>
   <div
@@ -20,7 +20,7 @@
 
         <!-- username -->
         <div class="flex items-center flex-col">
-          <input type="text" id="username" class="w-3/5 p-2  rounded" formControlName="username"
+          <input type="text" id="username" class="w-5/6 md:w-3/5 p-2  rounded" formControlName="username"
             placeholder="Username" />
           <div *ngIf="username?.errors?.['required'] && username?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
@@ -35,7 +35,7 @@
 
         <!-- email -->
         <div class="flex items-center flex-col">
-          <input type="email" id="email" class="w-3/5 p-2  rounded" formControlName="email" placeholder="Email" />
+          <input type="email" id="email" class="w-5/6 md:w-3/5 p-2  rounded" formControlName="email" placeholder="Email" />
           <div *ngIf="email?.errors?.['required'] && email?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
             Email is required.
@@ -47,21 +47,18 @@
 
 
 
-        <!-- otpComponent -->
+        
 
 
         <!-- password -->
         <div class="flex items-center flex-col">
-          <input type="password" id="password" class="w-3/5 p-2  rounded" formControlName="password"
+          <input type="password" id="password" class="w-5/6 md:w-3/5 p-2  rounded" formControlName="password"
             placeholder="Password" />
           <div *ngIf="password?.errors?.['required'] && password?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
             Password is required.
           </div>
-          <!-- <div *ngIf="password?.errors?.['minlength'] && password?.touched"
-            class="text-red-500 text-xs absolute translate-y-11 mt-3">
-            Password must be at least 8 characters long.
-          </div> -->
+          
           <div *ngIf="password?.errors?.['passwordStrength'] && password?.touched"
             class="text-red-500 text-xs mt-4 translate-x-3">
             Password must be 8 character. Needs uppercase, lowercase, digit, and special character.
@@ -70,7 +67,7 @@
 
         <!-- confirmpassword -->
         <div class="flex items-center flex-col">
-          <input type="password" id="confirmPassword" class="w-3/5 p-2  rounded" formControlName="confirmPassword"
+          <input type="password" id="confirmPassword" class="w-5/6 md:w-3/5 p-2  rounded" formControlName="confirmPassword"
             placeholder="Repeat password" />
           <div *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
