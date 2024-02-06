@@ -1,70 +1,54 @@
-<section class="h-screen bg-cover"
-        style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
-        <div class="flex items-center h-full bg-gradient-to-r from-blue-500 to-purple-500">
-            <div class="container mx-auto rounded-lg">
-                <div class="flex justify-end items-center h-full">
-                    <div class="w-full md:w-2/3 lg:w-1/2 xl:w-2/5">
-                        <div class="bg-white rounded-lg relative">
-                            <div class="p-3">
-                                <h4 class="text-2xl font-bold text-center mb-3">Login</h4>
+<div class=" h-screen w-screen flex flex-col-reverse md:flex-row md:px-16 md:py-6">
+    <!-- <img src="https://i.pinimg.com/564x/70/b9/76/70b9767c1fd5f71c9aba5486774bb08e.jpg"
+        class="hidden md:absolute md:-translate-x-16 md:-translate-y-6 md:h-screen md:w-screen" alt=""> -->
 
-                                <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="needs-validation"
-                                    novalidate>
+    <div
+        class="  h-full w-full md:w-1/2 bg-white rounded-bl-3xl rounded-tl-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-br-none opacity-90">
+        <div class="  w-full h-1/6 flex flex-col items-center gap-2  mb-10">
+            <p class="font-bold text-xl">Welcome Back!</p>
+            <p class="font-thin">Don't have an account? <a [routerLink]="'/signup'" class="text-red-500"> Sign
+                    Up</a></p>
+        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="needs-validation" novalidate>
+            <div class=" h-5/6 flex flex-col justify-center items-center gap-7 p-16">
 
-                                    <div class="mb-2">
-                                        <!-- Use either username or email based on your authentication setup -->
-                                        <input type="text" id="usernameOrEmail" class="w-full p-2 border rounded"
-                                            formControlName="usernameOrEmail" />
-                                        <label class="block text-sm text-gray-700" for="usernameOrEmail">Username or
-                                            Email</label>
-                                        <div *ngIf="usernameOrEmail?.errors?.['required'] && usernameOrEmail?.touched"
-                                            class="text-danger text-sm">
-                                            Username or Email is required.
-                                        </div>
-                                    </div>
+                <!-- email -->
+                <div class="flex flex-col justify-center items-center w-full">
+                    <input type="text" id="usernameOrEmail" class=" w-5/6 p-2 border-b-2 "
+                        formControlName="usernameOrEmail" placeholder="Username or Email" />
 
-                                    <div class="mb-2">
-                                        <input type="password" id="password" class="w-full p-2 border rounded"
-                                            formControlName="password" />
-                                        <label class="block text-sm text-gray-700" for="password">Password</label>
-                                        <div *ngIf="password?.errors?.['required'] && password?.touched"
-                                            class="text-danger text-sm">
-                                            Password is required.
-                                        </div>
-                                    </div>
-
-                                    <div class="flex justify-between items-center mb-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="rememberCheckbox"
-                                                formControlName="remember" />
-                                            <label class="text-sm text-gray-700" for="rememberCheckbox">Remember
-                                                me</label>
-                                        </div>
-                                        <a href="#!" class="text-body text-sm">Forgot Password?</a>
-                                    </div>
-
-                                    <div class="flex justify-center mb-2">
-                                        <button type="submit" class="bg-blue-500 text-white p-2 w-full rounded"
-                                            [disabled]="loginForm!.invalid">Login</button>
-                                    </div>
-
-                                    <!-- Display message in red color and at an appropriate position -->
-                                    <div *ngIf="message" class="text-danger text-center mt-2 text-sm">
-                                        {{message}}
-                                    </div>
-
-                                    <p class="text-center text-muted mt-2 mb-0">
-                                        Don't have an account?
-                                        <a [routerLink]="'/signup'" class="font-bold text-body text-sm"><u>Sign up
-                                                here</u></a>
-                                    </p>
-
-                                </form>
-
-                            </div>
-                        </div>
+                    <div *ngIf="usernameOrEmail?.errors?.['required'] && usernameOrEmail?.touched"
+                        class="text-red-500 text-xs">
+                        Username or Email is required.
                     </div>
                 </div>
+
+                <!-- password -->
+                <div class="flex flex-col justify-center items-center w-full">
+                    <input type="password" id="password" class="w-5/6 p-2 border-b-2"
+                        formControlName="password" placeholder="Password" />
+
+                    <div *ngIf="password?.errors?.['required'] && password?.touched" class="text-red-500 text-xs">
+                        Password is required.
+                    </div>
+                </div>
+
+                <!-- button -->
+                <div class="flex justify-center w-full">
+                    <button type="submit" class="bg-green-500 text-white p-2 w-5/6 rounded"
+                        [disabled]="loginForm!.invalid">Login</button>
+                </div>
+
+                <div *ngIf="message" class="text-red-500 text-center mt-2 text-xs">
+                    {{message}}
+                </div>
+
             </div>
-        </div>
-    </section>
+        </form>
+    </div>
+    <div
+        class="hidden md:flex border md:h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tr-3xl md:rounded-br-3xl md:rounded-tl-none opacity-90">
+        <p class="font-black text-4xl flex flex-col md:text-6xl p-5 md:p-5 leading-tight">Sign In to <span
+                class="text-red-500">Your Account</span></p>
+    </div>
+</div>

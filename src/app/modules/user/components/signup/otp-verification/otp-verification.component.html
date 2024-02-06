@@ -1,19 +1,19 @@
-<div class="otp-container">
-  <div class="otp-card">
-      <h4 class="otp-title text-2xl">OTP Verification</h4>
-      <form>
-          <div class="otp-input-group mt-4">
-              <label for="enteredOTP" class="text-sm">Enter OTP:</label>
-              <input type="text" id="enteredOTP" name="enteredOTP" [(ngModel)]="enteredOTP" class="otp-input p-2 border rounded" />
-          </div>
-          <div class="btn-cont mt-4">
-              <button type="button" (click)="onVerifyOTP()" class="otp-button bg-blue-500 text-white p-2 rounded">Verify OTP</button>
-              <button type="button" (click)="goBck()" class="back-button btn btn-danger bg-red-500 text-white p-2 rounded">Back</button>
-          </div>
-          <div class="message-container mt-4">
-              <span *ngIf="message === 'OTP verified successfully'" class="success-message text-green-500">{{message}}</span>
-              <span *ngIf="message === 'Invalid OTP'" class="error-message text-red-500">{{message}}</span>
-          </div>
-      </form>
-  </div>
+<div class=" w-screen absolute h-screen border flex items-center justify-center flex-col">
+    <div class="bg-slate-200 rounded-3xl h-3/5 w-2/6 border flex flex-col items-center justify-center gap-5">
+        <p class="font-bold text-3xl">OTP Verification</p>
+        <form action="" class="gap-5 flex flex-col">
+            <div class="flex flex-col justify-center items-center gap-2">
+                <label for="enteredOTP" class="">Enter OTP:</label>
+                <input class="bg-slate-200 text-center border-b-2 border-black" type="text" id="enteredOTP" name="enteredOTP" [(ngModel)]="enteredOTP"/>
+            </div>
+            <div class=" flex flex-row justify-center items-center space-x-5">
+                <button type="button" (click)="onVerifyOTP()" class="bg-green-500 px-10 rounded-xl py-1 text-white">Verify OTP</button>
+                <button type="button" (click)="goBck()" class="bg-red-500 px-10 rounded-xl py-1 text-white">Back</button>
+            </div>
+            <div class="flex justify-center items-center">
+                <span *ngIf="message === 'OTP verified successfully'" class="text-green-500">{{message}}</span>
+                <span *ngIf="message === 'Invalid OTP'" class="text-red-500">{{message}}</span>
+            </div>
+        </form>
+    </div>
 </div>

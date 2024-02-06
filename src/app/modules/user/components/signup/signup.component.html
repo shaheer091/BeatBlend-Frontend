@@ -1,19 +1,22 @@
-<div class="h-screen w-screen flex flex-col md:flex-row px-16 py-6">
-  <img src="https://i.pinimg.com/564x/70/b9/76/70b9767c1fd5f71c9aba5486774bb08e.jpg"
-    class="hidden md:absolute md:-translate-x-16 md:-translate-y-6 md:h-screen md:w-screen" alt="">
+<app-otp-verification class="z-10" *ngIf="showOtpComponent" [otp]="otp" [data]="data"
+  (hide)="hideComponent($event)"></app-otp-verification>
+
+<div  class="h-screen w-screen flex flex-col md:flex-row px-16 py-6">
+  <!-- <img src="https://i.pinimg.com/564x/70/b9/76/70b9767c1fd5f71c9aba5486774bb08e.jpg"
+    class="md:absolute md:-translate-x-16 md:-translate-y-6 md:h-screen md:w-screen" alt=""> -->
   <div
-    class=" h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-tr-none opacity-90">
-    <p class="font-black text-4xl md:text-6xl p-5 md:p-5 leading-tight">Sign Up for a <span class="text-red-500">Sonic
+    class=" h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-tr-none">
+    <p class="font-black text-4xl md:text-6xl p-5 md:p-8 leading-tight">Sign Up for a <span class="text-red-500">Sonic
         Adventure</span></p>
   </div>
   <div
-    class=" h-full w-full md:w-1/2 bg-white rounded-br-3xl rounded-bl-3xl md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-none opacity-90">
+    class=" h-full w-full md:w-1/2 bg-white rounded-br-3xl rounded-bl-3xl md:rounded-tr-3xl md:rounded-br-3xl md:rounded-bl-none">
     <div class="flex flex-col items-center gap-2  mb-10">
       <p class="font-bold text-xl">Create an Account</p>
-      <p class="font-thin">Already have an account? <a [routerLink]="'login'" class="text-red-500"> Sign In</a></p>
+      <p class="font-thin">Already have an account? <a [routerLink]="'/login'" class="text-red-500"> Sign In</a></p>
     </div>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="needs-validation" novalidate>
-      <div class="flex flex-col gap-7">
+      <div class="flex flex-col gap-5">
 
         <!-- username -->
         <div class="flex items-center flex-col">
@@ -45,12 +48,7 @@
 
 
         <!-- otpComponent -->
-        <div class="">
-          <div class="mainContainer">
-            <app-otp-verification *ngIf="showOtpComponent" [otp]="otp" [data]="data"
-              (hide)="hideComponent($event)"></app-otp-verification>
-          </div>
-        </div>
+
 
         <!-- password -->
         <div class="flex items-center flex-col">
@@ -60,13 +58,13 @@
             class="text-red-500 text-xs absolute translate-y-11">
             Password is required.
           </div>
-          <div *ngIf="password?.errors?.['minlength'] && password?.touched"
+          <!-- <div *ngIf="password?.errors?.['minlength'] && password?.touched"
             class="text-red-500 text-xs absolute translate-y-11 mt-3">
             Password must be at least 8 characters long.
-          </div>
+          </div> -->
           <div *ngIf="password?.errors?.['passwordStrength'] && password?.touched"
             class="text-red-500 text-xs mt-4 translate-x-3">
-            Password needs uppercase, lowercase, digit, and special character.
+            Password must be 8 character. Needs uppercase, lowercase, digit, and special character.
           </div>
         </div>
 
