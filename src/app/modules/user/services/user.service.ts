@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  api = 'http://localhost:3000/user/signup';
-  otpVerificationApi = 'http://localhost:3000/user/otp-verify';
-  loginApi = 'http://localhost:3000/user/login'
+  api = 'http://localhost:3000/signup';
+  otpVerificationApi = 'http://localhost:3000/otp-verify';
+  loginApi = 'http://localhost:3000/login'
 
   apiCall(data: any): Observable<any> {
     return this.http.post(this.api, data);

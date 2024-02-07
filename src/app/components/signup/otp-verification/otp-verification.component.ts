@@ -1,7 +1,7 @@
 // otp-verification.component.ts
 import { Component, Input, Output,EventEmitter } from '@angular/core';
-import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/modules/user/services/user.service';
 
 @Component({
   selector: 'app-otp-verification',

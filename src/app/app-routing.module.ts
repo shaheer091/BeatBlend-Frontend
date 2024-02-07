@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomepageComponent } from './modules/user/components/homepage/homepage.component';
-import { SignupComponent } from './modules/user/components/signup/signup.component';
-import { LoginComponent } from './modules/user/components/login/login.component';
-import { OtpVerificationComponent } from './modules/user/components/signup/otp-verification/otp-verification.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { OtpVerificationComponent } from './components/signup/otp-verification/otp-verification.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
