@@ -108,6 +108,9 @@ export class SignupComponent implements OnInit {
         this.data = this.signupForm.value;
       } else {
         this.alreadyExist = res.message;
+        setTimeout(() => {
+          this.alreadyExist=''
+        }, 4000);
       }
     });
     this.alreadyExist = '';

@@ -30,7 +30,9 @@ export class OtpVerificationComponent {
         console.log(response.success);
         console.log(response.message);
         this.message=response.message || "An unexpected error occurs"
+        console.log(response.token);
         if(response.success){
+          localStorage.setItem('token',response.token)
           setTimeout(() => {
             this.router.navigate([''])
           }, 2000);
