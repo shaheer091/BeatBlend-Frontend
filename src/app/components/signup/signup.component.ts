@@ -20,9 +20,13 @@ export class SignupComponent implements OnInit {
   otp = '';
   showOtpComponent: Boolean = false;
   data!: any;
+  showLoading: Boolean = false;
 
   hideComponent(event: Boolean) {
     this.showOtpComponent = event;
+  }
+  hideLoading(event: Boolean) {
+    this.showLoading = event;
   }
 
   constructor(
@@ -100,16 +104,18 @@ export class SignupComponent implements OnInit {
 
   onSubmit() {
     console.log('btn clicked');
+    this.showLoading = true;
     this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
       console.log('iam here', res);
       this.otp = res.otp;
       if (this.otp) {
         this.showOtpComponent = true;
+
         this.data = this.signupForm.value;
       } else {
         this.alreadyExist = res.message;
         setTimeout(() => {
-          this.alreadyExist=''
+          this.alreadyExist = '';
         }, 4000);
       }
     });

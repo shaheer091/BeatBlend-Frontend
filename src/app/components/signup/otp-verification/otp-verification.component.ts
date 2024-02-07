@@ -1,5 +1,5 @@
 // otp-verification.component.ts
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -8,13 +8,22 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './otp-verification.component.html',
   styleUrls: ['./otp-verification.component.css'],
 })
-export class OtpVerificationComponent {
+export class OtpVerificationComponent implements OnInit{
+
+
   constructor(private signupService:CommonService,private router:Router){}
+  ngOnInit(): void {
+    console.log("Inited")
+  }
   @Input() data:any
+
   @Input() otp: any;
-  enteredOTP: any;
   @Output() hide:EventEmitter<Boolean>=new EventEmitter<Boolean>();
+  
+  enteredOTP: any;
   message:any;
+
+  @Output() hideLoading:EventEmitter<Boolean>=new EventEmitter<Boolean>()
   
   
   onVerifyOTP(): void {
@@ -42,6 +51,8 @@ export class OtpVerificationComponent {
 
   goBck(){
     this.hide.emit(false)
-    console.log('btn clicked');
+    console.log('hide clicked false');
+    this.hideLoading.emit(false)
+    console.log('hideLoading clicked false');
   }
 }
