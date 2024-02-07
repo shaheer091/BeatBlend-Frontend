@@ -1,7 +1,7 @@
 // otp-verification.component.ts
 import { Component, Input, Output,EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-otp-verification',
@@ -9,7 +9,7 @@ import { UserService } from 'src/app/modules/user/services/user.service';
   styleUrls: ['./otp-verification.component.css'],
 })
 export class OtpVerificationComponent {
-  constructor(private signupService:UserService,private router:Router){}
+  constructor(private signupService:CommonService,private router:Router){}
   @Input() data:any
   @Input() otp: any;
   enteredOTP: any;

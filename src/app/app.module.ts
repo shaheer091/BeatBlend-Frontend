@@ -21,6 +21,7 @@ import { ConceptsComponent } from './components/homepage/concepts/concepts.compo
 import { SubscriptionComponent } from './components/homepage/subscription/subscription.component';
 import { PremiumComponent } from './components/homepage/premium/premium.component';
 import { FooterComponent } from './components/homepage/footer/footer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FooterComponent } from './components/homepage/footer/footer.component';
     SubscriptionComponent,
     PremiumComponent,
     FooterComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import {
   ValidationErrors,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/modules/user/services/user.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-signup',
@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private signupService: UserService,
+    private signupService: CommonService,
     private router: Router
   ) {}
   mattta: any = '';

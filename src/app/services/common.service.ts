@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
+export class CommonService {
   constructor(private http: HttpClient) {}
 
   api = 'http://localhost:3000/signup';
