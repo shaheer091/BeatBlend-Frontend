@@ -1,15 +1,24 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { SignupComponent } from './components/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HomepageComponent } from './components/homepage/homepage.component';
-import { OtpVerificationComponent } from './components/signup/otp-verification/otp-verification.component';
-import { NavBarComponent } from './components/homepage/nav-bar/nav-bar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { UserHomepageComponent } from './components/user-homepage/user-homepage.component';
+import { UserRoutingModule } from './routes/user-route.module';
 
 @NgModule({
-  declarations: [SignupComponent, HomepageComponent, OtpVerificationComponent, NavBarComponent],
-  imports: [BrowserModule, ReactiveFormsModule, FormsModule],
+  declarations: [
+    UserHomepageComponent
+  ],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
+    RouterModule,
+    CommonModule,
+    UserRoutingModule
+  ],
   providers: [],
-  exports: [SignupComponent,HomepageComponent],
+  exports: [ ],
 })
 export class UserModule {}

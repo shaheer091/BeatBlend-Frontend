@@ -1,0 +1,46 @@
+<div class="h-14 w-screen text-white bg-black items-center p-10 flex flex-row justify-between">
+    <div class="w-1/3">
+        <h1 class="text-2xl font-bold">Beat<span class="text-red-400">Blend</span></h1>
+    </div>
+    <div class="flex md:hidden">
+        <img (click)="showSideBar()" class="h-10" src="../../../../../../assets/images/more.png" alt="">
+    </div>
+    <div *ngIf="showSide" class="w-full  bg-black absolute translate-y-[185px] -translate-x-10  md:hidden">
+        <div class="">
+            <ul class="text-center mt-2 space-y-2">
+                <li class="hover:-translate-y-1 transition text-lg">Home</li>
+                <li class="hover:-translate-y-1 transition text-lg">About</li>
+                <li class="hover:-translate-y-1 transition text-lg">Pages</li>
+                <li class="hover:-translate-y-1 transition text-lg">News</li>
+                <li class="hover:-translate-y-1 transition text-lg">Contact</li>
+                <li class="hover:-translate-y-1 transition text-lg">Help</li>
+                <li class="hover:-translate-y-1 transition text-lg" [routerLink]="'/login'">Login</li>
+                <li class="hover:-translate-y-1 transition text-lg" [routerLink]="'/signup'">Signup</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="w-1/3 hidden md:flex">
+        <ul class="flex flex-row space-x-5 justify-between cursor-pointer">
+            <li class="hover:-translate-y-1 transition">Home</li>
+            <li class="hover:-translate-y-1 transition">About</li>
+            <li class="hover:-translate-y-1 transition">Pages</li>
+            <li class="hover:-translate-y-1 transition">News</li>
+            <li class="hover:-translate-y-1 transition">Contact</li>
+        </ul>
+    </div>
+    <div class="w-1/3 ml-16 hidden md:flex md:justify-center">
+        <ul class="flex flex-row justify-around space-x-5">
+            <div class="flex flex-row space-x-5 cursor-pointer">
+                <li class="hover:-translate-y-1 transition">Help</li>
+                <li>|</li>
+                <li (click)="login()" class="hover:-translate-y-1 transition">Login</li>
+            </div>
+            <div class="space-x-5 cursor-pointer">
+                <li (click)="signup()" class="hover:-translate-y-1 transition">Signup</li>
+            </div>
+        </ul>
+    </div>
+</div>

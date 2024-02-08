@@ -1,0 +1,58 @@
+
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 1rem;
+  }
+  
+  .logo h1 {
+    color: #fff;
+    font-size: 2rem;
+    font-family: 'Protest Guerrilla', sans-serif;
+
+  }
+  
+  .nav-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+  }
+  
+  .nav-list li {
+    margin-right: 1rem;
+  }
+  
+  .nav-list a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-list a:hover {
+    color: #ccc;
+  }
+  
+  .buttons {
+    display: flex;
+  }
+  
+  .signup-btn,
+  .login-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 1rem;
+  }
+  
+  .signup-btn:hover,
+  .login-btn:hover {
+    background-color: #45a049;
+  }
