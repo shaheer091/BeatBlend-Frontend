@@ -43,7 +43,7 @@ export class OtpVerificationComponent implements OnInit{
         if(response.success){
           localStorage.setItem('token',response.token)
           setTimeout(() => {
-            this.router.navigate([''])
+            this.router.navigate(['/user/home'])
           }, 2000);
         }
       });

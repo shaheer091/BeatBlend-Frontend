@@ -10,7 +10,7 @@ export class CommonService {
 
   api = 'http://192.168.0.66:3000/signup';
   otpVerificationApi = 'http://192.168.0.66:3000/otp-verify';
-  loginApi = 'http://192.168.0.66:3000/login'
+  loginApi = 'http://192.168.0.66:3000/login';
 
   apiCall(data: any): Observable<any> {
     return this.http.post(this.api, data);
@@ -18,7 +18,10 @@ export class CommonService {
   apiVerifyOtp(data: any): Observable<any> {
     return this.http.post(this.otpVerificationApi, data);
   }
-  apiLogin(data:any):Observable<any>{
-    return this.http.post(this.loginApi,data)
+  apiLogin(data: any): Observable<any> {
+    return this.http.post(this.loginApi, data);
+  }
+  isLoggedIn() {
+    return !!localStorage.getItem('token');
   }
 }
