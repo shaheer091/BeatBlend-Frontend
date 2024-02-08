@@ -21,6 +21,8 @@ export class CommonService {
   apiLogin(data: any): Observable<any> {
     return this.http.post(this.loginApi, data);
   }
+
+  
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }

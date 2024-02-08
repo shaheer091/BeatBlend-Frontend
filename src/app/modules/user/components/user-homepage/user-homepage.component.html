@@ -1,1 +1,12 @@
-hellllooooooo
+<nav class="h-16 w-full flex text-white justify-center items-center bg-black">
+        <div class="logo mr-3">
+          <h1>My Music App</h1>
+        </div>
+        <ul class="flex space-x-3">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/artists">Artists</a></li>
+          <li><a routerLink="/albums">Albums</a></li>
+          <li><a routerLink="/songs">Songs</a></li>
+        </ul>
+    <p class="ml-3" (click)="logout()">logout</p>
+</nav>
