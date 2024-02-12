@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 export class CommonService {
   constructor(private http: HttpClient) {}
 
-  api = 'http://192.168.0.66:3000/signup';
-  otpVerificationApi = 'http://192.168.0.66:3000/otp-verify';
-  loginApi = 'http://192.168.0.66:3000/login';
+  api = 'http://localhost:3000/signup';
+  otpVerificationApi = 'http://localhost:3000/otp-verify';
+  loginApi = 'http://localhost:3000/login';
 
   apiCall(data: any): Observable<any> {
     return this.http.post(this.api, data);

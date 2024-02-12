@@ -34,7 +34,6 @@ export class SignupComponent implements OnInit {
     private signupService: CommonService,
     private router: Router
   ) {}
-  mattta: any = '';
   ngOnInit() {
     this.signupForm = this.formBuilder.group(
       {

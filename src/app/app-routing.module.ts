@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: 'signup', canActivate: [LoginService], component: SignupComponent },
   {
     path: 'user',
+    canActivate: [AuthService],
     loadChildren: () =>
       import('./modules/user/user.module').then((e) => e.UserModule),
-    canActivate: [AuthService],
   },
   { path: '**', component: NotFoundComponent },
 ];
