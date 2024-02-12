@@ -37,6 +37,14 @@ export class ProfileComponent implements OnInit {
   onSubmit(): void {
     if (this.myForm.valid) {
       console.log(this.myForm.value);
+      this.userServ.updateProfile(this.myForm.value).subscribe(
+        (res)=>{
+        console.log(`Profile updated succesfully ${res}`);
+      },
+      (error)=>{
+        console.log(`Error updating profile ${error.message}`);
+      }
+      )
     } else {
       console.log('Form is invalid. Please check the fields.');
     }

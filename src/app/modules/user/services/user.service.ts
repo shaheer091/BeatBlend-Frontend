@@ -11,6 +11,10 @@ export class UserService {
   profileApi = 'http://localhost:3000/user/profile';
 
   getUserProfile(): Observable<any> {
-    return this.http.get(`${this.profileApi}`);
+    return this.http.get(this.profileApi);
+  }
+
+  updateProfile(data:any):Observable<any>{
+    return this.http.patch(this.profileApi,data);
   }
 }
