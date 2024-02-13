@@ -9,6 +9,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   profileApi = 'http://localhost:3000/user/profile';
+  phoneVerifyApi = 'http://localhost:3000/user/verifyPhone'
 
   getUserProfile(): Observable<any> {
     return this.http.get(this.profileApi);
@@ -16,5 +17,10 @@ export class UserService {
 
   updateProfile(data:any):Observable<any>{
     return this.http.patch(this.profileApi,data);
+  }
+
+  verifyPhone(phNo:any):Observable<any>{
+    console.log(phNo);
+    return this.http.post(this.phoneVerifyApi,{phone:phNo})
   }
 }
