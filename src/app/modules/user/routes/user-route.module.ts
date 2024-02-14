@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsPageComponent },
   { path: 'profile', component: ProfileComponent },
 ];
-
+ 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
