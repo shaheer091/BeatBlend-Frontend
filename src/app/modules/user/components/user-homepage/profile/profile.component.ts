@@ -11,6 +11,9 @@ import { Router } from '@angular/router';
 export class ProfileComponent implements OnInit {
   myForm!: FormGroup;
   userData: any;
+  showOtp:Boolean=false;
+  otp: any;
+  otpMessage:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,8 +78,24 @@ export class ProfileComponent implements OnInit {
     try {
       this.userServ.verifyPhone(this.myForm.value.phoneNumber).subscribe((res) => {
         console.log('otp send succesfully');
-        // console.log(this.myForm.value);
         console.log(res);
+        this.showOtp=true;
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  onVerify() {
+    console.log('Verify button clicked');
+    console.log('OTP:', this.otp);
+    try {
+      this.userServ.verifyPhoneOtp(this.otp,this.myForm.value.phoneNumber).subscribe((res) => {
+        console.log(res.message);
+        this.otpMessage=res.message
+        setTimeout(() => {
+          this.showOtp=false;
+        }, 1000);
       });
     } catch (err) {
       console.log(err);

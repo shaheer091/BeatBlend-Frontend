@@ -27,7 +27,8 @@
             <div class="flex justify-between items-center">
                 <div>
                     <label for="phoneNumber" class="block">Phone Number</label>
-                    <input name="phoneNumber" type="tel" id="phoneNumber" placeholder="Enter phone number" formControlName="phoneNumber"
+                    <input name="phoneNumber" type="tel" id="phoneNumber" placeholder="Enter phone number"
+                        formControlName="phoneNumber"
                         class="block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
                 </div>
                 <div>
@@ -66,5 +67,13 @@
                 class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600">Cancel</button>
 
         </form>
+
+        <div class="h-36 w-64 rounded-lg relative -translate-y-96 translate-x-52 bg-red-200 border-2 flex flex-col items-center justify-center"
+            *ngIf="showOtp">
+            <label for="otp">Enter Otp</label>
+            <input name="otp" [(ngModel)]="otp" type="number">
+            <button class="border-2 px-2 bg-white rounded-lg" (click)="onVerify()">Verify</button>
+            <p>{{otpMessage}}</p>
+        </div>
     </div>
 </div>

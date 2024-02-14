@@ -10,6 +10,7 @@ export class UserService {
 
   profileApi = 'http://localhost:3000/user/profile';
   phoneVerifyApi = 'http://localhost:3000/user/verifyPhone'
+  phoneVerifyOtp = 'http://localhost:3000/user/verifyOtp'
 
   getUserProfile(): Observable<any> {
     return this.http.get(this.profileApi);
@@ -22,5 +23,10 @@ export class UserService {
   verifyPhone(phNo:any):Observable<any>{
     console.log(phNo);
     return this.http.post(this.phoneVerifyApi,{phone:phNo})
+  }
+
+  verifyPhoneOtp(otp:number,phone:number):Observable<any>{
+    console.log(otp);
+    return this.http.post(this.phoneVerifyOtp,{otp,phone})
   }
 }
