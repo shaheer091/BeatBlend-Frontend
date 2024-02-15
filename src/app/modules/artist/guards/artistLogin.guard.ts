@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { CommonService } from '../services/common.service';
 import { CanActivate, Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements CanActivate {
+export class ArtistLoginGuard implements CanActivate {
   constructor(private serv: CommonService, private router: Router) {}
   canActivate(): boolean {
-    if (this.serv.isLoggedIn() && this.serv.isUser()) {
+    if (this.serv.isLoggedIn() && this.serv.isArtist()) {
       return true;
     } else {
       this.router.navigate(['/login']);

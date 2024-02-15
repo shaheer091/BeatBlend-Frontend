@@ -22,12 +22,17 @@ export class CommonService {
     return this.http.post(this.loginApi, data);
   }
 
-  
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }
-  isAdmin(){
-    const role=localStorage.getItem('role')
-    return role =='admin'
+  role: String | null = localStorage.getItem('role');
+  isUser() {
+    return this.role == 'user';
+  }
+  isAdmin() {
+    return this.role == 'admin';
+  }
+  isArtist() {
+    return this.role == 'artist';
   }
 }
