@@ -26,4 +26,8 @@ export class CommonService {
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }
+  isAdmin(){
+    const role=localStorage.getItem('role')
+    return role =='admin'
+  }
 }

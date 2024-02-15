@@ -6,6 +6,7 @@ import { HomepageComponent } from './components/homepage/homepage.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AuthService } from './guards/authService.guard';
 import { LoginService } from './guards/loginService.guard';
+import { AdminLoginGuard } from './modules/admin/guards/adminLogin.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate:[AdminLoginGuard],
     loadChildren: () =>
       import('./modules/admin/admin.module').then((e) => e.AdminModule),
   },

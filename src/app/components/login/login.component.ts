@@ -40,11 +40,14 @@ export class LoginComponent implements OnInit {
           console.log(res);
           if (res.success) {
             localStorage.setItem('token', res.token);
+            localStorage.setItem('role', res.role);
             console.log(res.token);
-            if(res.role=='user'){
+            if (res.role == 'user') {
               this.router.navigate(['/user/home']);
-            }else if(res.role=='admin'){
-              this.router.navigate(['/admin/home'])
+              console.log('role user');
+            } else if (res.role == 'admin') {
+              this.router.navigate(['/admin/home']);
+              console.log('role admin');
             }
           } else {
             this.message = res.message;

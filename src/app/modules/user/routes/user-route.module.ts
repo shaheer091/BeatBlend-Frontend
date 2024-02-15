@@ -4,6 +4,7 @@ import { UserHomepageComponent } from '../components/user-homepage/user-homepage
 import { AuthService } from 'src/app/guards/authService.guard';
 import { SettingsPageComponent } from '../components/user-homepage/settings-page/settings-page.component';
 import { ProfileComponent } from '../components/user-homepage/profile/profile.component';
+import { NotFoundComponent } from 'src/app/components/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -13,8 +14,10 @@ const routes: Routes = [
   },
   { path: 'settings', component: SettingsPageComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: '', redirectTo: '/user/home', pathMatch: 'full' },
+  { path: '**', component: NotFoundComponent },
 ];
- 
+
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
