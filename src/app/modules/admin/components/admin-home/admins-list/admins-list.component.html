@@ -1,16 +1,16 @@
 <app-navbar></app-navbar>
-<table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let admin of adminData">
-        <td>{{ admin.username }}</td>
-        <td>{{ admin.email }}</td>
-      </tr>
-    </tbody>
-  </table>
-  
+
+<table class="min-w-full divide-y divide-gray-200">
+  <thead>
+    <tr>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Username</th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Email</th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let admin of adminData" class="hover:bg-gray-100">
+      <td class="px-6 py-4 whitespace-no-wrap">{{ admin.username }}</td>
+      <td class="px-6 py-4 whitespace-no-wrap">{{ admin.email }}</td>
+    </tr>
+  </tbody>
+</table>

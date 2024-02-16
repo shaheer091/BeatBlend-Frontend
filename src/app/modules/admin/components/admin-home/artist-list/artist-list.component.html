@@ -1,20 +1,20 @@
 <app-navbar></app-navbar>
-<table>
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Email</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let artist of artistData">
-        <td>{{ artist.username }}</td>
-        <td>{{ artist.email }}</td>
-        <td>
-          <button >Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+
+<table class="min-w-full divide-y divide-gray-200">
+  <thead>
+    <tr>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Username</th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Email</th>
+      <th class="px-6 py-3 bg-gray-50"></th>
+    </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let artist of artistData" class="hover:bg-gray-100">
+      <td class="px-6 py-4 whitespace-no-wrap">{{ artist.username }}</td>
+      <td class="px-6 py-4 whitespace-no-wrap">{{ artist.email }}</td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

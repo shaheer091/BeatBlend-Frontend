@@ -7,29 +7,26 @@ import { Observable } from 'rxjs';
 })
 export class AdminService {
   constructor(private http: HttpClient) {}
-
-  getAllUsersApi = 'http://localhost:3000/admin/seeAllUsers';
-  getAllArtistApi = 'http://localhost:3000/admin/seeAllArtist';
-  getAllPendingApi = 'http://localhost:3000/admin/seeAllPending';
-  getAllAdminApi = 'http://localhost:3000/admin/seeAllAdmin';
-  approveUserApi = 'http://localhost:3000/admin/approveUser';
+  adminApi = 'http://localhost:3000/admin';
 
   getAllUsers(): Observable<any> {
-    return this.http.get(this.getAllUsersApi);
+    return this.http.get(`${this.adminApi}/seeAllUsers`);
   }
 
   getAllArtist(): Observable<any> {
-    return this.http.get(this.getAllArtistApi);
+    return this.http.get(`${this.adminApi}/seeAllArtist`);
   }
 
   getAllPending(): Observable<any> {
-    return this.http.get(this.getAllPendingApi);
+    return this.http.get(`${this.adminApi}/seeAllPending`);
   }
-  getAllAdmin():Observable<any>{
-    return this.http.get(this.getAllAdminApi)
+  getAllAdmin(): Observable<any> {
+    return this.http.get(`${this.adminApi}/seeAllAdmin`);
   }
-
-  approveUser(data: any): Observable<any> {
-    return this.http.patch(this.approveUserApi, data);
+  deleteUser(userId: any): Observable<any> {
+    return this.http.patch(`${this.adminApi}/deleteUser`, { userId });
+  }
+  unDeleteUser(userId: any): Observable<any> {
+    return this.http.patch(`${this.adminApi}/unDeleteUser`, { userId });
   }
 }
