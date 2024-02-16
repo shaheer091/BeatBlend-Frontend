@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pending of pendingData">
+        <td>{{ pending.username }}</td>
+        <td>{{ pending.email }}</td>
+        <td>
+          <button>Approve</button>
+          <button>Decline</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

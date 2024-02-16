@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let artist of artistData">
+        <td>{{ artist.username }}</td>
+        <td>{{ artist.email }}</td>
+        <td>
+          <button >Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

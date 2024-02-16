@@ -1,0 +1,16 @@
+<app-navbar></app-navbar>
+<table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of adminData">
+        <td>{{ admin.username }}</td>
+        <td>{{ admin.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+  

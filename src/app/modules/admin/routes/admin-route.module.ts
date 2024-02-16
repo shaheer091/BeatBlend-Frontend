@@ -1,13 +1,35 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from '../components/admin-home/admin-home.component';
-import { PlanComponent } from '../components/admin-home/plan/plan.component';
 import { NotFoundComponent } from 'src/app/components/not-found/not-found.component';
 import { AdminLoginGuard } from '../guards/adminLogin.guard';
+import { UserListComponent } from '../components/admin-home/user-list/user-list.component';
+import { ArtistListComponent } from '../components/admin-home/artist-list/artist-list.component';
+import { PendingUsersListComponent } from '../components/admin-home/pending-users-list/pending-users-list.component';
+import { AdminsListComponent } from '../components/admin-home/admins-list/admins-list.component';
 
 const routes: Routes = [
-  { path: 'home', canActivate: [AdminLoginGuard], component: AdminHomeComponent },
-  { path: 'plan', component: PlanComponent },
+  {
+    path: 'home',
+    canActivate: [AdminLoginGuard],
+    component: AdminHomeComponent,
+  },
+  {
+    path: 'userList',
+    component: UserListComponent,
+  },
+  {
+    path: 'artistList',
+    component: ArtistListComponent,
+  },
+  {
+    path: 'pendingUsersList',
+    component: PendingUsersListComponent,
+  },
+  {
+    path: 'adminList',
+    component: AdminsListComponent,
+  },
   { path: '', redirectTo: '/admin/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

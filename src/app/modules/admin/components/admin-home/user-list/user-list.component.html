@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userData">
+        <td>{{ user.username }}</td>
+        <td>{{ user.email }}</td>
+        <td><button>delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  

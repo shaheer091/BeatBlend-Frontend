@@ -11,6 +11,7 @@ export class UserService {
   profileApi = 'http://localhost:3000/user/profile';
   phoneVerifyApi = 'http://localhost:3000/user/verifyPhone'
   phoneVerifyOtp = 'http://localhost:3000/user/verifyOtp'
+  beArtistApi = 'http://localhost:3000/user/artistVerify'
 
   getUserProfile(): Observable<any> {
     return this.http.get(this.profileApi);
@@ -28,5 +29,10 @@ export class UserService {
   verifyPhoneOtp(otp:number,phone:number):Observable<any>{
     console.log(otp);
     return this.http.post(this.phoneVerifyOtp,{otp,phone})
+  }
+
+  artistVerification(socialMediaLink:any){
+    console.log(socialMediaLink);
+    return this.http.post(this.beArtistApi,{socialMediaLink})
   }
 }

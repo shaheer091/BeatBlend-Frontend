@@ -6,6 +6,14 @@
         <button [routerLink]="'/user/profile'" class="capitalize">update profile</button>
     </div>
     <div>
+        <button (click)="showInput()">Be an artist</button>
+    </div>
+    <div *ngIf="showDiv" class="flex flex-col">
+        <input [(ngModel)]="socialMediaLink" type="text" class="border-2">
+        <button (click)="beAnArtist()">submit</button>
+        <button (click)="onCancel()">cancel</button>
+    </div>
+    <div>
         <button [routerLink]="'/user/home'" class="capitalize">back</button>
     </div>
 </div>
