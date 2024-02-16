@@ -21,13 +21,14 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(userId:any){
-    this.adminServ.deleteUser(userId).subscribe((res)=>{
-      console.log(res);
+    this.adminServ.changeDeleteStatus(userId).subscribe((res)=>{
+      console.log(res.message);
     })
+    // window.location.reload();
   }
-  undeleteUser(userId:any){
-    this.adminServ.unDeleteUser(userId).subscribe((res)=>{
-      console.log(res);
-    })
-  }
+  // undeleteUser(userId:any){
+  //   this.adminServ.unDeleteUser(userId).subscribe((res)=>{
+  //     console.log(res);
+  //   })
+  // }
 }

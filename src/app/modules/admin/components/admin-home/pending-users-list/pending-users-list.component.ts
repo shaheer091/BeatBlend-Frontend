@@ -15,4 +15,9 @@ export class PendingUsersListComponent implements OnInit {
       this.pendingData = res.pending;
     });
   }
+  approveUser(userId:any){
+    this.adminServ.pendingApproval(userId).subscribe((res)=>{
+      console.log(res.message);
+    })
+  }
 }

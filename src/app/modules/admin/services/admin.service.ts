@@ -23,10 +23,10 @@ export class AdminService {
   getAllAdmin(): Observable<any> {
     return this.http.get(`${this.adminApi}/seeAllAdmin`);
   }
-  deleteUser(userId: any): Observable<any> {
-    return this.http.patch(`${this.adminApi}/deleteUser`, { userId });
+  changeDeleteStatus(userId: any): Observable<any> {
+    return this.http.patch(`${this.adminApi}/changeDeleteStatus`, { userId });
   }
-  unDeleteUser(userId: any): Observable<any> {
-    return this.http.patch(`${this.adminApi}/unDeleteUser`, { userId });
+  pendingApproval(userId:any):Observable<any>{
+    return this.http.patch(`${this.adminApi}/approveUser`,{userId})
   }
 }

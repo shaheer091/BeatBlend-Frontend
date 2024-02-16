@@ -13,8 +13,11 @@
       <td class="px-6 py-4 whitespace-no-wrap">{{ artist.username }}</td>
       <td class="px-6 py-4 whitespace-no-wrap">{{ artist.email }}</td>
       <td class="px-6 py-4 whitespace-no-wrap">
-        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
-      </td>
+        <button *ngIf="!artist.deleteStatus" (click)="deleteUser(artist._id)"
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
+        <button *ngIf="artist.deleteStatus" (click)="deleteUser(artist._id)"
+            class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Undelete</button>
+    </td>
     </tr>
   </tbody>
 </table>

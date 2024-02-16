@@ -15,4 +15,10 @@ export class ArtistListComponent implements OnInit {
       this.artistData = res.artist;
     });
   }
+  deleteUser(userId:any){
+    this.adminServ.changeDeleteStatus(userId).subscribe((res)=>{
+      console.log(res.message);
+    })
+    // window.location.reload();
+  }
 }

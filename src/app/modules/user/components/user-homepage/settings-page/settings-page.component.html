@@ -1,19 +1,21 @@
-<div class="w-screen flex flex-col h-screen items-center justify-evenly">
-    <div class="h-20 w-20">
-        <img src="../../../../../../assets/images/account.png" alt="">
+<div class="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-700">
+    <div class="mb-10">
+        <img src="../../../../../../assets/images/account.png" alt="Profile" class="w-20 h-20 rounded-full shadow-lg">
+    </div>
+    <div class="mb-6">
+        <button [routerLink]="'/user/profile'" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out">Update Profile</button>
+    </div>
+    <div class="mb-6">
+        <button (click)="showInput()" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out">Become an Artist</button>
+    </div>
+    <div *ngIf="showDiv" class="flex flex-col items-center mb-6">
+        <input [(ngModel)]="socialMediaLink" type="text" class="px-4 py-2 bg-white border-2 border-blue-600 rounded-md shadow-md focus:outline-none focus:border-blue-700 transition duration-300 ease-in-out">
+        <div class="mt-2 space-x-4">
+            <button (click)="beAnArtist()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
+            <button (click)="onCancel()" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-md shadow-md hover:bg-red-700 transition duration-300 ease-in-out">Cancel</button>
+        </div>
     </div>
     <div>
-        <button [routerLink]="'/user/profile'" class="capitalize">update profile</button>
-    </div>
-    <div>
-        <button (click)="showInput()">Be an artist</button>
-    </div>
-    <div *ngIf="showDiv" class="flex flex-col">
-        <input [(ngModel)]="socialMediaLink" type="text" class="border-2">
-        <button (click)="beAnArtist()">submit</button>
-        <button (click)="onCancel()">cancel</button>
-    </div>
-    <div>
-        <button [routerLink]="'/user/home'" class="capitalize">back</button>
+        <button [routerLink]="'/user/home'" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out">Back</button>
     </div>
 </div>

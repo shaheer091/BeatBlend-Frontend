@@ -7,32 +7,29 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
+  userApi='http://localhost:3000/user';
 
-  profileApi = 'http://localhost:3000/user/profile';
-  phoneVerifyApi = 'http://localhost:3000/user/verifyPhone'
-  phoneVerifyOtp = 'http://localhost:3000/user/verifyOtp'
-  beArtistApi = 'http://localhost:3000/user/artistVerify'
 
   getUserProfile(): Observable<any> {
-    return this.http.get(this.profileApi);
+    return this.http.get(`${this.userApi}/profile`);
   }
 
   updateProfile(data:any):Observable<any>{
-    return this.http.patch(this.profileApi,data);
+    return this.http.patch(`${this.userApi}/profile`,data);
   }
 
   verifyPhone(phNo:any):Observable<any>{
     console.log(phNo);
-    return this.http.post(this.phoneVerifyApi,{phone:phNo})
+    return this.http.post(`${this.userApi}/verifyPhone`,{phone:phNo})
   }
 
   verifyPhoneOtp(otp:number,phone:number):Observable<any>{
     console.log(otp);
-    return this.http.post(this.phoneVerifyOtp,{otp,phone})
+    return this.http.post(`${this.userApi}/verifyOtp`,{otp,phone})
   }
 
   artistVerification(socialMediaLink:any){
     console.log(socialMediaLink);
-    return this.http.post(this.beArtistApi,{socialMediaLink})
+    return this.http.post(`${this.userApi}/artistVerify`,{socialMediaLink})
   }
 }
