@@ -7,9 +7,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./artist-home.component.css']
 })
 export class ArtistHomeComponent {
-  constructor (private router:Router){}
-  logout(){
-    localStorage.clear()
-    this.router.navigate(['/login'])
-  }
+  
 }
