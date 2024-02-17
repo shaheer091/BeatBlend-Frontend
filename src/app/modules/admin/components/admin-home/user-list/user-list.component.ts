@@ -9,26 +9,24 @@ import { AdminService } from '../../../services/admin.service';
 export class UserListComponent implements OnInit {
   constructor(private adminServ: AdminService) {}
   userData: any;
-  activeUser:any;
+  message: any;
+  success: any;
   ngOnInit(): void {
     this.adminServ.getAllUsers().subscribe((res) => {
-      this.userData = res.user;
+      this.success = res.success;
+      if (this.success) {
+        this.userData = res.user;
+      } else {
+        this.message = res.message;
+      }
       console.log(res.user);
-      this.activeUser=this.userData.forEach((element:any) => {
-        element.deleteStatus
-      });
     });
   }
 
-  deleteUser(userId:any){
-    this.adminServ.changeDeleteStatus(userId).subscribe((res)=>{
+  deleteUser(userId: any) {
+    this.adminServ.changeDeleteStatus(userId).subscribe((res) => {
       console.log(res.message);
-    })
+    });
     // window.location.reload();
   }
-  // undeleteUser(userId:any){
-  //   this.adminServ.unDeleteUser(userId).subscribe((res)=>{
-  //     console.log(res);
-  //   })
-  // }
 }

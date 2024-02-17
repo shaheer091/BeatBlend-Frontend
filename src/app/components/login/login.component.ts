@@ -45,21 +45,19 @@ export class LoginComponent implements OnInit {
             if (res.role == 'user') {
               // this.router.navigate(['/user/home']);
               console.log('role user');
-              this.router.navigateByUrl('/user/home')
+              this.router.navigateByUrl('/user/home');
             }
-            
+
             if (res.role == 'admin') {
               // this.router.navigate(['/admin/home']);
               console.log('role admin');
-              this.router.navigateByUrl('/admin/home')
-
+              this.router.navigateByUrl('/admin/home');
             }
-            
+
             if (res.role == 'artist') {
               console.log('artist');
               this.router.navigate(['/artist/home']);
             }
-
           } else {
             this.message = res.message;
           }

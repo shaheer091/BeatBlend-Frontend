@@ -1,6 +1,9 @@
 <app-navbar></app-navbar>
 
-<table class="min-w-full divide-y divide-gray-200">
+<div *ngIf="!success" class="text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-md p-4 mt-4 shadow-md">
+    {{ message }}
+  </div>
+<table *ngIf="success" class="min-w-full divide-y divide-gray-200">
     <thead>
         <tr>
             <th

@@ -9,15 +9,21 @@ import { AdminService } from '../../../services/admin.service';
 export class PendingUsersListComponent implements OnInit {
   constructor(private adminServ: AdminService) {}
   pendingData: any;
+  message: any;
+  success: any;
   ngOnInit(): void {
     this.adminServ.getAllPending().subscribe((res) => {
-      console.log(res.pending);
-      this.pendingData = res.pending;
+      this.success = res.success;
+      if (this.success) {
+        this.pendingData = res.pending;
+      } else {
+        this.message = res.message;
+      }
     });
   }
-  approveUser(userId:any){
-    this.adminServ.pendingApproval(userId).subscribe((res)=>{
+  approveUser(userId: any) {
+    this.adminServ.pendingApproval(userId).subscribe((res) => {
       console.log(res.message);
-    })
+    });
   }
 }

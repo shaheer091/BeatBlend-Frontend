@@ -1,17 +1,15 @@
-<!-- Navigation bar -->
-<nav class="bg-gray-800 text-white py-4">
-    <div class="container mx-auto flex justify-between items-center">
+<!-- <nav class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto flex justify-between items-center px-10">
       <h1 class="text-2xl font-bold">Artist Name</h1>
       <ul class="flex space-x-4">
-        <li><a href="#about" class="hover:text-gray-300">About</a></li>
-        <li><a href="#gallery" class="hover:text-gray-300">Gallery</a></li>
-        <li><a href="#contact" class="hover:text-gray-300">Contact</a></li>
-        <li (click)="logout()">logout</li>
+        <li class="cursor-pointer hover:text-gray-300">Home</li>
+        <li class="cursor-pointer hover:text-gray-300">Add Song</li>
+        <li class="cursor-pointer hover:text-gray-300">Contact</li>
+        <li (click)="logout()" class="cursor-pointer hover:text-gray-300">Logout</li>
       </ul>
     </div>
   </nav>
 
-  <!-- Main content -->
   <div class="container mx-auto py-8 px-4">
     <section id="about" class="mb-8">
       <h2 class="text-2xl font-bold mb-4">About</h2>
@@ -21,7 +19,6 @@
     <section id="gallery" class="mb-8">
       <h2 class="text-2xl font-bold mb-4">Gallery</h2>
       <div class="grid grid-cols-3 gap-4">
-        <!-- Gallery images go here -->
         <img src="image1.jpg" alt="Image 1" class="w-full h-auto">
         <img src="image2.jpg" alt="Image 2" class="w-full h-auto">
         <img src="image3.jpg" alt="Image 3" class="w-full h-auto">
@@ -34,4 +31,38 @@
       <p>Email: artist@example.com</p>
       <p>Phone: 123-456-7890</p>
     </section>
+  </div> -->
+
+
+
+<!-- Navigation bar -->
+<nav class="bg-gray-800 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center px-10">
+    <h1 class="text-2xl font-bold">Artist Dashboard</h1>
+    
+    <ul class="flex space-x-4">
+      <li class="cursor-pointer hover:text-gray-300">Home</li>
+      <li class="cursor-pointer hover:text-gray-300">Add Song</li>
+      <li class="cursor-pointer hover:text-gray-300">Update Song</li>
+      <li (click)="logout()" class="cursor-pointer hover:text-gray-300">Logout</li>
+    </ul>
+    
   </div>
+</nav>
+
+<!-- Main content -->
+<div class="container mx-auto py-8 px-4">
+  <section id="about" class="mb-8">
+      <h2 class="text-2xl font-bold mb-4">About</h2>
+      <p>Welcome to the official website of Artist Name. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod risus in dui volutpat, nec tincidunt quam fermentum.</p>
+  </section>
+
+  
+
+  <section id="contact">
+      <h2 class="text-2xl font-bold mb-4">Contact</h2>
+      <p class="mb-2">Contact Artist Name for inquiries or bookings:</p>
+      <p>Email: artist@example.com</p>
+      <p>Phone: 123-456-7890</p>
+  </section>
+</div>
