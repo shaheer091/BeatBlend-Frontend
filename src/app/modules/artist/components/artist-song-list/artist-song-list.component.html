@@ -1,1 +1,23 @@
-<p>artist-song-list works!</p>
+<app-artist-nav-bar></app-artist-nav-bar>
+
+<table class="table-fixed w-full rounded-3xl overflow-hidden shadow-md mt-4">
+    <thead>
+      <tr>
+        <th scope="col" class="px-6 py-3 bg-gray-100 font-medium text-gray-700 text-left">Title</th>
+        <th scope="col" class="px-6 py-3 bg-gray-100 font-medium text-gray-700 text-left">Artist</th>
+        <th scope="col" class="px-6 py-3 bg-gray-100 font-medium text-gray-700 text-left">Album</th>
+        <th scope="col" class="px-6 py-3 bg-gray-100 font-medium text-gray-700 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let song of songs">
+        <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ song.title }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ song.artist }}</td>
+        <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ song.album }}</td>
+        <td class="px-6 py-4 whitespace-nowrap">
+          <button (click)="deleteSong(song._id)" class="text-red-500 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
