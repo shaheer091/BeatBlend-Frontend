@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdminService } from '../../../services/admin.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-artist-list',
@@ -11,6 +11,8 @@ export class ArtistListComponent implements OnInit {
   artistData: any;
   message: any;
   success: any;
+  deleteDiv:Boolean=false;
+  artistId:any;
   ngOnInit(): void {
     this.adminServ.getAllArtist().subscribe((res) => {
       console.log(res);
@@ -20,11 +22,17 @@ export class ArtistListComponent implements OnInit {
       } else {
         this.message = res.message;
       }
-      console.log(this.message);
+      // console.log(this.message);
     });
   }
-  deleteUser(userId: any) {
-    this.adminServ.changeDeleteStatus(userId).subscribe((res) => {
+
+  showDeleteDiv(artistId:any){
+    this.deleteDiv=true;
+    this.artistId=artistId;
+  }
+
+  deleteUser() {
+    this.adminServ.changeDeleteStatus(this.artistId).subscribe((res) => {
       console.log(res.message);
     });
     // window.location.reload();

@@ -29,4 +29,7 @@ export class AdminService {
   pendingApproval(userId:any):Observable<any>{
     return this.http.patch(`${this.adminApi}/approveUser`,{userId})
   }
+  pendingDecline(userId:any):Observable<any>{
+    return this.http.delete(`${this.adminApi}/declineUser/${userId}`)
+  }
 }

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminService } from '../../../services/admin.service';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-navbar',
