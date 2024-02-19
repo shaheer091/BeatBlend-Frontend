@@ -11,9 +11,10 @@ import { UserService } from '../../services/user.service';
 export class ProfileComponent implements OnInit {
   myForm!: FormGroup;
   userData: any;
-  showOtp:Boolean=false;
+  userDetails: any;
+  showOtp: Boolean = false;
   otp: any;
-  otpMessage:any;
+  otpMessage: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,24 +33,17 @@ export class ProfileComponent implements OnInit {
       gender: [''],
     });
     this.userServ.getUserProfile().subscribe((res) => {
-      this.userData = res.userProfile;
-      console.log(this.userData);
-      this.myForm.controls['username'].setValue(this.userData[0].username);
-      this.myForm.controls['email'].setValue(this.userData[0].email);
-      this.myForm.controls['bio'].setValue(this.userData[0].userDetails[0].bio);
-      this.myForm.controls['phoneNumber'].setValue(
-        this.userData[0].userDetails[0].phoneNumber
-      );
-      this.myForm.controls['date'].setValue(
-        this.userData[0].userDetails[0].dateOfBirth
-      );
-      this.myForm.controls['gender'].setValue(
-        this.userData[0].userDetails[0].gender
-      );
-      // this.myForm.controls['file'].setValue(this.userData[0].userDetails[0].imageUrl)
+      this.userData = res.userProfile[0];
+      this.userDetails = res.userProfile[0].userDetails[0];      
+      this.myForm.controls['username'].setValue(this.userData.username);
+      this.myForm.controls['email'].setValue(this.userData.email);
+      this.myForm.controls['bio'].setValue(this.userDetails.bio);
+      this.myForm.controls['phoneNumber'].setValue(this.userDetails.phoneNumber);
+      this.myForm.controls['date'].setValue(this.userDetails.dateOfBirth);
+      this.myForm.controls['gender'].setValue(this.userDetails.gender);
+      this.myForm.controls['file'].setValue(this.userDetails.imageUrl);
     });
   }
-  // phoneNumber: number = this.myForm.value;
   message: string = '';
   onSubmit(): void {
     if (this.myForm.valid) {
@@ -76,11 +70,13 @@ export class ProfileComponent implements OnInit {
     console.log('btn clicked');
     console.log(this.myForm.value.phoneNumber);
     try {
-      this.userServ.verifyPhone(this.myForm.value.phoneNumber).subscribe((res) => {
-        console.log('otp send succesfully');
-        console.log(res);
-        this.showOtp=true;
-      });
+      this.userServ
+        .verifyPhone(this.myForm.value.phoneNumber)
+        .subscribe((res) => {
+          console.log('otp send succesfully');
+          console.log(res);
+          this.showOtp = true;
+        });
     } catch (err) {
       console.log(err);
     }
@@ -90,13 +86,15 @@ export class ProfileComponent implements OnInit {
     console.log('Verify button clicked');
     console.log('OTP:', this.otp);
     try {
-      this.userServ.verifyPhoneOtp(this.otp,this.myForm.value.phoneNumber).subscribe((res) => {
-        console.log(res.message);
-        this.otpMessage=res.message
-        setTimeout(() => {
-          this.showOtp=false;
-        }, 1000);
-      });
+      this.userServ
+        .verifyPhoneOtp(this.otp, this.myForm.value.phoneNumber)
+        .subscribe((res) => {
+          console.log(res.message);
+          this.otpMessage = res.message;
+          setTimeout(() => {
+            this.showOtp = false;
+          }, 1000);
+        });
     } catch (err) {
       console.log(err);
     }

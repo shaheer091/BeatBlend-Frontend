@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
           if (res.success) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
-            console.log(res.token);
+            console.log(res.token,'hihihihi');
             if (res.role == 'user') {
               // this.router.navigate(['/user/home']);
               console.log('role user');

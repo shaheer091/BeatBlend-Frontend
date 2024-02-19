@@ -5,6 +5,7 @@ import { ArtistLoginGuard } from '../guards/artistLogin.guard';
 import { ArtistAddSongComponent } from '../components/artist-add-song/artist-add-song.component';
 import { NotFoundComponent } from 'src/app/components/not-found/not-found.component';
 import { ArtistSongListComponent } from '../components/artist-song-list/artist-song-list.component';
+import { ArtistProfileComponent } from '../components/artist-profile/artist-profile.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'songs',
     component: ArtistSongListComponent,
+  },
+  {
+    path: 'profile',
+    component: ArtistProfileComponent,
   },
   {
     path: '**',

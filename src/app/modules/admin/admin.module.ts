@@ -11,7 +11,14 @@ import { PendingUsersListComponent } from './components/pending-users-list/pendi
 import { AdminsListComponent } from './components/admins-list/admins-list.component';
 
 @NgModule({
-  declarations: [AdminHomeComponent, NavbarComponent, UserListComponent, ArtistListComponent, PendingUsersListComponent, AdminsListComponent],
+  declarations: [
+    AdminHomeComponent,
+    NavbarComponent,
+    UserListComponent,
+    ArtistListComponent,
+    PendingUsersListComponent,
+    AdminsListComponent,
+  ],
   imports: [FormsModule, HttpClientModule, CommonModule, AdminRoutingModule],
   exports: [],
 })

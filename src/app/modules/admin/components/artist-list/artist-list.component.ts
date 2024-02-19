@@ -22,7 +22,6 @@ export class ArtistListComponent implements OnInit {
       } else {
         this.message = res.message;
       }
-      // console.log(this.message);
     });
   }
 

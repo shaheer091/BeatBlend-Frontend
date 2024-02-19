@@ -6,20 +6,16 @@ import { ArtistAddSongComponent } from './components/artist-add-song/artist-add-
 import { ArtistNavBarComponent } from './components/artist-nav-bar/artist-nav-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ArtistSongListComponent } from './components/artist-song-list/artist-song-list.component';
-
-
+import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
 
 @NgModule({
   declarations: [
     ArtistHomeComponent,
     ArtistAddSongComponent,
     ArtistNavBarComponent,
-    ArtistSongListComponent
+    ArtistSongListComponent,
+    ArtistProfileComponent,
   ],
-  imports: [
-    CommonModule,
-    ArtistRoutingModule,
-    ReactiveFormsModule
-  ]
+  imports: [CommonModule, ArtistRoutingModule, ReactiveFormsModule],
 })
-export class ArtistModule { }
+export class ArtistModule {}
