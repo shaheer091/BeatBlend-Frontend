@@ -17,6 +17,10 @@ export class PendingUsersListComponent implements OnInit {
   decline:Boolean=false;
 
   ngOnInit(): void {
+    this.getPending()
+  }
+
+  getPending(){
     this.adminServ.getAllPending().subscribe((res) => {
       this.success = res.success;
       if (this.success) {
@@ -41,6 +45,7 @@ export class PendingUsersListComponent implements OnInit {
   approveUser() {
     this.adminServ.pendingApproval(this.pendingUserId).subscribe((res) => {
       console.log(res.message);
+      this.getPending()
     });
     // this.showPopUp=false;
     this.approve=false;
@@ -50,6 +55,7 @@ export class PendingUsersListComponent implements OnInit {
   declineUser(){
     this.adminServ.pendingDecline(this.pendingUserId).subscribe((res)=>{
       console.log(res);
+      this.getPending()
     })
     this.approve=false;
     this.decline=false;

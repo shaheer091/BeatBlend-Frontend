@@ -3,7 +3,8 @@
 
 <form [formGroup]="songForm" class="p-10" (ngSubmit)="onSubmit()">
     <div class="mb-4">
-        <label for="songFile" class="block text-gray-700 text-sm font-bold mb-2">Song File:</label>
+        <label for="songFile" class="block text-gray-700 text-sm font-bold mb-2">Song File: <span><sup
+                    class="text-red-500">*required</sup></span></label>
         <input type="file" id="songFile" formControlName="songFile"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         <div *ngIf="songForm.get('songFile')?.invalid && songForm.get('songFile')?.touched"
@@ -11,7 +12,8 @@
     </div>
 
     <div class="mb-4">
-        <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+        <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title: <span><sup
+                    class="text-red-500">*required</sup></span></label>
         <input type="text" id="title" formControlName="title"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         <div *ngIf="songForm.get('title')?.invalid && songForm.get('title')?.touched"
@@ -22,48 +24,44 @@
         <label for="artist" class="block text-gray-700 text-sm font-bold mb-2">Artist:</label>
         <input type="text" id="artist" formControlName="artist"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <div *ngIf="songForm.get('artist')?.invalid && songForm.get('artist')?.touched"
-            class="text-red-500 text-xs italic">Artist is required</div>
+
     </div>
 
     <div class="mb-4">
         <label for="album" class="block text-gray-700 text-sm font-bold mb-2">Album:</label>
         <input type="text" id="album" formControlName="album"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <div *ngIf="songForm.get('album')?.invalid && songForm.get('album')?.touched"
-            class="text-red-500 text-xs italic">Album is required</div>
+
     </div>
 
     <div class="mb-4">
         <label for="genre" class="block text-gray-700 text-sm font-bold mb-2">Genre:</label>
         <input type="text" id="genre" formControlName="genre"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <div *ngIf="songForm.get('genre')?.invalid && songForm.get('genre')?.touched"
-            class="text-red-500 text-xs italic">Genre is required</div>
+
     </div>
 
     <div class="mb-4">
         <label for="duration" class="block text-gray-700 text-sm font-bold mb-2">Duration (in seconds):</label>
         <input type="number" id="duration" formControlName="duration"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <div *ngIf="songForm.get('duration')?.invalid && songForm.get('duration')?.touched"
-            class="text-red-500 text-xs italic">Duration is required</div>
+
     </div>
 
     <div class="mb-4">
         <label for="releaseDate" class="block text-gray-700 text-sm font-bold mb-2">Release Date:</label>
         <input type="date" id="releaseDate" formControlName="releaseDate"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-        <div *ngIf="songForm.get('releaseDate')?.invalid && songForm.get('releaseDate')?.touched"
-            class="text-red-500 text-xs italic">Release Date is required</div>
-    </div>
 
+    </div>
+    <p *ngIf="reqMsg">{{reqMsg}}</p>
     <button type="submit"
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add
         Song</button>
 </form>
 
-<div *ngIf="message" class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center h-screen bg-black bg-opacity-50">
+<div *ngIf="message"
+    class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center h-screen bg-black bg-opacity-50">
     <div class="bg-white shadow-lg rounded-3xl overflow-hidden text-center py-4 px-8">
         <h2 class="text-2xl font-bold mb-2">{{message}}</h2>
         <p class="text-gray-700 text-sm">{{description}}</p>

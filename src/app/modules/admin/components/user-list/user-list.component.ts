@@ -11,7 +11,12 @@ export class UserListComponent implements OnInit {
   userData: any;
   message: any;
   success: any;
+  userId:any;
+  showDelDiv:Boolean=false;
   ngOnInit(): void {
+    this.getUser()
+  }
+  getUser(){
     this.adminServ.getAllUsers().subscribe((res) => {
       this.success = res.success;
       if (this.success) {
@@ -24,9 +29,15 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(userId: any) {
-    this.adminServ.changeDeleteStatus(userId).subscribe((res) => {
+    this.userId=userId;
+    this.showDelDiv=true;
+  }
+
+  confirmDelete(){
+    this.adminServ.changeDeleteStatus(this.userId).subscribe((res) => {
       console.log(res.message);
+      this.getUser()
     });
-    // window.location.reload();
+    this.showDelDiv=false;
   }
 }

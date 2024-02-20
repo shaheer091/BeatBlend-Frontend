@@ -11,9 +11,12 @@ export class ArtistListComponent implements OnInit {
   artistData: any;
   message: any;
   success: any;
-  deleteDiv:Boolean=false;
-  artistId:any;
+  deleteDiv: Boolean = false;
+  artistId: any;
   ngOnInit(): void {
+    this.getArtist();
+  }
+  getArtist() {
     this.adminServ.getAllArtist().subscribe((res) => {
       console.log(res);
       this.success = res.success;
@@ -25,14 +28,16 @@ export class ArtistListComponent implements OnInit {
     });
   }
 
-  showDeleteDiv(artistId:any){
-    this.deleteDiv=true;
-    this.artistId=artistId;
+  showDeleteDiv(artistId: any) {
+    this.deleteDiv = true;
+    this.artistId = artistId;
   }
 
   deleteUser() {
     this.adminServ.changeDeleteStatus(this.artistId).subscribe((res) => {
       console.log(res.message);
+      this.deleteDiv=false;
+      this.getArtist();
     });
     // window.location.reload();
   }

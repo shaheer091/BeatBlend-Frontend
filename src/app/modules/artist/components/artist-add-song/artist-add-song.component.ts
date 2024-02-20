@@ -13,7 +13,7 @@ export class ArtistAddSongComponent implements OnInit {
   message:any;
   description:any;
   success:any;
-
+  reqMsg:any;
   constructor(
     private formBuilder: FormBuilder,
     private artistServ: ArtistService,
@@ -23,27 +23,26 @@ export class ArtistAddSongComponent implements OnInit {
   ngOnInit(): void {
     this.songForm = this.formBuilder.group({
       title: ['', Validators.required],
-      artist: ['', Validators.required],
-      album: ['', Validators.required],
-      genre: ['', Validators.required],
-      duration: ['1', Validators.required],
-      releaseDate: ['', Validators.required],
+      artist: [''],
+      album: [''],
+      genre: [''],
+      duration: [''],
+      releaseDate: [''],
       songFile: [null, Validators.required],
     });
   }
 
   onSubmit() {
     if (this.songForm.valid) {
-      // Handle form submission here
       console.log('Form submitted!', this.songForm.value);
       this.artistServ.artistAddSong(this.songForm.value).subscribe((res) => {
         console.log(res);
         this.message=res.message;
         this.description=res.description;
         this.success=res.success;
-        
       });
     } else {
+      this.reqMsg='enter the required details';
       console.log('enter valid details');
     }
   }
