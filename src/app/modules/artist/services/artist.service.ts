@@ -23,4 +23,8 @@ export class ArtistService {
   artistGetProfile():Observable<any>{
     return this.http.get(`${this.artistApi}/profile`)
   }
+  artistUpdateProfile(profileDetails:any):Observable<any>{
+    // console.log(profileDetails);
+    return this.http.patch(`${this.artistApi}/profile`,{profileDetails})
+  }
 }

@@ -34,21 +34,23 @@ export class ProfileComponent implements OnInit {
     });
     this.userServ.getUserProfile().subscribe((res) => {
       this.userData = res.userProfile[0];
-      this.userDetails = res.userProfile[0].userDetails[0];      
-      this.myForm.controls['username'].setValue(this.userData.username);
-      this.myForm.controls['email'].setValue(this.userData.email);
-      this.myForm.controls['bio'].setValue(this.userDetails.bio);
-      this.myForm.controls['phoneNumber'].setValue(this.userDetails.phoneNumber);
-      this.myForm.controls['date'].setValue(this.userDetails.dateOfBirth);
-      this.myForm.controls['gender'].setValue(this.userDetails.gender);
-      this.myForm.controls['file'].setValue(this.userDetails.imageUrl);
+      this.userDetails = res.userProfile[0].userDetails[0];
+      this.myForm.controls['username'].setValue(this.userData.username || '');
+      this.myForm.controls['email'].setValue(this.userData.email || '');
+      this.myForm.controls['bio'].setValue(this.userDetails.bio || '');
+      this.myForm.controls['phoneNumber'].setValue(
+        this.userDetails.phoneNumber || ''
+      );
+      this.myForm.controls['date'].setValue(this.userDetails.dateOfBirth || '');
+      this.myForm.controls['gender'].setValue(this.userDetails.gender || '');
+      // this.myForm.controls['file'].setValue(this.userDetails.imageUrl || '');
     });
   }
   message: string = '';
   onSubmit(): void {
     if (this.myForm.valid) {
       console.log(this.myForm.value);
-      
+
       this.userServ.updateProfile(this.myForm.value).subscribe(
         (res) => {
           setTimeout(() => {
