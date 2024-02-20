@@ -13,6 +13,12 @@ export class LoginComponent implements OnInit {
   password: any;
   usernameOrEmail: any;
   message: any;
+  hidePassword: boolean = true;
+  role:any;
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,22 +47,27 @@ export class LoginComponent implements OnInit {
           if (res.success) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
+
             console.log(res.token,'hihihihi');
-            if (res.role == 'user') {
-              // this.router.navigate(['/user/home']);
-              console.log('role user');
-              this.router.navigateByUrl('/user/home');
-            }
+            this.role=res.role;
+            // if (res.role == 'user') {
+            //   // this.router.navigate(['/user/home']);
+            //   console.log('role user');
+            //   this.router.navigateByUrl('/user/home');
+            // }
 
-            if (res.role == 'admin') {
-              // this.router.navigate(['/admin/home']);
-              console.log('role admin');
-              this.router.navigateByUrl('/admin/home');
-            }
+            // if (res.role == 'admin') {
+            //   // this.router.navigate(['/admin/home']);
+            //   console.log('role admin');
+            //   this.router.navigateByUrl('/admin/home');
+            // }
 
-            if (res.role == 'artist') {
-              console.log('artist');
-              this.router.navigate(['/artist/home']);
+            // if (res.role == 'artist') {
+            //   console.log('artist');
+            //   this.router.navigate(['/artist/home']);
+            // }
+            if(this.role){
+              this.router.navigate([`/${this.role}/home`])
             }
           } else {
             this.message = res.message;

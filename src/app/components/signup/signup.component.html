@@ -1,6 +1,6 @@
 <!-- otpComponent -->
-<app-otp-verification class="z-10" *ngIf="showOtpComponent" [otp]="otp" [data]="data"
-  (hide)="hideComponent($event)" (hideLoading)="hideLoading($event)"></app-otp-verification>
+<app-otp-verification class="z-10" *ngIf="showOtpComponent" [otp]="otp" [data]="data" (hide)="hideComponent($event)"
+  (hideLoading)="hideLoading($event)"></app-otp-verification>
 
 <div [class.blur-background]="showOtpComponent" class="h-screen w-screen flex flex-col md:flex-row md:px-16 md:py-6">
 
@@ -36,7 +36,7 @@
 
         <!-- email -->
         <div class="flex items-center flex-col">
-          <input type="email" id="email" class="w-5/6 md:w-3/5 p-2  rounded" formControlName="email"
+          <input type="email" id="email" class="w-5/6 md:w-3/5 p-2 rounded" formControlName="email"
             placeholder="Email" />
           <div *ngIf="email?.errors?.['required'] && email?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
@@ -53,14 +53,13 @@
 
 
         <!-- password -->
-        <div class="flex items-center flex-col">
-          <input type="password" id="password" class="w-5/6 md:w-3/5 p-2  rounded" formControlName="password"
+        <div class="flex items-center justify-center flex-col">
+          <input type="password" id="password" class="w-5/6  md:w-3/5 p-2  rounded" formControlName="password"
             placeholder="Password" />
           <div *ngIf="password?.errors?.['required'] && password?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
             Password is required.
           </div>
-
           <div *ngIf="password?.errors?.['passwordStrength'] && password?.touched"
             class="text-red-500 text-xs mt-4 translate-x-3">
             Password must be 8 character. Needs uppercase, lowercase, digit, and special character.
@@ -69,8 +68,14 @@
 
         <!-- confirmpassword -->
         <div class="flex items-center flex-col">
-          <input type="password" id="confirmPassword" class="w-5/6 md:w-3/5 p-2  rounded"
-            formControlName="confirmPassword" placeholder="Repeat password" />
+          <div class="w-full  flex justify-center items-center">
+            <input type="{{ hidePassword ? 'password' : 'text' }}" id="confirmPassword"
+              class="w-5/6 translate-x-2 md:w-3/5 p-2  rounded" formControlName="confirmPassword"
+              placeholder="Repeat password" />
+            <img (click)="togglePasswordVisibility()" class="h-5 w-5 -translate-x-5"
+              [src]="hidePassword ? '../../../assets/images/eye.png' : '../../../assets/images/hidden.png'"
+              alt="Password visibility toggle" />
+          </div>
           <div *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched"
             class="text-red-500 text-xs absolute translate-y-11">
             Confirm Password is required.
@@ -93,10 +98,13 @@
         <!-- button -->
         <div class="flex justify-center">
           <button *ngIf="!showLoading" type="submit" class="bg-green-500 text-white p-2 w-3/5 rounded"
-            [disabled]="signupForm!.invalid">Register</button>
+            [disabled]="signupForm!.invalid" [style.cursor]="signupForm!.invalid ? 'not-allowed' : 'pointer'">
+            Register
+          </button>
         </div>
         <div class="flex justify-center -translate-y-5 relative">
-          <button *ngIf="showLoading" class="bg-green-500 text-white p-2 w-3/5 rounded flex justify-center items-center">
+          <button *ngIf="showLoading"
+            class="bg-green-500 text-white p-2 w-3/5 rounded flex justify-center items-center">
             <div class="w-6 h-6 border-2 border-white border-l-0 border-t-0 rounded-full animate-spin "></div>
           </button>
         </div>
@@ -104,6 +112,6 @@
 
       </div>
     </form>
-    
+
   </div>
 </div>

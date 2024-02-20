@@ -13,6 +13,7 @@ export class UserListComponent implements OnInit {
   success: any;
   userId:any;
   showDelDiv:Boolean=false;
+  togle=false
   ngOnInit(): void {
     this.getUser()
   }
@@ -31,6 +32,7 @@ export class UserListComponent implements OnInit {
   deleteUser(userId: any) {
     this.userId=userId;
     this.showDelDiv=true;
+    this.togle=!this.togle;
   }
 
   confirmDelete(){

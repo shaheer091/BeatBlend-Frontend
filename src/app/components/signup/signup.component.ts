@@ -21,6 +21,11 @@ export class SignupComponent implements OnInit {
   showOtpComponent: Boolean = false;
   data!: any;
   showLoading: Boolean = false;
+  hidePassword: boolean = true;
+
+  togglePasswordVisibility(): void {
+    this.hidePassword = !this.hidePassword;
+  }
 
   hideComponent(event: Boolean) {
     this.showOtpComponent = event;

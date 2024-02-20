@@ -20,4 +20,7 @@ export class ArtistService {
   artistDeleteSong(songId:any):Observable<any>{
     return this.http.delete(`${this.artistApi}/deleteSong/${songId}`)
   }
+  artistGetProfile():Observable<any>{
+    return this.http.get(`${this.artistApi}/profile`)
+  }
 }

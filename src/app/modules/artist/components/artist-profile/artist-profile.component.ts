@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ArtistService } from '../../services/artist.service';
 
 @Component({
   selector: 'app-artist-profile',
@@ -9,21 +10,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ArtistProfileComponent implements OnInit {
 
   profileForm!: FormGroup;
+  artistProfile:any;
+  artistDetails:any;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,private artistServ:ArtistService) { }
 
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      username: [''],
+      email: ['',Validators.email],
       bio: [''],
-      artistName: [''],
       phoneNumber: [''],
       dateOfBirth: [''],
-      file: ['']
+      file: [''],
     });
+    this.artistServ.artistGetProfile().subscribe((res)=>{
+      console.log(res.user)
+      this.artistProfile=res.artistProfile[0].profile[0];
+      this.artistDetails=res.user;
+      // console.log(this.artistProfile);
 
+      this.profileForm.controls['username'].setValue(this.artistDetails.username)
+      this.profileForm.controls['email'].setValue(this.artistDetails.email)
+      this.profileForm.controls['bio'].setValue(this.artistProfile.bio)
+      this.profileForm.controls['phoneNumber'].setValue(this.artistProfile.phoneNumber)
+      this.profileForm.controls['dateOfBirth'].setValue(this.artistProfile.dateOfBirth)
+      this.profileForm.controls['file'].setValue(this.artistProfile.file)
+
+    })
 
   }
 

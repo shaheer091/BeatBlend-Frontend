@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
   onSubmit(): void {
     if (this.myForm.valid) {
       console.log(this.myForm.value);
+      
       this.userServ.updateProfile(this.myForm.value).subscribe(
         (res) => {
           setTimeout(() => {
