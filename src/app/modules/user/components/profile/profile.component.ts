@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -33,6 +33,7 @@ export class ProfileComponent implements OnInit {
       gender: [''],
     });
     this.userServ.getUserProfile().subscribe((res) => {
+      console.log(res);
       this.userData = res.userProfile[0];
       this.userDetails = res.userProfile[0].userDetails[0];
       this.myForm.controls['username'].setValue(this.userData.username || '');
@@ -43,15 +44,35 @@ export class ProfileComponent implements OnInit {
       );
       this.myForm.controls['date'].setValue(this.userDetails.dateOfBirth || '');
       this.myForm.controls['gender'].setValue(this.userDetails.gender || '');
-      // this.myForm.controls['file'].setValue(this.userDetails.imageUrl || '');
+      this.myForm.controls['file'].setValue(this.userDetails.imageUrl || '');
     });
+  }
+
+  changing(event:any){
+    const files: FileList = event.target.files;
+    console.log(files);
+    
+    console.log(this.myForm.value);
+    
+    
   }
   message: string = '';
   onSubmit(): void {
     if (this.myForm.valid) {
       console.log(this.myForm.value);
 
-      this.userServ.updateProfile(this.myForm.value).subscribe(
+      const formdata = new FormData();
+      const value = this.myForm.value;
+      formdata.append('bio', value.bio);
+      formdata.append('username', value.username);
+      formdata.append('email', value.email);
+      formdata.append('phoneNumber', value.phoneNumber);
+      formdata.append('date', value.date);
+      formdata.append('gender', value.gender);
+      formdata.append('file', value.file);
+
+
+      this.userServ.updateProfile(formdata).subscribe(
         (res) => {
           setTimeout(() => {
             this.message = res.message;

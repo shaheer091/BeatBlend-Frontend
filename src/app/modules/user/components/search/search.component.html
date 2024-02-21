@@ -1,0 +1,12 @@
+<app-side-bar></app-side-bar>
+<div class="w-screen h-screen">
+    <div class="h-full w-10/12 border float-end p-5">
+        <div class="">
+            <input [(ngModel)]="searchText" type="text" (keyup)="search()" placeholder="search here......" class="px-5 h-14 rounded-xl border w-96 mx-auto">
+        </div>
+        <div *ngFor="let use of user" class="h-80 w-80 border bg-black rounded-xl mt-5">
+            <p class="text-red-400">{{use.username}}</p>
+            <p></p>
+        </div>
+    </div>
+</div>

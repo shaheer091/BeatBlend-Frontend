@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/guards/authService.guard';
 import { NotFoundComponent } from 'src/app/components/not-found/not-found.component';
 import { SettingsPageComponent } from '../components/settings-page/settings-page.component';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { SearchComponent } from '../components/search/search.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,7 @@ const routes: Routes = [
   },
   { path: 'settings', component: SettingsPageComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'search', component: SearchComponent },
   { path: '', redirectTo: '/user/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

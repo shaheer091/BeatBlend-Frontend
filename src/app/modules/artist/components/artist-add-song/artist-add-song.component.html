@@ -35,11 +35,16 @@
     </div>
 
     <div class="mb-4">
-        <label for="genre" class="block text-gray-700 text-sm font-bold mb-2">Genre:</label>
-        <input type="text" id="genre" formControlName="genre"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-
+        <label for="genre" class="block text-gray-700 text-sm font-bold mb-2">Genre: <span><sup
+            class="text-red-500">*required</sup></span></label>
+        <select id="genre" formControlName="genre" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="pop-music">Pop Music</option>
+            <option value="rap">Rap</option>
+            <option value="classical">Classical</option>
+            <option value="hip-hop">Hip-Hop</option>
+        </select>
     </div>
+    
 
     <div class="mb-4">
         <label for="duration" class="block text-gray-700 text-sm font-bold mb-2">Duration (in seconds):</label>

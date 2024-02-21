@@ -25,7 +25,7 @@ export class ArtistAddSongComponent implements OnInit {
       title: ['', Validators.required],
       artist: [''],
       album: [''],
-      genre: [''],
+      genre: ['',Validators.required],
       duration: [''],
       releaseDate: [''],
       songFile: [null, Validators.required],
@@ -43,6 +43,9 @@ export class ArtistAddSongComponent implements OnInit {
       });
     } else {
       this.reqMsg='enter the required details';
+      setTimeout(() => {
+        this.reqMsg=''
+      }, 3000);
       console.log('enter valid details');
     }
   }

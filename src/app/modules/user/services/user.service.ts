@@ -15,7 +15,7 @@ export class UserService {
   }
 
   updateProfile(data:any):Observable<any>{
-    return this.http.patch(`${this.userApi}/profile`,data);
+    return this.http.put(`${this.userApi}/profile`,data);
   }
 
   verifyPhone(phNo:any):Observable<any>{
@@ -28,8 +28,12 @@ export class UserService {
     return this.http.post(`${this.userApi}/verifyOtp`,{otp,phone})
   }
 
-  artistVerification(socialMediaLink:any){
+  artistVerification(socialMediaLink:any):Observable<any>{
     console.log(socialMediaLink);
     return this.http.post(`${this.userApi}/artistVerify`,{socialMediaLink})
+  }
+
+  searchSong(text:string):Observable<any>{
+    return this.http.post(`${this.userApi}/search`,{text})
   }
 }

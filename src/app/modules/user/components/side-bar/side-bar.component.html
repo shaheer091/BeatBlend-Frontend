@@ -5,9 +5,13 @@
         <img class="h-6 w-6" src="../../../../../assets/images/home.png" alt="">
         <p class="hidden md:flex text-gray-700 font-medium">Home</p>
       </div>
-      <div class="py-2 flex items-center space-x-4 hover:bg-gray-100 rounded-lg cursor-pointer">
+      <div [routerLink]="'/user/search'" class="py-2 flex items-center space-x-4 hover:bg-gray-100 rounded-lg cursor-pointer">
         <img class="h-6 w-6" src="../../../../../assets/images/magnifying-glass.png" alt="">
         <p class="hidden md:flex text-gray-700 font-medium">Search</p>
+      </div>
+      <div class="py-2 flex items-center space-x-4 hover:bg-gray-100 rounded-lg cursor-pointer">
+        <img class="h-6 w-6" src="../../../../../assets/images/heart.png" alt="">
+        <p class="hidden md:flex text-gray-700 font-medium">Favorite</p>
       </div>
       <div class="py-2 flex items-center space-x-4 hover:bg-gray-100 rounded-lg cursor-pointer">
         <img class="h-6 w-6" src="../../../../../assets/images/library.png" alt="">
