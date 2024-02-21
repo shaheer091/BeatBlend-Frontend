@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'artist',
-    canActivate:[ArtistLoginGuard],
+    canActivate: [ArtistLoginGuard],
     loadChildren: () =>
       import('./modules/artist/artist.module').then((e) => e.ArtistModule),
   },

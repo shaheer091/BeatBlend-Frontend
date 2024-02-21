@@ -41,3 +41,11 @@
     <button type="submit" [disabled]="profileForm.invalid"
         class="px-4 py-2 rounded-md bg-blue-500 text-white font-bold text-center hover:bg-blue-700 disabled:bg-gray-400 cursor-pointer">Submit</button>
 </form>
+
+<div *ngIf="showSavingDiv" class="fixed z-50 inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white rounded-lg shadow-md px-8 py-5 text-left">
+      <p *ngIf="!message" class="mb-4">Please wait...</p>
+      <p *ngIf="message">{{ message }}</p>
+    </div>
+  </div>
+  

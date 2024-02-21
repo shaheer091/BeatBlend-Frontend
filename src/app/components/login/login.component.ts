@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   usernameOrEmail: any;
   message: any;
   hidePassword: boolean = true;
-  role:any;
+  role: any;
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
 
-            console.log(res.token,'hihihihi');
-            this.role=res.role;
+            console.log(res.token, 'hihihihi');
+            this.role = res.role;
             // if (res.role == 'user') {
             //   // this.router.navigate(['/user/home']);
             //   console.log('role user');
@@ -66,11 +66,14 @@ export class LoginComponent implements OnInit {
             //   console.log('artist');
             //   this.router.navigate(['/artist/home']);
             // }
-            if(this.role){
-              this.router.navigate([`/${this.role}/home`])
+            if (this.role) {
+              this.router.navigate([`/${this.role}/home`]);
             }
           } else {
             this.message = res.message;
+            setTimeout(() => {
+              this.message = '';
+            }, 2000);
           }
         });
       } else {

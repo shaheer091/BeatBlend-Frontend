@@ -7,10 +7,5 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-homepage.component.css']
 })
 export class UserHomepageComponent {
-  constructor(private router:Router){}
-  logout(){
-    localStorage.clear();
-    this.router.navigate(['/login'])
-    console.log('logout successfull');
-  }
+  
 }

@@ -6,16 +6,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CommonService {
+  api='http://localhost:3000';
+  role: String | null = localStorage.getItem('role');
+
   constructor(private http: HttpClient) {}
 
-  api='http://localhost:3000';
-
+  // Signup function
   apiCall(data: any): Observable<any> {
     return this.http.post(`${this.api}/signup`, data);
   }
+
   apiVerifyOtp(data: any): Observable<any> {
     return this.http.post(`${this.api}/otp-verify`, data);
   }
+
   apiLogin(data: any): Observable<any> {
     return this.http.post(`${this.api}/login`, data);
   }
@@ -23,13 +27,15 @@ export class CommonService {
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }
-  role: String | null = localStorage.getItem('role');
+
   isUser() {
     return this.role == 'user';
   }
+
   isAdmin() {
     return this.role == 'admin';
   }
+
   isArtist() {
     return this.role == 'artist';
   }

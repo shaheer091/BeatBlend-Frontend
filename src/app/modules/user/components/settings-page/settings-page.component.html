@@ -1,22 +1,24 @@
-<div class="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-700">
+<app-side-bar></app-side-bar>
+
+<div class="flex flex-col items-center justify-center h-screen ">
     <div class="mb-10">
         <img src="../../../../../../assets/images/account.png" alt="Profile" class="w-20 h-20 rounded-full shadow-lg">
     </div>
     <div class="mb-6">
-        <button [routerLink]="'/user/profile'" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out">Update Profile</button>
+        <button [routerLink]="'/user/profile'" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Update Profile</button>
     </div>
     <div class="mb-6" *ngIf="!showDiv">
-        <button (click)="showInput()" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out">Become an Artist</button>
+        <button (click)="showInput()" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Become an Artist</button>
     </div>
     <div *ngIf="showDiv" class="flex flex-col items-center mb-6">
         <input [(ngModel)]="socialMediaLink" type="text" class="px-4 py-2 bg-white border-2 border-blue-600 rounded-md shadow-md focus:outline-none focus:border-blue-700 transition duration-300 ease-in-out" required>
         <p *ngIf="message" class="capitalize text-red-500">{{message}}</p>
         <div class="mt-2 space-x-4">
-            <button (click)="beAnArtist()" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-md shadow-md hover:bg-blue-700 transition duration-300 ease-in-out">Submit</button>
+            <button (click)="beAnArtist()" class="px-6 py-3  text-blue-600 font-semibold rounded-md shadow-md  transition duration-300 ease-in-out">Submit</button>
             <button (click)="showDiv=false" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-md shadow-md hover:bg-red-700 transition duration-300 ease-in-out">Cancel</button>
         </div>
     </div>
     <div>
-        <button [routerLink]="'/user/home'" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out">Back</button>
+        <button [routerLink]="'/user/home'" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md transition duration-300 ease-in-out">Back</button>
     </div>
 </div>
