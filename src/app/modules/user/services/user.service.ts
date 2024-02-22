@@ -37,4 +37,7 @@ export class UserService {
   followAndUnfollowUser(userId:any):Observable<any>{
     return this.http.post(`${this.userApi}/follow`,{userId});
   }
+  userGetSong():Observable<any>{
+    return this.http.get(`${this.userApi}/getSong`)
+  }
 }

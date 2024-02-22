@@ -1,36 +1,13 @@
-<!-- 
-<div class="h-screen w-screen">
-    <div class="h-full w-[70px] md:w-56 border-2 flex flex-col justify-between p-1 md:p-5">
-        <div class="flex flex-col space-y-5">
-            <div class="flex items-center space-x-5 border px-4 py-1 rounded-lg cursor-pointer">
-                <img class="h-6 w-6" src="../../../../../assets/images/home.png" alt="">
-                <p class="hidden md:flex">Home</p>
-            </div>
-            <div class="flex items-center space-x-5 border px-4 py-1 rounded-lg cursor-pointer">
-                <img class="h-6 w-6" src="../../../../../assets/images/magnifying-glass.png" alt="">
-                <p class="hidden md:flex">Search</p>
-            </div>
-            <div class="flex items-center space-x-5 border px-4 py-1 rounded-lg cursor-pointer">
-                <img class="h-6 w-6" src="../../../../../assets/images/library.png" alt="">
-                <p class="hidden md:flex">Library</p>
-            </div>
-        </div>
-        <div class="flex flex-col space-y-5">
-            <div [routerLink]="'/user/settings'" class="flex items-center space-x-5 border px-4 py-1 rounded-lg cursor-pointer">
-                <img class="h-6 w-6" src="../../../../../assets/images/settings.png" alt="">
-                <p class="hidden md:flex">Settings</p>
-            </div>
-            <div (click)="logout()" class="flex items-center space-x-5 border px-4 py-1 rounded-lg cursor-pointer">
-                <img class="h-6 w-6" src="../../../../../assets/images/power-off.png" alt="">
-                <p class="hidden md:flex">Logout</p>
-            </div>
-        </div>
+<app-side-bar></app-side-bar>
+
+<div class="w-10/12 h-screen border float-end p-5">
+    <div>
+        <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
+        <p *ngIf="message">{{message}}</p>
+    </div>
+    <div class="h-1/6 w-8/12 border" *ngFor="let song of songs">
+        <p>{{song.artist}}</p>
+        <p>{{song.title}}</p>
+        <p>({{song.genre}})</p>
     </div>
 </div>
-
-
-
-<router-outlet></router-outlet> -->
-
-
-<app-side-bar></app-side-bar>

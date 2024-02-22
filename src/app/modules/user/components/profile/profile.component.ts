@@ -33,7 +33,10 @@ export class ProfileComponent implements OnInit {
       date: [''],
       gender: [''],
     });
-
+    this.getData();
+    
+  }
+  getData(){
     this.userServ.getUserProfile().subscribe((res) => {
       this.userData = res.userProfile[0];
       this.userDetails = res.userProfile[0].userDetails[0];
