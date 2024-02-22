@@ -27,9 +27,8 @@ export class SearchComponent {
     });
   }
   followUser(userId: any) {
-    this.userServ.followUser(userId).subscribe((res) => {
+    this.userServ.followAndUnfollowUser(userId).subscribe((res) => {
       console.log(res);
-      // this.following=res.following;
     });
     this.search()
   }
