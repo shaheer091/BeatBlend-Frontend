@@ -4,10 +4,10 @@
   <div class="bg-white border border-gray-200 rounded-md shadow-md p-8 w-full max-w-md">
     <form [formGroup]="myForm" class="space-y-4" enctype="multipart/form-data">
       <div class="flex items-center mb-4">
-        <label for="file" class="block w-full mr-4 text-gray-700 font-medium">
+        <label for="file" class="block w-full mr-4 text-gray-700 font-medium" formControlName="file">
           Upload File
         </label>
-        <input name="file" type="file" id="file" formControlName="file"
+        <input name="file" type="file" id="file"
           class="block w-full rounded-md bg-gray-100 border border-gray-200 focus:ring-indigo-500 focus:border-indigo-500" (change)="changing($event)">
       </div>
       <div class="mb-4">

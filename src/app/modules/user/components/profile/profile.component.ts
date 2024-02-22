@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 
@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   showOtp: Boolean = false;
   otp: any;
   otpMessage: any;
+  arr: File[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,35 +33,38 @@ export class ProfileComponent implements OnInit {
       date: [''],
       gender: [''],
     });
+
     this.userServ.getUserProfile().subscribe((res) => {
-      console.log(res);
       this.userData = res.userProfile[0];
       this.userDetails = res.userProfile[0].userDetails[0];
-      this.myForm.controls['username'].setValue(this.userData.username || '');
-      this.myForm.controls['email'].setValue(this.userData.email || '');
-      this.myForm.controls['bio'].setValue(this.userDetails.bio || '');
-      this.myForm.controls['phoneNumber'].setValue(
+      this.myForm.controls['username']?.patchValue(
+        this.userData.username || ''
+      );
+      this.myForm.controls['email']?.patchValue(this.userData.email || '');
+      this.myForm.controls['bio']?.patchValue(this.userDetails.bio || '');
+      this.myForm.controls['phoneNumber']?.patchValue(
         this.userDetails.phoneNumber || ''
       );
-      this.myForm.controls['date'].setValue(this.userDetails.dateOfBirth || '');
-      this.myForm.controls['gender'].setValue(this.userDetails.gender || '');
-      this.myForm.controls['file'].setValue(this.userDetails.imageUrl || '');
+      this.myForm.controls['date']?.patchValue(
+        this.userDetails.dateOfBirth || ''
+      );
+      this.myForm.controls['gender']?.patchValue(this.userDetails.gender || '');
     });
   }
 
-  changing(event:any){
-    const files: FileList = event.target.files;
+  changing(event: any) {
+    const files = event.target.files;
+    if (files.length > 0) {
+      this.myForm.patchValue({
+        file: files[0],
+      });
+    }
     console.log(files);
-    
-    console.log(this.myForm.value);
-    
-    
   }
+
   message: string = '';
   onSubmit(): void {
     if (this.myForm.valid) {
-      console.log(this.myForm.value);
-
       const formdata = new FormData();
       const value = this.myForm.value;
       formdata.append('bio', value.bio);
@@ -71,6 +75,7 @@ export class ProfileComponent implements OnInit {
       formdata.append('gender', value.gender);
       formdata.append('file', value.file);
 
+      console.log('sudais');
 
       this.userServ.updateProfile(formdata).subscribe(
         (res) => {
