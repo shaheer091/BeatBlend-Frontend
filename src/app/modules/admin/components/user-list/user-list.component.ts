@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit {
       } else {
         this.message = res.message;
       }
-      console.log(res.user);
     });
   }
 
@@ -37,7 +36,6 @@ export class UserListComponent implements OnInit {
 
   confirmDelete(){
     this.adminServ.changeDeleteStatus(this.userId).subscribe((res) => {
-      console.log(res.message);
       this.getUser()
     });
     this.showDelDiv=false;

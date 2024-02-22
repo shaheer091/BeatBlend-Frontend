@@ -19,17 +19,14 @@ export class UserService {
   }
 
   verifyPhone(phNo:any):Observable<any>{
-    console.log(phNo);
     return this.http.post(`${this.userApi}/verifyPhone`,{phone:phNo})
   }
 
   verifyPhoneOtp(otp:number,phone:number):Observable<any>{
-    console.log(otp);
     return this.http.post(`${this.userApi}/verifyOtp`,{otp,phone})
   }
 
   artistVerification(socialMediaLink:any):Observable<any>{
-    console.log(socialMediaLink);
     return this.http.post(`${this.userApi}/artistVerify`,{socialMediaLink})
   }
 

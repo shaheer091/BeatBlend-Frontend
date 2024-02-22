@@ -59,7 +59,6 @@ export class ProfileComponent implements OnInit {
         file: files[0],
       });
     }
-    console.log(files);
   }
 
   message: string = '';
@@ -75,7 +74,6 @@ export class ProfileComponent implements OnInit {
       formdata.append('gender', value.gender);
       formdata.append('file', value.file);
 
-      console.log('sudais');
 
       this.userServ.updateProfile(formdata).subscribe(
         (res) => {
@@ -96,14 +94,10 @@ export class ProfileComponent implements OnInit {
     }
   }
   verifyPhone() {
-    console.log('btn clicked');
-    console.log(this.myForm.value.phoneNumber);
     try {
       this.userServ
         .verifyPhone(this.myForm.value.phoneNumber)
         .subscribe((res) => {
-          console.log('otp send succesfully');
-          console.log(res);
           this.showOtp = true;
         });
     } catch (err) {
@@ -112,13 +106,10 @@ export class ProfileComponent implements OnInit {
   }
 
   onVerify() {
-    console.log('Verify button clicked');
-    console.log('OTP:', this.otp);
     try {
       this.userServ
         .verifyPhoneOtp(this.otp, this.myForm.value.phoneNumber)
         .subscribe((res) => {
-          console.log(res.message);
           this.otpMessage = res.message;
           setTimeout(() => {
             this.showOtp = false;

@@ -107,10 +107,8 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('btn clicked');
     this.showLoading = true;
     this.signupService.apiCall(this.signupForm.value).subscribe((res) => {
-      console.log('iam here', res);
       this.otp = res.otp;
       if (this.otp) {
         this.showOtpComponent = true;
@@ -125,6 +123,5 @@ export class SignupComponent implements OnInit {
     });
     this.alreadyExist = '';
 
-    console.log('Form submitted!', this.signupForm.value);
   }
 }

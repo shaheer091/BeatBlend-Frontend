@@ -20,7 +20,6 @@ export class ArtistSongListComponent implements OnInit {
   }
   getSong() {
     this.artistServ.artistGetSongs().subscribe((res) => {
-      console.log(res);
       this.songs = res.songs;
       this.message = res.message;
       this.success = res.success;
@@ -30,9 +29,7 @@ export class ArtistSongListComponent implements OnInit {
 
   deleteSong() {
     try {
-      console.log('delete btn clicked');
       this.artistServ.artistDeleteSong(this.idSong).subscribe((res) => {
-        console.log(res);
       });
       this.showDeleteDiv = false;
       this.getSong();
@@ -43,7 +40,6 @@ export class ArtistSongListComponent implements OnInit {
 
   showDeleteConfirmation(songId: any) {
     this.showDeleteDiv = true;
-    console.log(songId);
     this.idSong = songId;
   }
 }

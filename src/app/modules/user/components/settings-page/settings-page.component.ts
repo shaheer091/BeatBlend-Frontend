@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -6,15 +6,23 @@ import { UserService } from '../../services/user.service';
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.css'],
 })
-export class SettingsPageComponent {
+export class SettingsPageComponent implements OnInit{
   constructor(private userServ: UserService) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
+  isArtist:Boolean=false;
+  role:any;
+  ngOnInit(): void {
+    this.role=localStorage.getItem('role')
+    console.log(this.role)
+    if(this.role=='artist'){
+      this.isArtist=true;
+    }
+  }
 
   showInput() {
     this.showDiv = true;
-    console.log('btn clicked');
   }
 
   isValidLink(link: any) {
@@ -23,14 +31,12 @@ export class SettingsPageComponent {
   }
   beAnArtist() {
     try {
-      console.log('btn clicked');
       // const token = localStorage.getItem('token');
       if (this.socialMediaLink) {
         if (this.isValidLink(this.socialMediaLink)) {
           this.userServ
             .artistVerification(this.socialMediaLink)
             .subscribe((res) => {
-              console.log(res);
             });
         }else{
           this.message='the provided link is not valid'

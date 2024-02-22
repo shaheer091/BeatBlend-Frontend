@@ -1,5 +1,5 @@
 // otp-verification.component.ts
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -8,11 +8,9 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './otp-verification.component.html',
   styleUrls: ['./otp-verification.component.css'],
 })
-export class OtpVerificationComponent implements OnInit {
+export class OtpVerificationComponent {
   constructor(private signupService: CommonService, private router: Router) {}
-  ngOnInit(): void {
-    console.log('Inited');
-  }
+  
   @Input() data: any;
 
   @Input() otp: any;
@@ -26,24 +24,16 @@ export class OtpVerificationComponent implements OnInit {
   @Output() hideLoading: EventEmitter<Boolean> = new EventEmitter<Boolean>();
 
   onVerifyOTP(): void {
-    // console.log(`serverOTP ${this.otp} ,enteredOTP ${this.enteredOTP}`);
-    // console.log(this.data);
 
     const fulldata = {
       sendedotp: this.otp,
       enteredotp: this.enteredOTP,
       ...this.data,
     };
-    console.log(fulldata);
 
     this.signupService.apiVerifyOtp(fulldata).subscribe((response) => {
-      // console.log(response);
-      // console.log(this.otp);
-      // console.log(response.success);
       this.success = response.success;
-      // console.log(response.message);
       this.message = response.message || 'An unexpected error occurs';
-      // console.log(response.token);
       if (response.success) {
         localStorage.setItem('token', response.token);
         setTimeout(() => {
@@ -55,8 +45,6 @@ export class OtpVerificationComponent implements OnInit {
 
   goBck() {
     this.hide.emit(false);
-    console.log('hide clicked false');
     this.hideLoading.emit(false);
-    console.log('hideLoading clicked false');
   }
 }

@@ -34,9 +34,7 @@ export class ArtistAddSongComponent implements OnInit {
 
   onSubmit() {
     if (this.songForm.valid) {
-      console.log('Form submitted!', this.songForm.value);
       this.artistServ.artistAddSong(this.songForm.value).subscribe((res) => {
-        console.log(res);
         this.message=res.message;
         this.description=res.description;
         this.success=res.success;
@@ -46,7 +44,6 @@ export class ArtistAddSongComponent implements OnInit {
       setTimeout(() => {
         this.reqMsg=''
       }, 3000);
-      console.log('enter valid details');
     }
   }
   goBack(){

@@ -40,30 +40,23 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     try {
       if (this.loginForm.valid) {
-        console.log(this.loginForm.value);
-        console.log('login button clicked');
         this.serv.apiLogin(this.loginForm.value).subscribe((res) => {
-          console.log(res);
           if (res.success) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
 
-            console.log(res.token, 'hihihihi');
             this.role = res.role;
             // if (res.role == 'user') {
             //   // this.router.navigate(['/user/home']);
-            //   console.log('role user');
             //   this.router.navigateByUrl('/user/home');
             // }
 
             // if (res.role == 'admin') {
             //   // this.router.navigate(['/admin/home']);
-            //   console.log('role admin');
             //   this.router.navigateByUrl('/admin/home');
             // }
 
             // if (res.role == 'artist') {
-            //   console.log('artist');
             //   this.router.navigate(['/artist/home']);
             // }
             if (this.role) {

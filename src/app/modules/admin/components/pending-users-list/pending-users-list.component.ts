@@ -44,7 +44,6 @@ export class PendingUsersListComponent implements OnInit {
 
   approveUser() {
     this.adminServ.pendingApproval(this.pendingUserId).subscribe((res) => {
-      console.log(res.message);
       this.getPending()
     });
     // this.showPopUp=false;
@@ -54,7 +53,6 @@ export class PendingUsersListComponent implements OnInit {
 
   declineUser(){
     this.adminServ.pendingDecline(this.pendingUserId).subscribe((res)=>{
-      console.log(res);
       this.getPending()
     })
     this.approve=false;

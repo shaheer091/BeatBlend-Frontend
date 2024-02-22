@@ -13,7 +13,6 @@ export class AdminsListComponent implements OnInit {
   success: any;
   ngOnInit(): void {
     this.adminServ.getAllAdmin().subscribe((res) => {
-      console.log(res.admin);
       this.success = res.success;
       if (this.success) {
         this.adminData = res.admin;

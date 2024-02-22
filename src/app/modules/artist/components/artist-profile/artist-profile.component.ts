@@ -31,8 +31,6 @@ export class ArtistProfileComponent implements OnInit {
       file: [''],
     });
     this.artistServ.artistGetProfile().subscribe((res) => {
-      // console.log(res.user);
-      console.log(res.artistProfile[0]);
 
       this.artistProfile = res.artistProfile[0].profile[0];
       this.artistDetails = res.user;
@@ -59,15 +57,12 @@ export class ArtistProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm.valid) {
-      console.log(this.profileForm.value);
       this.artistServ
         .artistUpdateProfile(this.profileForm.value)
         .subscribe((res) => {
-          console.log(res);
           this.showSavingDiv = true;
           setTimeout(() => {
             this.message = res.message;
-            console.log(this.message);
           }, 2000);
           setTimeout(() => {
             if (res.success) {
@@ -80,7 +75,6 @@ export class ArtistProfileComponent implements OnInit {
           }, 3000);
         });
     } else {
-      console.log('Form is invalid');
     }
   }
 }

@@ -18,7 +18,6 @@ export class ArtistListComponent implements OnInit {
   }
   getArtist() {
     this.adminServ.getAllArtist().subscribe((res) => {
-      console.log(res);
       this.success = res.success;
       if (res.success) {
         this.artistData = res.artist;
@@ -35,7 +34,6 @@ export class ArtistListComponent implements OnInit {
 
   deleteUser() {
     this.adminServ.changeDeleteStatus(this.artistId).subscribe((res) => {
-      console.log(res.message);
       this.deleteDiv=false;
       this.getArtist();
     });

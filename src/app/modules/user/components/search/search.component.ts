@@ -15,20 +15,15 @@ export class SearchComponent {
 
   search() {
     this.userServ.searchSong(this.searchText).subscribe((res) => {
-      console.log(res);
       this.user = res.users;
       this.userId = res.userId;
-      // console.log(res.users[0].followers)
       if (this.searchText !== '') {
         this.following = this.user.map((e) => e.followers.includes(this.userId));
-        console.log(this.following)
       }
-      console.log();
     });
   }
   followUser(userId: any) {
     this.userServ.followAndUnfollowUser(userId).subscribe((res) => {
-      console.log(res);
     });
     this.search()
   }
