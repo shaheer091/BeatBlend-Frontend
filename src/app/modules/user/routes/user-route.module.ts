@@ -6,6 +6,8 @@ import { NotFoundComponent } from 'src/app/components/not-found/not-found.compon
 import { SettingsPageComponent } from '../components/settings-page/settings-page.component';
 import { ProfileComponent } from '../components/profile/profile.component';
 import { SearchComponent } from '../components/search/search.component';
+import { FavoritesComponent } from '../components/favorites/favorites.component';
+import { PlaylistComponent } from '../components/playlist/playlist.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'settings', component: SettingsPageComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'search', component: SearchComponent },
+  { path: 'favorites', component: FavoritesComponent },
+  { path: 'playlist', component: PlaylistComponent },
   { path: '', redirectTo: '/user/home', pathMatch: 'full' },
   { path: '**', component: NotFoundComponent },
 ];

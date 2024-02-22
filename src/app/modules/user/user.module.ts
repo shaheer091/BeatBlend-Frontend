@@ -9,6 +9,8 @@ import { SettingsPageComponent } from './components/settings-page/settings-page.
 import { ProfileComponent } from './components/profile/profile.component';
 import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { SearchComponent } from './components/search/search.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { SearchComponent } from './components/search/search.component';
     SettingsPageComponent,
     ProfileComponent,
     SideBarComponent,
-    SearchComponent
+    SearchComponent,
+    FavoritesComponent,
+    PlaylistComponent
   ],
   imports: [
     ReactiveFormsModule,
