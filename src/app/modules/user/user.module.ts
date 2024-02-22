@@ -24,7 +24,7 @@ import { SearchComponent } from './components/search/search.component';
     HttpClientModule,
     RouterModule,
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
   ],
   providers: [],
   exports: [],

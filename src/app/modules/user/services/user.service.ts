@@ -36,4 +36,8 @@ export class UserService {
   searchSong(text:string):Observable<any>{
     return this.http.post(`${this.userApi}/search`,{text})
   }
+
+  followUser(userId:any):Observable<any>{
+    return this.http.post(`${this.userApi}/follow`,{userId});
+  }
 }

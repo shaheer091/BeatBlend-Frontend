@@ -9,12 +9,18 @@ import { UserService } from '../../services/user.service';
 export class SearchComponent {
   constructor(private userServ: UserService) {}
   searchText!: string;
-  user: any[]=[]
+  user: any[] = [];
 
   search() {
     this.userServ.searchSong(this.searchText).subscribe((res) => {
       console.log(res);
-        this.user = res.user;
+      this.user = res;
+      console.log(this.user)
     });
+  }
+  followUser(userId:any){
+    this.userServ.followUser(userId).subscribe((res)=>{
+      console.log(res)
+    })
   }
 }
