@@ -12,7 +12,7 @@ export class ArtistService {
   artistApi = 'http://localhost:3000/artist'
 
   artistAddSong (data:any):Observable<any>{
-    return this.http.post(`${this.artistApi}/addSong`,{data})
+    return this.http.post(`${this.artistApi}/addSong`, data)
   }
   artistGetSongs ():Observable<any>{
     return this.http.get(`${this.artistApi}/songs`)

@@ -15,6 +15,8 @@ export class SettingsPageComponent implements OnInit {
   role: any;
   following: number = 0;
   followers: number = 0;
+  image:any;
+  imgBool:Boolean=false;
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
@@ -53,6 +55,10 @@ export class SettingsPageComponent implements OnInit {
 
   getSettingsPage() {
     this.userServ.getSettingsPage().subscribe((res) => {
+      if(res.imageUrl){
+        this.imgBool=true;
+        this.image=res.imageUrl;
+      }
       if (res.followers && res.followers.length > 0) {
         this.followers = res.followers.length;
       } else {

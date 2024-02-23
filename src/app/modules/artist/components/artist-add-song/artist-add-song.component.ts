@@ -10,14 +10,15 @@ import { Router } from '@angular/router';
 })
 export class ArtistAddSongComponent implements OnInit {
   songForm!: FormGroup;
-  message:any;
-  description:any;
-  success:any;
-  reqMsg:any;
+  message: any;
+  description: any;
+  success: any;
+  reqMsg: any;
+  formData = new FormData();
   constructor(
     private formBuilder: FormBuilder,
     private artistServ: ArtistService,
-    private router:Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,30 +26,48 @@ export class ArtistAddSongComponent implements OnInit {
       title: ['', Validators.required],
       artist: [''],
       album: [''],
-      genre: ['',Validators.required],
+      genre: ['', Validators.required],
       duration: [''],
       releaseDate: [''],
-      songFile: [null, Validators.required],
+      songFile: ['', Validators.required],
     });
+  }
+
+  changing(event: any) {
+    this.formData.delete('songFile');
+    this.formData.append('songFile', event.target.files[0]);
   }
 
   onSubmit() {
     if (this.songForm.valid) {
-      this.artistServ.artistAddSong(this.songForm.value).subscribe((res) => {
-        this.message=res.message;
-        this.description=res.description;
-        this.success=res.success;
+      const value = this.songForm.value;
+      this.formData.append('title', value.title);
+      this.formData.append('artist', value.artist);
+      this.formData.append('album', value.album);
+      this.formData.append('genre', value.genre);
+      this.formData.append('duration', value.duration);
+      this.formData.append('releaseDate', value.releaseDate);
+
+      this.artistServ.artistAddSong(this.formData).subscribe({
+        next: (res) => {
+          this.message = res.message;
+          this.description = res.description;
+          this.success = res.success;
+        }, 
+        error: (err) => {
+          console.error(err);
+        }
       });
     } else {
-      this.reqMsg='enter the required details';
+      this.reqMsg = 'enter the required details';
       setTimeout(() => {
-        this.reqMsg=''
+        this.reqMsg = '';
       }, 3000);
     }
   }
-  goBack(){
-    if(this.success){
-      this.router.navigate(['artist/home'])
+  goBack() {
+    if (this.success) {
+      this.router.navigate(['artist/home']);
     }
   }
 }
