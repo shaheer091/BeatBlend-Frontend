@@ -16,6 +16,8 @@ export class ProfileComponent implements OnInit {
   otp: any;
   otpMessage: any;
   arr: File[] = [];
+  formdata = new FormData();
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,26 +36,28 @@ export class ProfileComponent implements OnInit {
       gender: [''],
     });
     this.getData();
-    
   }
-  getData(){
+  getData() {
     this.userServ.getUserProfile().subscribe((res) => {
-      this.userData = res.userProfile[0];
-      this.userDetails = res.userProfile[0].userDetails[0];
-      this.myForm.controls['username']?.patchValue(
-        this.userData.username || ''
-      );
-      this.myForm.controls['email']?.patchValue(this.userData.email || '');
-      this.myForm.controls['bio']?.patchValue(this.userDetails.bio || '');
-      this.myForm.controls['phoneNumber']?.patchValue(
-        this.userDetails.phoneNumber || ''
-      );
-      this.myForm.controls['date']?.patchValue(
-        this.userDetails.dateOfBirth || ''
-      );
-      this.myForm.controls['gender']?.patchValue(this.userDetails.gender || '');
+      const { userProfile } = res;
+      const { userDetails } = userProfile[0];
+  
+      this.userData = userProfile[0];
+      this.userDetails = userDetails[0];
+  
+      const { username, email } = this.userData;
+      const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
+  
+      const controls = this.myForm.controls;
+      controls['username']?.patchValue(username);
+      controls['email']?.patchValue(email);
+      controls['bio']?.patchValue(bio);
+      controls['phoneNumber']?.patchValue(phoneNumber);
+      controls['date']?.patchValue(dateOfBirth);
+      controls['gender']?.patchValue(gender);
     });
   }
+  
 
   changing(event: any) {
     const files = event.target.files;
@@ -76,7 +80,6 @@ export class ProfileComponent implements OnInit {
       formdata.append('date', value.date);
       formdata.append('gender', value.gender);
       formdata.append('file', value.file);
-
 
       this.userServ.updateProfile(formdata).subscribe(
         (res) => {

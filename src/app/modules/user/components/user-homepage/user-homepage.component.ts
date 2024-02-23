@@ -12,6 +12,7 @@ export class UserHomepageComponent implements OnInit{
   songs:any[]=[]
   username:string=''
   message:string = ''
+  favBtn:Boolean=false;
   ngOnInit(): void {
     this.getSong()
   }
@@ -22,6 +23,12 @@ export class UserHomepageComponent implements OnInit{
       this.songs=res.songs
       this.message=res.message;
     })
+  }
+  favAndUnfav(songId:any){
+    this.userServ.favAndUnfav(songId).subscribe((res)=>{
+      console.log(res)
+    })
+    this.getSong()
   }
 }
  

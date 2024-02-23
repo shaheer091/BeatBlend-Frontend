@@ -5,9 +5,10 @@
         <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
         <p *ngIf="message">{{message}}</p>
     </div>
-    <div class="h-1/6 w-8/12 border" *ngFor="let song of songs">
+    <div class="h-1/6 w-8/12 border flex justify-between items-center px-5" *ngFor="let song of songs">
         <p>{{song.artist}}</p>
         <p>{{song.title}}</p>
         <p>({{song.genre}})</p>
+        <img (click)="favAndUnfav(song._id)" class="cursor-pointer h-5 w-5" src="../../../../../assets/images/star.png" alt="">
     </div>
 </div>

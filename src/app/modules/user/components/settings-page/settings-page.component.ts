@@ -6,19 +6,20 @@ import { UserService } from '../../services/user.service';
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.css'],
 })
-export class SettingsPageComponent implements OnInit{
+export class SettingsPageComponent implements OnInit {
   constructor(private userServ: UserService) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
-  isArtist:Boolean=false;
-  role:any;
+  isArtist: Boolean = false;
+  role: any;
+  following: number = 0;
+  followers: number = 0;
+
   ngOnInit(): void {
-    this.role=localStorage.getItem('role')
-    console.log(this.role)
-    if(this.role=='artist'){
-      this.isArtist=true;
-    }
+    this.role = localStorage.getItem('role');
+    if (this.role == 'artist') this.isArtist = true;
+    this.getSettingsPage();
   }
 
   showInput() {
@@ -31,24 +32,37 @@ export class SettingsPageComponent implements OnInit{
   }
   beAnArtist() {
     try {
-      // const token = localStorage.getItem('token');
       if (this.socialMediaLink) {
         if (this.isValidLink(this.socialMediaLink)) {
           this.userServ
             .artistVerification(this.socialMediaLink)
-            .subscribe((res) => {
-            });
-        }else{
-          this.message='the provided link is not valid'
+            .subscribe((res) => {});
+        } else {
+          this.message = 'the provided link is not valid';
         }
       } else {
         this.message = 'enter your social media link';
       }
       setTimeout(() => {
-        this.message=''
+        this.message = '';
       }, 2000);
     } catch (err) {
       console.log('setting page', err);
     }
+  }
+
+  getSettingsPage() {
+    this.userServ.getSettingsPage().subscribe((res) => {
+      if (res.followers && res.followers.length > 0) {
+        this.followers = res.followers.length;
+      } else {
+        this.followers = 0;
+      }
+      if (res.following && res.following.length > 0) {
+        this.following = res.following.length;
+      } else {
+        this.following = 0;
+      }
+    });
   }
 }
