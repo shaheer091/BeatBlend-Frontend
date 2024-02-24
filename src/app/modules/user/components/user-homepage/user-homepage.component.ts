@@ -5,30 +5,44 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-user-homepage',
   templateUrl: './user-homepage.component.html',
-  styleUrls: ['./user-homepage.component.css']
+  styleUrls: ['./user-homepage.component.css'],
 })
-export class UserHomepageComponent implements OnInit{
-  constructor(private userServ:UserService){}
-  songs:any[]=[]
-  username:string=''
-  message:string = ''
-  favBtn:Boolean=false;
+export class UserHomepageComponent implements OnInit {
+  constructor(private userServ: UserService) {}
+
+  
+  songs: any[] = [];
+  username: string = '';
+  message: string = '';
+  songUrl: any = '';
+  favBtn: Boolean = false;
+
+
   ngOnInit(): void {
-    this.getSong()
+    this.getSong();
   }
-  getSong(){
-    this.userServ.userGetSong().subscribe((res)=>{
-      console.log(res)
-      this.username=res.username;
-      this.songs=res.songs
-      this.message=res.message;
-    })
+
+
+  getSong() {
+    this.userServ.userGetSong().subscribe((res) => {
+      console.log(res);
+      this.username = res.username;
+      this.songs = res.songs.map((song: any) => ({
+        ...song,
+        favBtn: false,
+        artistUsername: song.artist[0].username,
+      }));
+      this.message = res.message;
+    });
   }
-  favAndUnfav(songId:any){
-    this.userServ.favAndUnfav(songId).subscribe((res)=>{
-      console.log(res)
-    })
-    this.getSong()
+
+
+  favAndUnfav(song: any) {
+    this.userServ.favAndUnfav(song._id).subscribe((res) => {
+      console.log(res);
+      song.favBtn = !song.favBtn;
+    });
+    this.getSong();
   }
+
 }
- 
