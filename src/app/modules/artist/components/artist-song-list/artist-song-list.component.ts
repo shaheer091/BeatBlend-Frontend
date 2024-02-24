@@ -30,9 +30,10 @@ export class ArtistSongListComponent implements OnInit {
   deleteSong() {
     try {
       this.artistServ.artistDeleteSong(this.idSong).subscribe((res) => {
+        console.log(res);
       });
-      this.showDeleteDiv = false;
       this.getSong();
+      this.showDeleteDiv = false;
     } catch (err) {
       console.log(err);
     }

@@ -22,8 +22,10 @@
             <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{username}} , {{ song.artist }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-gray-700">{{ song.genre }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <button (click)="showDeleteConfirmation(song._id)"
+                <button *ngIf="!song.deleteStatus" (click)="showDeleteConfirmation(song._id)"
                     class="text-red-500 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">Delete</button>
+                <button *ngIf="song.deleteStatus" (click)="showDeleteConfirmation(song._id)"
+                    class="text-green-500 hover:text-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Undo</button>
             </td>
         </tr>
     </tbody>
