@@ -43,4 +43,8 @@ export class ArtistSongListComponent implements OnInit {
     this.showDeleteDiv = true;
     this.idSong = songId;
   }
+
+  editSong(){
+    
+  }
 }
