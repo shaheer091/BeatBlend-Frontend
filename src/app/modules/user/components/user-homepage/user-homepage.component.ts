@@ -10,12 +10,12 @@ import { UserService } from '../../services/user.service';
 export class UserHomepageComponent implements OnInit {
   constructor(private userServ: UserService) {}
 
-  
+
   songs: any[] = [];
   username: string = '';
   message: string = '';
   songUrl: any = '';
-  favBtn: Boolean = false;
+  favBtn: any ;
 
 
   ngOnInit(): void {
@@ -25,13 +25,13 @@ export class UserHomepageComponent implements OnInit {
 
   getSong() {
     this.userServ.userGetSong().subscribe((res) => {
-      console.log(res);
+      // console.log(res);
       this.username = res.username;
       this.songs = res.songs.map((song: any) => ({
         ...song,
-        favBtn: false,
         artistUsername: song.artist[0].username,
       }));
+      // console.log(this.songs);
       this.message = res.message;
     });
   }
@@ -40,7 +40,8 @@ export class UserHomepageComponent implements OnInit {
   favAndUnfav(song: any) {
     this.userServ.favAndUnfav(song._id).subscribe((res) => {
       console.log(res);
-      song.favBtn = !song.favBtn;
+      this.favBtn=res.fav;
+      console.log(this.favBtn);
     });
     this.getSong();
   }

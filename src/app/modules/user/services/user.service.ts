@@ -48,4 +48,8 @@ export class UserService {
   favAndUnfav(songId: any): Observable<any> {
     return this.http.post(`${this.userApi}/favUnfav`, { songId });
   }
+
+  getFavSongs():Observable<any>{
+    return this.http.get(`${this.userApi}/favorite`)
+  }
 }

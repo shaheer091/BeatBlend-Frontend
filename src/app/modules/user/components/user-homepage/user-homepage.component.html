@@ -6,14 +6,14 @@
         <p *ngIf="message">{{message}}</p>
     </div>
     <div class="h-1/6 w-8/12 border flex justify-between items-center px-5" *ngFor="let song of songs">
-        <audio id="audioPlayer" controls>
+        <audio controls>
             <source [src]="song.songUrl" type="audio/mpeg">
         </audio>
         <p>{{song.artistUsername}}</p>
         <p>{{song.title}}</p>
         <p>({{song.genre}})</p>
         <img (click)="favAndUnfav(song)" class="cursor-pointer h-5 w-5"
-        [src]="song.favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
+        [src]="favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
         alt="">
     </div>
 </div>
