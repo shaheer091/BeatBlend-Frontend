@@ -22,16 +22,16 @@
 <div class="w-10/12 h-screen float-end border p-10">
     <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
     <p *ngIf="message">{{message}}</p>
-    <div *ngFor="let song of songs" class="h-2/6 w-1/2 border flex flex-col justify-around">
+    <div *ngFor="let song of songs" (click)="playSong(song.songUrl)" class="h-2/6 w-1/2 cursor-pointer border flex flex-col justify-around">
         <div>
             <p>{{song.artistUsername}}</p>
         </div>
         <div class="flex items-center justify-between">
             <div>
                 <p>{{song.title}}</p>
-                <audio controls>
+                <!-- <audio controls>
                     <source [src]="song.songUrl" type="audio/mpeg">
-                </audio>
+                </audio> -->
             </div>
             <div>
                 <img (click)="favAndUnfav(song)" class="cursor-pointer h-5 w-5"
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+<app-music-player [audio]="songLink"></app-music-player>

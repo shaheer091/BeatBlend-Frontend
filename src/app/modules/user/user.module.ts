@@ -11,6 +11,7 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { SearchComponent } from './components/search/search.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,8 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     RouterModule,
     CommonModule,
     UserRoutingModule,
+    SharedModule,
+
   ],
   providers: [],
   exports: [],

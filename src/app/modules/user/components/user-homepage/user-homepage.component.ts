@@ -16,6 +16,7 @@ export class UserHomepageComponent implements OnInit {
   message: string = '';
   songUrl: any = '';
   favBtn: any ;
+  songLink:any;
 
 
   ngOnInit(): void {
@@ -44,6 +45,10 @@ export class UserHomepageComponent implements OnInit {
       console.log(this.favBtn);
     });
     this.getSong();
+  }
+
+  playSong(songUrl:any){
+    this.songLink=songUrl;
   }
 
 }
