@@ -1,20 +1,18 @@
-<app-side-bar></app-side-bar>
+<!-- <app-side-bar></app-side-bar> -->
 <div class="w-10/12 h-screen float-end border p-10">
     <p class="text-3xl font-bold text-red-400 mb-5">Your Favorites</p>
     <p *ngIf="message">{{message}}</p>
-    <div *ngFor="let fav of favSongs" class="h-2/6 w-1/2 border-b-2 flex flex-col justify-around">
+    <div *ngFor="let fav of favSongs" class="h-2/6 w-2/3 border-b-2 flex flex-col justify-around">
         <div>
             <p>{{fav.userId.username}}</p>
         </div>
         <div class="flex items-center justify-between">
             <div>
                 <p>{{fav.title}}</p>
-                <audio controls>
-                    <source [src]="fav.songUrl" type="audio/mpeg">
-                </audio>
             </div>
             <div><img (click)="unFavSong(fav._id)" class="h-5 w-5 cursor-pointer translate-y-2" src="../../../../../assets/images/star.png" alt="">
             </div>
         </div>
     </div>
 </div>
+<!-- <app-music-player></app-music-player> -->

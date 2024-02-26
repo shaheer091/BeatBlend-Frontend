@@ -10,19 +10,16 @@ import { UserService } from '../../services/user.service';
 export class UserHomepageComponent implements OnInit {
   constructor(private userServ: UserService) {}
 
-
   songs: any[] = [];
   username: string = '';
   message: string = '';
   songUrl: any = '';
-  favBtn: any ;
-  songLink:any;
-
+  favBtn: any;
+  songLink: any;
 
   ngOnInit(): void {
     this.getSong();
   }
-
 
   getSong() {
     this.userServ.userGetSong().subscribe((res) => {
@@ -37,18 +34,16 @@ export class UserHomepageComponent implements OnInit {
     });
   }
 
-
   favAndUnfav(song: any) {
     this.userServ.favAndUnfav(song._id).subscribe((res) => {
       console.log(res);
-      this.favBtn=res.fav;
+      this.favBtn = res.fav;
       console.log(this.favBtn);
     });
     this.getSong();
   }
 
-  playSong(songUrl:any){
-    this.songLink=songUrl;
+  playSong(songUrl: any) {
+    this.songLink = songUrl;
   }
-
 }

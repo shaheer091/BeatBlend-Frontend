@@ -24,6 +24,10 @@ export class CommonService {
     return this.http.post(`${this.api}/login`, data);
   }
 
+  getSingleUser(data:any):Observable<any>{
+    return this.http.get(`${this.api}/`)
+  }
+
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }

@@ -44,7 +44,5 @@ export class ArtistSongListComponent implements OnInit {
     this.idSong = songId;
   }
 
-  editSong(){
-    
-  }
+  editSong() {}
 }

@@ -1,9 +1,7 @@
 <!-- music-player.component.html -->
 
-<div class="h-screen w-screen -z-10 flex items-end fixed justify-end">
-    <div class="h-1/6 w-10/12 border z-50 bg-white flex items-center justify-center">
-        <audio controls class="md:w-full">
-            <source [src]="songUrl">
-        </audio>
-    </div>
+<div class="h-28 w-[500px] border bottom-0 bg-white flex items-center z-50 translate-x-96 fixed justify-center">
+    <audio #audioPlayer controls class="md:w-full">
+        <source src="{{ songUrl }}">
+    </audio>
 </div>

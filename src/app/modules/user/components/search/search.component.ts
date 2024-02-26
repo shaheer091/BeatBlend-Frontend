@@ -14,17 +14,30 @@ export class SearchComponent {
   following: any;
 
   search() {
-    this.userServ.searchSong(this.searchText).subscribe((res) => {
-      this.user = res.users;
-      this.userId = res.userId;
-      if (this.searchText !== '') {
-        this.following = this.user.map((e) => e.followers.includes(this.userId));
+    this.userServ.searchSong(this.searchText).subscribe(
+      (res) => {
+        this.user = res.users;
+        this.userId = res.userId;
+        if (this.searchText !== '') {
+          this.following = this.user.map((e) =>
+            e.followers.includes(this.userId)
+          );
+          console.log(this.following);
+        }
+      },
+      (err) => {
+        console.log(err);
+        if (err.status === 404) {
+          this.user = err.users;
+        }
       }
-    });
+    );
   }
   followUser(userId: any) {
-    this.userServ.followAndUnfollowUser(userId).subscribe((res) => {
-    });
-    this.search()
+    this.userServ.followAndUnfollowUser(userId).subscribe((res) => {});
+    this.search();
+  }
+  singleUser(userId: any) {
+    console.log(userId);
   }
 }

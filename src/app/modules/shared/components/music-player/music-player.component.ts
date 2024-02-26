@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-music-player',
@@ -7,12 +7,15 @@ import { Component, Input, OnChanges } from '@angular/core';
 })
 export class MusicPlayerComponent implements OnChanges {
   @Input() audio: any;
-  songUrl:any;
+  @ViewChild('audioPlayer') audioPlayer: any;
+  songUrl = '';
 
   ngOnChanges(): void {
-    this.songUrl=this.audio;
-    console.log("audio",this.audio);
-    console.log("songUrl",this.songUrl);
+    if(this.audio) {
+      this.songUrl=this.audio;
+      this.audioPlayer.nativeElement.load();
+      this.audioPlayer.nativeElement.play()
+    }
   }
 }
 

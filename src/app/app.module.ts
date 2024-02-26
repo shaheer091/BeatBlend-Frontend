@@ -24,6 +24,7 @@ import { FooterComponent } from './components/homepage/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { UserModule } from './modules/user/user.module';
 import { InterceptorService } from './services/interceptor.service';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { InterceptorService } from './services/interceptor.service';
     ReactiveFormsModule,
     RouterModule,
     CommonModule,
+    SharedModule
   ],
   providers: [
     {

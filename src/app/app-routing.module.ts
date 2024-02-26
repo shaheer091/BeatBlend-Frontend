@@ -8,11 +8,13 @@ import { AuthService } from './guards/authService.guard';
 import { LoginService } from './guards/loginService.guard';
 import { AdminLoginGuard } from './modules/admin/guards/adminLogin.guard';
 import { ArtistLoginGuard } from './modules/artist/guards/artistLogin.guard';
+import { UserProfileComponent } from './modules/shared/components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', canActivate: [LoginService], component: LoginComponent },
   { path: 'signup', canActivate: [LoginService], component: SignupComponent },
+  { path: 'user-profile/:id', component: UserProfileComponent },
   {
     path: 'user',
     canActivate: [AuthService],
