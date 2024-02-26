@@ -1,5 +1,5 @@
 <div class=" h-screen w-screen flex flex-col-reverse md:flex-row md:px-16 md:py-6">
-    
+
     <div
         class="  h-full w-full md:w-1/2 bg-white rounded-bl-3xl rounded-tl-3xl md:rounded-tl-3xl md:rounded-bl-3xl md:rounded-br-none opacity-90">
         <div class="  w-full h-1/6 flex flex-col items-center gap-2  mb-10">
@@ -11,7 +11,7 @@
             <div class=" h-5/6 flex flex-col justify-center items-center gap-7 p-16">
 
                 <!-- email -->
-                <div class="flex flex-col justify-center items-center w-full">
+                <div class="flex  flex-col justify-center items-center w-full">
                     <input type="text" id="usernameOrEmail" class="w-full  md:w-5/6 p-2 border-b-2 "
                         formControlName="usernameOrEmail" placeholder="Username or Email" />
 
@@ -23,9 +23,13 @@
 
                 <!-- password -->
                 <div class="flex flex-col justify-center items-center w-full">
-                    <input type="password" id="password" class="w-full  md:w-5/6 p-2 border-b-2"
-                        formControlName="password" placeholder="Password" />
-
+                    <div class="w-full flex items-center justify-between ">
+                        <input type="{{ hidePassword ? 'password' : 'text' }}" id="password"
+                            class="w-full md:w-5/6 p-2 translate-x-9 border-b-2" formControlName="password" placeholder="Password" />
+                        <img (click)="togglePasswordVisibility()" class="h-5 w-5 -translate-x-14"
+                            [src]="hidePassword ? '../../../assets/images/eye.png' : '../../../assets/images/hidden.png'"
+                            alt="Password visibility toggle" />
+                    </div>
                     <div *ngIf="password?.errors?.['required'] && password?.touched" class="text-red-500 text-xs">
                         Password is required.
                     </div>
@@ -46,7 +50,7 @@
     </div>
     <div
         class="flex justify-center border md:h-full w-full md:w-1/2 bg-red-200 rounded-tl-3xl rounded-tr-3xl md:rounded-tr-3xl md:rounded-br-3xl md:rounded-tl-none opacity-90">
-        <p class="font-black text-4xl flex flex-col justify-center items-center md:text-6xl p-5 md:p-5 leading-tight">Sign In to <span
-                class="text-red-500">Your Account</span></p>
+        <p class="font-black text-4xl flex flex-col justify-center items-center md:text-6xl p-5 md:p-5 leading-tight">
+            Sign In to <span class="text-red-500">Your Account</span></p>
     </div>
 </div>

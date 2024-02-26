@@ -18,7 +18,6 @@ export class NavBarComponent {
   }
   showSideBar(){
     this.showSide=!this.showSide;
-    console.log('btn clicked');
   }
   
 }

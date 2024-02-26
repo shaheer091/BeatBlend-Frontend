@@ -1,0 +1,15 @@
+<nav class="bg-gray-800 text-white py-4">
+  <div class="container mx-auto flex justify-between items-center px-10">
+    <h1 class="text-2xl font-bold">Artist Dashboard</h1>
+
+    <ul class="flex space-x-4">
+      <li [routerLink]="'/artist/home'" class="cursor-pointer hover:text-gray-300">Home</li>
+      <li [routerLink]="'/artist/songs'" class="cursor-pointer hover:text-gray-300">Song</li>
+      <li [routerLink]="'/artist/addSong'" class="cursor-pointer hover:text-gray-300">Add Song</li>
+      <li [routerLink]="'/user'" class="cursor-pointer hover:text-gray-300">Switch to User</li>
+      <li [routerLink]="'/artist/profile'" class="cursor-pointer hover:text-gray-300">Profile</li>
+      <li (click)="logout()" class="cursor-pointer hover:text-gray-300">Logout</li>
+    </ul>
+
+  </div>
+</nav>

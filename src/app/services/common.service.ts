@@ -6,22 +6,41 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CommonService {
+  api='http://localhost:3000';
+  role: String | null = localStorage.getItem('role');
+
   constructor(private http: HttpClient) {}
 
-  api = 'http://192.168.0.66:3000/signup';
-  otpVerificationApi = 'http://192.168.0.66:3000/otp-verify';
-  loginApi = 'http://192.168.0.66:3000/login';
-
+  // Signup function
   apiCall(data: any): Observable<any> {
-    return this.http.post(this.api, data);
+    return this.http.post(`${this.api}/signup`, data);
   }
+
   apiVerifyOtp(data: any): Observable<any> {
-    return this.http.post(this.otpVerificationApi, data);
+    return this.http.post(`${this.api}/otp-verify`, data);
   }
+
   apiLogin(data: any): Observable<any> {
-    return this.http.post(this.loginApi, data);
+    return this.http.post(`${this.api}/login`, data);
   }
+
+  getSingleUser(data:any):Observable<any>{
+    return this.http.get(`${this.api}/`)
+  }
+
   isLoggedIn() {
     return !!localStorage.getItem('token');
+  }
+
+  isUser() {
+    return this.role == 'user';
+  }
+
+  isAdmin() {
+    return this.role == 'admin';
+  }
+
+  isArtist() {
+    return this.role == 'artist';
   }
 }

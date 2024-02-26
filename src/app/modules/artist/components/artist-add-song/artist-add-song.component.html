@@ -1,0 +1,78 @@
+
+
+<form [formGroup]="songForm" class="p-10" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <div class="mb-4">
+        <label for="songFile" class="block text-gray-700 text-sm font-bold mb-2">Song File: <span><sup
+                    class="text-red-500">*required</sup></span></label>
+        <input type="file" id="songFile" formControlName="songFile"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            (change)="changing($event)">
+        <div *ngIf="songForm.get('songFile')?.invalid && songForm.get('songFile')?.touched"
+            class="text-red-500 text-xs italic">Song file is required</div>
+    </div>
+
+    <div class="mb-4">
+        <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Title: <span><sup
+                    class="text-red-500">*required</sup></span></label>
+        <input type="text" id="title" formControlName="title"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <div *ngIf="songForm.get('title')?.invalid && songForm.get('title')?.touched"
+            class="text-red-500 text-xs italic">Title is required</div>
+    </div>
+
+    <div class="mb-4">
+        <label for="artist" class="block text-gray-700 text-sm font-bold mb-2">Artist:</label>
+        <input type="text" id="artist" formControlName="artist"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+    </div>
+
+    <div class="mb-4">
+        <label for="album" class="block text-gray-700 text-sm font-bold mb-2">Album:</label>
+        <input type="text" id="album" formControlName="album"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+    </div>
+
+    <div class="mb-4">
+        <label for="genre" class="block text-gray-700 text-sm font-bold mb-2">Genre: <span><sup
+                    class="text-red-500">*required</sup></span></label>
+        <select id="genre" formControlName="genre"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            <option value="pop-music">Pop Music</option>
+            <option value="rap">Rap</option>
+            <option value="classical">Classical</option>
+            <option value="hip-hop">Hip-Hop</option>
+        </select>
+    </div>
+
+
+    <div class="mb-4">
+        <label for="duration" class="block text-gray-700 text-sm font-bold mb-2">Duration (in seconds):</label>
+        <input type="number" id="duration" formControlName="duration"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+    </div>
+
+    <div class="mb-4">
+        <label for="releaseDate" class="block text-gray-700 text-sm font-bold mb-2">Release Date:</label>
+        <input type="date" id="releaseDate" formControlName="releaseDate"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+    </div>
+    <p *ngIf="reqMsg">{{reqMsg}}</p>
+    <button type="submit"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Add
+        Song</button>
+</form>
+
+<div *ngIf="success"
+    class="fixed top-0 left-0 right-0 z-50 flex justify-center items-center h-screen bg-black bg-opacity-50">
+    <div class="bg-white shadow-lg rounded-3xl overflow-hidden text-center py-4 px-8">
+        <h2 class="text-2xl font-bold mb-2">{{message}}</h2>
+        <p class="text-gray-700 text-sm">{{description}}</p>
+        <button
+            class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            (click)="goBack()">Close</button>
+    </div>
+</div>

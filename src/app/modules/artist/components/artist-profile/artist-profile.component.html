@@ -1,0 +1,50 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="flex flex-col space-y-3">
+    <div class="mb-2 flex items-center">
+        <label for="file" class="w-32 text-right">File Upload</label>
+        <input type="file" formControlName="file" accept="image/*"
+            class="px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+    </div>
+
+    <div class="mb-2 flex items-center">
+        <label for="username" class="w-32 text-right">Username</label>
+        <input type="text" formControlName="username"
+            class="px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+    </div>
+
+    <div class="mb-2 flex items-center">
+        <label for="email" class="w-32 text-right">Email</label>
+        <input type="email" formControlName="email"
+            class="px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+        <div *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched"
+            class="text-danger text-xs mt-1">Please enter a valid email.</div>
+    </div>
+
+    <div class="mb-2 flex items-center">
+        <label for="bio" class="w-32 text-right">Bio</label>
+        <input type="text" formControlName="bio"
+            class="px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+    </div>
+
+    <div class="mb-2 flex items-center">
+        <label for="phoneNumber" class="w-32 text-right">Phone Number</label>
+        <input type="number" formControlName="phoneNumber"
+            class="px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+    </div>
+
+    <div class="mb-2 flex items-center">
+        <label for="dateOfBirth" class="w-32 text-right">Date of Birth</label>
+        <input type="date" formControlName="dateOfBirth"
+            class="px-3 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 focus:ring-opacity-50 w-full">
+    </div>
+
+    <button type="submit" [disabled]="profileForm.invalid"
+        class="px-4 py-2 rounded-md bg-blue-500 text-white font-bold text-center hover:bg-blue-700 disabled:bg-gray-400 cursor-pointer">Submit</button>
+</form>
+
+<div *ngIf="showSavingDiv" class="fixed z-50 inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white rounded-lg shadow-md px-8 py-5 text-left">
+      <p *ngIf="!message" class="mb-4">Please wait...</p>
+      <p *ngIf="message">{{ message }}</p>
+    </div>
+  </div>
+  

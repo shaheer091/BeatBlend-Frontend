@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./access.component.css']
 })
 export class AccessComponent {
-  constructor(private router:Router){}
+  constructor(private router: Router){}
+
   signup(){
     this.router.navigate(['signup'])
   }
