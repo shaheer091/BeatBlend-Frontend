@@ -9,6 +9,7 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { UserComponent } from './user.component';
 import { UserProfileComponent } from '../shared/components/user-profile/user-profile.component';
+import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'favorites', component: FavoritesComponent },
       { path: 'playlist', component: PlaylistComponent },
       { path: 'user-profile', component: UserProfileComponent },
+      { path: 'createPlaylist', component: CreatePlaylistComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

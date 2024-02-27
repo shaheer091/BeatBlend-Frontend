@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 
 @Component({
   selector: 'app-user-homepage',
@@ -8,7 +9,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user-homepage.component.css'],
 })
 export class UserHomepageComponent implements OnInit {
-  constructor(private userServ: UserService) {}
+  constructor(private userServ: UserService,private songSerivce:SharedServiceService) {}
 
   songs: any[] = [];
   username: string = '';
@@ -20,6 +21,7 @@ export class UserHomepageComponent implements OnInit {
   ngOnInit(): void {
     this.getSong();
   }
+  
 
   getSong() {
     this.userServ.userGetSong().subscribe((res) => {
@@ -45,5 +47,6 @@ export class UserHomepageComponent implements OnInit {
 
   playSong(songUrl: any) {
     this.songLink = songUrl;
+      this.songSerivce.setSongUrl(songUrl);
   }
 }

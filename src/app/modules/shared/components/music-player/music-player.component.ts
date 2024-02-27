@@ -1,21 +1,32 @@
-import { AfterViewInit, Component, Input, OnChanges, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  ViewChild,
+} from '@angular/core';
+import { SharedServiceService } from '../../services/shared-service.service';
 
 @Component({
   selector: 'app-music-player',
   templateUrl: './music-player.component.html',
-  styleUrls: ['./music-player.component.css']
+  styleUrls: ['./music-player.component.css'],
 })
-export class MusicPlayerComponent implements OnChanges {
-  @Input() audio: any;
+export class MusicPlayerComponent{
   @ViewChild('audioPlayer') audioPlayer: any;
+  constructor(private songServ: SharedServiceService) {
+    this.songServ.songUrl$.subscribe((url: string) => {
+      this.songUrl = url;
+      this.playSong();
+    });
+  }
   songUrl = '';
 
-  ngOnChanges(): void {
-    if(this.audio) {
-      this.songUrl=this.audio;
+  playSong() {
+    if (this.songUrl) {
+      this.audioPlayer.nativeElement.src = this.songUrl;
       this.audioPlayer.nativeElement.load();
-      this.audioPlayer.nativeElement.play()
+      this.audioPlayer.nativeElement.play();
     }
   }
 }
-

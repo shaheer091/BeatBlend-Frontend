@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedServiceService {
+
+  songUrlSource = new BehaviorSubject<string>('');
+  songUrl$ = this.songUrlSource.asObservable();
 
   constructor(private http:HttpClient) { }
 
@@ -16,4 +19,11 @@ export class SharedServiceService {
   getSingleUser():Observable<any>{
     return this.http.get(`${this.api}/singleUser`)
   }
+
+  setSongUrl(songUrl: string) {
+    console.log(songUrl);
+    this.songUrlSource.next(songUrl);
+  }
+
+  
 }
