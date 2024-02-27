@@ -8,11 +8,12 @@ import { SearchComponent } from './components/search/search.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { UserComponent } from './user.component';
+import { UserProfileComponent } from '../shared/components/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthService],
+    // canActivate: [AuthService],
     component: UserComponent,
     children: [
       { path: 'home', component: UserHomepageComponent },
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'search', component: SearchComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'playlist', component: PlaylistComponent },
+      { path: 'user-profile', component: UserProfileComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

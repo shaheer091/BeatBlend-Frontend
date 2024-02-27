@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { CommonService } from 'src/app/services/common.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -7,7 +9,12 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent {
-  constructor(private userServ: UserService) {}
+  constructor(
+    private userServ: UserService,
+    private commonServ: CommonService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   searchText!: string;
   user: any[] = [];
   userId: any;
@@ -37,7 +44,14 @@ export class SearchComponent {
     this.userServ.followAndUnfollowUser(userId).subscribe((res) => {});
     this.search();
   }
-  singleUser(userId: any) {
+  userProfile(userId: any) {
     console.log(userId);
+    const queryParams = {
+      id: userId,
+    };
+    this.router.navigate(['/user/user-profile'], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+    });
   }
 }

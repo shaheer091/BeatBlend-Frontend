@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-pending-users-list',
@@ -7,7 +8,7 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./pending-users-list.component.css'],
 })
 export class PendingUsersListComponent implements OnInit {
-  constructor(private adminServ: AdminService) {}
+  constructor(private adminServ: AdminService,private router:Router,private route:ActivatedRoute) {}
   pendingData: any;
   message: any;
   success: any;
@@ -57,5 +58,16 @@ export class PendingUsersListComponent implements OnInit {
     })
     this.approve=false;
     this.decline=false;
+  }
+
+  getUserDetails(userId:any){
+    console.log(userId);
+    const queryParams = {
+      id: userId,
+    };
+    this.router.navigate(['/admin/user-profile'], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+    });
   }
 }

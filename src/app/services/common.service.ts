@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class CommonService {
   api='http://localhost:3000';
   role: String | null = localStorage.getItem('role');
+  toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(!!localStorage.getItem("token"));
+
 
   constructor(private http: HttpClient) {}
 
@@ -24,8 +26,8 @@ export class CommonService {
     return this.http.post(`${this.api}/login`, data);
   }
 
-  getSingleUser(data:any):Observable<any>{
-    return this.http.get(`${this.api}/`)
+  getSingleUser(userId:any):Observable<any>{
+    return this.http.get(`${this.api}/user-profile/${userId}`);
   }
 
   isLoggedIn() {

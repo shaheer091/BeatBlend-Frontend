@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-artist-list',
@@ -7,7 +8,7 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./artist-list.component.css'],
 })
 export class ArtistListComponent implements OnInit {
-  constructor(private adminServ: AdminService) {}
+  constructor(private adminServ: AdminService,private route:ActivatedRoute,private router:Router) {}
   artistData: any;
   message: any;
   success: any;
@@ -38,5 +39,15 @@ export class ArtistListComponent implements OnInit {
       this.getArtist();
     });
     // window.location.reload();
+  }
+  getUserDetails(userId: any) {
+    console.log(userId);
+    const queryParams = {
+      id: userId,
+    };
+    this.router.navigate(['/admin/user-profile'], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+    });
   }
 }

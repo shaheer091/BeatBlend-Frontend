@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', canActivate: [LoginService], component: LoginComponent },
   { path: 'signup', canActivate: [LoginService], component: SignupComponent },
-  { path: 'user-profile/:id', component: UserProfileComponent },
   {
     path: 'user',
     canActivate: [AuthService],
