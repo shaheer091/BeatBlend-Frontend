@@ -35,7 +35,8 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  deleteUser(userId: any) {
+  deleteUser(event: any, userId: any) {
+    event.stopPropagation();
     this.userId = userId;
     this.showDelDiv = true;
     this.togle = !this.togle;
@@ -56,6 +57,19 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/admin/user-profile'], {
       relativeTo: this.route,
       queryParams: queryParams,
+    });
+  }
+
+  blockUser(event: any, userId: any) {
+    event.stopPropagation();
+    this.adminServ.changeBlockStatus(userId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getUser();
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 }

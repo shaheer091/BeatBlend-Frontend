@@ -1,9 +1,9 @@
 <!-- <app-side-bar></app-side-bar> -->
-<div class="w-10/12 h-screen float-end border p-10">
+<div class="w-10/12 h-[470px] overflow-auto float-end border p-10">
     <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
     <p *ngIf="message">{{message}}</p>
     <div *ngFor="let song of songs" (click)="playSong(song.songUrl)"
-        class="h-2/6 w-2/3 cursor-pointer border flex flex-col justify-around">
+        class="h-1/6 w-2/3 cursor-pointer border flex flex-col justify-around">
         <div>
             <p>{{song.artistUsername}}</p>
         </div>
@@ -12,7 +12,7 @@
                 <p>{{song.title}}</p>
             </div>
             <div>
-                <img (click)="favAndUnfav(song)" class="cursor-pointer h-5 w-5"
+                <img (click)="favAndUnfav($event,song)" class="cursor-pointer h-5 w-5"
                     [src]="favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
                     alt="">
             </div>

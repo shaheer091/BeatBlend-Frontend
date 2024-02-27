@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 
 @Component({
   selector: 'app-favorites',
@@ -7,7 +8,8 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./favorites.component.css']
 })
 export class FavoritesComponent implements OnInit{
-  constructor (private userServ:UserService){}
+  constructor (private userServ:UserService,private songSerivce:SharedServiceService){}
+  songLink:string=''
   favSongs:any;
   message:any;
   ngOnInit(): void {
@@ -20,10 +22,15 @@ export class FavoritesComponent implements OnInit{
       this.favSongs=res.favSongs;
     })
   }
-  unFavSong(songId:any){
+  unFavSong(event:any,songId:any){
+    event.stopPropagation();
     this.userServ.favAndUnfav(songId).subscribe((res)=>{
       console.log(res);
     })
     this.getFavSong()
+  }
+  playSong(songUrl: any) {
+    this.songLink = songUrl;
+      this.songSerivce.setSongUrl(songUrl);
   }
 }

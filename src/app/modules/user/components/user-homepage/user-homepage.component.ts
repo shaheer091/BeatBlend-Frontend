@@ -36,7 +36,8 @@ export class UserHomepageComponent implements OnInit {
     });
   }
 
-  favAndUnfav(song: any) {
+  favAndUnfav(event:any,song: any) {
+    event.stopPropagation()
     this.userServ.favAndUnfav(song._id).subscribe((res) => {
       console.log(res);
       this.favBtn = res.fav;
