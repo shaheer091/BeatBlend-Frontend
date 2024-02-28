@@ -1,23 +1,22 @@
 <div class="flex justify-center">
-    <form class="flex flex-col space-y-4" enctype="multipart/form-data">
-        <h2 class="text-xl font-bold text-gray-800">Create Playlist</h2>
-      
-        <div class="flex items-center space-x-2">
-          <label for="playlistTitle" class="text-sm text-gray-600">Title:</label>
-          <input type="text" id="playlistTitle" name="playlistTitle" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500">
-        </div>
-      
-        <div class="flex items-center space-x-2">
-          <label for="playlistImage" class="text-sm text-gray-600">Image URL:</label>
-          <input type="file" id="playlistImage" name="playlistImage" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500">
-        </div>
-      
-        <div class="flex items-center space-x-2">
-          <label for="songs" class="text-sm text-gray-600">Songs:</label>
-          <input type="text" id="songs" name="songs" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500" placeholder="Song Title - Artist (separate each song with a new line)">
-        </div>
-      
-        <button type="submit" class="w-full py-2 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Create Playlist</button>
-      </form>
-      
+  <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="flex flex-col space-y-4">
+    <h2 class="text-xl font-bold text-gray-800">Create Playlist</h2>
+
+    <div class="flex items-center space-x-2">
+      <label for="playlistTitle" class="text-sm text-gray-600">Title:</label>
+      <input type="text" id="playlistTitle" formControlName="playlistTitle" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500">
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <label for="playlistImage" class="text-sm text-gray-600">Image URL:</label>
+      <input type="file" id="playlistImage" formControlName="playlistImage" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500">
+    </div>
+
+    <div class="flex items-center space-x-2">
+      <label for="songs" class="text-sm text-gray-600">Songs:</label>
+      <textarea id="songs" formControlName="songs" class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500" placeholder="Song Title - Artist (separate each song with a new line)"></textarea>
+    </div>
+
+    <button type="submit" class="w-full py-2 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Create Playlist</button>
+  </form>
 </div>

@@ -7,7 +7,7 @@
   </div>
 
   <ul class="list-none space-y-2" *ngFor="let song of userSongs">
-    <li class="flex items-center">
+    <li class="flex items-center cursor-pointer" (click)="playSong(song.songUrl)">
       <p class="text-gray-800 line-clamp-2 w-full mr-4">{{ song.title }}</p>
       <p class="text-gray-600 text-sm"> {{ song.artist }}</p>
     </li>

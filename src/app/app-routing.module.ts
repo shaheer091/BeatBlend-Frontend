@@ -9,6 +9,7 @@ import { LoginService } from './guards/loginService.guard';
 import { AdminLoginGuard } from './modules/admin/guards/adminLogin.guard';
 import { ArtistLoginGuard } from './modules/artist/guards/artistLogin.guard';
 import { UserProfileComponent } from './modules/shared/components/user-profile/user-profile.component';
+import { BandLoginGuard } from './modules/band/guard/band.guard';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
@@ -31,6 +32,12 @@ const routes: Routes = [
     canActivate: [ArtistLoginGuard],
     loadChildren: () =>
       import('./modules/artist/artist.module').then((e) => e.ArtistModule),
+  },
+  {
+    path: 'band',
+    canActivate: [BandLoginGuard],
+    loadChildren: () =>
+      import('./modules/band/band.module').then((e) => e.BandModule),
   },
   { path: '**', component: NotFoundComponent },
 ];

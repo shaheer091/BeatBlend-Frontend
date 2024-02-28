@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings-page',
@@ -7,7 +8,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPageComponent implements OnInit {
-  constructor(private userServ: UserService) {}
+  constructor(private userServ: UserService,private router:Router) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
@@ -70,5 +71,9 @@ export class SettingsPageComponent implements OnInit {
         this.following = 0;
       }
     });
+  }
+
+  createBand(){
+    this.router.navigate(['/user/createBand'])
   }
 }

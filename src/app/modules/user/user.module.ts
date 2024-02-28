@@ -14,6 +14,7 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserComponent } from './user.component';
 import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
+import { CreateBandComponent } from './components/create-band/create-band.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { CreatePlaylistComponent } from './components/create-playlist/create-pla
     FavoritesComponent,
     PlaylistComponent,
     UserComponent,
-    CreatePlaylistComponent
+    CreatePlaylistComponent,
+    CreateBandComponent
   ],
   imports: [
     ReactiveFormsModule,

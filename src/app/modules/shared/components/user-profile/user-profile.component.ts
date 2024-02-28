@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
+import { SharedServiceService } from '../../services/shared-service.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,7 +14,8 @@ export class UserProfileComponent implements OnInit {
   userSongs:any;
   constructor(
     private route: ActivatedRoute,
-    private commonServ: CommonService
+    private commonServ: CommonService,
+    private sharedServ: SharedServiceService
   ) {}
   ngOnInit(): void {
     this.route.queryParams.subscribe((res) => {
@@ -29,5 +31,8 @@ export class UserProfileComponent implements OnInit {
       this.userSongs=res[0].songs;
       console.log(this.userData);
     });
+  }
+  playSong(songUrl:any){
+    this.sharedServ.setSongUrl(songUrl)
   }
 }

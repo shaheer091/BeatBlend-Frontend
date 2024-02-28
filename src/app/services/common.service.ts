@@ -45,4 +45,7 @@ export class CommonService {
   isArtist() {
     return this.role == 'artist';
   }
+  isBand() {
+    return this.role == 'band';
+  }
 }
