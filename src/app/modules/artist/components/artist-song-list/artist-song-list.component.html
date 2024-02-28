@@ -9,7 +9,7 @@
 <div *ngIf="success" class="table-fixed w-full rounded-3xl overflow-hidden shadow-md mt-4 p-5">
 
     <div>
-        <div *ngFor="let song of songs" class="border flex justify-between items-center">
+        <div *ngFor="let song of songs" class="border flex justify-between items-center" (click)="playSong(song.songUrl)">
             <div class="flex-grow flex flex-col">
                 <div class="">
                     <p class="px-6 py-1 whitespace-nowrap text-gray-700">{{ song.title }}</p>
@@ -20,13 +20,13 @@
                 </div>
             </div>
             <div>
-                <p (click)="editSong()" class="cursor-pointer text-blue-500">Edit</p>
+                <p (click)="editSong($event,song._id)" class="cursor-pointer text-blue-500">Edit</p>
             </div>
             <div class="">
                 <p class="px-6 py-1 whitespace-nowrap">
-                    <button *ngIf="song.deleteStatus==false" (click)="showDeleteConfirmation(song._id)"
+                    <button *ngIf="song.deleteStatus==false" (click)="showDeleteConfirmation($event,song._id)"
                         class="text-red-500 hover:text-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">Delete</button>
-                    <button *ngIf="song.deleteStatus==true" (click)="showDeleteConfirmation(song._id)"
+                    <button *ngIf="song.deleteStatus==true" (click)="showDeleteConfirmation($event,song._id)"
                         class="text-green-500 hover:text-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">Undo</button>
                 </p>
             </div>

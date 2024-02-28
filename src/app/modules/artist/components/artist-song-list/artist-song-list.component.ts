@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArtistService } from '../../services/artist.service';
 import { Router } from '@angular/router';
+import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 
 @Component({
   selector: 'app-artist-song-list',
@@ -14,7 +15,9 @@ export class ArtistSongListComponent implements OnInit {
   username: any;
   success!: Boolean;
   showDeleteDiv: Boolean = false;
-  constructor(private artistServ: ArtistService, private router: Router) {}
+  showSongEditForm: Boolean = false;
+
+  constructor(private artistServ: ArtistService, private router: Router,private sharedServ:SharedServiceService) {}
   ngOnInit(): void {
     this.getSong();
   }
@@ -39,10 +42,18 @@ export class ArtistSongListComponent implements OnInit {
     }
   }
 
-  showDeleteConfirmation(songId: any) {
+  showDeleteConfirmation(event:any,songId: any) {
+    event.stopPropagation()
     this.showDeleteDiv = true;
     this.idSong = songId;
   }
 
-  editSong() {}
+  editSong(event:any,songId: any) {
+    event.stopPropagation()
+    this.router.navigate(['/artist/editSong',songId])
+  }
+
+  playSong(songUrl:any){
+    this.sharedServ.setSongUrl(songUrl)
+  }
 }

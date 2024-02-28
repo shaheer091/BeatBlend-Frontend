@@ -6,6 +6,7 @@ import { ArtistAddSongComponent } from './components/artist-add-song/artist-add-
 import { ArtistSongListComponent } from './components/artist-song-list/artist-song-list.component';
 import { ArtistProfileComponent } from './components/artist-profile/artist-profile.component';
 import { ArtistComponent } from './artist.component';
+import { ArtistEditSongComponent } from './components/artist-edit-song/artist-edit-song.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,8 @@ const routes: Routes = [
       { path: 'addSong', component: ArtistAddSongComponent },
       { path: 'songs', component: ArtistSongListComponent },
       { path: 'profile', component: ArtistProfileComponent },
-      // { path: '', redirectTo: '/artist/home', pathMatch: 'full' },
+      { path: 'editSong/:id', component: ArtistEditSongComponent },
+      { path: '', redirectTo: '/artist/home', pathMatch: 'full' },
     ],
   },
 ];

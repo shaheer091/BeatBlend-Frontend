@@ -1,0 +1,35 @@
+<form [formGroup]="editSongForm" (ngSubmit)="onSubmit()"
+    style="background-color: #e0f2f1; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+
+    <label style="color: #333; font-weight: bold;">Title:</label>
+    <input type="text" formControlName="title"
+        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 15px;"><br>
+
+    <label style="color: #333; font-weight: bold;">Artist:</label>
+    <input type="text" formControlName="artist"
+        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 15px;"><br>
+
+    <label style="color: #333; font-weight: bold;">Album:</label>
+    <input type="text" formControlName="album"
+        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 15px;"><br>
+
+    <label style="color: #333; font-weight: bold;">Genre:</label>
+    <select formControlName="genre"
+        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 15px;">
+        <option value="pop">Pop Music</option>
+        <option value="rap">Rap</option>
+        <option value="classical">Classical</option>
+        <option value="hip-hop">Hip-Hop</option>
+    </select><br>
+
+    <label style="color: #333; font-weight: bold;">Duration:</label>
+    <input type="text" formControlName="duration"
+        style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 15px;"><br>
+
+    <button [routerLink]="'/artist/songs'"
+        style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 3px; margin-right: 10px;">Back</button>
+
+    <button type="submit"
+        style="background-color: #3f51b5; color: white; padding: 10px 20px; border: none; border-radius: 3px;">Save
+        Changes</button>
+</form>

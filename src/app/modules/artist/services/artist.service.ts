@@ -31,4 +31,12 @@ export class ArtistService {
     return this.http.patch(`${this.artistApi}/profile`,{profileDetails})
   }
 
+  artistGetSongDetails(songId:any):Observable<any>{
+    return this.http.get(`${this.artistApi}/getSongDetails/${songId}`)
+  }
+
+  artistEditSongDetails(songId:any,data:any):Observable<any>{
+    return  this.http.patch(`${this.artistApi}/editSongDetails/${songId}`,data);
+  }
+
 }
