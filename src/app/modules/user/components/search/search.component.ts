@@ -19,12 +19,15 @@ export class SearchComponent {
   user: any[] = [];
   userId: any;
   following: any;
+  message:any;
 
   search() {
-    this.userServ.searchSong(this.searchText).subscribe(
+    this.userServ.searchUser(this.searchText).subscribe(
       (res) => {
+        console.log(res);
         this.user = res.users;
         this.userId = res.userId;
+        this.message= res.message;
         if (this.searchText !== '') {
           this.following = this.user.map((e) =>
             e.followers.includes(this.userId)

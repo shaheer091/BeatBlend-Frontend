@@ -6,7 +6,7 @@
             <input [(ngModel)]="searchText" type="text" (keyup)="search()" placeholder="Search here..."
                 class="px-5 h-14 rounded-full border focus:outline-none focus:ring-blue-500 focus:ring-opacity-50">
         </div>
-        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div *ngIf="user" class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div *ngFor="let data of user;let i = index" (click)="userProfile(data._id)" class="h-80 border rounded-lg bg-white shadow-md hover:shadow-lg">
                 <div class="flex items-center p-3">
                     <p class="text-black font-bold">{{ data.username }}</p>
@@ -23,6 +23,9 @@
                     </button>
                 </div>
             </div>
+        </div>
+        <div *ngIf="message">
+            {{message}}
         </div>
     </div>
 </div>

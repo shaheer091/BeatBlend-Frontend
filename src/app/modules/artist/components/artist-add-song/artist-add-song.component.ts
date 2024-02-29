@@ -33,9 +33,10 @@ export class ArtistAddSongComponent implements OnInit {
     });
   }
 
+
+
   changing(event: any) {
     this.formData.delete('songFile');
-
     this.formData.append('songFile', event.target.files[0]);
   }
 
@@ -54,6 +55,9 @@ export class ArtistAddSongComponent implements OnInit {
           this.message = res.message;
           this.description = res.description;
           this.success = res.success;
+          if(res.success){
+
+          }
         },
         error: (err) => {
           console.error(err);

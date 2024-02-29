@@ -38,5 +38,6 @@ export class ArtistService {
   artistEditSongDetails(songId:any,data:any):Observable<any>{
     return  this.http.patch(`${this.artistApi}/editSongDetails/${songId}`,data);
   }
+  
 
 }
