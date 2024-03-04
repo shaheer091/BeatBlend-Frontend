@@ -1,0 +1,47 @@
+<div class="h-full w-10/12 float-end">
+    <div class=" min-h-screen p-10">
+
+        <div class="flex">
+            <img class="mr-6 h-44 w-44 object-cover" [src]="songDetails?.imageUrl ? songDetails.imageUrl : 'https://imgs.search.brave.com/Sctdgrmntepu2CbKseQlGAI5eDUal4TjOpatVAaxHXc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2RlLzlm/Lzg2L2RlOWY4Njlk/YTdiNzBjZjZkYTQ3/YzVhY2Y2NzQ5NDM4/LmpwZw'">
+            <div class="flex flex-col justify-center relative">
+                <h4 class="mt-0 mb-2 uppercase tracking-widest text-xs">Playlist</h4>
+                <h1 class="mt-0 mb-2 text-4xl">{{songDetails?.playlistName}}</h1>
+
+                <p class="text-sm">Created by you - {{songDetails?.songId?.length}} songs, 3 hr 2 min</p>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-between">
+            <div class="flex">
+                <button class="mr-2 bg-green-500  block py-2 px-8 rounded-full">Play</button>
+                
+                <button class="border px-4 rounded-full">...</button>
+            </div>
+            <div class=" text-sm tracking-widest text-right">
+                <h5 class="mb-1">Followers</h5>
+                <p>5,055</p>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <div class="flex ">
+                <div class="p-2 w-8 flex-shrink-0"></div>
+                <div class="p-2 w-8 flex-shrink-0"></div>
+                <div class="p-2 w-full">Title</div>
+                <div class="p-2 w-full">Artist</div>
+                <div class="p-2 w-full">Album</div>
+                <div class="p-2 w-12 flex-shrink-0 text-right">⏱</div>
+            </div>
+
+            <div class="flex border-b" *ngFor="let song of songs">
+                <div class="p-3 w-8 flex-shrink-0">▶️</div>
+                <div class="p-3 w-8 flex-shrink-0">❤️</div>
+                <div class="p-3 w-full">{{song?.title}}</div>
+                <div class="p-3 w-full">Eminem</div>
+                <div class="p-3 w-full">Spotify</div>
+                <div class="p-3 w-12 flex-shrink-0 text-right">5:35</div>
+            </div>
+            
+        </div>
+    </div>
+</div>

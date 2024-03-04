@@ -67,4 +67,10 @@ export class UserService {
   createPlaylist(data: any): Observable<any> {
     return this.http.post(`${this.userApi}/createPlaylist`, data);
   }
+
+  getSinglePlaylist(playlistID:string) : Observable <any>{
+    console.log(playlistID);
+    
+    return this.http.get(`${this.userApi}/singlePlaylist/${playlistID}`)
+  }
 }

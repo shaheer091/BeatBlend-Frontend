@@ -11,6 +11,7 @@ import { UserComponent } from './user.component';
 import { UserProfileComponent } from '../shared/components/user-profile/user-profile.component';
 import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
 import { CreateBandComponent } from './components/create-band/create-band.component';
+import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'playlist', component: PlaylistComponent },
       { path: 'user-profile', component: UserProfileComponent },
       { path: 'createPlaylist', component: CreatePlaylistComponent },
+      { path: 'playlist/:id', component: SinglePlaylistComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },
