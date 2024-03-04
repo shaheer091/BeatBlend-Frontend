@@ -13,11 +13,11 @@
                     <img *ngIf="data.isVerified" class="h-5 w-5 ml-2" src="../../../../../assets/images/verify.png"
                         alt="">
 
-                    <button *ngIf="!following[i]" (click)="followUser(data._id)"
+                    <button *ngIf="!following[i]" (click)="followUser($event,data._id)"
                         class="ml-auto px-3 py-2 rounded-md text-white bg-blue-500 hover:bg-blue-700">
                         Follow
                     </button>
-                    <button *ngIf="following[i]" (click)="followUser(data._id)"
+                    <button *ngIf="following[i]" (click)="followUser($event,data._id)"
                         class="ml-auto px-3 py-2 rounded-md text-blue-500 bg-white hover:bg-slate-200">
                         Following
                     </button>

@@ -43,7 +43,8 @@ export class SearchComponent {
       }
     );
   }
-  followUser(userId: any) {
+  followUser(event:any,userId: any) {
+    event.stopPropagation();
     this.userServ.followAndUnfollowUser(userId).subscribe((res) => {});
     this.search();
   }

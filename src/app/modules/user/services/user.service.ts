@@ -30,7 +30,7 @@ export class UserService {
   }
 
   searchUser(text: string): Observable<any> {
-    return this.http.get(`${this.userApi}/search/${ text }`);
+    return this.http.get(`${this.userApi}/search/${text}`);
   }
 
   followAndUnfollowUser(userId: any): Observable<any> {
@@ -56,14 +56,12 @@ export class UserService {
   searchSong(searchText: string): Observable<any> {
     if (searchText != '') {
       return this.http.get(`${this.userApi}/searchSong/${searchText}`);
-    }else{
-      return of()
+    } else {
+      return of();
     }
   }
-
-  addToPlaylist(songId:any):Observable<any>{
-    console.log(songId);
-  	return this.http.post(`${this.userApi}/addToPlayList`,{songId})
+  getPlaylist():Observable<any>{
+    return this.http.get(`${this.userApi}/getPlaylist`)
   }
 
   createPlaylist(data: any): Observable<any> {

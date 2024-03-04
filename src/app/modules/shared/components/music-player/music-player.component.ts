@@ -1,10 +1,4 @@
-import {
-  AfterViewInit,
-  Component,
-  Input,
-  OnChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SharedServiceService } from '../../services/shared-service.service';
 
 @Component({
@@ -12,7 +6,7 @@ import { SharedServiceService } from '../../services/shared-service.service';
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.css'],
 })
-export class MusicPlayerComponent{
+export class MusicPlayerComponent {
   @ViewChild('audioPlayer') audioPlayer: any;
   constructor(private songServ: SharedServiceService) {
     this.songServ.songUrl$.subscribe((url: string) => {

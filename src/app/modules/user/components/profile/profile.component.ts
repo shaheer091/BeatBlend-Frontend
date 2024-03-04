@@ -18,7 +18,6 @@ export class ProfileComponent implements OnInit {
   arr: File[] = [];
   formdata = new FormData();
 
-
   constructor(
     private formBuilder: FormBuilder,
     private userServ: UserService,
@@ -41,13 +40,13 @@ export class ProfileComponent implements OnInit {
     this.userServ.getUserProfile().subscribe((res) => {
       const { userProfile } = res;
       const { userDetails } = userProfile[0];
-  
+
       this.userData = userProfile[0];
       this.userDetails = userDetails[0];
-  
+
       const { username, email } = this.userData;
       const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
-  
+
       const controls = this.myForm.controls;
       controls['username']?.patchValue(username);
       controls['email']?.patchValue(email);
@@ -57,7 +56,6 @@ export class ProfileComponent implements OnInit {
       controls['gender']?.patchValue(gender);
     });
   }
-  
 
   changing(event: any) {
     const files = event.target.files;
