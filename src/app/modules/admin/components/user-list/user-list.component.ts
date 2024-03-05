@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { CommonService } from 'src/app/services/common.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -9,12 +9,17 @@ import { ActivatedRoute, Router } from '@angular/router';
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css'],
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent implements OnInit, OnDestroy {
   constructor(
     private adminServ: AdminService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
+
+  getAllUser$ = new Subscription();
+  changeDeleteStatus$ = new Subscription();
+  changeBlockStatus$ = new Subscription();
+
   userData: any;
   message: any;
   success: any;
@@ -25,7 +30,7 @@ export class UserListComponent implements OnInit {
     this.getUser();
   }
   getUser() {
-    this.adminServ.getAllUsers().subscribe((res) => {
+    this.getAllUser$ = this.adminServ.getAllUsers().subscribe((res) => {
       this.success = res.success;
       if (this.success) {
         this.userData = res.user;
@@ -43,9 +48,11 @@ export class UserListComponent implements OnInit {
   }
 
   confirmDelete() {
-    this.adminServ.changeDeleteStatus(this.userId).subscribe((res) => {
-      this.getUser();
-    });
+    this.changeDeleteStatus$ = this.adminServ
+      .changeDeleteStatus(this.userId)
+      .subscribe((res) => {
+        this.getUser();
+      });
     this.showDelDiv = false;
   }
 
@@ -62,14 +69,21 @@ export class UserListComponent implements OnInit {
 
   blockUser(event: any, userId: any) {
     event.stopPropagation();
-    this.adminServ.changeBlockStatus(userId).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.getUser();
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.changeBlockStatus$ = this.adminServ
+      .changeBlockStatus(userId)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.getUser();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+  ngOnDestroy(): void {
+    this.getAllUser$?.unsubscribe();
+    this.changeBlockStatus$?.unsubscribe();
+    this.changeDeleteStatus$?.unsubscribe();
   }
 }
