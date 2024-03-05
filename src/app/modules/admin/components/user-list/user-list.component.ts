@@ -30,13 +30,18 @@ export class UserListComponent implements OnInit, OnDestroy {
     this.getUser();
   }
   getUser() {
-    this.getAllUser$ = this.adminServ.getAllUsers().subscribe((res) => {
-      this.success = res.success;
-      if (this.success) {
-        this.userData = res.user;
-      } else {
-        this.message = res.message;
-      }
+    this.getAllUser$ = this.adminServ.getAllUsers().subscribe({
+      next: (res) => {
+        this.success = res.success;
+        if (this.success) {
+          this.userData = res.user;
+        } else {
+          this.message = res.message;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -50,14 +55,18 @@ export class UserListComponent implements OnInit, OnDestroy {
   confirmDelete() {
     this.changeDeleteStatus$ = this.adminServ
       .changeDeleteStatus(this.userId)
-      .subscribe((res) => {
-        this.getUser();
+      .subscribe({
+        next: (res) => {
+          this.getUser();
+        },
+        error: (err) => {
+          console.log(err);
+        },
       });
     this.showDelDiv = false;
   }
 
   getUserDetails(userId: any) {
-    console.log(userId);
     const queryParams = {
       id: userId,
     };

@@ -27,13 +27,18 @@ export class ArtistListComponent implements OnInit, OnDestroy {
     this.getArtist();
   }
   getArtist() {
-    this.getArtist$ = this.adminServ.getAllArtist().subscribe((res) => {
-      this.success = res.success;
-      if (res.success) {
-        this.artistData = res.artist;
-      } else {
-        this.message = res.message;
-      }
+    this.getArtist$ = this.adminServ.getAllArtist().subscribe({
+      next: (res) => {
+        this.success = res.success;
+        if (res.success) {
+          this.artistData = res.artist;
+        } else {
+          this.message = res.message;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -45,14 +50,18 @@ export class ArtistListComponent implements OnInit, OnDestroy {
   deleteUser() {
     this.changeDeleteStatus$ = this.adminServ
       .changeDeleteStatus(this.artistId)
-      .subscribe((res) => {
-        this.deleteDiv = false;
-        this.getArtist();
+      .subscribe({
+        next: (res) => {
+          this.deleteDiv = false;
+          this.getArtist();
+        },
+        error: (err) => {
+          console.log(err);
+        },
       });
     // window.location.reload();
   }
   getUserDetails(userId: any) {
-    console.log(userId);
     const queryParams = {
       id: userId,
     };

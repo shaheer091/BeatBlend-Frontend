@@ -30,11 +30,16 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
     this.getSong();
   }
   getSong() {
-    this.getSong$ = this.artistServ.artistGetSongs().subscribe((res) => {
-      this.songs = res.songs;
-      this.message = res.message;
-      this.success = res.success;
-      this.username = res.username;
+    this.getSong$ = this.artistServ.artistGetSongs().subscribe({
+      next: (res) => {
+        this.songs = res.songs;
+        this.message = res.message;
+        this.success = res.success;
+        this.username = res.username;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -42,8 +47,13 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
     try {
       this.deleteSong$ = this.artistServ
         .artistDeleteSong(this.idSong)
-        .subscribe((res) => {
-          console.log(res);
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+          },
+          error: (err) => {
+            console.log(err);
+          },
         });
       this.getSong();
       this.showDeleteDiv = false;

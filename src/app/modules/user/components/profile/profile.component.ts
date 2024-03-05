@@ -43,23 +43,28 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.getData();
   }
   getData() {
-    this.getUserProfile$ = this.userServ.getUserProfile().subscribe((res) => {
-      const { userProfile } = res;
-      const { userDetails } = userProfile[0];
+    this.getUserProfile$ = this.userServ.getUserProfile().subscribe({
+      next: (res) => {
+        const { userProfile } = res;
+        const { userDetails } = userProfile[0];
 
-      this.userData = userProfile[0];
-      this.userDetails = userDetails[0];
+        this.userData = userProfile[0];
+        this.userDetails = userDetails[0];
 
-      const { username, email } = this.userData;
-      const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
+        const { username, email } = this.userData;
+        const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
 
-      const controls = this.myForm.controls;
-      controls['username']?.patchValue(username);
-      controls['email']?.patchValue(email);
-      controls['bio']?.patchValue(bio);
-      controls['phoneNumber']?.patchValue(phoneNumber);
-      controls['date']?.patchValue(dateOfBirth);
-      controls['gender']?.patchValue(gender);
+        const controls = this.myForm.controls;
+        controls['username']?.patchValue(username);
+        controls['email']?.patchValue(email);
+        controls['bio']?.patchValue(bio);
+        controls['phoneNumber']?.patchValue(phoneNumber);
+        controls['date']?.patchValue(dateOfBirth);
+        controls['gender']?.patchValue(gender);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -85,17 +90,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
       formdata.append('gender', value.gender);
       formdata.append('file', value.file);
 
-      this.updateProfile$ = this.userServ.updateProfile(formdata).subscribe(
-        (res) => {
+      this.updateProfile$ = this.userServ.updateProfile(formdata).subscribe({
+        next: (res) => {
           setTimeout(() => {
             this.message = res.message;
           }, 1000);
           this.message = 'please wait saving the changes ...';
         },
-        (error) => {
+        error: (error) => {
           console.log(`Error updating profile ${error.message}`);
-        }
-      );
+        },
+      });
       setTimeout(() => {
         this.router.navigate(['/user/home']);
       }, 2000);
@@ -107,8 +112,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
     try {
       this.verifyPhone$ = this.userServ
         .verifyPhone(this.myForm.value.phoneNumber)
-        .subscribe((res) => {
-          this.showOtp = true;
+        .subscribe({
+          next: (res) => {
+            this.showOtp = true;
+          },
+          error: (err) => {
+            console.log(err);
+          },
         });
     } catch (err) {
       console.log(err);
@@ -119,11 +129,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
     try {
       this.verifyOtp$ = this.userServ
         .verifyPhoneOtp(this.otp, this.myForm.value.phoneNumber)
-        .subscribe((res) => {
-          this.otpMessage = res.message;
-          setTimeout(() => {
-            this.showOtp = false;
-          }, 1000);
+        .subscribe({
+          next: (res) => {
+            this.otpMessage = res.message;
+            setTimeout(() => {
+              this.showOtp = false;
+            }, 1000);
+          },
+          error: (err) => {
+            console.log(err);
+          },
         });
     } catch (err) {
       console.log(err);

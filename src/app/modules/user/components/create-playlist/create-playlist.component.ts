@@ -23,7 +23,6 @@ export class CreatePlaylistComponent implements OnDestroy {
   searchSong() {
     this.searchSong$ = this.userServ.searchSong(this.searchText).subscribe({
       next: (res) => {
-        console.log(res.songs);
         if (res.songs) {
           this.songs = res.songs;
         } else {
@@ -37,13 +36,11 @@ export class CreatePlaylistComponent implements OnDestroy {
   }
 
   change(event: any) {
-    console.log(event.target.files);
     this.file = event.target.files[0];
   }
 
   addToPlaylist(songId: any) {
     this.songId.push(songId);
-    console.log(this.songId);
   }
 
   onSubmit() {

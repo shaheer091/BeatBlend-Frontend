@@ -39,8 +39,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
         next: (res) => {
           this.playlistDetails = res[0];
           this.songs = res[0].songs;
-          // console.log(this.songs);
-          console.log(this.playlistDetails);
         },
         error: (err) => {
           console.log(err);
@@ -50,7 +48,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
 
   removeFromPlaylist(event: any, songId: any) {
     event.stopPropagation();
-    console.log(songId);
     this.removeFromPlaylist$ = this.userServ
       .removeFromPlaylist(songId)
       .subscribe({
@@ -65,7 +62,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   deletePlaylist(playlistId: any) {
-    console.log(playlistId);
     this.deletePlaylist$ = this.userServ.deletePlaylist(playlistId).subscribe({
       next: (res) => {
         console.log(res);
@@ -78,21 +74,17 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   playRandonSong() {
-    console.log(this.songs);
     const random = Math.floor(Math.random() * this.songs.length);
     this.songLink = this.songs[random].songUrl;
-    console.log(this.songLink);
     this.sharedServ.setSongUrl(this.songLink);
   }
 
   playSong(songUrl: any) {
-    console.log(songUrl);
     this.sharedServ.setSongUrl(songUrl);
   }
 
   favSong(event: any, songId: any) {
     event.stopPropagation();
-    console.log(songId);
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
         console.log(res);

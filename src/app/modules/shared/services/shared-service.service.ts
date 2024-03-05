@@ -21,7 +21,6 @@ export class SharedServiceService {
   }
 
   setSongUrl(songUrl: string) {
-    console.log(songUrl);
     this.songUrlSource.next(songUrl);
   }
 

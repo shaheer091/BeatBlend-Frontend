@@ -9,8 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
-
-  data:any;
+  data: any;
 
   constructor(private userServ: UserService, private router: Router) {}
   showDiv: Boolean = false;
@@ -46,7 +45,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
         if (this.isValidLink(this.socialMediaLink)) {
           this.artistVerification$ = this.userServ
             .artistVerification(this.socialMediaLink)
-            .subscribe((res) => {});
+            .subscribe();
         } else {
           this.message = 'the provided link is not valid';
         }
@@ -62,23 +61,17 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   }
 
   getSettingsPage() {
-    this.getSettings$ = this.userServ.getSettingsPage().subscribe((res) => {
-      if (res.imageUrl) {
-
-        this.imgBool = true;
-        this.image = res.imageUrl;
-      }
-      this.data=res;
-      // if (res.followers && res.followers.length > 0) {
-      //   this.followers = res.followers.length;
-      // } else {
-      //   this.followers = 0;
-      // }
-      // if (res.following && res.following.length > 0) {
-      //   this.following = res.following.length;
-      // } else {
-      //   this.following = 0;
-      // }
+    this.getSettings$ = this.userServ.getSettingsPage().subscribe({
+      next: (res) => {
+        if (res.imageUrl) {
+          this.imgBool = true;
+          this.image = res.imageUrl;
+        }
+        this.data = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 

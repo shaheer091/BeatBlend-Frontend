@@ -30,24 +30,30 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   }
 
   getSong() {
-    this.getSong$ = this.userServ.userGetSong().subscribe((res) => {
-      // console.log(res);
-      this.username = res.username;
-      this.songs = res.songs.map((song: any) => ({
-        ...song,
-        artistUsername: song.artist[0].username,
-      }));
-      // console.log(this.songs);
-      this.message = res.message;
+    this.getSong$ = this.userServ.userGetSong().subscribe({
+      next: (res) => {
+        this.username = res.username;
+        this.songs = res.songs.map((song: any) => ({
+          ...song,
+          artistUsername: song.artist[0].username,
+        }));
+        this.message = res.message;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
   favAndUnfav(event: any, song: any) {
     event.stopPropagation();
-    this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe((res) => {
-      console.log(res);
-      this.favBtn = res.fav;
-      console.log(this.favBtn);
+    this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe({
+      next: (res) => {
+        this.favBtn = res.fav;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
     this.getSong();
   }

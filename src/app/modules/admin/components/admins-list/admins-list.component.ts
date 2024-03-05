@@ -16,13 +16,18 @@ export class AdminsListComponent implements OnInit, OnDestroy {
   getAdmins$ = new Subscription();
 
   ngOnInit(): void {
-    this.getAdmins$ = this.adminServ.getAllAdmin().subscribe((res) => {
-      this.success = res.success;
-      if (this.success) {
-        this.adminData = res.admin;
-      } else {
-        this.message = res.message;
-      }
+    this.getAdmins$ = this.adminServ.getAllAdmin().subscribe({
+      next: (res) => {
+        this.success = res.success;
+        if (this.success) {
+          this.adminData = res.admin;
+        } else {
+          this.message = res.message;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
   ngOnDestroy(): void {

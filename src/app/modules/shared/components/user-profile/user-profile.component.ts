@@ -23,19 +23,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.queryParams.subscribe((res) => {
       this.id = res['id'];
-      console.log(this.id);
     });
     this.getUserProfile();
   }
   getUserProfile() {
-    this.getSingleUser$ = this.commonServ
-      .getSingleUser(this.id)
-      .subscribe((res) => {
-        console.log(res[0].profile);
+    this.getSingleUser$ = this.commonServ.getSingleUser(this.id).subscribe({
+      next: (res) => {
         this.userData = res;
         this.userSongs = res[0].songs;
-        console.log(this.userData);
-      });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
   playSong(songUrl: any) {
     this.sharedServ.setSongUrl(songUrl);

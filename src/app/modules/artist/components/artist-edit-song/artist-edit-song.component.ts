@@ -26,7 +26,6 @@ export class ArtistEditSongComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.songId = params['id'];
-      console.log(this.songId);
     });
     this.getSongDetails();
     this.initializeForm();
@@ -37,7 +36,6 @@ export class ArtistEditSongComponent implements OnInit, OnDestroy {
       .artistGetSongDetails(this.songId)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.editSongForm.patchValue({
             title: res.title,
             artist: res.artist,
@@ -64,12 +62,10 @@ export class ArtistEditSongComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     const editedSongData = this.editSongForm.value;
-    console.log('Edited Song Data:', editedSongData);
     this.editSongDetails$ = this.artistServ
       .artistEditSongDetails(this.songId, editedSongData)
       .subscribe({
         next: (res) => {
-          console.log(res.message);
           if (res.message) {
             setTimeout(() => {
               this.router.navigate(['/artist/songs']);

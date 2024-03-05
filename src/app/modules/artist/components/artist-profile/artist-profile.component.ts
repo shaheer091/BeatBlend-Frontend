@@ -34,27 +34,32 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
       dateOfBirth: [''],
       file: [''],
     });
-    this.getProfile$ = this.artistServ.artistGetProfile().subscribe((res) => {
-      this.artistProfile = res.artistProfile[0].profile[0];
-      this.artistDetails = res.user;
-      this.profileForm.controls['username'].setValue(
-        this.artistDetails.username || ''
-      );
-      this.profileForm.controls['email'].setValue(
-        this.artistDetails.email || ''
-      );
-      this.profileForm.controls['bio'].setValue(
-        this.artistProfile ? this.artistProfile.bio : ''
-      );
-      this.profileForm.controls['phoneNumber'].setValue(
-        this.artistProfile ? this.artistProfile.phoneNumber : ''
-      );
-      this.profileForm.controls['dateOfBirth'].setValue(
-        this.artistProfile ? this.artistProfile.dateOfBirth : ''
-      );
-      this.profileForm.controls['file'].setValue(
-        this.artistProfile ? this.artistProfile.file : ''
-      );
+    this.getProfile$ = this.artistServ.artistGetProfile().subscribe({
+      next: (res) => {
+        this.artistProfile = res.artistProfile[0].profile[0];
+        this.artistDetails = res.user;
+        this.profileForm.controls['username'].setValue(
+          this.artistDetails.username || ''
+        );
+        this.profileForm.controls['email'].setValue(
+          this.artistDetails.email || ''
+        );
+        this.profileForm.controls['bio'].setValue(
+          this.artistProfile ? this.artistProfile.bio : ''
+        );
+        this.profileForm.controls['phoneNumber'].setValue(
+          this.artistProfile ? this.artistProfile.phoneNumber : ''
+        );
+        this.profileForm.controls['dateOfBirth'].setValue(
+          this.artistProfile ? this.artistProfile.dateOfBirth : ''
+        );
+        this.profileForm.controls['file'].setValue(
+          this.artistProfile ? this.artistProfile.file : ''
+        );
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -62,20 +67,25 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
     if (this.profileForm.valid) {
       this.updateProfile$ = this.artistServ
         .artistUpdateProfile(this.profileForm.value)
-        .subscribe((res) => {
-          this.showSavingDiv = true;
-          setTimeout(() => {
-            this.message = res.message;
-          }, 2000);
-          setTimeout(() => {
-            if (res.success) {
-              this.router.navigate(['/artist/home']);
-              this.message = '';
-            } else {
-              this.showSavingDiv = false;
-              this.message = '';
-            }
-          }, 3000);
+        .subscribe({
+          next: (res) => {
+            this.showSavingDiv = true;
+            setTimeout(() => {
+              this.message = res.message;
+            }, 2000);
+            setTimeout(() => {
+              if (res.success) {
+                this.router.navigate(['/artist/home']);
+                this.message = '';
+              } else {
+                this.showSavingDiv = false;
+                this.message = '';
+              }
+            }, 3000);
+          },
+          error: (err) => {
+            console.log(err);
+          },
         });
     } else {
     }

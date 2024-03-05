@@ -24,16 +24,25 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     this.getFavSong();
   }
   getFavSong() {
-    this.getFavSongs$ = this.userServ.getFavSongs().subscribe((res) => {
-      console.log(res);
-      this.message = res.message;
-      this.favSongs = res.favSongs;
+    this.getFavSongs$ = this.userServ.getFavSongs().subscribe({
+      next: (res) => {
+        this.message = res.message;
+        this.favSongs = res.favSongs;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
   unFavSong(event: any, songId: any) {
     event.stopPropagation();
-    this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe((res) => {
-      console.log(res);
+    this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
     this.getFavSong();
   }

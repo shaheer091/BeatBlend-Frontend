@@ -18,7 +18,6 @@ export class FollowingListComponent implements OnInit {
     this.sharedServ.getFollowingList().subscribe({
       next: (res) => {
         this.userList=res;
-        console.log(res);
       },
       error: (err) => {
         console.log(err);

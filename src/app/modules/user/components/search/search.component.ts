@@ -26,9 +26,8 @@ export class SearchComponent implements OnDestroy {
   followAndUnfollow$ = new Subscription();
 
   search() {
-    this.searchUser$ = this.userServ.searchUser(this.searchText).subscribe(
-      (res) => {
-        console.log(res);
+    this.searchUser$ = this.userServ.searchUser(this.searchText).subscribe({
+      next: (res) => {
         this.user = res.users;
         this.userId = res.userId;
         this.message = res.message;
@@ -36,26 +35,24 @@ export class SearchComponent implements OnDestroy {
           this.following = this.user.map((e) =>
             e.followers.includes(this.userId)
           );
-          console.log(this.following);
         }
       },
-      (err) => {
+      error: (err) => {
         console.log(err);
         if (err.status === 404) {
           this.user = err.users;
         }
-      }
-    );
+      },
+    });
   }
   followUser(event: any, userId: any) {
     event.stopPropagation();
     this.followAndUnfollow$ = this.userServ
       .followAndUnfollowUser(userId)
-      .subscribe((res) => {});
+      .subscribe();
     this.search();
   }
   userProfile(userId: any) {
-    console.log(userId);
     const queryParams = {
       id: userId,
     };

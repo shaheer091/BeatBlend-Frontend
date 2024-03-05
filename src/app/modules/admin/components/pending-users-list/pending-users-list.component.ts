@@ -31,13 +31,18 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
   }
 
   getPending() {
-    this.getPendingUser$ = this.adminServ.getAllPending().subscribe((res) => {
-      this.success = res.success;
-      if (this.success) {
-        this.pendingData = res.pending;
-      } else {
-        this.message = res.message;
-      }
+    this.getPendingUser$ = this.adminServ.getAllPending().subscribe({
+      next: (res) => {
+        this.success = res.success;
+        if (this.success) {
+          this.pendingData = res.pending;
+        } else {
+          this.message = res.message;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -55,8 +60,13 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
   approveUser() {
     this.approve$ = this.adminServ
       .pendingApproval(this.pendingUserId)
-      .subscribe((res) => {
-        this.getPending();
+      .subscribe({
+        next: (res) => {
+          this.getPending();
+        },
+        error: (err) => {
+          console.log(err);
+        },
       });
     // this.showPopUp=false;
     this.approve = false;
@@ -66,15 +76,19 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
   declineUser() {
     this.decline$ = this.adminServ
       .pendingDecline(this.pendingUserId)
-      .subscribe((res) => {
-        this.getPending();
+      .subscribe({
+        next: (res) => {
+          this.getPending();
+        },
+        error: (err) => {
+          console.log(err);
+        },
       });
     this.approve = false;
     this.decline = false;
   }
 
   getUserDetails(userId: any) {
-    console.log(userId);
     const queryParams = {
       id: userId,
     };

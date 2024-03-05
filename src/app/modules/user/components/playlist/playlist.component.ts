@@ -21,7 +21,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     this.getPlaylist$ = this.userServ.getPlaylist().subscribe({
       next: (res) => {
         this.playlist = res;
-        console.log(res);
       },
       error: (err) => {
         console.log(err);
