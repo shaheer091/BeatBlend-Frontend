@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })
-export class SearchComponent {
+export class SearchComponent implements OnDestroy {
   constructor(
     private userServ: UserService,
     private commonServ: CommonService,
@@ -19,15 +20,18 @@ export class SearchComponent {
   user: any[] = [];
   userId: any;
   following: any;
-  message:any;
+  message: any;
+
+  searchUser$ = new Subscription();
+  followAndUnfollow$ = new Subscription();
 
   search() {
-    this.userServ.searchUser(this.searchText).subscribe(
+    this.searchUser$ = this.userServ.searchUser(this.searchText).subscribe(
       (res) => {
         console.log(res);
         this.user = res.users;
         this.userId = res.userId;
-        this.message= res.message;
+        this.message = res.message;
         if (this.searchText !== '') {
           this.following = this.user.map((e) =>
             e.followers.includes(this.userId)
@@ -43,9 +47,11 @@ export class SearchComponent {
       }
     );
   }
-  followUser(event:any,userId: any) {
+  followUser(event: any, userId: any) {
     event.stopPropagation();
-    this.userServ.followAndUnfollowUser(userId).subscribe((res) => {});
+    this.followAndUnfollow$ = this.userServ
+      .followAndUnfollowUser(userId)
+      .subscribe((res) => {});
     this.search();
   }
   userProfile(userId: any) {
@@ -57,5 +63,10 @@ export class SearchComponent {
       relativeTo: this.route,
       queryParams: queryParams,
     });
+  }
+
+  ngOnDestroy(): void {
+    this.searchUser$?.unsubscribe();
+    this.followAndUnfollow$?.unsubscribe();
   }
 }

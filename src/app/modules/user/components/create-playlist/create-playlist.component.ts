@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-playlist',
   templateUrl: './create-playlist.component.html',
   styleUrls: ['./create-playlist.component.css'],
 })
-export class CreatePlaylistComponent {
-  constructor(private userServ: UserService,private router:Router) {}
+export class CreatePlaylistComponent implements OnDestroy {
+  constructor(private userServ: UserService, private router: Router) {}
   searchText!: string;
   playlistName!: string;
   songs: any[] = [];
@@ -16,8 +17,11 @@ export class CreatePlaylistComponent {
   file: any;
   formData = new FormData();
 
+  searchSong$ = new Subscription();
+  createPlaylist$ = new Subscription();
+
   searchSong() {
-    this.userServ.searchSong(this.searchText).subscribe({
+    this.searchSong$ = this.userServ.searchSong(this.searchText).subscribe({
       next: (res) => {
         console.log(res.songs);
         if (res.songs) {
@@ -49,17 +53,24 @@ export class CreatePlaylistComponent {
       this.songId.forEach((id) => {
         this.formData.append('songIds[]', id);
       });
-      this.userServ.createPlaylist(this.formData).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.router.navigate(['/user/playlist'])
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+      this.createPlaylist$ = this.userServ
+        .createPlaylist(this.formData)
+        .subscribe({
+          next: (res) => {
+            console.log(res);
+            this.router.navigate(['/user/playlist']);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
     } else {
       console.error('Please provide playlist name and songs');
     }
+  }
+
+  ngOnDestroy(): void {
+    this.createPlaylist$?.unsubscribe();
+    this.searchSong$?.unsubscribe();
   }
 }

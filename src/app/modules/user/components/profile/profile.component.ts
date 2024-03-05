@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   myForm!: FormGroup;
   userData: any;
   userDetails: any;
@@ -17,6 +18,11 @@ export class ProfileComponent implements OnInit {
   otpMessage: any;
   arr: File[] = [];
   formdata = new FormData();
+
+  getUserProfile$ = new Subscription();
+  updateProfile$ = new Subscription();
+  verifyPhone$ = new Subscription();
+  verifyOtp$ = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,7 +43,7 @@ export class ProfileComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.userServ.getUserProfile().subscribe((res) => {
+    this.getUserProfile$ = this.userServ.getUserProfile().subscribe((res) => {
       const { userProfile } = res;
       const { userDetails } = userProfile[0];
 
@@ -79,7 +85,7 @@ export class ProfileComponent implements OnInit {
       formdata.append('gender', value.gender);
       formdata.append('file', value.file);
 
-      this.userServ.updateProfile(formdata).subscribe(
+      this.updateProfile$ = this.userServ.updateProfile(formdata).subscribe(
         (res) => {
           setTimeout(() => {
             this.message = res.message;
@@ -99,7 +105,7 @@ export class ProfileComponent implements OnInit {
   }
   verifyPhone() {
     try {
-      this.userServ
+      this.verifyPhone$ = this.userServ
         .verifyPhone(this.myForm.value.phoneNumber)
         .subscribe((res) => {
           this.showOtp = true;
@@ -111,7 +117,7 @@ export class ProfileComponent implements OnInit {
 
   onVerify() {
     try {
-      this.userServ
+      this.verifyOtp$ = this.userServ
         .verifyPhoneOtp(this.otp, this.myForm.value.phoneNumber)
         .subscribe((res) => {
           this.otpMessage = res.message;
@@ -122,5 +128,12 @@ export class ProfileComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.getUserProfile$?.unsubscribe();
+    this.updateProfile$?.unsubscribe();
+    this.verifyOtp$?.unsubscribe();
+    this.verifyPhone$?.unsubscribe();
   }
 }

@@ -1,19 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArtistService } from '../../services/artist.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-artist-profile',
   templateUrl: './artist-profile.component.html',
   styleUrls: ['./artist-profile.component.css'],
 })
-export class ArtistProfileComponent implements OnInit {
+export class ArtistProfileComponent implements OnInit, OnDestroy {
   profileForm!: FormGroup;
   artistProfile: any;
   artistDetails: any;
   message: string = '';
   showSavingDiv: Boolean = false;
+
+  getProfile$ = new Subscription();
+  updateProfile$ = new Subscription();
 
   constructor(
     private fb: FormBuilder,
@@ -30,8 +34,7 @@ export class ArtistProfileComponent implements OnInit {
       dateOfBirth: [''],
       file: [''],
     });
-    this.artistServ.artistGetProfile().subscribe((res) => {
-
+    this.getProfile$ = this.artistServ.artistGetProfile().subscribe((res) => {
       this.artistProfile = res.artistProfile[0].profile[0];
       this.artistDetails = res.user;
       this.profileForm.controls['username'].setValue(
@@ -57,7 +60,7 @@ export class ArtistProfileComponent implements OnInit {
 
   onSubmit() {
     if (this.profileForm.valid) {
-      this.artistServ
+      this.updateProfile$ = this.artistServ
         .artistUpdateProfile(this.profileForm.value)
         .subscribe((res) => {
           this.showSavingDiv = true;
@@ -76,5 +79,9 @@ export class ArtistProfileComponent implements OnInit {
         });
     } else {
     }
+  }
+  ngOnDestroy(): void {
+    this.getProfile$?.unsubscribe();
+    this.updateProfile$?.unsubscribe();
   }
 }

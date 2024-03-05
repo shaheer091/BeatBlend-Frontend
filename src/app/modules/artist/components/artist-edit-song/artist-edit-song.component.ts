@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArtistService } from '../../services/artist.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-artist-edit-song',
   templateUrl: './artist-edit-song.component.html',
   styleUrls: ['./artist-edit-song.component.css'],
 })
-export class ArtistEditSongComponent implements OnInit {
+export class ArtistEditSongComponent implements OnInit, OnDestroy {
   songId!: number;
   editSongForm!: FormGroup;
+
+  getSongDetails$ = new Subscription();
+  editSongDetails$ = new Subscription();
 
   constructor(
     private route: ActivatedRoute,
@@ -29,21 +33,23 @@ export class ArtistEditSongComponent implements OnInit {
   }
 
   getSongDetails() {
-    this.artistServ.artistGetSongDetails(this.songId).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.editSongForm.patchValue({
-          title: res.title,
-          artist: res.artist,
-          album: res.album,
-          genre: res.genre,
-          duration: res.duration,
-        });
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
+    this.getSongDetails$ = this.artistServ
+      .artistGetSongDetails(this.songId)
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.editSongForm.patchValue({
+            title: res.title,
+            artist: res.artist,
+            album: res.album,
+            genre: res.genre,
+            duration: res.duration,
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
   }
 
   initializeForm(): void {
@@ -59,7 +65,7 @@ export class ArtistEditSongComponent implements OnInit {
   onSubmit(): void {
     const editedSongData = this.editSongForm.value;
     console.log('Edited Song Data:', editedSongData);
-    this.artistServ
+    this.editSongDetails$ = this.artistServ
       .artistEditSongDetails(this.songId, editedSongData)
       .subscribe({
         next: (res) => {
@@ -74,5 +80,9 @@ export class ArtistEditSongComponent implements OnInit {
           console.log(err);
         },
       });
+  }
+  ngOnDestroy(): void {
+    this.getSongDetails$?.unsubscribe();
+    this.editSongDetails$?.unsubscribe();
   }
 }

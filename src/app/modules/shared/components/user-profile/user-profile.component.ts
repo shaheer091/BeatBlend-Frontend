@@ -1,22 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { SharedServiceService } from '../../services/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   id: any;
   userData: any;
-  userSongs:any;
+  userSongs: any;
   constructor(
     private route: ActivatedRoute,
     private commonServ: CommonService,
     private sharedServ: SharedServiceService
   ) {}
+
+  getSingleUser$ = new Subscription();
   ngOnInit(): void {
     this.route.queryParams.subscribe((res) => {
       this.id = res['id'];
@@ -25,14 +28,19 @@ export class UserProfileComponent implements OnInit {
     this.getUserProfile();
   }
   getUserProfile() {
-    this.commonServ.getSingleUser(this.id).subscribe((res) => {
-      console.log(res[0].profile);
-      this.userData = res;
-      this.userSongs=res[0].songs;
-      console.log(this.userData);
-    });
+    this.getSingleUser$ = this.commonServ
+      .getSingleUser(this.id)
+      .subscribe((res) => {
+        console.log(res[0].profile);
+        this.userData = res;
+        this.userSongs = res[0].songs;
+        console.log(this.userData);
+      });
   }
-  playSong(songUrl:any){
-    this.sharedServ.setSongUrl(songUrl)
+  playSong(songUrl: any) {
+    this.sharedServ.setSongUrl(songUrl);
+  }
+  ngOnDestroy(): void {
+    this.getSingleUser$?.unsubscribe();
   }
 }

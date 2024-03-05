@@ -2,7 +2,8 @@
     <div class=" min-h-screen p-10">
 
         <div class="flex">
-            <img class="mr-6 h-44 w-44 object-cover rounded-3xl" [src]="playlistDetails?.imageUrl ? playlistDetails.imageUrl : 'https://imgs.search.brave.com/Sctdgrmntepu2CbKseQlGAI5eDUal4TjOpatVAaxHXc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2RlLzlm/Lzg2L2RlOWY4Njlk/YTdiNzBjZjZkYTQ3/YzVhY2Y2NzQ5NDM4/LmpwZw'">
+            <img class="mr-6 h-44 w-44 object-cover rounded-3xl"
+                [src]="playlistDetails?.imageUrl ? playlistDetails.imageUrl : 'https://imgs.search.brave.com/Sctdgrmntepu2CbKseQlGAI5eDUal4TjOpatVAaxHXc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2RlLzlm/Lzg2L2RlOWY4Njlk/YTdiNzBjZjZkYTQ3/YzVhY2Y2NzQ5NDM4/LmpwZw'">
             <div class="flex flex-col justify-center relative">
                 <h4 class="mt-0 mb-2 uppercase tracking-widest text-xs">Playlist</h4>
                 <h1 class="mt-0 mb-2 text-4xl">{{playlistDetails?.playlistName}}</h1>
@@ -13,8 +14,10 @@
 
         <div class="mt-6 flex justify-between">
             <div class="flex">
-                <button class="mr-2 bg-green-500  block py-2 px-8 rounded-full" (click)="playSong()">Play</button>
-                <button class="mr-2 bg-red-300  block py-2 px-8 rounded-full text-gray-700" (click)="deletePlaylist(playlistDetails?._id)">Delete</button>
+                <button class="mr-2 bg-green-500  block py-2 px-8 rounded-full" (click)="playRandonSong()">Play</button>
+                <button class="mr-2 bg-red-300  block py-2 px-8 rounded-full text-gray-700"
+                    (click)="deletePlaylist(playlistDetails?._id)">Delete</button>
+                <button class="mr-2 bg-green-500  block py-2 px-8 rounded-full" (click)="addSong()">Add Song</button>
             </div>
         </div>
 
@@ -28,15 +31,15 @@
                 <div class="p-2 w-12 flex-shrink-0 text-right"></div>
             </div>
 
-            <div class="flex border-b" *ngFor="let song of songs">
-                <div class="p-3 w-8 flex-shrink-0">▶️</div>
-                <div class="p-3 w-8 flex-shrink-0">❤️</div>
+            <div class="flex border-b cursor-pointer" *ngFor="let song of songs" (click)="playSong(song.songUrl)">
+                <div class="p-3 w-8 flex-shrink-0 cursor-pointer" (click)="favSong(song._id)">❤️</div>
                 <div class="p-3 w-full">{{song?.title}}</div>
                 <div class="p-3 w-full">lkoi</div>
                 <div class="p-3 w-full">{{song?.genre}}</div>
-                <div class="p-3 w-12 flex-shrink-0 text-right text-red-500 cursor-pointer" (click)="removeFromPlaylist(song._id)">Romove</div>
+                <div class="p-3 w-12 flex-shrink-0 text-right text-red-500 cursor-pointer"
+                    (click)="removeFromPlaylist(song._id)">Romove</div>
             </div>
-            
+
         </div>
     </div>
 </div>

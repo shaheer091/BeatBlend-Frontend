@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.css'],
 })
-export class SettingsPageComponent implements OnInit {
-  constructor(private userServ: UserService,private router:Router) {}
+export class SettingsPageComponent implements OnInit, OnDestroy {
+  constructor(private userServ: UserService, private router: Router) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
@@ -16,8 +17,11 @@ export class SettingsPageComponent implements OnInit {
   role: any;
   following: number = 0;
   followers: number = 0;
-  image:any;
-  imgBool:Boolean=false;
+  image: any;
+  imgBool: Boolean = false;
+
+  artistVerification$ = new Subscription();
+  getSettings$ = new Subscription();
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
@@ -37,7 +41,7 @@ export class SettingsPageComponent implements OnInit {
     try {
       if (this.socialMediaLink) {
         if (this.isValidLink(this.socialMediaLink)) {
-          this.userServ
+          this.artistVerification$ = this.userServ
             .artistVerification(this.socialMediaLink)
             .subscribe((res) => {});
         } else {
@@ -55,10 +59,10 @@ export class SettingsPageComponent implements OnInit {
   }
 
   getSettingsPage() {
-    this.userServ.getSettingsPage().subscribe((res) => {
-      if(res.imageUrl){
-        this.imgBool=true;
-        this.image=res.imageUrl;
+    this.getSettings$ = this.userServ.getSettingsPage().subscribe((res) => {
+      if (res.imageUrl) {
+        this.imgBool = true;
+        this.image = res.imageUrl;
       }
       if (res.followers && res.followers.length > 0) {
         this.followers = res.followers.length;
@@ -73,7 +77,12 @@ export class SettingsPageComponent implements OnInit {
     });
   }
 
-  createBand(){
-    this.router.navigate(['/user/createBand'])
+  createBand() {
+    this.router.navigate(['/user/createBand']);
+  }
+
+  ngOnDestroy(): void {
+    this.artistVerification$?.unsubscribe();
+    this.getSettings$?.unsubscribe();
   }
 }
