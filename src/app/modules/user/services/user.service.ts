@@ -69,8 +69,14 @@ export class UserService {
   }
 
   getSinglePlaylist(playlistID:string) : Observable <any>{
-    console.log(playlistID);
-    
     return this.http.get(`${this.userApi}/singlePlaylist/${playlistID}`)
+  }
+
+  removeFromPlaylist(songId:any):Observable<any>{
+    return this.http.delete(`${this.userApi}/removeFromPlaylist/${songId}`)
+  }
+
+  deletePlaylist(playlistId:any):Observable<any>{
+    return this.http.delete(`${this.userApi}/deletePlaylist/${playlistId}`)
   }
 }

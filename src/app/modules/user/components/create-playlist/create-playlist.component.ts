@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-playlist',
@@ -7,7 +8,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./create-playlist.component.css'],
 })
 export class CreatePlaylistComponent {
-  constructor(private userServ: UserService) {}
+  constructor(private userServ: UserService,private router:Router) {}
   searchText!: string;
   playlistName!: string;
   songs: any[] = [];
@@ -51,6 +52,7 @@ export class CreatePlaylistComponent {
       this.userServ.createPlaylist(this.formData).subscribe({
         next: (res) => {
           console.log(res);
+          this.router.navigate(['/user/playlist'])
         },
         error: (err) => {
           console.log(err);
