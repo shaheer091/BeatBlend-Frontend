@@ -9,6 +9,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
+
+  data:any;
+
   constructor(private userServ: UserService, private router: Router) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
@@ -61,19 +64,21 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   getSettingsPage() {
     this.getSettings$ = this.userServ.getSettingsPage().subscribe((res) => {
       if (res.imageUrl) {
+
         this.imgBool = true;
         this.image = res.imageUrl;
       }
-      if (res.followers && res.followers.length > 0) {
-        this.followers = res.followers.length;
-      } else {
-        this.followers = 0;
-      }
-      if (res.following && res.following.length > 0) {
-        this.following = res.following.length;
-      } else {
-        this.following = 0;
-      }
+      this.data=res;
+      // if (res.followers && res.followers.length > 0) {
+      //   this.followers = res.followers.length;
+      // } else {
+      //   this.followers = 0;
+      // }
+      // if (res.following && res.following.length > 0) {
+      //   this.following = res.following.length;
+      // } else {
+      //   this.following = 0;
+      // }
     });
   }
 

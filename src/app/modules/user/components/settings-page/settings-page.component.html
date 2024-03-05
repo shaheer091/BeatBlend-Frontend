@@ -8,15 +8,15 @@
         <img [src]="image" alt="Profile" class="w-20 h-20 rounded-full shadow-lg">
     </div>
     <div class="mb-5 flex justify-around items-center space-x-4">
-        <div
+        <div [routerLink]="'/user/followingList'"
             class="flex flex-row justify-between bg-gray-200 shadow-md w-36 rounded-md hover:bg-gray-300 px-4 cursor-pointer">
-            <p class="text-gray-700 font-bold text-center">Following</p>
-            <span class="text-xl text-blue-600 font-bold text-center">{{ following }}</span>
+            <p class="text-gray-700 font-bold text-center" >Following</p>
+            <span class="text-xl text-blue-600 font-bold text-center">{{ data?.following?.length }}</span>
         </div>
-        <div
+        <div [routerLink]="'/user/followersList'"
             class="flex flex-row justify-between bg-gray-200 shadow-md w-36 rounded-md hover:bg-gray-300 px-4 cursor-pointer">
             <p class="text-gray-700 font-bold text-center">Followers</p>
-            <span class="text-xl text-blue-600 font-bold text-center">{{ followers }}</span>
+            <span class="text-xl text-blue-600 font-bold text-center">{{ data?.followers?.length }}</span>
         </div>
     </div>
 

@@ -14,7 +14,7 @@ export class SharedServiceService {
 
   api='http://localhost:3000'
 
-  role=localStorage.getItem('role')
+  // role=localStorage.getItem('role')
 
   getSingleUser():Observable<any>{
     return this.http.get(`${this.api}/singleUser`)
@@ -23,6 +23,14 @@ export class SharedServiceService {
   setSongUrl(songUrl: string) {
     console.log(songUrl);
     this.songUrlSource.next(songUrl);
+  }
+
+  getFollowingList():Observable<any>{
+    return this.http.get(`${this.api}/following-list`)
+  }
+
+  getFollowersList():Observable<any>{
+    return this.http.get(`${this.api}/followers-list`)
   }
 
   

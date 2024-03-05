@@ -48,7 +48,8 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       });
   }
 
-  removeFromPlaylist(songId: any) {
+  removeFromPlaylist(event: any, songId: any) {
+    event.stopPropagation();
     console.log(songId);
     this.removeFromPlaylist$ = this.userServ
       .removeFromPlaylist(songId)
@@ -89,7 +90,8 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     this.sharedServ.setSongUrl(songUrl);
   }
 
-  favSong(songId: any) {
+  favSong(event: any, songId: any) {
+    event.stopPropagation();
     console.log(songId);
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
