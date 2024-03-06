@@ -1,48 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-create-band',
   templateUrl: './create-band.component.html',
-  styleUrls: ['./create-band.component.css']
+  styleUrls: ['./create-band.component.css'],
 })
 export class CreateBandComponent implements OnInit {
-  createBandForm!: FormGroup;
+  bandForm!: FormGroup;
+  artists:any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private userServ: UserService
+  ) {}
 
   ngOnInit(): void {
-    this.createForm();
-  }
-
-  createForm(): void {
-    this.createBandForm = this.formBuilder.group({
-      bandName: [''],
-      image: [''],
-      members: this.formBuilder.array([]) 
+    this.bandForm = this.formBuilder.group({
+      bandImage: [null, Validators.required],
+      bandName: ['', Validators.required],
+      newMember: ['', [Validators.required]],
     });
   }
-
-  createMemberFormGroup(): FormGroup {
-    return this.formBuilder.group({
-      name: [''],
-      instrument: ['']
-    });
-  }
-
-  addMember(): void {
-    const membersArray = this.createBandForm.get('members') as any;
-    membersArray.push(this.createMemberFormGroup());
-  }
-
-  removeMember(index: number): void {
-    const membersArray = this.createBandForm.get('members') as any;
-    membersArray.removeAt(index);
+  searchArtist() {
+    const artistName = this.bandForm.value.newMember;
+    if (artistName != '') {
+      this.userServ.searchArtist(artistName).subscribe({
+        next: (res) => {
+          this.artists=res.artists;
+          console.log(this.artists);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
   onSubmit(): void {
-    const formData = this.createBandForm.value;
-    console.log('Band form data:', formData);
-    // Call a service to submit the form data to the backend
+    if (this.bandForm.valid) {
+      console.log(this.bandForm.value);
+    } else {
+      console.error('Enter the form details correctly');
+    }
   }
 }

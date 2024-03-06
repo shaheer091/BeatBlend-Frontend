@@ -34,7 +34,7 @@
             <div class="flex border-b cursor-pointer" *ngFor="let song of songs" (click)="playSong(song.songUrl)">
                 <div class="p-3 w-8 flex-shrink-0 cursor-pointer" (click)="favSong($event,song._id)">❤️</div>
                 <div class="p-3 w-full">{{song?.title}}</div>
-                <div class="p-3 w-full">lkoi</div>
+                <div class="p-3 w-full">{{song?.artists[0]?.username}}</div>
                 <div class="p-3 w-full">{{song?.genre}}</div>
                 <div class="p-3 w-12 flex-shrink-0 text-right text-red-500 cursor-pointer"
                     (click)="removeFromPlaylist($event,song._id)">Romove</div>

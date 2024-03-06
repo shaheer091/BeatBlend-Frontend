@@ -33,7 +33,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     this.getSong$ = this.userServ.userGetSong().subscribe({
       next: (res) => {
         this.username = res.username;
-        this.songs = res.songs.map((song: any) => ({
+        this.songs = res.songs?.map((song: any) => ({
           ...song,
           artistUsername: song.artist[0].username,
         }));

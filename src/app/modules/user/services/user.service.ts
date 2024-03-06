@@ -80,4 +80,8 @@ export class UserService {
   deletePlaylist(playlistId:any):Observable<any>{
     return this.http.delete(`${this.userApi}/deletePlaylist/${playlistId}`)
   }
+
+  searchArtist(searchText:any):Observable<any>{
+    return this.http.get(`${this.userApi}/searchArtist/${searchText}`);
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedServiceService } from '../../services/shared-service.service';
+import { UserService } from 'src/app/modules/user/services/user.service';
 
 @Component({
   selector: 'app-following-list',
@@ -7,7 +8,7 @@ import { SharedServiceService } from '../../services/shared-service.service';
   styleUrls: ['./following-list.component.css'],
 })
 export class FollowingListComponent implements OnInit {
-  constructor(private sharedServ: SharedServiceService) {}
+  constructor(private sharedServ: SharedServiceService,private userServ:UserService) {}
 
   userList:any;
   ngOnInit(): void {
@@ -23,5 +24,9 @@ export class FollowingListComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+
+  unfollowUser(userId:any){
+    this.userServ.followAndUnfollowUser(userId).subscribe()
   }
 }
