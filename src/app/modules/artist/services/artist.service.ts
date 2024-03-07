@@ -42,6 +42,14 @@ export class ArtistService {
   artistGetHome():Observable<any>{
     return this.http.get(`${this.artistApi}/home`);
   }
+
+  searchArtist(searchText:any):Observable<any>{
+    return this.http.get(`${this.artistApi}/searchArtist/${searchText}`);
+  }
+
+  createBand(data:any):Observable<any>{
+    return this.http.post(`${this.artistApi}/createBand`,data)
+  }
   
 
 }

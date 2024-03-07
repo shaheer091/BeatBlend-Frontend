@@ -10,7 +10,6 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
 import { UserComponent } from './user.component';
 import { UserProfileComponent } from '../shared/components/user-profile/user-profile.component';
 import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
-import { CreateBandComponent } from './components/create-band/create-band.component';
 import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
 import { FollowingListComponent } from '../shared/components/following-list/following-list.component';
 import { FollowersListComponent } from '../shared/components/followers-list/followers-list.component';
@@ -25,7 +24,6 @@ const routes: Routes = [
       { path: 'settings', component: SettingsPageComponent },
       { path: 'profile', component: ProfileComponent },
       { path: 'search', component: SearchComponent },
-      { path: 'createBand', component: CreateBandComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'playlist', component: PlaylistComponent },
       { path: 'user-profile', component: UserProfileComponent },

@@ -46,12 +46,14 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
     });
   }
 
-  showApproveDiv(userId: any) {
+  showApproveDiv(event: any, userId: any) {
+    event.stopPropagation();
     // this.showPopUp=true;
     this.approve = true;
     this.pendingUserId = userId;
   }
-  showDeclineDiv(userId: any) {
+  showDeclineDiv(event: any, userId: any) {
+    event.stopPropagation();
     this.pendingUserId = userId;
     // this.showPopUp=true;
     this.decline = true;

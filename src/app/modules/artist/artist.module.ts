@@ -10,6 +10,7 @@ import { ArtistProfileComponent } from './components/artist-profile/artist-profi
 import { ArtistComponent } from './artist.component';
 import { SharedModule } from '../shared/shared.module';
 import { ArtistEditSongComponent } from './components/artist-edit-song/artist-edit-song.component';
+import { ArtistSettingsComponent } from './components/artist-settings/artist-settings.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ArtistEditSongComponent } from './components/artist-edit-song/artist-ed
     ArtistSongListComponent,
     ArtistProfileComponent,
     ArtistComponent,
-    ArtistEditSongComponent
+    ArtistEditSongComponent,
+    ArtistSettingsComponent
   ],
   imports: [
     CommonModule,

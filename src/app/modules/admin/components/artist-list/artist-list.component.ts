@@ -42,7 +42,8 @@ export class ArtistListComponent implements OnInit, OnDestroy {
     });
   }
 
-  showDeleteDiv(artistId: any) {
+  showDeleteDiv(event:any,artistId: any) {
+    event.stopPropagation()
     this.deleteDiv = true;
     this.artistId = artistId;
   }

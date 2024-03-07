@@ -9,6 +9,8 @@ import { ArtistComponent } from './artist.component';
 import { ArtistEditSongComponent } from './components/artist-edit-song/artist-edit-song.component';
 import { FollowingListComponent } from '../shared/components/following-list/following-list.component';
 import { FollowersListComponent } from '../shared/components/followers-list/followers-list.component';
+import { CreateBandComponent } from './components/create-band/create-band.component';
+import { ArtistSettingsComponent } from './components/artist-settings/artist-settings.component';
 
 const routes: Routes = [
   {
@@ -20,9 +22,11 @@ const routes: Routes = [
       { path: 'addSong', component: ArtistAddSongComponent },
       { path: 'songs', component: ArtistSongListComponent },
       { path: 'profile', component: ArtistProfileComponent },
+      { path: 'settings', component: ArtistSettingsComponent },
       { path: 'editSong/:id', component: ArtistEditSongComponent },
       { path: 'followingList', component: FollowingListComponent },
       { path: 'followersList', component: FollowersListComponent },
+      { path: 'createBand', component: CreateBandComponent },
       { path: '', redirectTo: '/artist/home', pathMatch: 'full' },
     ],
   },
