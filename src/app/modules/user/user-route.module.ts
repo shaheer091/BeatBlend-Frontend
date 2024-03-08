@@ -13,6 +13,7 @@ import { CreatePlaylistComponent } from './components/create-playlist/create-pla
 import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
 import { FollowingListComponent } from '../shared/components/following-list/following-list.component';
 import { FollowersListComponent } from '../shared/components/followers-list/followers-list.component';
+import { NotificationComponent } from '../shared/components/notification/notification.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'playlist/:id', component: SinglePlaylistComponent },
       { path: 'followingList', component: FollowingListComponent },
       { path: 'followersList', component: FollowersListComponent },
+      { path: 'notification', component: NotificationComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

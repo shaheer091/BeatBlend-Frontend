@@ -6,10 +6,18 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { SharedComponent } from './shared.component';
 import { FollowersListComponent } from './components/followers-list/followers-list.component';
 import { FollowingListComponent } from './components/following-list/following-list.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
-  declarations: [MusicPlayerComponent, UserProfileComponent, SharedComponent, FollowersListComponent, FollowingListComponent],
+  declarations: [
+    MusicPlayerComponent,
+    UserProfileComponent,
+    SharedComponent,
+    FollowersListComponent,
+    FollowingListComponent,
+    NotificationComponent,
+  ],
   imports: [CommonModule, RouterModule],
-  exports:[MusicPlayerComponent],
+  exports: [MusicPlayerComponent],
 })
 export class SharedModule {}
