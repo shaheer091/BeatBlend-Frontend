@@ -8,7 +8,8 @@ import { SharedServiceService } from '../../services/shared-service.service';
 })
 export class NotificationComponent implements OnInit {
   constructor(private sharedServ: SharedServiceService) {}
-  notifications: any;
+  bandInvitation: any;
+  newSongs:any;
   ngOnInit(): void {
     this.getNotification();
   }
@@ -16,7 +17,8 @@ export class NotificationComponent implements OnInit {
     this.sharedServ.getNotification().subscribe({
       next: (res) => {
         console.log(res);
-        this.notifications = res;
+        this.bandInvitation = res.bandInvitation;
+        this.newSongs=res.songs;
       },
       error: (err) => {
         console.log(err);

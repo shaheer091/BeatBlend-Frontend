@@ -1,7 +1,15 @@
-<div *ngFor="let notif of notifications">
-    <p>{{notif?.bandAdminInfo[0]?.username}} invited you to join {{notif?.bandName}} band</p>
-    <p>would you like to accept the request</p>
-    <button (click)="acceptInvite(notif?._id)" class="text-green-500">yes</button>
-    <button (click)="declineInvite()" class="text-red-500">no</button>
-
+<div class="w-10/12 float-end p-16">
+    <div *ngIf="bandInvitation?.length > 0">
+        <div *ngFor="let invitation of bandInvitation">
+            <p>{{invitation?.bandAdminInfo[0]?.username}} invited you to join {{invitation?.bandName}} band</p>
+            <p>would you like to accept the request</p>
+            <button (click)="acceptInvite(invitation?._id)" class="text-green-500">yes</button>
+            <button (click)="declineInvite()" class="text-red-500">no</button>
+        </div>
+    </div>
+    <div *ngIf="newSongs?.length > 0">
+        <div *ngFor="let songs of newSongs">
+            <p>{{songs?.artist?.username}} uploaded {{songs?.title}}</p>
+        </div>
+    </div>
 </div>
