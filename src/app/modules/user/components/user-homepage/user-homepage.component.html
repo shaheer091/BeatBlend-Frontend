@@ -1,5 +1,5 @@
 <!-- <app-side-bar></app-side-bar> -->
-<div class="w-10/12 h-[470px] overflow-auto float-end border p-10">
+<!-- <div class="w-10/12 h-[470px] overflow-auto float-end border p-10">
     <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
     <p *ngIf="message">{{message}}</p>
     <div *ngFor="let song of songs" (click)="playSong(song.songUrl)"
@@ -16,6 +16,42 @@
                     [src]="favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
                     alt="">
             </div>
+        </div>
+    </div>
+</div> -->
+<div class="w-10/12 h-screen float-right border overflow-auto p-10">
+    <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
+    <p *ngIf="message">{{message}}</p>
+    <div *ngFor="let song of songs" (click)="playSong(song.songUrl)"
+        class="h-40 w-1/2 border flex flex-col p-5 gap-5">
+        <div class="flex justify-between">
+            <div class="flex gap-5 items-center justify-center">
+                <div>
+                    <img [src]="song.artistProfiles[0].imageUrl" class="h-7 object-cover rounded-full w-7" alt="">
+                </div>
+                <div>
+                    <p>{{song.artistUsername}}</p>
+                </div>
+            </div>
+            <div>
+                <img src="../../../../../assets/images/more (1).png" class="h-5 w-5" alt="">
+            </div>
+        </div>
+        <div>
+            <p>{{song.title}}</p>
+        </div>
+        <div class="flex justify-between">
+            <div class="flex gap-5">
+                <div>
+                    <img src="../../../../../assets/images/like.png" class="h-5 w-5" alt="">
+                </div>
+                <div>
+                    <img src="../../../../../assets/images/comment.png" class="h-5 w-5" alt="">
+                </div>
+            </div>
+            <div (click)="favAndUnfav($event,song)"><img
+                    [src]="favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
+                    class="h-5 w-5" alt=""></div>
         </div>
     </div>
 </div>

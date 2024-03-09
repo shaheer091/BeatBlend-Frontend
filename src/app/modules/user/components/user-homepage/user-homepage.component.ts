@@ -21,6 +21,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   songUrl: any = '';
   favBtn: any;
   songLink: any;
+  artistDetails:any;
 
   getSong$ = new Subscription();
   favAndUnfav$ = new Subscription();
@@ -32,6 +33,8 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   getSong() {
     this.getSong$ = this.userServ.userGetSong().subscribe({
       next: (res) => {
+        console.log(res);
+        this.artistDetails=res
         this.username = res.username;
         this.songs = res.songs?.map((song: any) => ({
           ...song,
