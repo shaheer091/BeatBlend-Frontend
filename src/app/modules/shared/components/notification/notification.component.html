@@ -1,1 +1,7 @@
-<p>notification works!</p>
+<div *ngFor="let notif of notifications">
+    <p>{{notif?.bandAdminInfo[0]?.username}} invited you to join {{notif?.bandName}} band</p>
+    <p>would you like to accept the request</p>
+    <button (click)="acceptInvite(notif?._id)" class="text-green-500">yes</button>
+    <button (click)="declineInvite()" class="text-red-500">no</button>
+
+</div>

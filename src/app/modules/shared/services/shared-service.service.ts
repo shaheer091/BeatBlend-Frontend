@@ -32,5 +32,13 @@ export class SharedServiceService {
     return this.http.get(`${this.api}/followers-list`)
   }
 
+  getNotification():Observable<any>{
+    return this.http.get(`${this.api}/notifications`)
+  }
+
+  acceptInvitation(bandId:any):Observable<any>{
+    return this.http.patch(`${this.api}/artist/acceptBandInvitation/`,{bandId})
+  }
+
   
 }
