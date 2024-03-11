@@ -7,6 +7,8 @@ import { SharedComponent } from './shared.component';
 import { FollowersListComponent } from './components/followers-list/followers-list.component';
 import { FollowingListComponent } from './components/following-list/following-list.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { ChattingComponent } from './components/chatting/chatting.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,9 @@ import { NotificationComponent } from './components/notification/notification.co
     FollowersListComponent,
     FollowingListComponent,
     NotificationComponent,
+    ChattingComponent,
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   exports: [MusicPlayerComponent],
 })
 export class SharedModule {}

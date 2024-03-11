@@ -33,7 +33,6 @@ export class CreateBandComponent implements OnInit {
       this.artistServ.searchArtist(artistName).subscribe({
         next: (res) => {
           this.artists = res.artists;
-          console.log(this.artists);
         },
         error: (err) => {
           console.log(err);
@@ -49,7 +48,6 @@ export class CreateBandComponent implements OnInit {
     } else {
       this.selectedArtists.splice(index, 1);
     }
-    console.log(this.selectedArtists);
   }
   changing(event: any) {
     const files = event.target.files;

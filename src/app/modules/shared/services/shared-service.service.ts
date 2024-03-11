@@ -16,6 +16,7 @@ export class SharedServiceService {
 
   // role=localStorage.getItem('role')
 
+  
   getSingleUser():Observable<any>{
     return this.http.get(`${this.api}/singleUser`)
   }

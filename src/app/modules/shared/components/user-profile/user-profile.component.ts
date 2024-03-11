@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { SharedServiceService } from '../../services/shared-service.service';
 import { Subscription } from 'rxjs';
@@ -13,22 +13,27 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   id: any;
   userData: any;
   userSongs: any;
+  role = localStorage.getItem('role');
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private commonServ: CommonService,
     private sharedServ: SharedServiceService
   ) {}
 
   getSingleUser$ = new Subscription();
   ngOnInit(): void {
-    this.route.queryParams.subscribe((res) => {
-      this.id = res['id'];
+    this.route.params.subscribe({
+      next: (res) => {
+        this.id = res['id'];
+      },
     });
     this.getUserProfile();
   }
   getUserProfile() {
     this.getSingleUser$ = this.commonServ.getSingleUser(this.id).subscribe({
       next: (res) => {
+        console.log(res);
         this.userData = res;
         this.userSongs = res[0]?.songs;
       },
@@ -42,5 +47,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.getSingleUser$?.unsubscribe();
+  }
+
+  sendMsg(userId: any) {
+    this.router.navigate([`/user/chats/${userId}`]);
   }
 }

@@ -14,6 +14,7 @@ import { SinglePlaylistComponent } from './components/single-playlist/single-pla
 import { FollowingListComponent } from '../shared/components/following-list/following-list.component';
 import { FollowersListComponent } from '../shared/components/followers-list/followers-list.component';
 import { NotificationComponent } from '../shared/components/notification/notification.component';
+import { ChattingComponent } from '../shared/components/chatting/chatting.component';
 
 const routes: Routes = [
   {
@@ -27,12 +28,13 @@ const routes: Routes = [
       { path: 'search', component: SearchComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'playlist', component: PlaylistComponent },
-      { path: 'user-profile', component: UserProfileComponent },
+      { path: 'user-profile/:id', component: UserProfileComponent },
       { path: 'createPlaylist', component: CreatePlaylistComponent },
       { path: 'playlist/:id', component: SinglePlaylistComponent },
       { path: 'followingList', component: FollowingListComponent },
       { path: 'followersList', component: FollowersListComponent },
       { path: 'notification', component: NotificationComponent },
+      { path: 'chats/:id', component: ChattingComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

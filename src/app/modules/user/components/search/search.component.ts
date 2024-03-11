@@ -53,13 +53,7 @@ export class SearchComponent implements OnDestroy {
     this.search();
   }
   userProfile(userId: any) {
-    const queryParams = {
-      id: userId,
-    };
-    this.router.navigate(['/user/user-profile'], {
-      relativeTo: this.route,
-      queryParams: queryParams,
-    });
+    this.router.navigate([`/user/user-profile/${userId}`]);
   }
 
   ngOnDestroy(): void {

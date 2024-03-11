@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,9 @@ import { Subscription } from 'rxjs';
 export class UserHomepageComponent implements OnInit, OnDestroy {
   constructor(
     private userServ: UserService,
-    private songSerivce: SharedServiceService
+    private songSerivce: SharedServiceService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   songs: any[] = [];
@@ -21,20 +23,27 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   songUrl: any = '';
   favBtn: any;
   songLink: any;
-  artistDetails:any;
+  artistDetails: any;
+  animateText:Boolean=false;
 
   getSong$ = new Subscription();
   favAndUnfav$ = new Subscription();
 
   ngOnInit(): void {
+    this.animateText=true;
     this.getSong();
+  }
+
+  
+  userProfile(event:any,userId: any) {
+    event.stopPropagation();
+    this.router.navigate([`/user/user-profile/${userId}`]);
   }
 
   getSong() {
     this.getSong$ = this.userServ.userGetSong().subscribe({
       next: (res) => {
-        console.log(res);
-        this.artistDetails=res
+        this.artistDetails = res;
         this.username = res.username;
         this.songs = res.songs?.map((song: any) => ({
           ...song,
