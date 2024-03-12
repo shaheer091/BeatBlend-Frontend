@@ -81,5 +81,9 @@ export class UserService {
     return this.http.delete(`${this.userApi}/deletePlaylist/${playlistId}`)
   }
 
+  likeAndUnlikeSong(songId:any):Observable<any>{
+    return this.http.post(`${this.userApi}/likeUnlikeSong`,{songId})
+  }
+
   
 }

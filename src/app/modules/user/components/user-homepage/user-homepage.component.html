@@ -20,7 +20,7 @@
     </div>
 </div> -->
 <div class="w-10/12  h-screen float-right border overflow-auto p-10">
-    <h3 class="text-xl font-bold mb-4 gradient-text" *ngIf="animateText">welcome, {{username}}</h3>
+    <h3 class="text-xl font-bold mb-4" *ngIf="animateText">welcome, {{username}}</h3>
     <p *ngIf="message">{{message}}</p>
     <div *ngFor="let song of songs" (click)="playSong(song.songUrl)" class="mb-5 rounded-2xl border-black h-40 w-1/2 cursor-pointer border flex flex-col p-5 gap-5">
         <div class="flex justify-between">
@@ -42,10 +42,13 @@
         </div>
         <div class="flex justify-between">
             <div class="flex gap-5">
-                <div>
-                    <img src="../../../../../assets/images/like.png" class="h-5 w-5" alt="">
+                <div (click)="likeSong($event, song._id)" class="flex gap-3">
+                    <img [src]="song?.likedByUser ? '../../../assets/images/likered.png' : '../../../assets/images/like.png'"
+     class="h-5 w-5" alt="">
+
+                    <p>{{song?.likedBy?.length}}</p>
                 </div>
-                <div>
+                <div (click)="commentSong($event, song._id)">
                     <img src="../../../../../assets/images/comment.png" class="h-5 w-5" alt="">
                 </div>
             </div>

@@ -18,24 +18,24 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   ) {}
 
   songs: any[] = [];
+  userId: any;
   username: string = '';
   message: string = '';
   songUrl: any = '';
   favBtn: any;
   songLink: any;
   artistDetails: any;
-  animateText:Boolean=false;
+  animateText: Boolean = false;
 
   getSong$ = new Subscription();
   favAndUnfav$ = new Subscription();
 
   ngOnInit(): void {
-    this.animateText=true;
+    this.animateText = true;
     this.getSong();
   }
 
-  
-  userProfile(event:any,userId: any) {
+  userProfile(event: any, userId: any) {
     event.stopPropagation();
     this.router.navigate([`/user/user-profile/${userId}`]);
   }
@@ -43,12 +43,16 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   getSong() {
     this.getSong$ = this.userServ.userGetSong().subscribe({
       next: (res) => {
+        this.userId = res.userId;
         this.artistDetails = res;
         this.username = res.username;
-        this.songs = res.songs?.map((song: any) => ({
-          ...song,
-          artistUsername: song.artist[0].username,
-        }));
+        if (res.songs) {
+          this.songs = res.songs?.map((song: any) => ({
+            ...song,
+            artistUsername: song.artist[0].username,
+            likedByUser: song.likedBy?.includes(this.userId) || false,
+          }));
+        }
         this.message = res.message;
       },
       error: (err) => {
@@ -73,6 +77,24 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   playSong(songUrl: any) {
     this.songLink = songUrl;
     this.songSerivce.setSongUrl(songUrl);
+  }
+
+  likeSong(event: any, songId: any) {
+    event.stopPropagation();
+    this.userServ.likeAndUnlikeSong(songId).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.getSong();
+  }
+
+  commentSong(event: any, songId: any) {
+    event.stopPropagation();
+    console.log(songId);
   }
 
   ngOnDestroy(): void {
