@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div (click)="favAndUnfav($event,song)"><img
-                    [src]="favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
+                    [src]="song?.favorited ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
                     class="h-5 w-5" alt=""></div>
         </div>
     </div>

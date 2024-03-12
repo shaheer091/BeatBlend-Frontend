@@ -51,6 +51,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
             ...song,
             artistUsername: song.artist[0].username,
             likedByUser: song.likedBy?.includes(this.userId) || false,
+            favorited: song.favouritedBy?.includes(this.userId) || false,
           }));
         }
         this.message = res.message;
@@ -65,7 +66,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe({
       next: (res) => {
-        this.favBtn = res.fav;
+        console.log(res)
       },
       error: (err) => {
         console.log(err);
