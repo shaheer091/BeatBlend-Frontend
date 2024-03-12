@@ -1,0 +1,12 @@
+<!-- <div class="w-10/12 h-screen float-end">
+    <input class="h-16 border-2 border-black w-40" (click)="$event.stopPropagation()" type="text" [(ngModel)]="comments">
+    <button (click)="submitComment($event)">submit</button>
+    <button (click)="cancelComment($event)">cancel</button>
+</div> -->
+
+
+<div class="comment-box">
+    <input class="comment-input" type="text" [(ngModel)]="comments">
+    <button class="comment-button" (click)="submitComment($event)">Submit</button>
+    <button class="comment-button" (click)="cancelComment($event)">Cancel</button>
+</div>

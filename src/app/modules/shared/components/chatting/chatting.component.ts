@@ -10,6 +10,7 @@ import { SocketService } from 'src/app/services/socket.service';
 export class ChattingComponent implements OnInit {
   receiver: any;
   message!: any;
+  senderId:any;
 
   constructor(private chatServ: SocketService, private route: ActivatedRoute) {}
   ngOnInit(): void {

@@ -16,6 +16,7 @@ import { UserComponent } from './user.component';
 import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
 import { CreateBandComponent } from '../artist/components/create-band/create-band.component';
 import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SinglePlaylistComponent } from './components/single-playlist/single-pla
     UserComponent,
     CreatePlaylistComponent,
     CreateBandComponent,
-    SinglePlaylistComponent
+    SinglePlaylistComponent,
+    CommentsComponent
   ],
   imports: [
     ReactiveFormsModule,

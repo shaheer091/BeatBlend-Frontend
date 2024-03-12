@@ -33,7 +33,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   getUserProfile() {
     this.getSingleUser$ = this.commonServ.getSingleUser(this.id).subscribe({
       next: (res) => {
-        console.log(res);
         this.userData = res;
         this.userSongs = res[0]?.songs;
       },

@@ -1,0 +1,34 @@
+.comment-box {
+  position: fixed; /* Make it a fixed element */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the element */
+  background-color: rgba(0, 0, 0, 0.7);
+  background-color: #fff; /* Set background color */
+  border: 1px solid #ccc; /* Add a border */
+  padding: 20px; /* Add some padding inside */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  border-radius: 5px; /* Add rounded corners */
+  display: flex; /* Allow buttons to be side-by-side */
+}
+
+.comment-input {
+  flex: 1; /* Make the input fill most of the space */
+  height: 30px; /* Set input height */
+  border: 1px solid #ccc; /* Add border to input */
+  padding: 5px; /* Add padding to input */
+}
+
+.comment-button {
+  margin-left: 10px; /* Add spacing between buttons */
+  padding: 5px 10px; /* Add padding to buttons */
+  border: none; /* Remove default button border */
+  background-color: #4caf50; /* Set button background color */
+  color: white; /* Set button text color */
+  cursor: pointer; /* Make it look clickable */
+  border-radius: 5px; /* Add rounded corners to buttons */
+}
+
+.comment-button:hover {
+  background-color: #3e8e41; /* Change button color on hover */
+}

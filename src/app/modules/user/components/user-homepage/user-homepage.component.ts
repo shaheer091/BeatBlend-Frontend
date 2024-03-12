@@ -25,13 +25,13 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   favBtn: any;
   songLink: any;
   artistDetails: any;
-  animateText: Boolean = false;
+  showCommentDiv: Boolean = false;
+  songId:any;
 
   getSong$ = new Subscription();
   favAndUnfav$ = new Subscription();
 
   ngOnInit(): void {
-    this.animateText = true;
     this.getSong();
   }
 
@@ -66,7 +66,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe({
       next: (res) => {
-        console.log(res)
+        console.log(res);
       },
       error: (err) => {
         console.log(err);
@@ -95,7 +95,11 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
 
   commentSong(event: any, songId: any) {
     event.stopPropagation();
-    console.log(songId);
+    this.songId=songId;
+    this.showCommentDiv=true;
+  }
+  handleCommentDivEvent(isVisible: Boolean) {
+    this.showCommentDiv = isVisible;
   }
 
   ngOnDestroy(): void {

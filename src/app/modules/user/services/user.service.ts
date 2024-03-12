@@ -85,5 +85,10 @@ export class UserService {
     return this.http.post(`${this.userApi}/likeUnlikeSong`,{songId})
   }
 
+  addComment(data:any):Observable<any>{
+    console.log(data);
+    return this.http.post(`${this.userApi}/addComment`,data)
+  }
+
   
 }
