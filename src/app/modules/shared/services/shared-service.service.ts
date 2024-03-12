@@ -38,8 +38,11 @@ export class SharedServiceService {
   }
 
   acceptInvitation(bandId:any):Observable<any>{
-    return this.http.patch(`${this.api}/artist/acceptBandInvitation/`,{bandId})
+    return this.http.patch(`${this.api}/artist/acceptBandInvitation`,{bandId})
   }
 
+  declineInvitation(bandId:any):Observable<any>{
+    return this.http.patch(`${this.api}/artist/decllineBandInvitation`,{bandId})
+  }
   
 }

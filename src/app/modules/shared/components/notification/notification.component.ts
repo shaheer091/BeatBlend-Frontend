@@ -9,7 +9,8 @@ import { SharedServiceService } from '../../services/shared-service.service';
 export class NotificationComponent implements OnInit {
   constructor(private sharedServ: SharedServiceService) {}
   bandInvitation: any;
-  newSongs:any;
+  newSongs: any;
+  message: any;
   ngOnInit(): void {
     this.getNotification();
   }
@@ -18,7 +19,8 @@ export class NotificationComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.bandInvitation = res.bandInvitation;
-        this.newSongs=res.songs;
+        this.newSongs = res.songs;
+        this.message = res.message;
       },
       error: (err) => {
         console.log(err);
@@ -26,7 +28,7 @@ export class NotificationComponent implements OnInit {
     });
   }
 
-  acceptInvite(bandId:any) {
+  acceptInvite(bandId: any) {
     this.sharedServ.acceptInvitation(bandId).subscribe({
       next: (res) => {
         console.log(res);
@@ -35,7 +37,19 @@ export class NotificationComponent implements OnInit {
         console.log(err);
       },
     });
+    this.getNotification();
   }
 
-  declineInvite() {}
+  declineInvite(bandId: any) {
+    console.log(bandId);
+    this.sharedServ.declineInvitation(bandId).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.getNotification();
+  }
 }
