@@ -40,8 +40,19 @@ export class CreatePlaylistComponent implements OnDestroy {
   }
 
   addToPlaylist(songId: any) {
-    this.songId.push(songId);
+    const index = this.songId.indexOf(songId);
+    if (index === -1) {
+      this.songId.push(songId);
+    } else {
+      this.songId.splice(index, 1);
+    }
+    console.log(this.songId);
   }
+
+  isSongInPlaylist(songId: any): boolean {
+    return this.songId.includes(songId);
+  }
+  
 
   onSubmit() {
     if (this.playlistName && this.songId.length > 0) {

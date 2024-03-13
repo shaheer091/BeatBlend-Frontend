@@ -1,5 +1,4 @@
-<!-- <app-side-bar></app-side-bar> -->
-<div class="w-10/12 h-screen float-end border p-10">
+<div class="w-10/12 float-end p-10">
     <p class="text-3xl font-bold text-red-400 mb-5">Your Favorites</p>
     <p *ngIf="message">{{message}}</p>
     <div *ngFor="let fav of favSongs" class="h-2/6 w-2/3 border-b-2 flex flex-col justify-around cursor-pointer" (click)="playSong(fav.songUrl)">
@@ -15,4 +14,3 @@
         </div>
     </div>
 </div>
-<!-- <app-music-player></app-music-player> -->

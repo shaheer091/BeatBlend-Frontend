@@ -1,12 +1,12 @@
 <!-- <app-side-bar></app-side-bar> -->
 
-<div class="w-10/12 h-screen float-end">
+<div class="w-10/12 float-end">
     <div class="border rounded-md p-5">
         <div class="flex items-center">
             <input [(ngModel)]="searchText" type="text" (keyup)="search()" placeholder="Search here..."
                 class="px-5 h-14 rounded-full border focus:outline-none focus:ring-blue-500 focus:ring-opacity-50">
         </div>
-        <div *ngIf="user" class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div *ngIf="user" class="mt-5 grid  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div *ngFor="let data of user;let i = index" (click)="userProfile(data._id)"
                 class="h-80 border rounded-lg shadow-md hover:shadow-lg object-fit"
                 [style.background-image]="data?.profile[0]?.imageUrl ? 'url(' + data?.profile[0]?.imageUrl + ')' : 'url(../../../../../assets/images/account.png)'">

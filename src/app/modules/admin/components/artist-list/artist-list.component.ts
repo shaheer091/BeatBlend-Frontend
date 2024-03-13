@@ -42,8 +42,8 @@ export class ArtistListComponent implements OnInit, OnDestroy {
     });
   }
 
-  showDeleteDiv(event:any,artistId: any) {
-    event.stopPropagation()
+  showDeleteDiv(event: any, artistId: any) {
+    event.stopPropagation();
     this.deleteDiv = true;
     this.artistId = artistId;
   }
@@ -63,13 +63,7 @@ export class ArtistListComponent implements OnInit, OnDestroy {
     // window.location.reload();
   }
   getUserDetails(userId: any) {
-    const queryParams = {
-      id: userId,
-    };
-    this.router.navigate(['/admin/user-profile'], {
-      relativeTo: this.route,
-      queryParams: queryParams,
-    });
+    this.router.navigate([`/admin/user-profile/${userId}`]);
   }
   ngOnDestroy(): void {
     this.changeDeleteStatus$?.unsubscribe();

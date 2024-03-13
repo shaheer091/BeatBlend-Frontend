@@ -67,13 +67,7 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   getUserDetails(userId: any) {
-    const queryParams = {
-      id: userId,
-    };
-    this.router.navigate(['/admin/user-profile'], {
-      relativeTo: this.route,
-      queryParams: queryParams,
-    });
+    this.router.navigate([`/admin/user-profile/${userId}`])
   }
 
   blockUser(event: any, userId: any) {

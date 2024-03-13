@@ -95,7 +95,10 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     });
   }
 
-  addSong() {}
+  editPlaylist(playlistId:any) {
+    console.log(playlistId);
+    this.router.navigate([`/user/editPlaylist/${playlistId}`])
+  }
 
   ngOnDestroy(): void {
     this.singlePlaylist$?.unsubscribe();

@@ -26,10 +26,11 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   songLink: any;
   artistDetails: any;
   showCommentDiv: Boolean = false;
-  songId:any;
+  songId: any;
 
   getSong$ = new Subscription();
   favAndUnfav$ = new Subscription();
+  likeUnlikeSong$ = new Subscription();
 
   ngOnInit(): void {
     this.getSong();
@@ -82,7 +83,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
 
   likeSong(event: any, songId: any) {
     event.stopPropagation();
-    this.userServ.likeAndUnlikeSong(songId).subscribe({
+    this.likeUnlikeSong$ = this.userServ.likeAndUnlikeSong(songId).subscribe({
       next: (res) => {
         console.log(res);
       },
@@ -95,8 +96,8 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
 
   commentSong(event: any, songId: any) {
     event.stopPropagation();
-    this.songId=songId;
-    this.showCommentDiv=true;
+    this.songId = songId;
+    this.showCommentDiv = true;
   }
   handleCommentDivEvent(isVisible: Boolean) {
     this.showCommentDiv = isVisible;
@@ -105,5 +106,6 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.getSong$?.unsubscribe();
     this.favAndUnfav$.unsubscribe();
+    this.likeUnlikeSong$.unsubscribe();
   }
 }
