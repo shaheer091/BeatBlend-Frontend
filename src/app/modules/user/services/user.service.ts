@@ -90,5 +90,9 @@ export class UserService {
     return this.http.post(`${this.userApi}/addComment`,data)
   }
 
+  getComment(songId:any):Observable<any>{
+    return this.http.get(`${this.userApi}/comments/${songId}`)
+  }
+
   
 }
