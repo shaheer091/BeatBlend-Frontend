@@ -30,6 +30,10 @@ export class CommonService {
     return this.http.get(`${this.api}/user-profile/${userId}`);
   }
 
+  getSingleBand(bandId:any):Observable<any>{
+    return this.http.get(`${this.api}/band-profile/${bandId}`)
+  }
+
   isLoggedIn() {
     return !!localStorage.getItem('token');
   }

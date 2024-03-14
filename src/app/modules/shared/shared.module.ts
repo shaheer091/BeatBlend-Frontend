@@ -9,6 +9,7 @@ import { FollowingListComponent } from './components/following-list/following-li
 import { NotificationComponent } from './components/notification/notification.component';
 import { ChattingComponent } from './components/chatting/chatting.component';
 import { FormsModule } from '@angular/forms';
+import { BandProfileComponent } from './components/band-profile/band-profile.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
     FollowingListComponent,
     NotificationComponent,
     ChattingComponent,
+    BandProfileComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [MusicPlayerComponent],

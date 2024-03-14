@@ -86,7 +86,6 @@ export class UserService {
   }
 
   addComment(data:any):Observable<any>{
-    console.log(data);
     return this.http.post(`${this.userApi}/addComment`,data)
   }
 

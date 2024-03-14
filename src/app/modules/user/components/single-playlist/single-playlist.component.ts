@@ -38,7 +38,9 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res) => {
           this.playlistDetails = res[0];
-          this.songs = res[0].songs;
+          if(res[0]?.songs){
+            this.songs = res[0]?.songs
+          }
         },
         error: (err) => {
           console.log(err);
@@ -62,6 +64,7 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   deletePlaylist(playlistId: any) {
+    console.log(playlistId);
     this.deletePlaylist$ = this.userServ.deletePlaylist(playlistId).subscribe({
       next: (res) => {
         console.log(res);

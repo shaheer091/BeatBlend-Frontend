@@ -1,0 +1,13 @@
+<div class="w-10/12 float-end band-profile-container">
+    <div *ngFor="let band of bandDetail" class="band-details">
+      <div class="band-header">
+        <img [src]="band?.bandImage" class="band-image" alt="">
+        <div class="band-name">{{band?.bandName}}</div>
+      </div>
+      <div class="admin cursor-pointer"  (click)="getUserProfile(band?.bandAdmin?._id)">Admin: {{band?.bandAdmin?.username}}</div>
+      <div class="members">
+        <div *ngFor="let member of band?.bandMembers" class="member cursor-pointer" (click)="getUserProfile(member?._id)">{{member?.username}}</div>
+      </div>
+    </div>
+  </div>
+  

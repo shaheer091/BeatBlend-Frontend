@@ -44,6 +44,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   playSong(songUrl: any) {
     this.sharedServ.setSongUrl(songUrl);
   }
+
+  getBandDetails(bandId:any){
+    this.router.navigate([`/user/band-profile/${bandId}`])
+  }
   ngOnDestroy(): void {
     this.getSingleUser$?.unsubscribe();
   }

@@ -48,11 +48,11 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
         this.artistDetails = res;
         this.username = res.username;
         if (res.songs) {
-          this.songs = res.songs?.map((song: any) => ({
+          this.songs = res?.songs?.map((song: any) => ({
             ...song,
-            artistUsername: song.artist[0].username,
-            likedByUser: song.likedBy?.includes(this.userId) || false,
-            favorited: song.favouritedBy?.includes(this.userId) || false,
+            artistUsername: song?.artist[0]?.username,
+            likedByUser: song?.likedBy?.includes(this.userId) || false,
+            favorited: song?.favouritedBy?.includes(this.userId) || false,
           }));
         }
         this.message = res.message;
