@@ -6,8 +6,8 @@ import { BandRoutingModule } from './band-routing.module';
 import { BandNavbarComponent } from './components/band-navbar/band-navbar.component';
 import { BandSongsComponent } from './components/band-songs/band-songs.component';
 import { BandAddSongComponent } from './components/band-add-song/band-add-song.component';
-import { InviteMembersComponent } from './components/invite-members/invite-members.component';
 import { BandProfileComponent } from './components/band-profile/band-profile.component';
+import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 
 
 
@@ -18,8 +18,8 @@ import { BandProfileComponent } from './components/band-profile/band-profile.com
     BandNavbarComponent,
     BandSongsComponent,
     BandAddSongComponent,
-    InviteMembersComponent,
-    BandProfileComponent
+    BandProfileComponent,
+    ManageMembersComponent
   ],
   imports: [
     CommonModule,

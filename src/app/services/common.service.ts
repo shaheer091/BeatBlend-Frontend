@@ -6,10 +6,11 @@ import { BehaviorSubject, Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CommonService {
-  api='http://localhost:3000';
+  api = 'http://localhost:3000';
   role: String | null = localStorage.getItem('role');
-  toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(!!localStorage.getItem("token"));
-
+  toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    !!localStorage.getItem('token')
+  );
 
   constructor(private http: HttpClient) {}
 
@@ -26,12 +27,12 @@ export class CommonService {
     return this.http.post(`${this.api}/login`, data);
   }
 
-  getSingleUser(userId:any):Observable<any>{
+  getSingleUser(userId: any): Observable<any> {
     return this.http.get(`${this.api}/user-profile/${userId}`);
   }
 
-  getSingleBand(bandId:any):Observable<any>{
-    return this.http.get(`${this.api}/band-profile/${bandId}`)
+  getSingleBand(bandId: any): Observable<any> {
+    return this.http.get(`${this.api}/band-profile/${bandId}`);
   }
 
   isLoggedIn() {
@@ -50,6 +51,11 @@ export class CommonService {
     return this.role == 'artist';
   }
   isBand() {
-    return this.role == 'band';
+    const isInBand = localStorage.getItem('isInBand');
+    if (isInBand == 'true') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

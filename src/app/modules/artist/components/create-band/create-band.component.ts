@@ -71,6 +71,7 @@ export class CreateBandComponent implements OnInit {
         next: (res) => {
           console.log(res);
           if(res.message){
+            localStorage.setItem('isInBand','true')
             this.router.navigate(['/artist/home'])
           }
         },

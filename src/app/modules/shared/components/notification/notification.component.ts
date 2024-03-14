@@ -32,6 +32,7 @@ export class NotificationComponent implements OnInit {
     this.sharedServ.acceptInvitation(bandId).subscribe({
       next: (res) => {
         console.log(res);
+        localStorage.setItem('isInBand','true')
       },
       error: (err) => {
         console.log(err);

@@ -20,6 +20,7 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   playlistDetails: any;
   songs: any;
   songLink: any;
+  userId: any;
   singlePlaylist$ = new Subscription();
   removeFromPlaylist$ = new Subscription();
   deletePlaylist$ = new Subscription();
@@ -37,9 +38,11 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .getSinglePlaylist(this.playlistId)
       .subscribe({
         next: (res) => {
+          this.userId = res.userId;
           this.playlistDetails = res[0];
-          if(res[0]?.songs){
+          if (res[0]?.songs) {
             this.songs = res[0]?.songs
+            console.log(this.songs);
           }
         },
         error: (err) => {
@@ -98,9 +101,9 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     });
   }
 
-  editPlaylist(playlistId:any) {
+  editPlaylist(playlistId: any) {
     console.log(playlistId);
-    this.router.navigate([`/user/editPlaylist/${playlistId}`])
+    this.router.navigate([`/user/editPlaylist/${playlistId}`]);
   }
 
   ngOnDestroy(): void {

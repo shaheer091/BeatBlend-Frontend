@@ -5,8 +5,8 @@ import { BandComponent } from './band.component';
 import { BandHomeComponent } from './components/band-home/band-home.component';
 import { BandProfileComponent } from './components/band-profile/band-profile.component';
 import { BandAddSongComponent } from './components/band-add-song/band-add-song.component';
-import { InviteMembersComponent } from './components/invite-members/invite-members.component';
 import { BandSongsComponent } from './components/band-songs/band-songs.component';
+import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
       { path: 'songs', component: BandSongsComponent },
       { path: 'profile', component: BandProfileComponent },
       { path: 'addSongs', component: BandAddSongComponent },
-      { path: 'inviteMembers', component: InviteMembersComponent },
+      { path: 'manageMembers', component: ManageMembersComponent },
       { path: '', redirectTo: '/band/home', pathMatch: 'full' },
     ],
   },
