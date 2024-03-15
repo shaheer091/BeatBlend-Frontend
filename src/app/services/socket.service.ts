@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
 @Injectable({
@@ -17,11 +18,15 @@ export class SocketService implements OnInit {
     });
   }
 
-  sendMessage(message: string, receiver: any) {
-    this.socket.emit('message', { message, receiver });
+  sendMessage(message: string, receiver: any, sender:any) {
+    this.socket.emit('sendMessage', { message, receiver, sender});
   }
 
-  getMessage(): any {
-    return this.socket.on('message-broadcast', (data: any) => data);
+  getMessage(): Observable<any> {
+    return new Observable<any>(observer => {
+      this.socket.on('message-broadcast', (data: any) => {
+        observer.next(data);
+      });
+    });
   }
 }

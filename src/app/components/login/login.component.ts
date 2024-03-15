@@ -44,9 +44,12 @@ export class LoginComponent implements OnInit {
           if (res.success) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
-            this.serv.toggleToken$.next(true)
+            this.serv.toggleToken$.next(true);
             this.role = res.role;
-            this.serv.role = res.role
+            this.serv.role = res.role;
+            if (res.isInBand) {
+              localStorage.setItem('isInBand', 'true');
+            }
             if (this.role) {
               this.router.navigate([`/${this.role}/home`]);
             }

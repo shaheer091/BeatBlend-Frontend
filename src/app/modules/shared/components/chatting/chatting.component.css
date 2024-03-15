@@ -1,0 +1,21 @@
+.sentMessage {
+  background-color: rgb(37 99 235 / 100%);
+  padding: 12px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 0.5rem;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.receivedMessage {
+  background-color: gray;
+  padding: 0.75rem;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 0.5rem;
+  color: white;
+  align-self: flex-start;
+  margin-right: auto;
+}
