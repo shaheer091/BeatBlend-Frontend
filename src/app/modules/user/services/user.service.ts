@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -29,8 +29,8 @@ export class UserService {
     return this.http.post(`${this.userApi}/artistVerify`, { socialMediaLink });
   }
 
-  searchSong(text: string): Observable<any> {
-    return this.http.post(`${this.userApi}/search`, { text });
+  searchUser(text: string): Observable<any> {
+    return this.http.get(`${this.userApi}/search/${text}`);
   }
 
   followAndUnfollowUser(userId: any): Observable<any> {
@@ -49,7 +49,49 @@ export class UserService {
     return this.http.post(`${this.userApi}/favUnfav`, { songId });
   }
 
-  getFavSongs():Observable<any>{
-    return this.http.get(`${this.userApi}/favorite`)
+  getFavSongs(): Observable<any> {
+    return this.http.get(`${this.userApi}/favorite`);
   }
+
+  searchSong(searchText: string): Observable<any> {
+    if (searchText != '') {
+      return this.http.get(`${this.userApi}/searchSong/${searchText}`);
+    } else {
+      return of();
+    }
+  }
+  
+  getPlaylist():Observable<any>{
+    return this.http.get(`${this.userApi}/getPlaylist`)
+  }
+
+  createPlaylist(data: any): Observable<any> {
+    return this.http.post(`${this.userApi}/createPlaylist`, data);
+  }
+
+  getSinglePlaylist(playlistID:string) : Observable <any>{
+    return this.http.get(`${this.userApi}/singlePlaylist/${playlistID}`)
+  }
+
+  removeFromPlaylist(songId:any):Observable<any>{
+    return this.http.delete(`${this.userApi}/removeFromPlaylist/${songId}`)
+  }
+
+  deletePlaylist(playlistId:any):Observable<any>{
+    return this.http.delete(`${this.userApi}/deletePlaylist/${playlistId}`)
+  }
+
+  likeAndUnlikeSong(songId:any):Observable<any>{
+    return this.http.post(`${this.userApi}/likeUnlikeSong`,{songId})
+  }
+
+  addComment(data:any):Observable<any>{
+    return this.http.post(`${this.userApi}/addComment`,data)
+  }
+
+  getComment(songId:any):Observable<any>{
+    return this.http.get(`${this.userApi}/comments/${songId}`)
+  }
+
+  
 }

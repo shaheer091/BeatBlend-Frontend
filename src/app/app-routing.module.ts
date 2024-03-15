@@ -9,12 +9,14 @@ import { LoginService } from './guards/loginService.guard';
 import { AdminLoginGuard } from './modules/admin/guards/adminLogin.guard';
 import { ArtistLoginGuard } from './modules/artist/guards/artistLogin.guard';
 import { UserProfileComponent } from './modules/shared/components/user-profile/user-profile.component';
+import { BandLoginGuard } from './modules/band/guard/band.guard';
+import { ChattingComponent } from './modules/shared/components/chatting/chatting.component';
 
 const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', canActivate: [LoginService], component: LoginComponent },
   { path: 'signup', canActivate: [LoginService], component: SignupComponent },
-  { path: 'user-profile/:id', component: UserProfileComponent },
+  // { path: 'chats/:id', component: ChattingComponent },
   {
     path: 'user',
     canActivate: [AuthService],
@@ -32,6 +34,12 @@ const routes: Routes = [
     canActivate: [ArtistLoginGuard],
     loadChildren: () =>
       import('./modules/artist/artist.module').then((e) => e.ArtistModule),
+  },
+  {
+    path: 'band',
+    canActivate: [BandLoginGuard],
+    loadChildren: () =>
+      import('./modules/band/band.module').then((e) => e.BandModule),
   },
   { path: '**', component: NotFoundComponent },
 ];

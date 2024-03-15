@@ -44,21 +44,12 @@ export class LoginComponent implements OnInit {
           if (res.success) {
             localStorage.setItem('token', res.token);
             localStorage.setItem('role', res.role);
-
+            this.serv.toggleToken$.next(true);
             this.role = res.role;
-            // if (res.role == 'user') {
-            //   // this.router.navigate(['/user/home']);
-            //   this.router.navigateByUrl('/user/home');
-            // }
-
-            // if (res.role == 'admin') {
-            //   // this.router.navigate(['/admin/home']);
-            //   this.router.navigateByUrl('/admin/home');
-            // }
-
-            // if (res.role == 'artist') {
-            //   this.router.navigate(['/artist/home']);
-            // }
+            this.serv.role = res.role;
+            if (res.isInBand) {
+              localStorage.setItem('isInBand', 'true');
+            }
             if (this.role) {
               this.router.navigate([`/${this.role}/home`]);
             }

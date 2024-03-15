@@ -26,6 +26,9 @@ export class AdminService {
   changeDeleteStatus(userId: any): Observable<any> {
     return this.http.patch(`${this.adminApi}/changeDeleteStatus`, { userId });
   }
+  changeBlockStatus(userId:any):Observable<any>{
+    return this.http.patch(`${this.adminApi}/changeBlockStatus`,{userId});
+  }
   pendingApproval(userId:any):Observable<any>{
     return this.http.patch(`${this.adminApi}/approveUser`,{userId})
   }

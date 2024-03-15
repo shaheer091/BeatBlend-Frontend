@@ -8,11 +8,19 @@ import { SearchComponent } from './components/search/search.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { UserComponent } from './user.component';
+import { UserProfileComponent } from '../shared/components/user-profile/user-profile.component';
+import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
+import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
+import { FollowingListComponent } from '../shared/components/following-list/following-list.component';
+import { FollowersListComponent } from '../shared/components/followers-list/followers-list.component';
+import { NotificationComponent } from '../shared/components/notification/notification.component';
+import { ChattingComponent } from '../shared/components/chatting/chatting.component';
+import { BandProfileComponent } from '../shared/components/band-profile/band-profile.component';
 
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthService],
+    // canActivate: [AuthService],
     component: UserComponent,
     children: [
       { path: 'home', component: UserHomepageComponent },
@@ -21,6 +29,14 @@ const routes: Routes = [
       { path: 'search', component: SearchComponent },
       { path: 'favorites', component: FavoritesComponent },
       { path: 'playlist', component: PlaylistComponent },
+      { path: 'user-profile/:id', component: UserProfileComponent },
+      { path: 'createPlaylist', component: CreatePlaylistComponent },
+      { path: 'playlist/:id', component: SinglePlaylistComponent },
+      { path: 'followingList', component: FollowingListComponent },
+      { path: 'followersList', component: FollowersListComponent },
+      { path: 'notification', component: NotificationComponent },
+      { path: 'band-profile/:id', component: BandProfileComponent },
+      { path: 'chats/:id', component: ChattingComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

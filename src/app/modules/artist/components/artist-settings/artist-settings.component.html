@@ -1,0 +1,4 @@
+<button [routerLink]="'/user/home'" class="border px-3 py-1 bg-black text-white">switch to user</button>
+<button [routerLink]="'/artist/profile'" class="border px-3 py-1 bg-black text-white">profile</button>
+<button *ngIf="!isInBand" [routerLink]="'/artist/createBand'" class="border px-3 py-1 bg-black text-white">create band</button>
+<button *ngIf="isInBand" [routerLink]="'/band/home'" class="border px-3 py-1 bg-black text-white">access band</button>

@@ -1,0 +1,35 @@
+<div class="w-10/12 float-right">
+    <form [formGroup]="bandForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto mt-8">
+        <div class="mb-4">
+            <label for="bandImage" class="block text-gray-700">Upload Band Image</label>
+            <input (change)="changing($event)" type="file" id="bandImage" formControlName="bandImage" class="form-input mt-1 block w-full">
+            <div *ngIf="bandForm.get('bandImage')?.invalid && bandForm.get('bandImage')?.touched" class="text-red-500">
+                Image is required</div>
+        </div>
+        <div class="mb-4">
+            <label for="bandName" class="block text-gray-700">Band Name</label>
+            <input type="text" id="bandName" formControlName="bandName" class="border form-input mt-1 block w-full">
+            <div *ngIf="bandForm.get('bandName')?.invalid && bandForm.get('bandName')?.touched" class="text-red-500">
+                Band name is required</div>
+        </div>
+        <div class="mb-4">
+            <label for="newMember" class="block text-gray-700">Add New Members</label>
+            <input (keyup)="searchArtist()" type="text" id="newMember" formControlName="newMember"
+                class="border form-input mt-1 block w-full">
+            <div *ngIf="bandForm.get('newMember')?.invalid && bandForm.get('newMember')?.touched" class="text-red-500">
+                Atleast two member is required</div>
+        </div>
+        <div *ngIf="artists">
+            <div *ngFor="let artist of artists" class="flex cursor-pointer">
+                <input type="checkbox" [checked]="selectedArtists.includes(artist._id)" (change)="toggleSelection(artist._id)">
+                <label>{{ artist.username }}</label>
+            </div>
+        </div>
+        
+
+        <button id="submit" type="submit" [disabled]="!bandForm.valid"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Band</button>
+        <button id="cancel" type="button" [routerLink]="'/artist/home'"
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cancel</button>
+    </form>
+</div>

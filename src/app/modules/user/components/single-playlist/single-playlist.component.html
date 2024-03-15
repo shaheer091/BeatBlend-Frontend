@@ -1,0 +1,48 @@
+<div class="w-10/12 float-end">
+    <div class=" p-10">
+
+        <div class="flex">
+            <img class="mr-6 h-44 w-44 object-cover rounded-3xl"
+                [src]="playlistDetails?.imageUrl ? playlistDetails.imageUrl : 'https://imgs.search.brave.com/Sctdgrmntepu2CbKseQlGAI5eDUal4TjOpatVAaxHXc/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2RlLzlm/Lzg2L2RlOWY4Njlk/YTdiNzBjZjZkYTQ3/YzVhY2Y2NzQ5NDM4/LmpwZw'">
+            <div class="flex flex-col justify-center relative">
+                <h4 class="mt-0 mb-2 uppercase tracking-widest text-xs">Playlist</h4>
+                <h1 class="mt-0 mb-2 text-4xl">{{playlistDetails?.playlistName}}</h1>
+
+                <p class="text-sm">Created by you - {{playlistDetails?.songId?.length}} songs</p>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-between">
+            <div class="flex">
+                <button class="mr-2 bg-green-500  block py-2 px-8 rounded-full" (click)="playRandonSong()">Play</button>
+                <button class="mr-2 bg-red-300  block py-2 px-8 rounded-full text-gray-700"
+                    (click)="deletePlaylist(playlistDetails?._id)">Delete</button>
+                <button class="mr-2 bg-green-500  block py-2 px-8 rounded-full"
+                    (click)="editPlaylist(playlistDetails?._id)">Edit Playlist</button>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <div class="flex ">
+                <div class="p-2 w-8 flex-shrink-0"></div>
+                <div class="p-2 w-8 flex-shrink-0"></div>
+                <div class="p-2 w-full">Title</div>
+                <div class="p-2 w-full">Artist</div>
+                <div class="p-2 w-full">Album</div>
+                <div class="p-2 w-12 flex-shrink-0 text-right"></div>
+            </div>
+
+            <div class="flex border-b cursor-pointer" *ngFor="let song of songs" (click)="playSong(song?.songUrl)">
+                <div (click)="favSong($event,song)"><img
+                        [src]="song?.favorited ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
+                        class="h-5 w-5" alt=""></div>
+                <div class="p-3 w-full">{{song?.title}}</div>
+                <div class="p-3 w-full">{{song?.artists[0]?.username}}</div>
+                <div class="p-3 w-full">{{song?.genre}}</div>
+                <div class="p-3 w-12 flex-shrink-0 text-right text-red-500 cursor-pointer"
+                    (click)="removeFromPlaylist($event,song?._id)">Romove</div>
+            </div>
+
+        </div>
+    </div>
+</div>

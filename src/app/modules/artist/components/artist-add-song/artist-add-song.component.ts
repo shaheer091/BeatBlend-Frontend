@@ -1,20 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArtistService } from '../../services/artist.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-artist-add-song',
   templateUrl: './artist-add-song.component.html',
   styleUrls: ['./artist-add-song.component.css'],
 })
-export class ArtistAddSongComponent implements OnInit {
+export class ArtistAddSongComponent implements OnInit, OnDestroy {
   songForm!: FormGroup;
   message: any;
   description: any;
   success: any;
   reqMsg: any;
   formData = new FormData();
+
+  addSong$ = new Subscription();
+
   constructor(
     private formBuilder: FormBuilder,
     private artistServ: ArtistService,
@@ -48,15 +52,17 @@ export class ArtistAddSongComponent implements OnInit {
       this.formData.append('duration', value.duration);
       this.formData.append('releaseDate', value.releaseDate);
 
-      this.artistServ.artistAddSong(this.formData).subscribe({
+      this.addSong$ = this.artistServ.artistAddSong(this.formData).subscribe({
         next: (res) => {
           this.message = res.message;
           this.description = res.description;
           this.success = res.success;
-        }, 
+          if (res.success) {
+          }
+        },
         error: (err) => {
           console.error(err);
-        }
+        },
       });
     } else {
       this.reqMsg = 'enter the required details';
@@ -69,5 +75,8 @@ export class ArtistAddSongComponent implements OnInit {
     if (this.success) {
       this.router.navigate(['artist/home']);
     }
+  }
+  ngOnDestroy(): void {
+    this.addSong$?.unsubscribe();
   }
 }

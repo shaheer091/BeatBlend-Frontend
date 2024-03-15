@@ -13,6 +13,10 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { SharedModule } from '../shared/shared.module';
 import { UserComponent } from './user.component';
+import { CreatePlaylistComponent } from './components/create-playlist/create-playlist.component';
+import { CreateBandComponent } from '../artist/components/create-band/create-band.component';
+import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,11 @@ import { UserComponent } from './user.component';
     SearchComponent,
     FavoritesComponent,
     PlaylistComponent,
-    UserComponent
+    UserComponent,
+    CreatePlaylistComponent,
+    CreateBandComponent,
+    SinglePlaylistComponent,
+    CommentsComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -39,4 +47,3 @@ import { UserComponent } from './user.component';
   exports: [],
 })
 export class UserModule {}
- 

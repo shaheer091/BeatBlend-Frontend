@@ -1,0 +1,42 @@
+<!-- <div class="w-10/12 h-screen float-end">
+    <input class="h-16 border-2 border-black w-40" (click)="$event.stopPropagation()" type="text" [(ngModel)]="comments">
+    <button (click)="submitComment($event)">submit</button>
+    <button (click)="cancelComment($event)">cancel</button>
+</div> -->
+
+
+<!-- <div class="comment-box">
+    <div *ngFor="let comments of alreadyComments">
+        <div class="flex ">
+            <img class="h-4 w-4 rounded-full" [src]="comments?.userProfile[0]?.imageUrl" alt="">
+            {{comments?.users[0]?.username}}
+        </div>
+        {{comments?.comment}}
+    </div>
+    <input class="comment-input" type="text" [(ngModel)]="comments">
+    <button class="comment-button" (click)="submitComment($event)">Submit</button>
+    <button class="comment-button" (click)="cancelComment($event)">Cancel</button>
+</div>  -->
+
+<div class="fixed top-0 left-0 w-full h-full bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="comment-box bg-white rounded-lg shadow-md px-4 py-5 max-w-sm">
+        <div *ngIf="message">
+            <p class="text-red-300">{{message}}</p>
+        </div>
+        <div *ngFor="let comments of alreadyComments" class="space-x-3">
+            <div class="flex items-center mb-2 cursor-pointer hover:scale-105 transition-all hover:font-semibold"
+                (click)="getUserProfile(comments?.userId)">
+                <img class="h-4 w-4 rounded-full mr-2" [src]="comments?.userProfile[0]?.imageUrl" alt="">
+                {{comments?.users[0]?.username}}
+            </div>
+            {{comments?.comment}}
+        </div>
+        <input class="comment-input w-full border rounded-md px-2 py-1 mb-2" type="text" [(ngModel)]="comments">
+        <div class="flex justify-end">
+            <button class="comment-button bg-blue-500 text-white px-3 py-1 rounded-md mr-2"
+                (click)="submitComment($event)">Submit</button>
+            <button class="comment-button bg-gray-300 text-gray-700 px-3 py-1 rounded-md"
+                (click)="cancelComment($event)">Cancel</button>
+        </div>
+    </div>
+</div>

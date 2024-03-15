@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-settings-page',
   templateUrl: './settings-page.component.html',
   styleUrls: ['./settings-page.component.css'],
 })
-export class SettingsPageComponent implements OnInit {
-  constructor(private userServ: UserService) {}
+export class SettingsPageComponent implements OnInit, OnDestroy {
+  data: any;
+
+  constructor(private userServ: UserService, private router: Router) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
@@ -15,8 +19,11 @@ export class SettingsPageComponent implements OnInit {
   role: any;
   following: number = 0;
   followers: number = 0;
-  image:any;
-  imgBool:Boolean=false;
+  image: any;
+  imgBool: Boolean = false;
+
+  artistVerification$ = new Subscription();
+  getSettings$ = new Subscription();
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role');
@@ -36,9 +43,9 @@ export class SettingsPageComponent implements OnInit {
     try {
       if (this.socialMediaLink) {
         if (this.isValidLink(this.socialMediaLink)) {
-          this.userServ
+          this.artistVerification$ = this.userServ
             .artistVerification(this.socialMediaLink)
-            .subscribe((res) => {});
+            .subscribe();
         } else {
           this.message = 'the provided link is not valid';
         }
@@ -54,21 +61,26 @@ export class SettingsPageComponent implements OnInit {
   }
 
   getSettingsPage() {
-    this.userServ.getSettingsPage().subscribe((res) => {
-      if(res.imageUrl){
-        this.imgBool=true;
-        this.image=res.imageUrl;
-      }
-      if (res.followers && res.followers.length > 0) {
-        this.followers = res.followers.length;
-      } else {
-        this.followers = 0;
-      }
-      if (res.following && res.following.length > 0) {
-        this.following = res.following.length;
-      } else {
-        this.following = 0;
-      }
+    this.getSettings$ = this.userServ.getSettingsPage().subscribe({
+      next: (res) => {
+        if (res.imageUrl) {
+          this.imgBool = true;
+          this.image = res.imageUrl;
+        }
+        this.data = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
+  }
+
+  createBand() {
+    this.router.navigate(['/user/createBand']);
+  }
+
+  ngOnDestroy(): void {
+    this.artistVerification$?.unsubscribe();
+    this.getSettings$?.unsubscribe();
   }
 }

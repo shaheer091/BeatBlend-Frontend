@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   myForm!: FormGroup;
   userData: any;
   userDetails: any;
@@ -18,6 +19,10 @@ export class ProfileComponent implements OnInit {
   arr: File[] = [];
   formdata = new FormData();
 
+  getUserProfile$ = new Subscription();
+  updateProfile$ = new Subscription();
+  verifyPhone$ = new Subscription();
+  verifyOtp$ = new Subscription();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,26 +43,30 @@ export class ProfileComponent implements OnInit {
     this.getData();
   }
   getData() {
-    this.userServ.getUserProfile().subscribe((res) => {
-      const { userProfile } = res;
-      const { userDetails } = userProfile[0];
-  
-      this.userData = userProfile[0];
-      this.userDetails = userDetails[0];
-  
-      const { username, email } = this.userData;
-      const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
-  
-      const controls = this.myForm.controls;
-      controls['username']?.patchValue(username);
-      controls['email']?.patchValue(email);
-      controls['bio']?.patchValue(bio);
-      controls['phoneNumber']?.patchValue(phoneNumber);
-      controls['date']?.patchValue(dateOfBirth);
-      controls['gender']?.patchValue(gender);
+    this.getUserProfile$ = this.userServ.getUserProfile().subscribe({
+      next: (res) => {
+        const { userProfile } = res;
+        const { userDetails } = userProfile[0];
+
+        this.userData = userProfile[0];
+        this.userDetails = userDetails[0];
+
+        const { username, email } = this.userData;
+        const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
+
+        const controls = this.myForm.controls;
+        controls['username']?.patchValue(username);
+        controls['email']?.patchValue(email);
+        controls['bio']?.patchValue(bio);
+        controls['phoneNumber']?.patchValue(phoneNumber);
+        controls['date']?.patchValue(dateOfBirth);
+        controls['gender']?.patchValue(gender);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
-  
 
   changing(event: any) {
     const files = event.target.files;
@@ -81,17 +90,17 @@ export class ProfileComponent implements OnInit {
       formdata.append('gender', value.gender);
       formdata.append('file', value.file);
 
-      this.userServ.updateProfile(formdata).subscribe(
-        (res) => {
+      this.updateProfile$ = this.userServ.updateProfile(formdata).subscribe({
+        next: (res) => {
           setTimeout(() => {
             this.message = res.message;
           }, 1000);
           this.message = 'please wait saving the changes ...';
         },
-        (error) => {
+        error: (error) => {
           console.log(`Error updating profile ${error.message}`);
-        }
-      );
+        },
+      });
       setTimeout(() => {
         this.router.navigate(['/user/home']);
       }, 2000);
@@ -101,10 +110,15 @@ export class ProfileComponent implements OnInit {
   }
   verifyPhone() {
     try {
-      this.userServ
+      this.verifyPhone$ = this.userServ
         .verifyPhone(this.myForm.value.phoneNumber)
-        .subscribe((res) => {
-          this.showOtp = true;
+        .subscribe({
+          next: (res) => {
+            this.showOtp = true;
+          },
+          error: (err) => {
+            console.log(err);
+          },
         });
     } catch (err) {
       console.log(err);
@@ -113,16 +127,28 @@ export class ProfileComponent implements OnInit {
 
   onVerify() {
     try {
-      this.userServ
+      this.verifyOtp$ = this.userServ
         .verifyPhoneOtp(this.otp, this.myForm.value.phoneNumber)
-        .subscribe((res) => {
-          this.otpMessage = res.message;
-          setTimeout(() => {
-            this.showOtp = false;
-          }, 1000);
+        .subscribe({
+          next: (res) => {
+            this.otpMessage = res.message;
+            setTimeout(() => {
+              this.showOtp = false;
+            }, 1000);
+          },
+          error: (err) => {
+            console.log(err);
+          },
         });
     } catch (err) {
       console.log(err);
     }
+  }
+
+  ngOnDestroy(): void {
+    this.getUserProfile$?.unsubscribe();
+    this.updateProfile$?.unsubscribe();
+    this.verifyOtp$?.unsubscribe();
+    this.verifyPhone$?.unsubscribe();
   }
 }

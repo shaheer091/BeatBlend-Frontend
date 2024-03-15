@@ -1,13 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
-  api='http://localhost:3000';
+  api = 'http://localhost:3000';
   role: String | null = localStorage.getItem('role');
+  toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    !!localStorage.getItem('token')
+  );
 
   constructor(private http: HttpClient) {}
 
@@ -24,8 +27,12 @@ export class CommonService {
     return this.http.post(`${this.api}/login`, data);
   }
 
-  getSingleUser(data:any):Observable<any>{
-    return this.http.get(`${this.api}/`)
+  getSingleUser(userId: any): Observable<any> {
+    return this.http.get(`${this.api}/user-profile/${userId}`);
+  }
+
+  getSingleBand(bandId: any): Observable<any> {
+    return this.http.get(`${this.api}/band-profile/${bandId}`);
   }
 
   isLoggedIn() {
@@ -42,5 +49,13 @@ export class CommonService {
 
   isArtist() {
     return this.role == 'artist';
+  }
+  isBand() {
+    const isInBand = localStorage.getItem('isInBand');
+    if (isInBand == 'true') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

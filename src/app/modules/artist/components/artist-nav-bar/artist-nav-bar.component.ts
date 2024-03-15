@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-artist-nav-bar',
@@ -7,9 +8,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./artist-nav-bar.component.css']
 })
 export class ArtistNavBarComponent {
-  constructor (private router:Router){}
+  constructor (private router:Router,private commonServ:CommonService){}
   logout(){
     localStorage.clear()
     this.router.navigate(['/login'])
+    this.commonServ.toggleToken$.next(false);
   }
 }

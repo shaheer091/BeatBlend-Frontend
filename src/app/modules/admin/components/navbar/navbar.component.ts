@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,7 +9,7 @@ import { AdminService } from '../../services/admin.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private router: Router, private adminServ: AdminService) {}
+  constructor(private router: Router, private adminServ: AdminService,private commonServ:CommonService) {}
   userData: any;
   artistData: any;
   pendingData: any;
@@ -16,23 +17,6 @@ export class NavbarComponent {
   onLogout() {
     localStorage.clear();
     this.router.navigate(['/login']);
-  }
-
-  seeAllUsers() {
-    this.router.navigate(['/admin/userList']);
-  }
-
-  seeAllArtist() {
-    this.router.navigate(['/admin/artistList']);
-  }
-
-  seeAllPending() {
-    this.router.navigate(['/admin/pendingUsersList']);
-  }
-  seeAllAdmin(){
-    this.router.navigate(['/admin/adminList'])
-  }
-  goHome() {
-    this.router.navigate(['/admin/home']);
+    this.commonServ.toggleToken$.next(false)
   }
 }
