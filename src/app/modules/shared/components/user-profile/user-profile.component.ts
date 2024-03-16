@@ -13,7 +13,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   id: any;
   userData: any;
   userSongs: any;
-  role = localStorage.getItem('role');
+  role = this.commonServ.role;
   constructor(
     private route: ActivatedRoute,
     private router: Router,

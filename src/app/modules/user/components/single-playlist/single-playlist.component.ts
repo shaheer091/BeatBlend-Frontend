@@ -42,7 +42,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
           this.playlistDetails = res[0];
           if (res[0]?.songs) {
             this.songs = res[0]?.songs
-            console.log(this.songs);
           }
         },
         error: (err) => {
@@ -67,7 +66,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   deletePlaylist(playlistId: any) {
-    console.log(playlistId);
     this.deletePlaylist$ = this.userServ.deletePlaylist(playlistId).subscribe({
       next: (res) => {
         console.log(res);
@@ -102,7 +100,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   editPlaylist(playlistId: any) {
-    console.log(playlistId);
     this.router.navigate([`/user/editPlaylist/${playlistId}`]);
   }
 

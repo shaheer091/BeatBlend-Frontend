@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-settings-page',
@@ -11,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class SettingsPageComponent implements OnInit, OnDestroy {
   data: any;
 
-  constructor(private userServ: UserService, private router: Router) {}
+  constructor(private userServ: UserService, private router: Router,private commonServ:CommonService) {}
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
@@ -26,7 +27,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   getSettings$ = new Subscription();
 
   ngOnInit(): void {
-    this.role = localStorage.getItem('role');
+    this.role = this.commonServ.role;
     if (this.role == 'artist') this.isArtist = true;
     this.getSettingsPage();
   }

@@ -25,7 +25,6 @@ export class CommentsComponent implements OnInit {
 
   submitComment(event: any) {
     event.stopPropagation();
-    console.log(this.comments, this.songId);
     this.data = { comment: this.comments, songId: this.songId };
     this.showCommentDiv.emit(false);
 

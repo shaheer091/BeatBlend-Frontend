@@ -1,0 +1,13 @@
+<p class="text-2xl font-bold">welcome, {{username}}</p>
+<div class="h-36 w-36 border cursor-pointer" [routerLink]="'/admin/userList'">
+    total users
+    {{users?.length}}
+</div>
+<div class="h-36 w-36 border cursor-pointer" [routerLink]="'/admin/artistList'">
+    total artists
+    {{artists?.length}}
+</div>
+<div class="h-36 w-36 border cursor-pointer" [routerLink]="'/admin/pendingUsersList'">
+    pending requests
+    {{pendingUsers?.length}}
+</div>

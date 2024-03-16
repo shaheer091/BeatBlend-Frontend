@@ -42,7 +42,6 @@ export class NotificationComponent implements OnInit {
   }
 
   declineInvite(bandId: any) {
-    console.log(bandId);
     this.sharedServ.declineInvitation(bandId).subscribe({
       next: (res) => {
         console.log(res);

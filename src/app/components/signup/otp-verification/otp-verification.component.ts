@@ -36,7 +36,8 @@ export class OtpVerificationComponent {
       this.message = response.message || 'An unexpected error occurs';
       if (response.success) {
         localStorage.setItem('token', response.token);
-        localStorage.setItem('role',response.role);
+        // localStorage.setItem('role',response.role);
+        this.signupService.role=response.role;
         setTimeout(() => {
           this.router.navigate(['/user/home']);
         }, 2000);

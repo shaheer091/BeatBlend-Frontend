@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   usernameOrEmail: any;
   message: any;
   hidePassword: boolean = true;
-  role: any;
+  // role: any;
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
@@ -43,15 +43,15 @@ export class LoginComponent implements OnInit {
         this.serv.apiLogin(this.loginForm.value).subscribe((res) => {
           if (res.success) {
             localStorage.setItem('token', res.token);
-            localStorage.setItem('role', res.role);
+            // localStorage.setItem('role', res.role);
             this.serv.toggleToken$.next(true);
-            this.role = res.role;
+            // this.role = res.role;
             this.serv.role = res.role;
             if (res.isInBand) {
               localStorage.setItem('isInBand', 'true');
             }
-            if (this.role) {
-              this.router.navigate([`/${this.role}/home`]);
+            if (this.serv.role) {
+              this.router.navigate([`/${this.serv.role}/home`]);
             }
           } else {
             this.message = res.message;

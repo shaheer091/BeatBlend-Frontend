@@ -15,6 +15,5 @@ export class ArtistSettingsComponent implements OnInit {
     } else {
       this.isInBand = false;
     }
-    console.log(this.isInBand);
   }
 }

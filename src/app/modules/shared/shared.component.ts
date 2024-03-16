@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-shared',
@@ -6,7 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./shared.component.css'],
 })
 export class SharedComponent {
+  constructor(private commonServ:CommonService){}
   OnInInit() {
-    const role = localStorage.getItem('role')
+    const role = this.commonServ.role;
   }
 }

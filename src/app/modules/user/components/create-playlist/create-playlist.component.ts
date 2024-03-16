@@ -46,7 +46,6 @@ export class CreatePlaylistComponent implements OnDestroy {
     } else {
       this.songId.splice(index, 1);
     }
-    console.log(this.songId);
   }
 
   isSongInPlaylist(songId: any): boolean {

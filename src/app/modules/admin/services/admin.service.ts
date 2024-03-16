@@ -9,6 +9,10 @@ export class AdminService {
   constructor(private http: HttpClient) {}
   adminApi = 'http://localhost:3000/admin';
 
+  getAdminHome():Observable<any>{
+    return this.http.get(`${this.adminApi}/getHome`)
+  }
+
   getAllUsers(): Observable<any> {
     return this.http.get(`${this.adminApi}/seeAllUsers`);
   }
