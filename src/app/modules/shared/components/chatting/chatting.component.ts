@@ -42,6 +42,23 @@ export class ChattingComponent implements OnInit {
   }
   getMessage() {
     this.chatServ.getMessage().subscribe((data) => {
+      // this.recievedMsg.push(data);
+      const currentTime = new Date();
+      const messageTime = new Date(data.date);
+      const timeDifference = currentTime.getTime() - messageTime.getTime();
+      const secondsDifference = Math.floor(timeDifference / 1000);
+      const minutesDifference = Math.floor(secondsDifference / 60);
+      const hoursDifference = Math.floor(minutesDifference / 60);
+      let timeDisplay = '';
+      if (hoursDifference > 0) {
+        timeDisplay = hoursDifference + ' hours ago';
+      } else if (minutesDifference > 0) {
+        timeDisplay = minutesDifference + ' minutes ago';
+      } else {
+        timeDisplay = 'just now';
+      }
+      data.timeDisplay = timeDisplay;
+
       this.recievedMsg.push(data);
     });
   }

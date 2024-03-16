@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -7,8 +8,9 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './band-profile.component.html',
   styleUrls: ['./band-profile.component.css'],
 })
-export class BandProfileComponent implements OnInit {
+export class BandProfileComponent implements OnInit,OnDestroy {
   bandDetail:any;
+  singleBand$= new Subscription()
   constructor(
     private route: ActivatedRoute,
     private commonServ: CommonService,
@@ -25,7 +27,7 @@ export class BandProfileComponent implements OnInit {
   }
 
   getBandDetails() {
-    this.commonServ.getSingleBand(this.bandId).subscribe({
+    this.singleBand$=this.commonServ.getSingleBand(this.bandId).subscribe({
       next: (res) => {
         if(res){
           this.bandDetail=res;
@@ -39,5 +41,9 @@ export class BandProfileComponent implements OnInit {
 
   getUserProfile(userId:any){
     this.router.navigate([`/user/user-profile/${userId}`])
+  }
+
+  ngOnDestroy(): void {
+    this.singleBand$.unsubscribe()
   }
 }

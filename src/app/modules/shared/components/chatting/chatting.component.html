@@ -22,7 +22,7 @@
                 <div
                     [ngClass]="{'sentMessage': message.sender === senderId.userId, 'receivedMessage': message.sender !== senderId.userId}">
                     <p class="text-sm">{{ message.message }}</p>
-                    <p class="text-sm">{{ message.date }}</p>
+                    <p class="text-[10px]">{{ message.timeDisplay }}</p>
                 </div>
             </div>
 

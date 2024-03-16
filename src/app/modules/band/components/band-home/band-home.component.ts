@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BandService } from '../../services/band.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-band-home',
   templateUrl: './band-home.component.html',
   styleUrls: ['./band-home.component.css'],
 })
-export class BandHomeComponent implements OnInit {
+export class BandHomeComponent implements OnInit,OnDestroy {
   constructor(private bandServ: BandService) {}
+  bandHome$= new Subscription()
   bandDetails:any;
   isBandAdmin:any=Boolean(localStorage.getItem('isInBand'))
   ngOnInit(): void {
@@ -15,7 +17,7 @@ export class BandHomeComponent implements OnInit {
     console.log(this.isBandAdmin);
   }
   getBandDetails() {
-    this.bandServ.bandGetHome().subscribe({
+    this.bandHome$=this.bandServ.bandGetHome().subscribe({
       next: (res) => {
         this.bandDetails=res[0];
         console.log(this.bandDetails);
@@ -24,5 +26,8 @@ export class BandHomeComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+  ngOnDestroy(): void {
+    this.bandHome$.unsubscribe()
   }
 }

@@ -9,7 +9,7 @@ import { SharedServiceService } from '../modules/shared/services/shared-service.
 export class CommonService {
   api = 'http://localhost:3000';
   decodedToken = this.sharedServ.parseJwt(localStorage.getItem('token'))
-  role: String | null = this.decodedToken.role;
+  role: any = this.decodedToken?.role ? this.decodedToken?.role : '';
   toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     !!localStorage.getItem('token')
   );

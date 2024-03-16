@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SharedServiceService } from '../../services/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-followers-list',
   templateUrl: './followers-list.component.html',
   styleUrls: ['./followers-list.component.css'],
 })
-export class FollowersListComponent implements OnInit {
+export class FollowersListComponent implements OnInit,OnDestroy {
   constructor(private sharedServ: SharedServiceService) {}
   userList:any;
+  followersList$=new Subscription()
   ngOnInit(): void {
     this.getFollowersList()
   }
 
   getFollowersList() {
-    this.sharedServ.getFollowersList().subscribe({
+    this.followersList$=this.sharedServ.getFollowersList().subscribe({
       next: (res) => {
         this.userList=res;
       },
@@ -22,5 +24,8 @@ export class FollowersListComponent implements OnInit {
         console.log(err);
       },
     });
+  }
+  ngOnDestroy(): void {
+    this.followersList$.unsubscribe()
   }
 }
