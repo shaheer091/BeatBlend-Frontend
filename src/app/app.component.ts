@@ -9,11 +9,9 @@ import { CommonService } from './services/common.service';
 export class AppComponent implements OnInit{
   title = 'frontend';
   showPlayer!: boolean;
-  songLink:any;
-  songTime:any;
   constructor(private commonServ: CommonService) {}
   ngOnInit(): void {
-
+    
     this.commonServ.toggleToken$.subscribe({
       next:(val)=>{
         this.showPlayer=val
@@ -22,9 +20,6 @@ export class AppComponent implements OnInit{
         console.log(err);
       }
     })
-    this.songLink=localStorage.getItem('songLink')
-    this.songTime=localStorage.getItem('songTime')
-    console.log(this.songLink,this.songTime);
   }
   
 }

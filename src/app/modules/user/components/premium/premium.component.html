@@ -1,0 +1,17 @@
+<div class="w-10/12 float-end border">
+    <h1>Choose the plan that fits for you</h1>
+    <p>Deploy your sites to global infrastructure in seconds. No credit cardrequired</p>
+    <div class="flex items-center justify-center">
+        <div class="pricing" *ngFor="let price of pricing">
+            <div class="plan">
+                <h2>{{price.name}}</h2>
+                <div class="price">₹{{price.price}}/month</div>
+                <ul class="features" *ngFor="let features of price.features">
+                    <li><i class="fas fa-check-circle"></i> {{features.feat}}</li>
+                </ul>
+                <button (click)="buyNow(price.price)">{{price.btn}}</button>
+            </div>
+        </div>
+    </div>
+    <p [routerLink]="'/user/home'" class="cursor-pointer">Back</p>
+</div>

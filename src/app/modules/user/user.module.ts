@@ -17,6 +17,7 @@ import { CreatePlaylistComponent } from './components/create-playlist/create-pla
 import { CreateBandComponent } from '../artist/components/create-band/create-band.component';
 import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { PremiumComponent } from './components/premium/premium.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     CreatePlaylistComponent,
     CreateBandComponent,
     SinglePlaylistComponent,
-    CommentsComponent
+    CommentsComponent,
+    PremiumComponent
   ],
   imports: [
     ReactiveFormsModule,

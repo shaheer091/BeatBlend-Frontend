@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { SharedServiceService } from '../../services/shared-service.service';
 
 @Component({
@@ -6,30 +12,50 @@ import { SharedServiceService } from '../../services/shared-service.service';
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.css'],
 })
-export class MusicPlayerComponent implements OnInit,AfterViewInit{
+export class MusicPlayerComponent implements OnInit, AfterViewInit {
   @ViewChild('audioPlayer') audioPlayer: any;
-  @Input() storedTime:any
-  @Input() storedSongUrl:any;
   constructor(private songServ: SharedServiceService) {
     this.songServ.songUrl$.subscribe((url: string) => {
       this.songUrl = url;
       this.playSong();
     });
   }
-
+  storedSongUrl: any;
+  storedTime: any;
   songUrl = '';
   ngAfterViewInit(): void {
-    if (this.storedSongUrl && this.storedTime) {
-      this.audioPlayer.nativeElement.currentTime = this.storedTime;
-      this.songUrl = this.storedSongUrl;
-      this.playSong();
-    }
+    this.loadStoredSong();
   }
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    // Listen for page refresh or close event
+    window.addEventListener('beforeunload', () => {
+      this.storeSongInfo();
+    });
+
+    this.loadStoredSong();
+
+    // Subscribe to changes in song URL
     this.songServ.songUrl$.subscribe((url: string) => {
       this.songUrl = url;
       this.playSong();
     });
+  }
+  loadStoredSong(): void {
+    this.storedSongUrl = localStorage.getItem('songLink');
+    this.storedTime = localStorage.getItem('songTime');
+
+    if (this.storedSongUrl && this.storedTime) {
+      this.audioPlayer.nativeElement.src = this.storedSongUrl;
+      this.audioPlayer.nativeElement.currentTime = parseFloat(this.storedTime);
+      this.playSong();
+    }
+  }
+  storeSongInfo(): void {
+    localStorage.setItem('songLink', this.songUrl);
+    localStorage.setItem(
+      'songTime',
+      this.audioPlayer.nativeElement.currentTime.toString()
+    );
   }
 
   playSong() {
@@ -38,11 +64,5 @@ export class MusicPlayerComponent implements OnInit,AfterViewInit{
       this.audioPlayer.nativeElement.load();
       this.audioPlayer.nativeElement.play();
     }
-  }
-  
-
-  onTimeUpdate(): void {
-    localStorage.setItem('songTime', this.audioPlayer.nativeElement.currentTime.toString());
-    localStorage.setItem('songLink', this.songUrl);
   }
 }

@@ -9,7 +9,6 @@ export class SharedServiceService {
 
   songUrlSource = new BehaviorSubject<string>('');
   songUrl$ = this.songUrlSource.asObservable();
-
   constructor(private http:HttpClient) { }
 
   api='http://localhost:3000'

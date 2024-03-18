@@ -24,6 +24,10 @@
         <button [routerLink]="'/user/profile'"
             class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Update Profile</button>
     </div>
+    <div class="mb-6">
+        <button [routerLink]="'/user/premium'"
+            class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Explore Premium</button>
+    </div>
     <div class="mb-6" *ngIf="!showDiv && !isArtist">
         <button (click)="showInput()" class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Become
             an Artist</button>
