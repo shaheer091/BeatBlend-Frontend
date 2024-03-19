@@ -1,8 +1,33 @@
-<img class="h-24 w-24 rounded-3xl" [src]="bandDetails?.bandImage" alt="">
-<p> {{bandDetails?.bandName}} </p>
-<p>Admin {{bandDetails?.bandAdmin[0]?.username}} </p>
-<p>members</p>
-<div *ngFor="let members of bandDetails?.bandMembers" class="flex space-x-7">
-    <p (click)="getUserProfille(members._id)" class="cursor-pointer">{{members.username}}</p>
-    <p (click)="removeMembers(members._id)" class="cursor-pointer">remove</p>
+<div class="band-details-container">
+    <div class="band-image-wrapper">
+        <img class="band-image" [src]="bandDetails?.bandImage" alt="Band Logo" />
+    </div>
+    <div class="band-info">
+        <h2 class="band-name">{{bandDetails?.bandName}}</h2>
+        <p class="band-admin">Admin: {{bandDetails?.bandAdmin[0]?.username}}</p>
+        <div class="member-actions" *ngIf="addMember">
+            <input type="text" (keyup)="searchArtist()" [(ngModel)]="searchText">
+            <div *ngIf="artists">
+                <div *ngFor="let artist of artists">
+                    <input type="checkbox" [checked]="selectedArtists.includes(artist._id)"
+                        (change)="toggleSelection(artist._id)">
+                    <label>{{ artist.username }}</label>
+                </div>
+            </div>
+            <button (click)="addMembers()">add</button>
+            <button (click)="onCancel()">cancel</button>
+        </div>
+        <button class="add-member-button" (click)="addMember = true" *ngIf="!addMember">Add Members</button>
+        <p class="members-title">Members:</p>
+        <div class="members-list">
+            <div class="member-item" *ngFor="let member of bandDetails?.bandMembers">
+                <p class="member-name" (click)="getUserProfille(member._id)">
+                    {{member.username}}
+                </p>
+                <button class="remove-member-button" (click)="removeMembers(member._id)">
+                    Remove
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

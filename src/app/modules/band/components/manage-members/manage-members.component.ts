@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BandService } from '../../services/band.service';
 import { Router } from '@angular/router';
+import { ArtistService } from 'src/app/modules/artist/services/artist.service';
 
 @Component({
   selector: 'app-manage-members',
@@ -9,6 +10,10 @@ import { Router } from '@angular/router';
 })
 export class ManageMembersComponent implements OnInit {
   bandDetails: any;
+  addMember: Boolean = false;
+  searchText!: any;
+  artists: any;
+  selectedArtists: any[] = [];
   constructor(private bandServ: BandService, private router: Router) {}
   ngOnInit(): void {
     this.getBandMembers();
@@ -27,6 +32,44 @@ export class ManageMembersComponent implements OnInit {
 
   getUserProfille(userId: any) {
     this.router.navigate([`/band/user-profile/${userId}`]);
+  }
+
+  addMembers() {
+    this.bandServ.addBandMember(this.selectedArtists).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.addMember=false;
+  }
+
+  toggleSelection(artistId: any): void {
+    const index = this.selectedArtists.indexOf(artistId);
+    if (index === -1) {
+      this.selectedArtists.push(artistId);
+    } else {
+      this.selectedArtists.splice(index, 1);
+    }
+  }
+
+  onCancel() {
+    this.addMember = false;
+    this.selectedArtists = [];
+  }
+
+  searchArtist() {
+    this.bandServ.searchArtist(this.searchText).subscribe({
+      next: (res) => {
+        this.artists = res.artists;
+        console.log(this.artists);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   removeMembers(userId: any) {
