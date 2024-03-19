@@ -33,4 +33,12 @@ export class BandService {
   addBandMember(artistId: any): Observable<any> {
     return this.http.patch(`${this.bandApi}/addToBand`, {artistId});
   }
+
+  getBandSongs():Observable<any>{
+    return this.http.get(`${this.bandApi}/songs`)
+  }
+
+  // deleteBandSong(songId:any):Observable<any>{
+  //   return this.http.patch(`${this.bandApi}/deleteSong`,{songId})
+  // }
 }
