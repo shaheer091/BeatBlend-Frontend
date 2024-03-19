@@ -30,7 +30,7 @@ export class ManageMembersComponent implements OnInit {
     });
   }
 
-  getUserProfille(userId: any) {
+  getUserProfile(userId: any) {
     this.router.navigate([`/band/user-profile/${userId}`]);
   }
 

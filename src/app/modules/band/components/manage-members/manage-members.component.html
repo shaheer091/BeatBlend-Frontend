@@ -5,26 +5,32 @@
     <div class="band-info">
         <h2 class="band-name">{{bandDetails?.bandName}}</h2>
         <p class="band-admin">Admin: {{bandDetails?.bandAdmin[0]?.username}}</p>
+        
+        <!-- Member Actions -->
         <div class="member-actions" *ngIf="addMember">
-            <input type="text" (keyup)="searchArtist()" [(ngModel)]="searchText">
-            <div *ngIf="artists">
-                <div *ngFor="let artist of artists">
+            <input type="text" (keyup)="searchArtist()" [(ngModel)]="searchText" placeholder="Search for artists">
+            <div *ngIf="artists" class="artist-list">
+                <div *ngFor="let artist of artists" class="artist-item">
                     <input type="checkbox" [checked]="selectedArtists.includes(artist._id)"
                         (change)="toggleSelection(artist._id)">
                     <label>{{ artist.username }}</label>
                 </div>
             </div>
-            <button (click)="addMembers()">add</button>
-            <button (click)="onCancel()">cancel</button>
+            <button class="action-button add-button" (click)="addMembers()">Add</button>
+            <button class="action-button cancel-button" (click)="onCancel()">Cancel</button>
         </div>
+        
+        <!-- Add Members Button -->
         <button class="add-member-button" (click)="addMember = true" *ngIf="!addMember">Add Members</button>
+        
+        <!-- Members List -->
         <p class="members-title">Members:</p>
         <div class="members-list">
             <div class="member-item" *ngFor="let member of bandDetails?.bandMembers">
-                <p class="member-name" (click)="getUserProfille(member._id)">
+                <p class="member-name" (click)="getUserProfile(member._id)">
                     {{member.username}}
                 </p>
-                <button class="remove-member-button" (click)="removeMembers(member._id)">
+                <button class="action-button remove-button" (click)="removeMembers(member._id)">
                     Remove
                 </button>
             </div>

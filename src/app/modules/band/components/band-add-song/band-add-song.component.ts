@@ -38,7 +38,7 @@ export class BandAddSongComponent {
 
   changing(event: any) {
     // this.formData.delete('songFile');
-    // this.formData.append('songFile', event.target.files[0]);
+    this.formData.append('songFile', event.target.files[0]);
   }
 
   onSubmit() {
