@@ -38,6 +38,14 @@ export class BandService {
     return this.http.get(`${this.bandApi}/songs`)
   }
 
+  getBandSingleSong(songId:any):Observable<any>{
+    return this.http.get(`${this.bandApi}/getSong/${songId}`)
+  }
+
+  bandEditSong(data:any,songId:any):Observable<any>{
+    return this.http.patch(`${this.bandApi}/editSong/${songId}`, {data})
+  }
+
   // deleteBandSong(songId:any):Observable<any>{
   //   return this.http.patch(`${this.bandApi}/deleteSong`,{songId})
   // }

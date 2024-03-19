@@ -20,6 +20,7 @@ const routes: Routes = [
       { path: 'songs', component: BandSongsComponent },
       { path: 'profile', component: BandProfileComponent },
       { path: 'addSongs', component: BandAddSongComponent },
+      { path: 'editSong/:id', component: BandAddSongComponent },
       { path: 'manageMembers', component: ManageMembersComponent },
       { path: 'chats/:id', component: ChattingComponent },
       { path: 'user-profile/:id', component: UserProfileComponent },

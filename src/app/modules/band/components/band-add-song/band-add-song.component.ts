@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BandService } from '../../services/band.service';
 
 @Component({
   selector: 'app-band-add-song',
   templateUrl: './band-add-song.component.html',
-  styleUrls: ['./band-add-song.component.css']
+  styleUrls: ['./band-add-song.component.css'],
 })
 export class BandAddSongComponent {
   songForm!: FormGroup;
@@ -16,16 +16,35 @@ export class BandAddSongComponent {
   success: any;
   reqMsg: any;
   formData = new FormData();
-
   addSong$ = new Subscription();
+  songId: any;
+  songDetails: any;
 
   constructor(
     private formBuilder: FormBuilder,
-    private bandServ:BandService,
-    private router: Router
+    private bandServ: BandService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    this.route.params.subscribe((id) => {
+      this.songId = id['id'];
+    });
+    if (this.songId) {
+      this.bandServ.getBandSingleSong(this.songId).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.songDetails = res;
+          if (this.songDetails) {
+            this.setSongFormValues(this.songDetails);
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
     this.songForm = this.formBuilder.group({
       title: ['', Validators.required],
       album: [''],
@@ -34,10 +53,22 @@ export class BandAddSongComponent {
       releaseDate: [''],
       songFile: ['', Validators.required],
     });
+    if (this.songId) {
+      this.songForm.get('songFile')?.disable();
+      this.songForm.get('releaseDate')?.disable();
+    }
+  }
+  setSongFormValues(songDetails: any) {
+    this.songForm.patchValue({
+      title: songDetails.title,
+      album: songDetails.album,
+      genre: songDetails.genre,
+      duration: songDetails.duration,
+      releaseDate: songDetails.releaseDate.split('T')[0],
+    });
   }
 
   changing(event: any) {
-    // this.formData.delete('songFile');
     this.formData.append('songFile', event.target.files[0]);
   }
 
@@ -69,11 +100,28 @@ export class BandAddSongComponent {
       }, 3000);
     }
   }
+
   goBack() {
     if (this.success) {
       this.router.navigate(['band/home']);
     }
   }
+
+  updateSong(songId: any) {
+    console.log(songId);
+    this.bandServ.bandEditSong(this.songForm.value, songId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.success = res.success;
+        this.message = res.message;
+        this.description = res.discription;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   ngOnDestroy(): void {
     this.addSong$?.unsubscribe();
   }

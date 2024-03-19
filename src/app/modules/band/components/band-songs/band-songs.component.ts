@@ -63,6 +63,6 @@ export class BandSongsComponent implements OnInit {
 
   editSong(event: any, songId: any) {
     event.stopPropagation();
-    this.router.navigate(['/band/editSong', songId]);
+    this.router.navigate([`/band/editSong/${songId}`]);
   }
 }
