@@ -53,6 +53,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   sendMsg(userId: any) {
-    this.router.navigate([`/${this.role}/chats/${userId}`]);
+    console.log(this.role);
+    this.router.navigate([`/user/chats/${userId}`]);
   }
 }

@@ -14,4 +14,16 @@ export class BandService {
   bandGetHome():Observable<any>{
     return this.http.get(`${this.bandApi}/home`)
   }
+  
+  bandAddSong (data:any):Observable<any>{
+    return this.http.post(`${this.bandApi}/addSong`, data)
+  }
+
+  bandGetMembers():Observable<any>{
+    return this.http.get(`${this.bandApi}/getBandMembers`)
+  }
+
+  removeBandMember(userId:any):Observable<any>{
+    return this.http.patch(`${this.bandApi}/removeFromBand`,{userId})
+  }
 }

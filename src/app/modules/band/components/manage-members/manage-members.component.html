@@ -1,1 +1,8 @@
-<p>manage-members works!</p>
+<img class="h-24 w-24 rounded-3xl" [src]="bandDetails?.bandImage" alt="">
+<p> {{bandDetails?.bandName}} </p>
+<p>Admin {{bandDetails?.bandAdmin[0]?.username}} </p>
+<p>members</p>
+<div *ngFor="let members of bandDetails?.bandMembers" class="flex space-x-7">
+    <p (click)="getUserProfille(members._id)" class="cursor-pointer">{{members.username}}</p>
+    <p (click)="removeMembers(members._id)" class="cursor-pointer">remove</p>
+</div>

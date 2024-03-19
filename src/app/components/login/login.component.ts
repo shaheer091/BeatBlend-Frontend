@@ -41,14 +41,17 @@ export class LoginComponent implements OnInit {
     try {
       if (this.loginForm.valid) {
         this.serv.apiLogin(this.loginForm.value).subscribe((res) => {
+          console.log(res);
           if (res.success) {
             localStorage.setItem('token', res.token);
             // localStorage.setItem('role', res.role);
             this.serv.toggleToken$.next(true);
             // this.role = res.role;
             this.serv.role = res.role;
-            if (res.isInBand) {
+            if (res.isInBand == 'true') {
               localStorage.setItem('isInBand', 'true');
+            } else if (res.isInBand == 'false') {
+              localStorage.setItem('isInBand', 'false');
             }
             if (this.serv.role) {
               this.router.navigate([`/${this.serv.role}/home`]);

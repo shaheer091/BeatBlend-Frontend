@@ -7,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistSettingsComponent implements OnInit {
   isInBand: any;
-  hell:any;
+  hell: any;
   ngOnInit(): void {
     this.hell = localStorage.getItem('isInBand');
-    if (this.hell) {
+    if (this.hell == 'true') {
       this.isInBand = true;
-    } else {
+    } else if (this.hell == 'false') {
       this.isInBand = false;
     }
   }

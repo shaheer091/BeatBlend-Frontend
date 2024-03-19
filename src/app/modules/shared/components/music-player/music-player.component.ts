@@ -23,23 +23,24 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
   storedSongUrl: any;
   storedTime: any;
   songUrl = '';
-  ngAfterViewInit(): void {
-    this.loadStoredSong();
-  }
+
   ngOnInit(): void {
-    // Listen for page refresh or close event
     window.addEventListener('beforeunload', () => {
       this.storeSongInfo();
     });
 
-    this.loadStoredSong();
-
-    // Subscribe to changes in song URL
     this.songServ.songUrl$.subscribe((url: string) => {
       this.songUrl = url;
       this.playSong();
     });
   }
+
+  ngAfterViewInit(): void {
+    if (this.audioPlayer) {
+      this.loadStoredSong();
+    }
+  }
+
   loadStoredSong(): void {
     this.storedSongUrl = localStorage.getItem('songLink');
     this.storedTime = localStorage.getItem('songTime');
@@ -50,6 +51,7 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
       this.playSong();
     }
   }
+
   storeSongInfo(): void {
     localStorage.setItem('songLink', this.songUrl);
     localStorage.setItem(
@@ -59,10 +61,14 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
   }
 
   playSong() {
-    if (this.songUrl) {
+    if (!this.songUrl) {
+      this.loadStoredSong(); // Load from local storage if songUrl is empty
+    } else if (this.songUrl) {
       this.audioPlayer.nativeElement.src = this.songUrl;
       this.audioPlayer.nativeElement.load();
-      this.audioPlayer.nativeElement.play();
+      this.audioPlayer.nativeElement.addEventListener('loadeddata', () => {
+        this.audioPlayer.nativeElement.play();
+      });
     }
   }
 }
