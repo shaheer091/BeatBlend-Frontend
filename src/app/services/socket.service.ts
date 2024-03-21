@@ -1,29 +1,31 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { SharedServiceService } from '../modules/shared/services/shared-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocketService implements OnInit {
-  private socket: Socket;
+  private socket!: Socket;
+  senderId=this.sharedServ.parseJwt()
 
-  constructor() {
-    this.socket = io('http://localhost:4000');
-  }
-
-  ngOnInit() {
-    this.socket.on('event-name', (data: any) => {
-      console.log('Received data:', data);
+  constructor(private sharedServ:SharedServiceService) {
+    this.socket = io('http://localhost:4000', {
+      auth: {
+        userid: `${this.senderId.userId}`,
+      },
     });
   }
 
-  sendMessage(message: string, receiver: any, sender:any) {
-    this.socket.emit('sendMessage', { message, receiver, sender});
+  ngOnInit() {}
+
+  sendMessage(message: string, receiver: any, sender: any) {
+    this.socket.emit('sendMessage', { message, receiver, sender });
   }
 
   getMessage(): Observable<any> {
-    return new Observable<any>(observer => {
+    return new Observable<any>((observer) => {
       this.socket.on('message-broadcast', (data: any) => {
         observer.next(data);
       });

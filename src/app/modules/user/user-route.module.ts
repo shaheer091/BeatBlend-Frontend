@@ -39,6 +39,7 @@ const routes: Routes = [
       { path: 'band-profile/:id', component: BandProfileComponent },
       { path: 'chats/:id', component: ChattingComponent },
       { path: 'premium', component: PremiumComponent },
+      { path: 'editPlaylist/:id', component: CreatePlaylistComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

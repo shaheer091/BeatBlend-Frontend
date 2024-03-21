@@ -16,7 +16,8 @@ export class SharedServiceService {
   // role=localStorage.getItem('role')
 
 
-  parseJwt(token: any) {
+  parseJwt() {
+    const token = localStorage.getItem('token')
     if (!token) {
       return;
     }
@@ -52,6 +53,10 @@ export class SharedServiceService {
 
   declineInvitation(bandId:any):Observable<any>{
     return this.http.patch(`${this.api}/artist/decllineBandInvitation`,{bandId})
+  }
+
+  getMessage():Observable<any>{
+    return this.http.get(`${this.api}/chat/userMessages`)
   }
   
 }

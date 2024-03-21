@@ -8,13 +8,16 @@ import { SharedServiceService } from '../modules/shared/services/shared-service.
 })
 export class CommonService {
   api = 'http://localhost:3000';
-  decodedToken = this.sharedServ.parseJwt(localStorage.getItem('token'))
+  decodedToken = this.sharedServ.parseJwt();
   role: any = this.decodedToken?.role ? this.decodedToken?.role : '';
   toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     !!localStorage.getItem('token')
   );
 
-  constructor(private http: HttpClient,private sharedServ:SharedServiceService) {}
+  constructor(
+    private http: HttpClient,
+    private sharedServ: SharedServiceService
+  ) {}
 
   // Signup function
   apiCall(data: any): Observable<any> {
@@ -42,16 +45,19 @@ export class CommonService {
   }
 
   isUser() {
-    
-    return this.role ? this.role == 'user': this.decodedToken.role === 'user';
+    return this.role ? this.role == 'user' : this.decodedToken.role === 'user';
   }
 
   isAdmin() {
-    return this.role ? this.role == 'admin': this.decodedToken.role === 'admin';
+    return this.role
+      ? this.role == 'admin'
+      : this.decodedToken.role === 'admin';
   }
 
   isArtist() {
-    return this.role ? this.role == 'artist': this.decodedToken.role === 'artist';
+    return this.role
+      ? this.role == 'artist'
+      : this.decodedToken.role === 'artist';
   }
   isBand() {
     const isInBand = localStorage.getItem('isInBand');

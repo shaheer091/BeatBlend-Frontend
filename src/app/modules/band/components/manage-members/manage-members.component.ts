@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BandService } from '../../services/band.service';
 import { Router } from '@angular/router';
 import { ArtistService } from 'src/app/modules/artist/services/artist.service';
+import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 
 @Component({
   selector: 'app-manage-members',
@@ -14,9 +15,16 @@ export class ManageMembersComponent implements OnInit {
   searchText!: any;
   artists: any;
   selectedArtists: any[] = [];
-  constructor(private bandServ: BandService, private router: Router) {}
+  role:any;
+  constructor(
+    private bandServ: BandService,
+    private router: Router,
+    private sharedServ: SharedServiceService
+  ) {}
   ngOnInit(): void {
     this.getBandMembers();
+    // this.role=this.sharedServ.parseJwt();
+    // console.log(this.role.role);
   }
   getBandMembers() {
     this.bandServ.bandGetMembers().subscribe({
@@ -43,7 +51,7 @@ export class ManageMembersComponent implements OnInit {
         console.log(err);
       },
     });
-    this.addMember=false;
+    this.addMember = false;
   }
 
   toggleSelection(artistId: any): void {

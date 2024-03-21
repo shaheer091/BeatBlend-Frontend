@@ -19,9 +19,7 @@ export class AdminHomeComponent implements OnInit,OnDestroy {
   pendingUsers:any;
   getHome$=new Subscription()
   ngOnInit(): void {
-    const decodedToken = this.sharedServ.parseJwt(
-      localStorage.getItem('token')
-    );
+    const decodedToken = this.sharedServ.parseJwt();
     this.username = decodedToken.username;
     this.getHome();
   }

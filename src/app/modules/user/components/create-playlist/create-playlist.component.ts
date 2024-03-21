@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -8,18 +8,47 @@ import { Subscription } from 'rxjs';
   templateUrl: './create-playlist.component.html',
   styleUrls: ['./create-playlist.component.css'],
 })
-export class CreatePlaylistComponent implements OnDestroy {
-  constructor(private userServ: UserService, private router: Router) {}
+export class CreatePlaylistComponent implements OnDestroy, OnInit {
+  constructor(
+    private userServ: UserService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
   searchText!: string;
   playlistName!: string;
   songs: any[] = [];
   songId: any[] = [];
   file: any;
   formData = new FormData();
+  playlistId: any;
+  playlistData: any;
 
   searchSong$ = new Subscription();
   createPlaylist$ = new Subscription();
 
+  ngOnInit(): void {
+    this.route.params.subscribe((id) => {
+      this.playlistId = id['id'];
+    });
+    if (this.playlistId) {
+      this.getPlaylistData();
+    }
+  }
+
+  getPlaylistData() {
+    this.userServ.getSinglePlaylistData(this.playlistId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.playlistData = res[0];
+        if (this.playlistData) {
+          this.playlistName = this.playlistData.playlistName;
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
   searchSong() {
     this.searchSong$ = this.userServ.searchSong(this.searchText).subscribe({
       next: (res) => {
@@ -51,7 +80,6 @@ export class CreatePlaylistComponent implements OnDestroy {
   isSongInPlaylist(songId: any): boolean {
     return this.songId.includes(songId);
   }
-  
 
   onSubmit() {
     if (this.playlistName && this.songId.length > 0) {
@@ -74,6 +102,10 @@ export class CreatePlaylistComponent implements OnDestroy {
     } else {
       console.error('Please provide playlist name and songs');
     }
+  }
+
+  onEditPlaylist(){
+    
   }
 
   ngOnDestroy(): void {

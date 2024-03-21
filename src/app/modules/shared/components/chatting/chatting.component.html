@@ -14,9 +14,9 @@
 </div> -->
 
 
-<body class="flex flex-col items-center justify-center w-full h-[480px] text-gray-800 p-10">
+<div class="flex flex-col items-center justify-center w-full h-[480px] text-gray-800 p-10">
 
-    <div class="flex flex-col flex-grow w-4/12 bg-white shadow-xl rounded-lg overflow-hidden">
+    <div class="flex flex-col flex-grow min-w-4/12 w-6/12 bg-white shadow-xl rounded-lg overflow-hidden">
         <div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
             <div class="flex w-full mt-2 space-x-3 max-w-xs" *ngFor="let message of recievedMsg">
                 <div
@@ -33,4 +33,4 @@
                 (keyup.enter)="send()" placeholder="Type your message…">
         </div>
     </div>
-</body>
+</div>

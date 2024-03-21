@@ -1,5 +1,5 @@
-<div class="fixed h-screen sm:w-1/12 md:w-2/12  border-4 shadow-md z-50 flex flex-col justify-between p-4 md:p-8">
-  <div class="flex flex-col space-y-5">
+<div class="fixed h-screen sm:w-1/12 md:w-2/12 md:min-w-2/12 shadow-md z-50 flex flex-col justify-between p-4 md:p-6">
+  <div class="flex flex-col space-y-4">
     <div *ngFor="let items of navBarItems" (click)="navigation(items.title)"
       class="py-2 flex items-center space-x-4 hover:-translate-y-1 transition-all hover:bg-gray-100 rounded-lg cursor-pointer">
       <img class="h-6 w-6" [src]="items.logo" alt="">
@@ -7,7 +7,7 @@
     </div>
 
   </div>
-  <div class="flex flex-col space-y-5">
+  <div class="flex flex-col space-y-4">
     <div [routerLink]="'/user/settings'"
       class="py-2 flex items-center space-x-4 hover:-translate-y-1 transition-all hover:bg-gray-100 rounded-lg cursor-pointer">
       <img class="h-6 w-6" src="../../../../../assets/images/settings.png" alt="">

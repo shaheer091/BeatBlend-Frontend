@@ -25,7 +25,8 @@
         
       </div>
     
-      <button (click)="onSubmit()" type="submit" class="w-full py-2 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Create Playlist</button>
+      <button *ngIf="!playlistId" (click)="onSubmit()" type="submit" class="w-full py-2 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Create Playlist</button>
+      <button *ngIf="playlistId" (click)="onEditPlaylist()" type="button" class="w-full py-2 bg-sky-500 text-white rounded-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500">Edit Playlist</button>
       <button type="button" [routerLink]="'/user/playlist'" class="w-full py-2 bg-slate-500 text-white rounded-md hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500">back</button>
     </form>
     

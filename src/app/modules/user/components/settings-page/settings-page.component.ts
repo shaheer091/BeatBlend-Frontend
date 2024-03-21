@@ -10,9 +10,9 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
-  data: any;
-
+  
   constructor(private userServ: UserService, private router: Router,private commonServ:CommonService) {}
+  user: any;
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
@@ -22,6 +22,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   followers: number = 0;
   image: any;
   imgBool: Boolean = false;
+  profile:any;
 
   artistVerification$ = new Subscription();
   getSettings$ = new Subscription();
@@ -64,11 +65,12 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   getSettingsPage() {
     this.getSettings$ = this.userServ.getSettingsPage().subscribe({
       next: (res) => {
-        if (res.imageUrl) {
-          this.imgBool = true;
-          this.image = res.imageUrl;
+        // console.log(res);
+        this.user = res.user;
+        this.profile=res.profile;
+        if(this.profile.imageUrl){
+          this.imgBool=true;
         }
-        this.data = res;
       },
       error: (err) => {
         console.log(err);

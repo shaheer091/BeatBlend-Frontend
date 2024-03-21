@@ -73,6 +73,10 @@ export class UserService {
     return this.http.get(`${this.userApi}/singlePlaylist/${playlistID}`)
   }
 
+  getSinglePlaylistData(playlistId:any):Observable<any>{
+    return this.http.get(`${this.userApi}/getPlaylistData/${playlistId}`)
+  }
+
   removeFromPlaylist(songId:any):Observable<any>{
     return this.http.delete(`${this.userApi}/removeFromPlaylist/${songId}`)
   }

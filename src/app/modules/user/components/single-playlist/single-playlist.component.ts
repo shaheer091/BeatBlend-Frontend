@@ -20,7 +20,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   playlistDetails: any;
   songs: any;
   songLink: any;
-  userId: any;
   singlePlaylist$ = new Subscription();
   removeFromPlaylist$ = new Subscription();
   deletePlaylist$ = new Subscription();
@@ -38,10 +37,10 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .getSinglePlaylist(this.playlistId)
       .subscribe({
         next: (res) => {
-          this.userId = res.userId;
-          this.playlistDetails = res[0];
-          if (res[0]?.songs) {
-            this.songs = res[0]?.songs
+          console.log(res);
+          this.playlistDetails = res?.playlist[0];
+          if (res?.playlist[0]?.songs) {
+            this.songs = res?.playlist[0]?.songs
           }
         },
         error: (err) => {
@@ -100,6 +99,7 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   editPlaylist(playlistId: any) {
+    console.log(playlistId);
     this.router.navigate([`/user/editPlaylist/${playlistId}`]);
   }
 
