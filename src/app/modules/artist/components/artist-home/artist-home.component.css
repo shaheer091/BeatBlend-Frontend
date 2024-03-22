@@ -1,0 +1,28 @@
+.card1,
+.card2,
+.card3 {
+  transition: all 0.5s ease-in-out;
+}
+
+.card1 {
+  background: linear-gradient(135deg, #00ff87, #60efff);
+}
+.card2 {
+  background: linear-gradient(135deg, #ff930f, #fff95b);
+}
+.card3 {
+  background: linear-gradient(135deg, #9bf8f4, #6f7bf7);
+}
+
+.card1:hover,
+.card2:hover,
+.card3:hover {
+  transform: scale(1.05);
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, #7177c1, #ff0048);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

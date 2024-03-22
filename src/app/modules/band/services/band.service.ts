@@ -46,7 +46,11 @@ export class BandService {
     return this.http.patch(`${this.bandApi}/editSong/${songId}`, {data})
   }
 
-  // deleteBandSong(songId:any):Observable<any>{
-  //   return this.http.patch(`${this.bandApi}/deleteSong`,{songId})
-  // }
+  bandAddProfile(data:any):Observable<any>{
+    return this.http.post(`${this.bandApi}/addProfile`,data);
+  }
+
+  bandGetProfile():Observable<any>{
+    return this.http.get(`${this.bandApi}/getProfile`)
+  }
 }
