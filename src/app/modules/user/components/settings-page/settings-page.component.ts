@@ -65,7 +65,6 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   getSettingsPage() {
     this.getSettings$ = this.userServ.getSettingsPage().subscribe({
       next: (res) => {
-        // console.log(res);
         this.user = res.user;
         this.profile=res.profile;
         if(this.profile.imageUrl){

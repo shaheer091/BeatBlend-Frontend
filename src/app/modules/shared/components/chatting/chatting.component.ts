@@ -25,7 +25,6 @@ export class ChattingComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.senderId = this.sharedServ.parseJwt();
-    console.log(this.senderId);
     this.route.params.subscribe({
       next: (res) => {
         this.receiver = res['id'];
@@ -50,7 +49,6 @@ export class ChattingComponent implements OnInit, OnDestroy {
   }
   getMessage() {
     this.chatServ.getMessage().subscribe((data) => {
-      console.log(data);
       data.timeDisplay = data.date.split('T')[1].slice(0, 5);
       this.recievedMsg.push(data);
     });

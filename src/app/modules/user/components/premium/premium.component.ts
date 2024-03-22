@@ -52,12 +52,9 @@ export class PremiumComponent {
   ];
 
   buyNow(price: Number) {
-    console.log(price);
     this.paymentServ.order(price).subscribe({
       next: (res) => {
-        console.log(res);
         this.orderId = res.id;
-        console.log(this.orderId);
         const options = {
           key: 'rzp_test_dRIwkROLF4t3ER',
           amount: res.amount * 100,
@@ -79,14 +76,12 @@ export class PremiumComponent {
     });
   }
   paymentResponseHandler(response: any) {
-    console.log(response);
     this.data = response;
     if (response.status === 'failed') {
       return console.error('Payment failed:', response);
     }
     this.paymentServ.successPayent(this.data).subscribe({
       next: (res) => {
-        console.log(res);
       },
       error: (err) => {
         console.log(err);

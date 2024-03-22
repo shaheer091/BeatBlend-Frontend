@@ -38,7 +38,6 @@ export class BandSongsComponent implements OnInit {
   }
 
   showDeleteConfirmation(event: any, songId: any) {
-    console.log(songId);
     event.stopPropagation();
     this.showDeleteDiv = true;
     this.idSong = songId;

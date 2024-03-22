@@ -23,8 +23,6 @@ export class ManageMembersComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.getBandMembers();
-    // this.role=this.sharedServ.parseJwt();
-    // console.log(this.role.role);
   }
   getBandMembers() {
     this.bandServ.bandGetMembers().subscribe({
@@ -72,7 +70,6 @@ export class ManageMembersComponent implements OnInit {
     this.bandServ.searchArtist(this.searchText).subscribe({
       next: (res) => {
         this.artists = res.artists;
-        console.log(this.artists);
       },
       error: (err) => {
         console.log(err);
@@ -81,7 +78,6 @@ export class ManageMembersComponent implements OnInit {
   }
 
   removeMembers(userId: any) {
-    console.log(userId);
     this.bandServ.removeBandMember(userId).subscribe({
       next: (res) => {
         console.log(res);

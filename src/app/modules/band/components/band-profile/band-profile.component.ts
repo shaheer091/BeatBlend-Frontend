@@ -65,8 +65,6 @@ export class BandProfileComponent implements OnInit {
           console.log(err);
         },
       });
-      console.log('Form submitted');
-      // console.log('Form value:', this.bandProfileForm.value);
     } else {
     }
   }

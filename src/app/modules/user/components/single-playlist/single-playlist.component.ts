@@ -37,7 +37,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .getSinglePlaylist(this.playlistId)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.playlistDetails = res?.playlist[0];
           if (res?.playlist[0]?.songs) {
             this.songs = res?.playlist[0]?.songs
@@ -99,7 +98,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   }
 
   editPlaylist(playlistId: any) {
-    console.log(playlistId);
     this.router.navigate([`/user/editPlaylist/${playlistId}`]);
   }
 

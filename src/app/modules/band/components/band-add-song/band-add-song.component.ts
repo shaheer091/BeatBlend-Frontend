@@ -108,7 +108,6 @@ export class BandAddSongComponent {
   }
 
   updateSong(songId: any) {
-    console.log(songId);
     this.bandServ.bandEditSong(this.songForm.value, songId).subscribe({
       next: (res) => {
         console.log(res);
