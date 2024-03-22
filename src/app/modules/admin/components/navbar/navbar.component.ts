@@ -9,14 +9,19 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent {
-  constructor(private router: Router, private adminServ: AdminService,private commonServ:CommonService) {}
-  userData: any;
-  artistData: any;
-  pendingData: any;
-
+  constructor(
+    private router: Router,
+    private adminServ: AdminService,
+    private commonServ: CommonService
+  ) {}
+  showSide: Boolean = false;
+  showSideBar() {
+    this.showSide = !this.showSide;
+  }
   onLogout() {
     localStorage.clear();
+    this.showSide = false;
     this.router.navigate(['/login']);
-    this.commonServ.toggleToken$.next(false)
+    this.commonServ.toggleToken$.next(false);
   }
 }

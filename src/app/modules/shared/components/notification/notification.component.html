@@ -8,8 +8,12 @@
         </div>
     </div>
     <div *ngIf="newSongs?.length > 0">
-        <div *ngFor="let songs of newSongs">
-            <p>{{songs?.artist?.username}} uploaded {{songs?.title}}</p>
+        <div *ngFor="let songs of newSongs" class="flex gap-1">
+            <p (click)="userProfile($event,songs?.artist?._id)" class="cursor-pointer hover:font-bold transition-all">
+                {{songs?.artist?.username}}</p>
+            <p>uploaded</p>
+            <p (click)="playSong(songs?.songUrl)" class="cursor-pointer hover:font-bold transition-all">{{songs?.title}}
+            </p>
         </div>
     </div>
     <div *ngIf="message">

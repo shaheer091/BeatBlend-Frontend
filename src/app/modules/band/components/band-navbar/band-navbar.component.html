@@ -1,15 +1,37 @@
-<nav class="bg-gray-800 py-4">
-    <ul class="flex justify-between items-center mx-auto px-4">
+<nav class="bg-gray-800 py-4 text-white">
+    <ul class="flex justify-between items-center  mx-auto px-4">
         <div>
             <li><a class="cursor-pointer text-white text-lg font-bold">Band Name</a></li>
         </div>
-        <div class="flex "> 
-            <li><a [routerLink]="'/band/home'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Home</a></li>
-            <li><a [routerLink]="'/band/songs'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Songs</a></li>
-            <li><a [routerLink]="'/band/addSongs'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Add Songs</a></li>
-            <li><a [routerLink]="'/band/manageMembers'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Manage Members</a></li>
-            <li><a [routerLink]="'/band/profile'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Profile</a></li>
+        <div class="flex md:hidden">
+            <img (click)="showSideBar()" class="h-10" src="../../../../../../assets/images/more.png" alt="">
+        </div>
+        <div *ngIf="showSide" class="bg-black bg-opacity-50 w-screen translate-y-36 -translate-x-4 absolute md:hidden">
+            <div class="">
+                <ul class="text-center mt-2 space-y-2">
+                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/band/home'">Home</li>
+                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/band/songs'">Songs</li>
+                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/band/addSongs'">Add Songs</li>
+                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/band/manageMembers'">Manage Members</li>
+                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/band/profile'">Profile</li>
+                    <li class="hover:-translate-y-1 transition text-lg" (click)="logout()">Logout</li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="md:flex hidden">
+            <li><a [routerLink]="'/band/home'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Home</a>
+            </li>
+            <li><a [routerLink]="'/band/songs'"
+                    class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Songs</a></li>
+            <li><a [routerLink]="'/band/addSongs'" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Add
+                    Songs</a></li>
+            <li><a [routerLink]="'/band/manageMembers'"
+                    class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Manage Members</a></li>
+            <li><a [routerLink]="'/band/profile'"
+                    class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Profile</a></li>
             <li><a (click)="logout()" class="cursor-pointer text-white hover:text-gray-300 px-3 py-2">Logout</a></li>
         </div>
     </ul>
+
 </nav>

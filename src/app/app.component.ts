@@ -13,7 +13,6 @@ export class AppComponent implements OnInit{
   constructor(private commonServ: CommonService,private sharedServ:SharedServiceService) {}
   ngOnInit(): void {
     const decodedToken = this.sharedServ.parseJwt();
-    console.log(decodedToken);
     this.commonServ.role=decodedToken.role;
     
     this.commonServ.toggleToken$.subscribe({

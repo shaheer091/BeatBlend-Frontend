@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedServiceService } from '../../services/shared-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
@@ -7,10 +8,11 @@ import { SharedServiceService } from '../../services/shared-service.service';
   styleUrls: ['./notification.component.css'],
 })
 export class NotificationComponent implements OnInit {
-  constructor(private sharedServ: SharedServiceService) {}
+  constructor(private sharedServ: SharedServiceService,private router:Router,private songSerivce: SharedServiceService) {}
   bandInvitation: any;
   newSongs: any;
   message: any;
+  songLink:any;
   ngOnInit(): void {
     this.getNotification();
   }
@@ -51,5 +53,13 @@ export class NotificationComponent implements OnInit {
       },
     });
     this.getNotification();
+  }
+  userProfile(event: any, userId: any) {
+    event.stopPropagation();
+    this.router.navigate([`/user/user-profile/${userId}`]);
+  }
+  playSong(songUrl: any) {
+    this.songLink = songUrl;
+    this.songSerivce.setSongUrl(songUrl);
   }
 }
