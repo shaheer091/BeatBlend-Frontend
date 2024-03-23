@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SharedServiceService } from '../../services/shared-service.service';
 import { UserService } from 'src/app/modules/user/services/user.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-following-list',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./following-list.component.css'],
 })
 export class FollowingListComponent implements OnInit,OnDestroy {
-  constructor(private sharedServ: SharedServiceService,private userServ:UserService) {}
+  constructor(private sharedServ: SharedServiceService,private userServ:UserService,private router:Router) {}
 
   userList:any;
   followingList$=new Subscription()
@@ -31,6 +32,10 @@ export class FollowingListComponent implements OnInit,OnDestroy {
 
   unfollowUser(userId:any){
     this.unfollowUser$=this.userServ.followAndUnfollowUser(userId).subscribe()
+  }
+
+  getSingleUser(userId:any){
+    this.router.navigate([`/user/user-profile/${userId}`]);
   }
   ngOnDestroy(): void {
     this.followingList$.unsubscribe()

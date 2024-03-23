@@ -17,12 +17,12 @@
     <div *ngIf="showSide" class="bg-black bg-opacity-50 w-screen translate-y-36 -translate-x-[102px] absolute md:hidden">
       <div class="">
           <ul class="text-center mt-2 space-y-2">
-              <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/artist/home'">Home</li>
-              <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/artist/songs'">Songs</li>
-              <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/artist/addSong'">Add Song</li>
-              <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/artist/notification'">Notification</li>
-              <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" [routerLink]="'/artist/settings'">Settings</li>
-              <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false" (click)="logout()">Logout</li>
+              <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false" [routerLink]="'/artist/home'">Home</li>
+              <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false" [routerLink]="'/artist/songs'">Songs</li>
+              <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false" [routerLink]="'/artist/addSong'">Add Song</li>
+              <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false" [routerLink]="'/artist/notification'">Notification</li>
+              <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false" [routerLink]="'/artist/settings'">Settings</li>
+              <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="logout()">Logout</li>
           </ul>
       </div>
   </div>

@@ -40,7 +40,7 @@
                 <div class="p-3 w-full">{{song?.artists[0]?.username}}</div>
                 <div class="p-3 w-full">{{song?.genre}}</div>
                 <div class="p-3 w-12 flex-shrink-0 text-right text-red-500 cursor-pointer"
-                    (click)="removeFromPlaylist($event,song?._id)">Romove</div>
+                    (click)="removeFromPlaylist($event,song?._id,playlistDetails?._id)">Remove</div>
             </div>
 
         </div>

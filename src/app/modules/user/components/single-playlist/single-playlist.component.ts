@@ -48,10 +48,10 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       });
   }
 
-  removeFromPlaylist(event: any, songId: any) {
+  removeFromPlaylist(event: any, songId: any, playlistId:any) {
     event.stopPropagation();
     this.removeFromPlaylist$ = this.userServ
-      .removeFromPlaylist(songId)
+      .removeFromPlaylist(songId,playlistId)
       .subscribe({
         next: (res) => {
           console.log(res);

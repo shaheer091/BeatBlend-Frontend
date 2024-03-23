@@ -4,22 +4,22 @@
             <span class="text-white text-lg font-bold">Admin Dashboard</span>
         </div>
         <div class="flex md:hidden">
-            <img (click)="showSideBar()" class="h-10" src="../../../../../../assets/images/more.png" alt="">
+            <img (click)="showSideBar()" class="h-10 cursor-pointer" src="../../../../../../assets/images/more.png" alt="">
         </div>
         <div *ngIf="showSide" class="bg-black bg-opacity-50 w-screen translate-y-36 -translate-x-4 absolute md:hidden">
             <div class="">
                 <ul class="text-center mt-2 space-y-2">
-                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false"
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
                         [routerLink]="'/admin/home'">Home</li>
-                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false"
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
                         [routerLink]="'/admin/userList'">Users</li>
-                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false"
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
                         [routerLink]="'/admin/artistList'">Artists</li>
-                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false"
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
                         [routerLink]="'/admin/adminList'">Admins</li>
-                    <li class="hover:-translate-y-1 transition text-lg" (click)="showSide=false"
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
                         [routerLink]="'/admin/pendingUsersList'">Pending Request</li>
-                    <li class="hover:-translate-y-1 transition text-lg" (click)="onLogout()">Logout</li>
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="onLogout()">Logout</li>
 
                 </ul>
             </div>

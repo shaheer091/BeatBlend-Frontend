@@ -77,8 +77,8 @@ export class UserService {
     return this.http.get(`${this.userApi}/getPlaylistData/${playlistId}`)
   }
 
-  removeFromPlaylist(songId:any):Observable<any>{
-    return this.http.delete(`${this.userApi}/removeFromPlaylist/${songId}`)
+  removeFromPlaylist(songId:any,playlistId:any):Observable<any>{
+    return this.http.patch(`${this.userApi}/removeFromPlaylist`,{songId,playlistId})
   }
 
   deletePlaylist(playlistId:any):Observable<any>{

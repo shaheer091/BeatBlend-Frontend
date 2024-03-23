@@ -1,3 +1,3 @@
-<div class="h-screen w-10/12 float-end">
-    <div *ngFor="let user of userList">{{user.username}}</div>
+<div class="h-screen w-10/12 float-end cursor-pointer">
+    <div *ngFor="let user of userList" (click)="getUserProfile(user._id)">{{user.username}}</div>
 </div>

@@ -25,9 +25,9 @@
             class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Update Profile</button>
     </div>
     <div class="mb-6">
-        <button [routerLink]="'/user/premium'" *ngIf="!user?.isVerified"
+        <button [routerLink]="'/user/premium'" *ngIf="!user?.isPremium"
             class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Explore Premium</button>
-        <button [routerLink]="'/user/premium'" *ngIf="user?.isVerified"
+        <button [routerLink]="'/user/premium'" *ngIf="user?.isPremium"
             class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-md shadow-md">Change Premium Plan</button>
     </div>
     <div class="mb-6" *ngIf="!showDiv && !isArtist">

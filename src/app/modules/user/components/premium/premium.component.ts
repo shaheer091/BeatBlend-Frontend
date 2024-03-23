@@ -77,11 +77,10 @@ export class PremiumComponent {
   }
   paymentResponseHandler(response: any) {
     this.data = response;
-    if (response.status === 'failed') {
-      return console.error('Payment failed:', response);
-    }
+    console.log(this.data);
     this.paymentServ.successPayent(this.data).subscribe({
       next: (res) => {
+        console.log(res);
       },
       error: (err) => {
         console.log(err);

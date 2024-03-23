@@ -17,5 +17,6 @@ export class ArtistNavBarComponent {
     localStorage.clear();
     this.router.navigate(['/login']);
     this.commonServ.toggleToken$.next(false);
+    this.showSide = false;
   }
 }

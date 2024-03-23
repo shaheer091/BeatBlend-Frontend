@@ -8,9 +8,10 @@ import { SharedServiceService } from '../modules/shared/services/shared-service.
 })
 export class SocketService implements OnInit {
   private socket!: Socket;
-  senderId=this.sharedServ.parseJwt()
+  senderId:any;
 
-  constructor(private sharedServ:SharedServiceService) {
+  constructor(private sharedServ: SharedServiceService) {
+    this.senderId = this.sharedServ.parseJwt();
     this.socket = io('http://localhost:4000', {
       auth: {
         userid: `${this.senderId.userId}`,
@@ -26,7 +27,8 @@ export class SocketService implements OnInit {
 
   getMessage(): Observable<any> {
     return new Observable<any>((observer) => {
-      this.socket.on('message-broadcast', (data: any) => {
+      this.socket.on('receiveMessage', (data: any) => {
+        console.log(data);
         observer.next(data);
       });
     });
