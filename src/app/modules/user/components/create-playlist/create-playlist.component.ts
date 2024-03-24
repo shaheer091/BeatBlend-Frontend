@@ -42,6 +42,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
         this.playlistData = res[0];
         if (this.playlistData) {
           this.playlistName = this.playlistData.playlistName;
+          this.songId = this.playlistData.songId;
         }
       },
       error: (err) => {
@@ -104,8 +105,22 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
     }
   }
 
-  onEditPlaylist(){
-    
+  onEditPlaylist() {
+    // console.log(this.playlistName,this.songId,this.file);
+    this.formData.append('playlistName', this.playlistName);
+    this.formData.append('playlistImage', this.file);
+    this.songId.forEach((id) => {
+      this.formData.append('songIds[]', id);
+    });
+    this.userServ.editPlaylist(this.playlistData._id, this.formData).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.router.navigate(['/user/playlist'])
   }
 
   ngOnDestroy(): void {
