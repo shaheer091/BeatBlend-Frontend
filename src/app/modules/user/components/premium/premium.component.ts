@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PaymentService } from '../../services/payment.service';
+import { environment } from 'src/environments/environment';
 
 declare var Razorpay: any;
 
@@ -56,7 +57,7 @@ export class PremiumComponent {
       next: (res) => {
         this.orderId = res.id;
         const options = {
-          key: 'rzp_test_dRIwkROLF4t3ER',
+          key: environment.razorPayKey,
           amount: res.amount * 100,
           currency: 'INR',
           name: 'BeatBlend',

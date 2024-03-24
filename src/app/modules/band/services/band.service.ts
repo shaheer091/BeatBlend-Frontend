@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class BandService {
   constructor(private http: HttpClient) {}
 
-  bandApi: any = 'http://localhost:3000/band';
+  bandApi: any = `${environment.apiUrl}/band`;
 
   bandGetHome(): Observable<any> {
     return this.http.get(`${this.bandApi}/home`);

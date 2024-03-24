@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-  userApi = 'http://localhost:3000/user';
+  userApi = `${environment.apiUrl}/user`;
 
   getUserProfile(): Observable<any> {
     return this.http.get(`${this.userApi}/profile`);
