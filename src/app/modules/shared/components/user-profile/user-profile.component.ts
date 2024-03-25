@@ -26,9 +26,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.route.params.subscribe({
       next: (res) => {
         this.id = res['id'];
+        this.getUserProfile();
       },
     });
-    this.getUserProfile();
   }
   getUserProfile() {
     this.getSingleUser$ = this.commonServ.getSingleUser(this.id).subscribe({

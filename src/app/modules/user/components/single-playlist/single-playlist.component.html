@@ -1,5 +1,5 @@
 <div class="w-10/12 float-end">
-    <div class=" p-10">
+    <div class="p-10">
 
         <div class="flex">
             <img class="mr-6 h-44 w-44 object-cover rounded-3xl"
@@ -8,7 +8,7 @@
                 <h4 class="mt-0 mb-2 uppercase tracking-widest text-xs">Playlist</h4>
                 <h1 class="mt-0 mb-2 text-4xl">{{playlistDetails?.playlistName}}</h1>
 
-                <p class="text-sm">Created by you - {{playlistDetails?.songId?.length}} songs</p>
+                <p class="text-sm">Created by you - {{playlistDetails?.songs?.length}} songs</p>
             </div>
         </div>
 
@@ -34,9 +34,10 @@
 
             <div class="flex justify-evenly border-b cursor-pointer" *ngFor="let song of songs"
                 (click)="playSong(song?.songUrl)">
-                <div (click)="favSong($event,song)"><img
-                        [src]="song?.favorited ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
-                        class="h-5 w-5" alt=""></div>
+                <div (click)="favSong($event,song)">
+                    <img [src]="song?.favorited ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
+                        class="h-5 w-5" alt="">
+                </div>
                 <div class="p-3 w-full">{{song?.title}}</div>
                 <div class="p-3 w-full">{{song?.artists[0]?.username}}</div>
                 <div class="p-3 w-full">{{song?.genre}}</div>

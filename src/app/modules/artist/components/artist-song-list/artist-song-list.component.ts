@@ -50,12 +50,12 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (res) => {
             console.log(res);
+            this.getSong();
           },
           error: (err) => {
             console.log(err);
           },
         });
-      this.getSong();
       this.showDeleteDiv = false;
     } catch (err) {
       console.log(err);

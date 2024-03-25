@@ -81,11 +81,11 @@ export class ManageMembersComponent implements OnInit {
     this.bandServ.removeBandMember(userId).subscribe({
       next: (res) => {
         console.log(res);
+        this.getBandMembers();
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.getBandMembers();
   }
 }

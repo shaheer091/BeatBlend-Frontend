@@ -39,12 +39,12 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
         console.log(res);
+        this.getFavSong();
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.getFavSong();
   }
   playSong(songUrl: any) {
     this.songLink = songUrl;

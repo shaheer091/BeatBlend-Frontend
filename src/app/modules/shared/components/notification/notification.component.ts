@@ -35,24 +35,24 @@ export class NotificationComponent implements OnInit {
       next: (res) => {
         console.log(res);
         localStorage.setItem('isInBand','true')
+        this.getNotification();
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.getNotification();
   }
 
   declineInvite(bandId: any) {
     this.sharedServ.declineInvitation(bandId).subscribe({
       next: (res) => {
         console.log(res);
+        this.getNotification();
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.getNotification();
   }
   userProfile(event: any, userId: any) {
     event.stopPropagation();

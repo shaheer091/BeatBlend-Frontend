@@ -27,6 +27,7 @@ export class SocketService implements OnInit {
 
   getMessage(): Observable<any> {
     return new Observable<any>((observer) => {
+      console.log(observer);
       this.socket.on('receiveMessage', (data: any) => {
         console.log(data);
         observer.next(data);

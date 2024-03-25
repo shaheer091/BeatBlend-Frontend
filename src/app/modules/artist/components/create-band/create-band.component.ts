@@ -53,11 +53,6 @@ export class CreateBandComponent implements OnInit,OnDestroy {
   }
   changing(event: any) {
     const files = event.target.files;
-    // if (files.length > 0) {
-    //   this.bandForm.patchValue({
-    //     file: files[0],
-    //   });
-    // }
     this.formData.append('bandImage',files[0])
   }
 

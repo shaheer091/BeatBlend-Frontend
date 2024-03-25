@@ -49,8 +49,16 @@ export class SearchComponent implements OnDestroy {
     event.stopPropagation();
     this.followAndUnfollow$ = this.userServ
       .followAndUnfollowUser(userId)
-      .subscribe();
-    this.search();
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          this.search();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    
   }
   userProfile(userId: any) {
     this.router.navigate([`/user/user-profile/${userId}`]);

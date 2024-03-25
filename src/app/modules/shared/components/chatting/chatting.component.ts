@@ -18,8 +18,8 @@ export class ChattingComponent implements OnInit, OnDestroy {
   recievedMsg: any[] = [];
   myMessage: any;
   socket: any;
-  receiverName:any;
-  receiverImg:any;
+  receiverName: any;
+  receiverImg: any;
 
   constructor(
     private chatServ: SocketService,
@@ -32,7 +32,7 @@ export class ChattingComponent implements OnInit, OnDestroy {
     this.route.params.subscribe({
       next: (res) => {
         this.receiver = res['id'];
-        this.getUserProfile()
+        this.getUserProfile();
       },
       error: (err) => {
         console.log(err);
@@ -45,8 +45,8 @@ export class ChattingComponent implements OnInit, OnDestroy {
   getUserProfile() {
     this.commonServ.getSingleUser(this.receiver).subscribe({
       next: (res) => {
-        this.receiverName=res[0]?.username
-        this.receiverImg=res[0]?.profile[0]?.imageUrl
+        this.receiverName = res[0]?.username;
+        this.receiverImg = res[0]?.profile[0]?.imageUrl;
       },
       error: (err) => {
         console.log(err);
@@ -65,13 +65,18 @@ export class ChattingComponent implements OnInit, OnDestroy {
     }
   }
   getMessage() {
-    this.chatServ.getMessage().subscribe((data) => {
-      console.log(data);
-      data.timeDisplay = data.date.split('T')[1].slice(0, 5);
-      this.recievedMsg.push(data);
+    this.chatServ.getMessage().subscribe({
+      next: (data) => {
+        // console.log(data);
+        data.timeDisplay = data.date.split('T')[1].slice(0, 5);
+        this.recievedMsg.push(data);
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
   ngOnDestroy(): void {
-    this.socket.disconnect();
+    this.socket?.disconnect();
   }
 }

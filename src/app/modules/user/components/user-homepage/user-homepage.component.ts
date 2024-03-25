@@ -68,12 +68,12 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe({
       next: (res) => {
         console.log(res);
+        this.getSong()
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.getSong();
   }
 
   playSong(songUrl: any) {
@@ -86,12 +86,13 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     this.likeUnlikeSong$ = this.userServ.likeAndUnlikeSong(songId).subscribe({
       next: (res) => {
         console.log(res);
+        this.getSong();
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.getSong();
+    
   }
 
   commentSong(event: any, songId: any) {

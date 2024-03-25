@@ -56,12 +56,13 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res) => {
           console.log(res);
+          this.getSinglePlaylist();
         },
         error: (err) => {
           console.log(err);
         },
       });
-    this.getSinglePlaylist();
+    
   }
 
   deletePlaylist(playlistId: any) {
@@ -91,11 +92,13 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
         console.log(res);
+        this.getSinglePlaylist()
       },
       error: (err) => {
         console.log(err);
       },
     });
+    
   }
 
   editPlaylist(playlistId: any) {

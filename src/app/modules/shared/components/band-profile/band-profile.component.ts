@@ -21,9 +21,9 @@ export class BandProfileComponent implements OnInit,OnDestroy {
     this.route.params.subscribe({
       next: (params) => {
         this.bandId = params['id'];
+        this.getBandDetails()
       },
     });
-    this.getBandDetails()
   }
 
   getBandDetails() {

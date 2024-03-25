@@ -115,12 +115,12 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
     this.userServ.editPlaylist(this.playlistData._id, this.formData).subscribe({
       next: (res) => {
         console.log(res);
+        this.router.navigate(['/user/playlist'])
       },
       error: (err) => {
         console.log(err);
       },
     });
-    this.router.navigate(['/user/playlist'])
   }
 
   ngOnDestroy(): void {
