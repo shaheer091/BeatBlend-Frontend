@@ -12,8 +12,8 @@ export class AppComponent implements OnInit{
   showPlayer!: boolean;
   constructor(private commonServ: CommonService,private sharedServ:SharedServiceService) {}
   ngOnInit(): void {
-    const decodedToken = this.sharedServ.parseJwt();
-    this.commonServ.role=decodedToken.role;
+    const decodedToken = this.sharedServ?.parseJwt();
+    this.commonServ.role=decodedToken?.role;
     
     this.commonServ.toggleToken$.subscribe({
       next:(val)=>{

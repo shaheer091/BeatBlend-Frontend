@@ -2,21 +2,16 @@ import { Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { SharedServiceService } from '../modules/shared/services/shared-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SocketService implements OnInit {
-  private socket!: Socket;
-  senderId:any;
+  public socket!: Socket;
 
-  constructor(private sharedServ: SharedServiceService) {
-    this.senderId = this.sharedServ.parseJwt();
-    this.socket = io('http://localhost:4000', {
-      auth: {
-        userid: `${this.senderId.userId}`,
-      },
-    });
+  constructor(private http:HttpClient) {
+    // this.socket = io('http://localhost:4000')
   }
 
   ngOnInit() {}
@@ -27,11 +22,16 @@ export class SocketService implements OnInit {
 
   getMessage(): Observable<any> {
     return new Observable<any>((observer) => {
-      console.log(observer);
-      this.socket.on('receiveMessage', (data: any) => {
-        console.log(data);
+      this.socket?.on('receiveMessage', (data: any) => {
         observer.next(data);
       });
     });
+  }
+  getPrevoiusMsg(userId:any):Observable<any>{
+    return this.http.get(`http://localhost:3000/user/chats/${userId}`)
+  }
+
+  disconnect(){
+    this.socket?.disconnect();
   }
 }

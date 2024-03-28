@@ -29,7 +29,6 @@ export class BandSongsComponent implements OnInit {
     this.bandServ.getBandSongs().subscribe({
       next: (res) => {
         this.songs = res;
-        console.log(res);
       },
       error: (err) => {
         console.log(err);

@@ -38,7 +38,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res) => {
           this.playlistDetails = res?.playlist[0];
-          console.log(this.playlistDetails);
           if (res?.playlist[0]?.songs) {
             this.songs = res?.playlist[0]?.songs
           }

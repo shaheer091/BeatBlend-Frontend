@@ -87,7 +87,6 @@ export class UserService {
   }
 
   editPlaylist(playlistId:any,data:any):Observable<any>{
-    // console.log(playlistId);
     return this.http.patch(`${this.userApi}/editPlaylist/${playlistId}`,data)
   }
 

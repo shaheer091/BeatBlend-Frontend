@@ -66,7 +66,6 @@ export class CreateBandComponent implements OnInit,OnDestroy {
       });
       this.createBand$=this.artistServ.createBand(this.formData).subscribe({
         next: (res) => {
-          console.log(res);
           if(res.message){
             localStorage.setItem('isInBand','true')
             this.router.navigate(['/artist/home'])

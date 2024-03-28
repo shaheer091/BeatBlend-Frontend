@@ -34,7 +34,6 @@ export class BandAddSongComponent {
     if (this.songId) {
       this.bandServ.getBandSingleSong(this.songId).subscribe({
         next: (res) => {
-          console.log(res);
           this.songDetails = res;
           if (this.songDetails) {
             this.setSongFormValues(this.songDetails);
@@ -110,7 +109,6 @@ export class BandAddSongComponent {
   updateSong(songId: any) {
     this.bandServ.bandEditSong(this.songForm.value, songId).subscribe({
       next: (res) => {
-        console.log(res);
         this.success = res.success;
         this.message = res.message;
         this.description = res.discription;

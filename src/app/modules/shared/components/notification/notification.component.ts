@@ -19,7 +19,6 @@ export class NotificationComponent implements OnInit {
   getNotification() {
     this.sharedServ.getNotification().subscribe({
       next: (res) => {
-        console.log(res);
         this.bandInvitation = res.bandInvitation;
         this.newSongs = res.songs;
         this.message = res.message;

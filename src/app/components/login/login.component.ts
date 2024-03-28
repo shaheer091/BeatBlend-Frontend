@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
     try {
       if (this.loginForm.valid) {
         this.serv.apiLogin(this.loginForm.value).subscribe((res) => {
-          console.log(res);
           if (res.success) {
             localStorage.setItem('token', res.token);
             // localStorage.setItem('role', res.role);

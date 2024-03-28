@@ -78,7 +78,6 @@ export class PremiumComponent {
   }
   paymentResponseHandler(response: any) {
     this.data = response;
-    console.log(this.data);
     this.paymentServ.successPayent(this.data).subscribe({
       next: (res) => {
         console.log(res);

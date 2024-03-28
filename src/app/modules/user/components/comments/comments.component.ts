@@ -41,7 +41,6 @@ export class CommentsComponent implements OnInit {
   getComment() {
     this.userServ.getComment(this.songId).subscribe({
       next: (res) => {
-        console.log(res);
 
         if (res?.message) {
           this.message = res.message;

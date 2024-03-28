@@ -106,7 +106,6 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
   }
 
   onEditPlaylist() {
-    // console.log(this.playlistName,this.songId,this.file);
     this.formData.append('playlistName', this.playlistName);
     this.formData.append('playlistImage', this.file);
     this.songId.forEach((id) => {

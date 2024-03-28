@@ -27,7 +27,6 @@ export class ManageMembersComponent implements OnInit {
   getBandMembers() {
     this.bandServ.bandGetMembers().subscribe({
       next: (res) => {
-        console.log(res);
         this.bandDetails = res.band[0];
       },
       error: (err) => {

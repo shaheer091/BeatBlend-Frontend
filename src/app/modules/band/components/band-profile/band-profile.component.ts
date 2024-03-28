@@ -25,7 +25,6 @@ export class BandProfileComponent implements OnInit {
   bandGetProfile() {
     this.bandServ.bandGetProfile().subscribe({
       next: (res) => {
-        console.log(res);
         this.bandProfile = res[0];
         if (this.bandProfile) {
           this.bandProfileForm.patchValue({

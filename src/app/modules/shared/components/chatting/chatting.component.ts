@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SocketService } from 'src/app/services/socket.service';
 import { SharedServiceService } from '../../services/shared-service.service';
-import { io } from 'socket.io-client';
+import { Socket, io } from 'socket.io-client';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -17,9 +17,10 @@ export class ChattingComponent implements OnInit, OnDestroy {
   token: any = localStorage.getItem('token');
   recievedMsg: any[] = [];
   myMessage: any;
-  socket: any;
+  socket!: Socket;
   receiverName: any;
   receiverImg: any;
+  who: any;
 
   constructor(
     private chatServ: SocketService,
@@ -29,6 +30,8 @@ export class ChattingComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.senderId = this.sharedServ.parseJwt();
+    this.connectSocket();
+
     this.route.params.subscribe({
       next: (res) => {
         this.receiver = res['id'];
@@ -38,8 +41,30 @@ export class ChattingComponent implements OnInit, OnDestroy {
         console.log(err);
       },
     });
+    this.getPrevoiusMsg()
 
     this.getMessage();
+    this.who = this.sharedServ.parseJwt();
+  }
+
+  getPrevoiusMsg() {
+    this.chatServ.getPrevoiusMsg(this.receiver).subscribe({
+      next: (res) => {
+        this.recievedMsg=res
+        console.log(this.recievedMsg);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  connectSocket() {
+    this.chatServ.socket = io('http://localhost:4000', {
+      auth: {
+        userid: `${this.senderId.userId}`,
+      },
+    });
   }
 
   getUserProfile() {
@@ -61,13 +86,21 @@ export class ChattingComponent implements OnInit, OnDestroy {
         this.receiver,
         this.senderId.userId
       );
+      const time = new Date();
+      const myMsg = {
+        message: this.message,
+        sender: this.senderId.userId,
+        receiver: this.receiver,
+        timeDisplay: `${time.getHours()}:${time.getMinutes()}`,
+      };
+      this.recievedMsg.push(myMsg);
+      console.log(this.recievedMsg);
       this.message = '';
     }
   }
   getMessage() {
     this.chatServ.getMessage().subscribe({
       next: (data) => {
-        // console.log(data);
         data.timeDisplay = data.date.split('T')[1].slice(0, 5);
         this.recievedMsg.push(data);
       },
@@ -76,7 +109,8 @@ export class ChattingComponent implements OnInit, OnDestroy {
       },
     });
   }
+  
   ngOnDestroy(): void {
-    this.socket?.disconnect();
+    this.chatServ.socket.disconnect();
   }
 }
