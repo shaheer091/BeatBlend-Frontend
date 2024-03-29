@@ -1,13 +1,27 @@
-<div class="w-10/12 float-end band-profile-container">
-    <div *ngFor="let band of bandDetail" class="band-details">
-      <div class="band-header">
-        <img [src]="band?.bandImage" class="band-image" alt="">
-        <div class="band-name">{{band?.bandName}}</div>
+<div class="container w-10/12 float-end mx-auto px-4 py-8">
+  <div *ngFor="let band of bandDetail" class="bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="flex flex-col md:flex-row items-center px-6 py-4">
+      <img src="{{ band?.bandImage }}" alt="Band Image" class="w-36 h-36 rounded-full md:w-40 md:h-40 object-cover">
+      <div class="flex flex-col justify-center ml-4">
+        <h2 class="text-2xl font-bold mb-2">{{ band?.bandName }}</h2>
+        <p class="text-gray-600">{{ band?.genre }}</p>
       </div>
-      <div class="admin cursor-pointer"  (click)="getUserProfile(band?.bandAdmin?._id)">Admin: {{band?.bandAdmin?.username}}</div>
-      <div class="members">
-        <div *ngFor="let member of band?.bandMembers" class="member cursor-pointer" (click)="getUserProfile(member?._id)">{{member?.username}}</div>
+    </div>
+
+    <div class="p-4 bg-gray-100">
+      <div class="flex items-center mb-4">
+        <h4 class="font-semibold text-gray-800 mr-5">Admin:</h4>
+        <a class="text-blue-600 hover:underline cursor-pointer" (click)="getUserProfile(band?.bandAdmin?._id)">{{
+          band?.bandAdmin?.username }}</a>
+      </div>
+
+      <h4 class="font-semibold mb-2">Members:</h4>
+      <div class="flex flex-wrap">
+        <div *ngFor="let member of band?.bandMembers" class="px-4 py-2 rounded-md border border-gray-200 mb-2">
+          <a class="text-blue-600 hover:underline cursor-pointer" (click)="getUserProfile(member?._id)">{{
+            member?.username }}</a>
+        </div>
       </div>
     </div>
   </div>
-  
+</div>

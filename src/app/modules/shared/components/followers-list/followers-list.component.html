@@ -1,3 +1,12 @@
-<div class="h-screen w-10/12 float-end cursor-pointer">
-    <div *ngFor="let user of userList" (click)="getUserProfile(user._id)">{{user.username}}</div>
+<div class="h-screen w-10/12 float-end flex flex-col overflow-y-auto px-4 py-8">
+    <h3 class="text-xl font-bold mb-4">Followers</h3>
+    <ul class="space-y-4">
+        <li *ngFor="let user of userList"
+            class="flex items-center py-2 px-4 rounded-lg hover:bg-gray-100 cursor-pointer"
+            (click)="getUserProfile(user._id)">
+            <img [src]="user?.userProfile[0]?.imageUrl ? user?.userProfile[0]?.imageUrl : '../../../../../assets/images/account.png'"
+                alt="User Avatar" class="w-10 h-10 rounded-full mr-4 object-cover">
+            <div class="text-gray-800">{{ user?.username }}</div>
+        </li>
+    </ul>
 </div>

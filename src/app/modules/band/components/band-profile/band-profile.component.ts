@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BandService } from '../../services/band.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-band-profile',
@@ -14,7 +15,8 @@ export class BandProfileComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private bandServ: BandService
+    private bandServ: BandService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +66,7 @@ export class BandProfileComponent implements OnInit {
           console.log(err);
         },
       });
-    } else {
+      this.router.navigate(['/band/home'])
     }
   }
 

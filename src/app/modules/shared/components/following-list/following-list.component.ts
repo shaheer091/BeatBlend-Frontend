@@ -23,11 +23,15 @@ export class FollowingListComponent implements OnInit,OnDestroy {
     this.followingList$=this.sharedServ.getFollowingList().subscribe({
       next: (res) => {
         this.userList=res;
+        console.log(this.userList);
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+  getUserProfile(userId: any) {
+    this.router.navigate([`/user/user-profile/${userId}`]);
   }
 
   unfollowUser(userId:any){
