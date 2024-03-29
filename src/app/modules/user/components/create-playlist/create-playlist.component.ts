@@ -99,7 +99,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
           },
         });
     } else {
-      console.error('Please provide playlist name and songs');
+      alert('Please provide playlist name and songs');
     }
   }
 

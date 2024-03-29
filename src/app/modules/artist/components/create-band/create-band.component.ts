@@ -76,7 +76,7 @@ export class CreateBandComponent implements OnInit,OnDestroy {
         },
       });
     } else {
-      console.error('Enter the form details correctly');
+      alert('Enter the form details correctly');
     }
   }
   ngOnDestroy(): void {

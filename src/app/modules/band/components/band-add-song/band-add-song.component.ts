@@ -89,7 +89,7 @@ export class BandAddSongComponent {
           }
         },
         error: (err) => {
-          console.error(err);
+          alert(err);
         },
       });
     } else {
