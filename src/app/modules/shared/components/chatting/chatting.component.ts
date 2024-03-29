@@ -38,10 +38,10 @@ export class ChattingComponent implements OnInit, OnDestroy {
         this.getUserProfile();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
-    this.getPrevoiusMsg()
+    this.getPrevoiusMsg();
 
     this.getMessage();
     this.who = this.sharedServ.parseJwt();
@@ -50,11 +50,10 @@ export class ChattingComponent implements OnInit, OnDestroy {
   getPrevoiusMsg() {
     this.chatServ.getPrevoiusMsg(this.receiver).subscribe({
       next: (res) => {
-        this.recievedMsg=res
-        console.log(this.recievedMsg);
+        this.recievedMsg = res;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -74,7 +73,7 @@ export class ChattingComponent implements OnInit, OnDestroy {
         this.receiverImg = res[0]?.profile[0]?.imageUrl;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -94,7 +93,6 @@ export class ChattingComponent implements OnInit, OnDestroy {
         timeDisplay: `${time.getHours()}:${time.getMinutes()}`,
       };
       this.recievedMsg.push(myMsg);
-      console.log(this.recievedMsg);
       this.message = '';
     }
   }
@@ -105,11 +103,11 @@ export class ChattingComponent implements OnInit, OnDestroy {
         this.recievedMsg.push(data);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
-  
+
   ngOnDestroy(): void {
     this.chatServ.socket.disconnect();
   }

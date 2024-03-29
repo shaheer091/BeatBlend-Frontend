@@ -58,7 +58,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
         this.message = res.message;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -67,11 +67,10 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe({
       next: (res) => {
-        console.log(res);
-        this.getSong()
+        this.getSong();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -85,14 +84,12 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.likeUnlikeSong$ = this.userServ.likeAndUnlikeSong(songId).subscribe({
       next: (res) => {
-        console.log(res);
         this.getSong();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
-    
   }
 
   commentSong(event: any, songId: any) {

@@ -30,7 +30,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
         this.favSongs = res.favSongs;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -38,11 +38,10 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
-        console.log(res);
         this.getFavSong();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }

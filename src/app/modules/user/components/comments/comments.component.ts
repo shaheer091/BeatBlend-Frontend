@@ -8,10 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./comments.component.css'],
 })
 export class CommentsComponent implements OnInit {
-  constructor(
-    private userServ: UserService,
-    private router: Router,
-  ) {}
+  constructor(private userServ: UserService, private router: Router) {}
   @Input() songId: any;
   @Output() showCommentDiv = new EventEmitter<Boolean>();
   comments!: string;
@@ -30,10 +27,9 @@ export class CommentsComponent implements OnInit {
 
     this.userServ.addComment(this.data).subscribe({
       next: (res) => {
-        console.log(res);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -41,7 +37,6 @@ export class CommentsComponent implements OnInit {
   getComment() {
     this.userServ.getComment(this.songId).subscribe({
       next: (res) => {
-
         if (res?.message) {
           this.message = res.message;
         } else {
@@ -49,13 +44,13 @@ export class CommentsComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
 
   getUserProfile(userId: any) {
-    this.router.navigate([`/user/user-profile/${userId}`])
+    this.router.navigate([`/user/user-profile/${userId}`]);
   }
 
   cancelComment(event: any) {

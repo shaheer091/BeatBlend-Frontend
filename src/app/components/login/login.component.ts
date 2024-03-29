@@ -63,10 +63,10 @@ export class LoginComponent implements OnInit {
           }
         });
       } else {
-        console.log('Invalid form. Please check the fields.');
+        alert('Invalid form. Please check the fields.');
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      alert(error)
     }
   }
 }

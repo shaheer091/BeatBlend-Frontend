@@ -37,7 +37,7 @@ export class ArtistListComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -57,7 +57,7 @@ export class ArtistListComponent implements OnInit, OnDestroy {
           this.getArtist();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
     // window.location.reload();

@@ -37,7 +37,7 @@ export class CreateBandComponent implements OnInit,OnDestroy {
           this.artists = res.artists;
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message)
         },
       });
     }
@@ -72,7 +72,7 @@ export class CreateBandComponent implements OnInit,OnDestroy {
           }
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message)
         },
       });
     } else {

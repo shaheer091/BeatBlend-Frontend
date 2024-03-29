@@ -40,7 +40,7 @@ export class BandAddSongComponent {
           }
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message)
         },
       });
     }
@@ -114,7 +114,7 @@ export class BandAddSongComponent {
         this.description = res.discription;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }

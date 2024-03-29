@@ -38,7 +38,8 @@ export class SearchComponent implements OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
+
         if (err.status === 404) {
           this.user = err.users;
         }
@@ -51,14 +52,12 @@ export class SearchComponent implements OnDestroy {
       .followAndUnfollowUser(userId)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.search();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
-    
   }
   userProfile(userId: any) {
     this.router.navigate([`/user/user-profile/${userId}`]);

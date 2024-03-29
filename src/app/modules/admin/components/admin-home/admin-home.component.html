@@ -1,13 +1,20 @@
-<p class="text-2xl font-bold">welcome, {{username}}</p>
-<div class="h-36 w-36 border cursor-pointer" [routerLink]="'/admin/userList'">
-    total users
-    {{users?.length}}
-</div>
-<div class="h-36 w-36 border cursor-pointer" [routerLink]="'/admin/artistList'">
-    total artists
-    {{artists?.length}}
-</div>
-<div class="h-36 w-36 border cursor-pointer" [routerLink]="'/admin/pendingUsersList'">
-    pending requests
-    {{pendingUsers?.length}}
+<div class="text-center mt-10">
+    <p class="text-4xl font-bold mb-6">Welcome, {{username}}</p>
+    <div class="flex justify-center gap-8">
+        <div [routerLink]="'/admin/userList'"
+            class="border rounded-lg cursor-pointer p-6 hover:shadow-lg transform transition duration-300 hover:scale-105">
+            <p class="text-2xl font-bold mb-4">Total Users</p>
+            <p class="text-3xl font-bold">{{users?.length}}</p>
+        </div>
+        <div [routerLink]="'/admin/artistList'"
+            class="border rounded-lg cursor-pointer p-6 hover:shadow-lg transform transition duration-300 hover:scale-105">
+            <p class="text-2xl font-bold mb-4">Total Artists</p>
+            <p class="text-3xl font-bold">{{artists?.length}}</p>
+        </div>
+        <div [routerLink]="'/admin/pendingUsersList'"
+            class="border rounded-lg cursor-pointer p-6 hover:shadow-lg transform transition duration-300 hover:scale-105">
+            <p class="text-2xl font-bold mb-4">Pending Requests</p>
+            <p class="text-3xl font-bold">{{pendingUsers?.length}}</p>
+        </div>
+    </div>
 </div>

@@ -30,7 +30,7 @@ export class ManageMembersComponent implements OnInit {
         this.bandDetails = res.band[0];
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }
@@ -42,10 +42,9 @@ export class ManageMembersComponent implements OnInit {
   addMembers() {
     this.bandServ.addBandMember(this.selectedArtists).subscribe({
       next: (res) => {
-        console.log(res);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
     this.addMember = false;
@@ -71,7 +70,7 @@ export class ManageMembersComponent implements OnInit {
         this.artists = res.artists;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }
@@ -79,11 +78,10 @@ export class ManageMembersComponent implements OnInit {
   removeMembers(userId: any) {
     this.bandServ.removeBandMember(userId).subscribe({
       next: (res) => {
-        console.log(res);
         this.getBandMembers();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }

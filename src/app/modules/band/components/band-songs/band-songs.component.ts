@@ -31,7 +31,8 @@ export class BandSongsComponent implements OnInit {
         this.songs = res;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
+
       },
     });
   }
@@ -49,12 +50,11 @@ export class BandSongsComponent implements OnInit {
   deleteSong() {
     this.artistServ.artistDeleteSong(this.idSong).subscribe({
       next: (res) => {
-        console.log(res);
         this.getBandSongs();
         this.showDeleteDiv=false;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }

@@ -26,7 +26,8 @@ export class FollowersListComponent implements OnInit, OnDestroy {
         this.userList = res;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
+
       },
     });
   }

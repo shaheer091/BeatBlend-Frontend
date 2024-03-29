@@ -63,7 +63,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
         controls['gender']?.patchValue(gender);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -98,14 +98,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this.message = 'please wait saving the changes ...';
         },
         error: (error) => {
-          console.log(`Error updating profile ${error.message}`);
+          alert(error.error.message)
+
         },
       });
       setTimeout(() => {
         this.router.navigate(['/user/home']);
       }, 2000);
     } else {
-      console.log('Form is invalid. Please check the fields.');
+      alert('Form is invalid. Please check the fields.');
     }
   }
   verifyPhone() {
@@ -117,11 +118,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.showOtp = true;
           },
           error: (err) => {
-            console.log(err);
+            alert(err.error.message);
           },
         });
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   }
 
@@ -137,11 +138,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
             }, 1000);
           },
           error: (err) => {
-            console.log(err);
+            alert(err.error.message);
           },
         });
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   }
 

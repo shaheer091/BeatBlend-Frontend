@@ -34,7 +34,8 @@ export class BandProfileComponent implements OnInit,OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
+
       },
     });
   }

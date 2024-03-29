@@ -58,7 +58,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
         this.message = '';
       }, 2000);
     } catch (err) {
-      console.log('setting page', err);
+      alert(err)
     }
   }
 
@@ -72,7 +72,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }

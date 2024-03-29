@@ -21,7 +21,8 @@ export class BandHomeComponent implements OnInit, OnDestroy {
         this.bandDetails = res[0];
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
+
       },
     });
   }

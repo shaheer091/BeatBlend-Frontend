@@ -8,11 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./notification.component.css'],
 })
 export class NotificationComponent implements OnInit {
-  constructor(private sharedServ: SharedServiceService,private router:Router,private songSerivce: SharedServiceService) {}
+  constructor(
+    private sharedServ: SharedServiceService,
+    private router: Router,
+    private songSerivce: SharedServiceService
+  ) {}
   bandInvitation: any;
   newSongs: any;
   message: any;
-  songLink:any;
+  songLink: any;
   ngOnInit(): void {
     this.getNotification();
   }
@@ -24,7 +28,7 @@ export class NotificationComponent implements OnInit {
         this.message = res.message;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -32,12 +36,11 @@ export class NotificationComponent implements OnInit {
   acceptInvite(bandId: any) {
     this.sharedServ.acceptInvitation(bandId).subscribe({
       next: (res) => {
-        console.log(res);
-        localStorage.setItem('isInBand','true')
+        localStorage.setItem('isInBand', 'true');
         this.getNotification();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -45,11 +48,10 @@ export class NotificationComponent implements OnInit {
   declineInvite(bandId: any) {
     this.sharedServ.declineInvitation(bandId).subscribe({
       next: (res) => {
-        console.log(res);
         this.getNotification();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }

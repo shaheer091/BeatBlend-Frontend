@@ -37,7 +37,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.userSongs = res[0]?.songs;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
+
       },
     });
   }

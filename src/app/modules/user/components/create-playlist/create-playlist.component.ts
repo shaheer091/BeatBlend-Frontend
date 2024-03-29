@@ -38,7 +38,6 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
   getPlaylistData() {
     this.userServ.getSinglePlaylistData(this.playlistId).subscribe({
       next: (res) => {
-        console.log(res);
         this.playlistData = res[0];
         if (this.playlistData) {
           this.playlistName = this.playlistData.playlistName;
@@ -46,7 +45,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -60,7 +59,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -93,11 +92,10 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
         .createPlaylist(this.formData)
         .subscribe({
           next: (res) => {
-            console.log(res);
-            this.router.navigate(['/user/playlist']);
+                this.router.navigate(['/user/playlist']);
           },
           error: (err) => {
-            console.log(err);
+            alert(err.error.message);
           },
         });
     } else {
@@ -113,11 +111,10 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
     });
     this.userServ.editPlaylist(this.playlistData._id, this.formData).subscribe({
       next: (res) => {
-        console.log(res);
-        this.router.navigate(['/user/playlist'])
+        this.router.navigate(['/user/playlist']);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }

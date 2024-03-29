@@ -8,7 +8,7 @@ import { Subscription, filter } from 'rxjs';
   templateUrl: './admin-home.component.html',
   styleUrls: ['./admin-home.component.css'],
 })
-export class AdminHomeComponent implements OnInit,OnDestroy {
+export class AdminHomeComponent implements OnInit, OnDestroy {
   constructor(
     private sharedServ: SharedServiceService,
     private adminServ: AdminService
@@ -16,8 +16,8 @@ export class AdminHomeComponent implements OnInit,OnDestroy {
   username: any;
   users: any;
   artists: any;
-  pendingUsers:any;
-  getHome$=new Subscription()
+  pendingUsers: any;
+  getHome$ = new Subscription();
   ngOnInit(): void {
     const decodedToken = this.sharedServ.parseJwt();
     this.username = decodedToken.username;
@@ -25,10 +25,10 @@ export class AdminHomeComponent implements OnInit,OnDestroy {
   }
 
   getHome() {
-    this.getHome$=this.adminServ.getAdminHome().subscribe({
+    this.getHome$ = this.adminServ.getAdminHome().subscribe({
       next: (res) => {
-        if(res?.pendingUsers){
-          this.pendingUsers=res?.pendingUsers;
+        if (res?.pendingUsers) {
+          this.pendingUsers = res?.pendingUsers;
         }
         const resp = res?.users;
         this.users = resp.filter((e: any) => {
@@ -39,11 +39,11 @@ export class AdminHomeComponent implements OnInit,OnDestroy {
         });
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
   ngOnDestroy(): void {
-    this.getHome$.unsubscribe()
+    this.getHome$.unsubscribe();
   }
 }

@@ -72,7 +72,7 @@ export class PremiumComponent {
         rzp.open();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -80,10 +80,9 @@ export class PremiumComponent {
     this.data = response;
     this.paymentServ.successPayent(this.data).subscribe({
       next: (res) => {
-        console.log(res);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }

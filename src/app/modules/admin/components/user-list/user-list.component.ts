@@ -40,7 +40,7 @@ export class UserListComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -60,14 +60,14 @@ export class UserListComponent implements OnInit, OnDestroy {
           this.getUser();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
     this.showDelDiv = false;
   }
 
   getUserDetails(userId: any) {
-    this.router.navigate([`/admin/user-profile/${userId}`])
+    this.router.navigate([`/admin/user-profile/${userId}`]);
   }
 
   blockUser(event: any, userId: any) {
@@ -76,11 +76,10 @@ export class UserListComponent implements OnInit, OnDestroy {
       .changeBlockStatus(userId)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.getUser();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
   }

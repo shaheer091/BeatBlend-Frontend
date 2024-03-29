@@ -5,24 +5,26 @@ import { SharedServiceService } from './modules/shared/services/shared-service.s
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'frontend';
   showPlayer!: boolean;
-  constructor(private commonServ: CommonService,private sharedServ:SharedServiceService) {}
+  constructor(
+    private commonServ: CommonService,
+    private sharedServ: SharedServiceService
+  ) {}
   ngOnInit(): void {
     const decodedToken = this.sharedServ?.parseJwt();
-    this.commonServ.role=decodedToken?.role;
-    
+    this.commonServ.role = decodedToken?.role;
+
     this.commonServ.toggleToken$.subscribe({
-      next:(val)=>{
-        this.showPlayer=val
+      next: (val) => {
+        this.showPlayer = val;
       },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
+      error: (err) => {
+        alert(err.error.message);
+      },
+    });
   }
-  
 }

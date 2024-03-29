@@ -37,7 +37,8 @@ export class BandProfileComponent implements OnInit {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
+
       },
     });
   }
@@ -60,10 +61,10 @@ export class BandProfileComponent implements OnInit {
       this.formData.append('bandImage', value.bandImage);
       this.bandServ.bandAddProfile(this.formData).subscribe({
         next: (res) => {
-          console.log(res);
         },
         error: (err) => {
-          console.log(err);
+        alert(err.error.message)
+
         },
       });
       this.router.navigate(['/band/home'])

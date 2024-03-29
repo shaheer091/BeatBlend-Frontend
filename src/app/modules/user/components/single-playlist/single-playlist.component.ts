@@ -39,39 +39,36 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
         next: (res) => {
           this.playlistDetails = res?.playlist[0];
           if (res?.playlist[0]?.songs) {
-            this.songs = res?.playlist[0]?.songs
+            this.songs = res?.playlist[0]?.songs;
           }
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
   }
 
-  removeFromPlaylist(event: any, songId: any, playlistId:any) {
+  removeFromPlaylist(event: any, songId: any, playlistId: any) {
     event.stopPropagation();
     this.removeFromPlaylist$ = this.userServ
-      .removeFromPlaylist(songId,playlistId)
+      .removeFromPlaylist(songId, playlistId)
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.getSinglePlaylist();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
-    
   }
 
   deletePlaylist(playlistId: any) {
     this.deletePlaylist$ = this.userServ.deletePlaylist(playlistId).subscribe({
       next: (res) => {
-        console.log(res);
         this.router.navigate(['/user/playlist']);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -90,14 +87,12 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
-        console.log(res);
-        this.getSinglePlaylist()
+        this.getSinglePlaylist();
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
-    
   }
 
   editPlaylist(playlistId: any) {
