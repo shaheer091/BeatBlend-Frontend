@@ -22,14 +22,15 @@
   </div>
 </div>
 
-<div class="sm:hidden flex w-full h-16 border-2 fixed bg-white z-10 justify-evenly items-center bottom-0 ">
+<div class="sm:hidden  flex w-full h-16 border-2 fixed bg-white z-50 justify-evenly items-center bottom-0 ">
   <div *ngFor="let items of mobileScreenNavBar">
     <img (click)="mobileNavigation(items.title)" [src]="items.logo" class="cursor-pointer h-5 w-5" alt="">
   </div>
-  <div *ngIf="showMore" class="border flex flex-col justify-evenly items-center h-36 w-36 bg-white absolute right-0 bottom-[60px] z-10">
+  <div *ngIf="showMore"
+    class="border flex flex-col justify-evenly items-center h-36 w-36 bg-white absolute right-0 bottom-[60px] z-10">
     <div (click)="showMore=false" [routerLink]="'/user/settings'">Settings</div>
     <div (click)="showMore=false" [routerLink]="'/user/notification'">Notification</div>
     <div (click)="showMore=false" [routerLink]="'/user/playlist'">Playlist</div>
-    <div (click)="logout()" >Logout</div>
+    <div (click)="logout()">Logout</div>
   </div>
 </div>
