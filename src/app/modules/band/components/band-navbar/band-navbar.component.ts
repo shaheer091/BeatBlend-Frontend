@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 import { CommonService } from 'src/app/services/common.service';
+import { SocketService } from 'src/app/services/socket.service';
 
 @Component({
   selector: 'app-band-navbar',
@@ -12,7 +13,8 @@ export class BandNavbarComponent{
   constructor(
     private router: Router,
     private commonServ: CommonService,
-    private sharedServ: SharedServiceService
+    private sharedServ: SharedServiceService,
+    private chatServ:SocketService
   ) {}
   showSide: Boolean = false;
   showSideBar() {
@@ -23,5 +25,6 @@ export class BandNavbarComponent{
     this.router.navigate(['/login']);
     this.showSide=false;
     this.commonServ.toggleToken$.next(false);
+    this.chatServ.socket.disconnect();
   }
 }

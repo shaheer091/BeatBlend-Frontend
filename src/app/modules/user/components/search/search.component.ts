@@ -38,8 +38,6 @@ export class SearchComponent implements OnDestroy {
         }
       },
       error: (err) => {
-        alert(err.error.message);
-
         if (err.status === 404) {
           this.user = err.users;
         }

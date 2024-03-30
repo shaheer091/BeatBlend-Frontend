@@ -1,7 +1,7 @@
-<div class="float-end flex flex-col items-center justify-center w-full h-[480px] text-gray-800 p-10">
-    <p>{{ who.username }}</p>
+<div class="md:float-end flex flex-col items-center justify-center w-full h-[480px] text-gray-800 p-10">
+    <!-- <p>{{ who.username }}</p> -->
 
-    <div class="flex flex-col flex-grow min-w-4/12 w-6/12 bg-white shadow-xl rounded-lg overflow-hidden">
+    <div class="flex flex-col flex-grow w-full md:w-6/12 bg-white shadow-xl rounded-lg overflow-hidden">
         <div class="flex items-center justify-start p-3 border-b">
             <img [src]="receiverImg" class="h-6 w-6 rounded-full" alt="">
             <p>{{ receiverName }}</p>

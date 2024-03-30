@@ -4,6 +4,7 @@ import { SocketService } from 'src/app/services/socket.service';
 import { SharedServiceService } from '../../services/shared-service.service';
 import { Socket, io } from 'socket.io-client';
 import { CommonService } from 'src/app/services/common.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-chatting',
@@ -30,7 +31,7 @@ export class ChattingComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.senderId = this.sharedServ.parseJwt();
-    this.connectSocket();
+    
 
     this.route.params.subscribe({
       next: (res) => {
@@ -38,13 +39,13 @@ export class ChattingComponent implements OnInit, OnDestroy {
         this.getUserProfile();
       },
       error: (err) => {
-        alert(err.error.message);
+        console.log(`Error: ${err}`)
       },
     });
     this.getPrevoiusMsg();
 
     this.getMessage();
-    this.who = this.sharedServ.parseJwt();
+    // this.who = this.sharedServ.parseJwt();
   }
 
   getPrevoiusMsg() {
@@ -53,18 +54,12 @@ export class ChattingComponent implements OnInit, OnDestroy {
         this.recievedMsg = res;
       },
       error: (err) => {
-        alert(err.error.message);
+        
       },
     });
   }
 
-  connectSocket() {
-    this.chatServ.socket = io('http://localhost:4000', {
-      auth: {
-        userid: `${this.senderId.userId}`,
-      },
-    });
-  }
+  
 
   getUserProfile() {
     this.commonServ.getSingleUser(this.receiver).subscribe({
@@ -109,6 +104,6 @@ export class ChattingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.chatServ.socket.disconnect();
+    
   }
 }

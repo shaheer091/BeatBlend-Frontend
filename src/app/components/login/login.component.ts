@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { io } from 'socket.io-client';
+import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
 import { CommonService } from 'src/app/services/common.service';
+import { SocketService } from 'src/app/services/socket.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +18,7 @@ export class LoginComponent implements OnInit {
   usernameOrEmail: any;
   message: any;
   hidePassword: boolean = true;
-  // role: any;
+  senderId:any;
 
   togglePasswordVisibility(): void {
     this.hidePassword = !this.hidePassword;
@@ -23,7 +27,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private serv: CommonService,
-    private router: Router
+    private router: Router,
+    private sharedServ:SharedServiceService,
+    private chatServ:SocketService
   ) {}
 
   ngOnInit(): void {
@@ -43,9 +49,9 @@ export class LoginComponent implements OnInit {
         this.serv.apiLogin(this.loginForm.value).subscribe((res) => {
           if (res.success) {
             localStorage.setItem('token', res.token);
-            // localStorage.setItem('role', res.role);
+            this.senderId = this.sharedServ.parseJwt();
+            this.connectSocket();
             this.serv.toggleToken$.next(true);
-            // this.role = res.role;
             this.serv.role = res.role;
             if (res.isInBand == 'true') {
               localStorage.setItem('isInBand', 'true');
@@ -68,5 +74,12 @@ export class LoginComponent implements OnInit {
     } catch (error) {
       alert(error)
     }
+  }
+  connectSocket() {
+    this.chatServ.socket = io(environment.socketUrl, {
+      auth: {
+        userid: `${this.senderId.userId}`,
+      },
+    });
   }
 }

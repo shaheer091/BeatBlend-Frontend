@@ -70,7 +70,6 @@ export class ManageMembersComponent implements OnInit {
         this.artists = res.artists;
       },
       error: (err) => {
-        alert(err.error.message)
       },
     });
   }
