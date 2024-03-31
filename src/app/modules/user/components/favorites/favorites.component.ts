@@ -30,7 +30,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
         this.favSongs = res.favSongs;
       },
       error: (err) => {
-        alert(err.error.message);
+        alert(err.error.error)
       },
     });
   }

@@ -14,24 +14,18 @@ import { SharedServiceService } from '../../services/shared-service.service';
 })
 export class MusicPlayerComponent implements OnInit, AfterViewInit {
   @ViewChild('audioPlayer') audioPlayer: any;
-  constructor(private songServ: SharedServiceService) {
-    this.songServ.songUrl$.subscribe((url: string) => {
-      this.songUrl = url;
-      this.playSong();
-    });
-  }
+  constructor(private songServ: SharedServiceService) {}
   storedSongUrl: any;
   storedTime: any;
   songUrl = '';
 
   ngOnInit(): void {
-    window.addEventListener('beforeunload', () => {
-      this.storeSongInfo();
-    });
-
     this.songServ.songUrl$.subscribe((url: string) => {
       this.songUrl = url;
       this.playSong();
+    });
+    window.addEventListener('beforeunload', () => {
+      this.storeSongInfo();
     });
   }
 
@@ -43,6 +37,7 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
 
   loadStoredSong(): void {
     this.storedSongUrl = localStorage.getItem('songLink');
+    this.songUrl = this.storedSongUrl;
     this.storedTime = localStorage.getItem('songTime');
 
     if (this.storedSongUrl && this.storedTime) {
@@ -61,14 +56,16 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
   }
 
   playSong() {
+    if (!this.audioPlayer || !this.audioPlayer.nativeElement) {
+      return;
+    }
     if (!this.songUrl) {
       this.loadStoredSong(); // Load from local storage if songUrl is empty
-    } else if (this.songUrl) {
+    } else {
       this.audioPlayer.nativeElement.src = this.songUrl;
       this.audioPlayer.nativeElement.load();
-      this.audioPlayer.nativeElement.addEventListener('loadeddata', () => {
-        this.audioPlayer.nativeElement.play();
-      });
+      this.audioPlayer.nativeElement.play();
+      console.log(this.audioPlayer.nativeElement.paused);
     }
   }
 }

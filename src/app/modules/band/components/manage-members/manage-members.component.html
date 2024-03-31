@@ -1,39 +1,47 @@
-<div class="band-details-container">
-    <div class="band-image-wrapper">
-        <img class="band-image" [src]="bandDetails?.bandImage" alt="Band Logo" />
+<div class="flex items-center justify-between p-5 border border-gray-300 rounded-lg shadow-md">
+    <div class="w-24 h-24 overflow-hidden rounded-full">
+        <img class="w-full h-full object-cover" [src]="bandDetails?.bandImage" alt="Band Logo" />
     </div>
-    <div class="band-info">
-        <h2 class="band-name">{{bandDetails?.bandName}}</h2>
-        <p class="band-admin">Admin: {{bandDetails?.bandAdmin[0]?.username}}</p>
-        
+    <div class="flex-1 ml-5">
+        <h2 class="text-xl font-bold mb-2">{{bandDetails?.bandName}}</h2>
+        <p class="mb-2">Admin: {{bandDetails?.bandAdmin[0]?.username}}</p>
+
         <!-- Member Actions -->
-        <div class="member-actions" *ngIf="addMember">
-            <input type="text" (keyup)="searchArtist()" [(ngModel)]="searchText" placeholder="Search for artists">
-            <div *ngIf="artists" class="artist-list">
-                <div *ngFor="let artist of artists" class="artist-item">
+        <div class="mb-4" *ngIf="addMember">
+            <input type="text" (keyup)="searchArtist()" [(ngModel)]="searchText" placeholder="Search for artists"
+                class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+            <div *ngIf="artists" class="mt-2">
+                <div *ngFor="let artist of artists" class="flex items-center mb-2">
                     <input type="checkbox" [checked]="selectedArtists.includes(artist._id)"
-                        (change)="toggleSelection(artist._id)">
+                        (change)="toggleSelection(artist._id)" class="mr-2">
                     <label>{{ artist.username }}</label>
                 </div>
             </div>
-            <button class="action-button add-button" (click)="addMembers()">Add</button>
-            <button class="action-button cancel-button" (click)="onCancel()">Cancel</button>
+            <button class="p-2 bg-green-500 text-white rounded-md mr-2 hover:bg-green-600 focus:outline-none"
+                (click)="addMembers()">Add</button>
+            <button class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none"
+                (click)="onCancel()">Cancel</button>
         </div>
-        
+
         <!-- Add Members Button -->
-        <button class="add-member-button" (click)="addMember = true" *ngIf="!addMember">Add Members</button>
-        
+        <button class="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none mb-2"
+            (click)="addMember = true" *ngIf="!addMember">Add Members</button>
+
         <!-- Members List -->
-        <p class="members-title">Members:</p>
-        <div class="members-list">
-            <div class="member-item" *ngFor="let member of bandDetails?.bandMembers">
-                <p class="member-name" (click)="getUserProfile(member._id)">
+        <p class="text-lg font-bold mt-4 mb-2">Members:</p>
+        <div class="mb-4">
+            <div *ngFor="let member of bandDetails?.bandMembers" class="flex items-center justify-between border-b border-gray-300 py-2">
+                <p class="cursor-pointer hover:underline" (click)="getUserProfile(member._id)">
                     {{member.username}}
                 </p>
-                <button class="action-button remove-button" (click)="removeMembers(member._id)">
+                <button class="p-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none"
+                    (click)="removeMembers(member._id)">
                     Remove
                 </button>
             </div>
         </div>
     </div>
 </div>
+
+<p [routerLink]="'/artist/home'"
+    class="cursor-pointer text-blue-500 hover:text-blue-700 transition-colors duration-300">Switch to Artist</p>

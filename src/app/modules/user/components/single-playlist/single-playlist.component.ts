@@ -23,7 +23,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   singlePlaylist$ = new Subscription();
   removeFromPlaylist$ = new Subscription();
   deletePlaylist$ = new Subscription();
-  favAndUnfav$ = new Subscription();
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -46,6 +45,10 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
           alert(err.error.message);
         },
       });
+  }
+
+  getArtist(userId:any){
+    this.router.navigate([`/user/user-profile/${userId}`]);
   }
 
   removeFromPlaylist(event: any, songId: any, playlistId: any) {
@@ -83,18 +86,6 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     this.sharedServ.setSongUrl(songUrl);
   }
 
-  favSong(event: any, songId: any) {
-    event.stopPropagation();
-    this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
-      next: (res) => {
-        this.getSinglePlaylist();
-      },
-      error: (err) => {
-        alert(err.error.message);
-      },
-    });
-  }
-
   editPlaylist(playlistId: any) {
     this.router.navigate([`/user/editPlaylist/${playlistId}`]);
   }
@@ -103,6 +94,5 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     this.singlePlaylist$?.unsubscribe();
     this.removeFromPlaylist$?.unsubscribe();
     this.deletePlaylist$?.unsubscribe();
-    this.favAndUnfav$?.unsubscribe();
   }
 }
