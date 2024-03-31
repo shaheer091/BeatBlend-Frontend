@@ -1,12 +1,15 @@
-<p class="font-bold text-3xl gradient-text">hey, {{artistDetails?.username}}</p>
-<div class="w-screen flex gap-5">
-  <div class="h-36 w-36 border card1 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase" [routerLink]="'/artist/followingList'">following 
-    <span>{{artistDetails?.following?.length}}</span>
+<p class="font-bold text-3xl gradient-text mb-7">hey, {{artistDetails?.username}}</p>
+<div class="w-screen sm:flex flex justify-center items-center flex-col gap-5">
+  <div class="h-36 w-36 border card1 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
+    [routerLink]="'/artist/followingList'">following 
+    {{ artistDetails?.following?.length}}
   </div>
-  <div class="h-36 w-36 border card2 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase" [routerLink]="'/artist/followersList'">followers
-    <span>{{artistDetails?.followers?.length}}</span>
+  <div class="h-36 w-36 border card2 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
+    [routerLink]="'/artist/followersList'">followers 
+    {{artistDetails?.followers?.length}}
   </div>
-  <div class="h-36 w-36 border card3 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase" [routerLink]="'/artist/songs'">songs
-    <span>{{artistDetails?.songs?.length}}</span>
+  <div class="h-36 w-36 border card3 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
+    [routerLink]="'/artist/songs'">songs 
+    {{artistDetails?.songs?.length}}
   </div>
 </div>
