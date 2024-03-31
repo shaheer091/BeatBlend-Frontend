@@ -34,5 +34,14 @@
                 Requests</a>
             <a (click)="onLogout()" class="text-white hover:text-gray-300 cursor-pointer">Logout</a>
         </div>
+
+        <div class="bg-white text-black flex justify-evenly items-center fixed bottom-0 left-0 w-full h-16 sm:hidden">
+            <img src="../../../../../assets/images/home.png" class="h-5 w-5 hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+              [routerLink]="'/admin/home'">
+            <img src="../../../../../assets/images/icons8-users-30.png" class="h-7 w-7 hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+              [routerLink]="'/admin/userList'">
+            <img src="../../../../../assets/images/power-off.png" class="h-5 w-5 hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+              [routerLink]="'/artist/settings'">
+          </div>
     </div>
 </nav>

@@ -1,19 +1,24 @@
-
-<div *ngIf="!success" class="text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-md p-4 mt-4 shadow-md">
+<div *ngIf="!success"
+  class="text-center text-gray-500 bg-gray-100 border border-gray-300 rounded-md p-4 mt-4 shadow-md">
   {{ message }}
 </div>
 <table *ngIf="success" class="min-w-full divide-y divide-gray-200">
   <thead>
     <tr>
-      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Username</th>
-      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Email</th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Username</th>
+      <th
+        class="px-6 py-3 hidden md:flex bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Email</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
     <tr *ngFor="let admin of adminData" class="hover:bg-gray-100">
       <td class="px-6 py-4 whitespace-no-wrap">{{ admin.username }}</td>
-      <td class="px-6 py-4 whitespace-no-wrap">{{ admin.email }}</td>
-      <td class="px-6 py-4 whitespace-no-wrap" *ngIf="admin._id != userId.userId"><button (click)="chatWith(admin._id)" class="bg-green-500 px-9 py-2 rounded-2xl text-white hover:bg-green-700">Chat</button></td>
+      <td class="px-6 py-4 whitespace-no-wrap hidden md:flex">{{ admin.email }}</td>
+      <td class="px-6 py-4 whitespace-no-wrap" *ngIf="admin._id != userId.userId"><button (click)="chatWith(admin._id)"
+          class="bg-green-500 px-9 py-2 rounded-2xl text-white hover:bg-green-700">Chat</button></td>
     </tr>
   </tbody>
 </table>

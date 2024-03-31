@@ -48,6 +48,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
           this.artistVerification$ = this.userServ
             .artistVerification(this.socialMediaLink)
             .subscribe();
+            this.showDiv=false;
         } else {
           this.message = 'the provided link is not valid';
         }

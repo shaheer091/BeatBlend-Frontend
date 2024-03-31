@@ -8,20 +8,21 @@
     <tr>
       <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
         Username</th>
-      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      <th class="px-6 hidden md:flex py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
         Email</th>
-      <th class="px-6 py-3 bg-gray-50"></th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Action</th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
     <tr *ngFor="let artist of artistData" class="hover:bg-gray-100" (click)="getUserDetails(artist._id)">
       <td class="px-6 py-4 whitespace-no-wrap">{{ artist.username }}</td>
-      <td class="px-6 py-4 whitespace-no-wrap">{{ artist.email }}</td>
+      <td class="px-6 py-4 whitespace-no-wrap hidden md:flex">{{ artist.email }}</td>
       <td class="px-6 py-4 whitespace-no-wrap">
         <button *ngIf="!artist.deleteStatus" (click)="showDeleteDiv($event,artist._id)"
           class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Delete</button>
         <button *ngIf="artist.deleteStatus" (click)="showDeleteDiv($event,artist._id)"
-          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Undelete</button>
+          class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Undo</button>
       </td>
     </tr>
   </tbody>

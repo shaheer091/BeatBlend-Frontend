@@ -7,14 +7,14 @@
   <thead>
     <tr>
       <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Username</th>
-      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Email</th>
+      <th class="hidden md:flex px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Email</th>
       <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Actions</th>
     </tr>
   </thead>
   <tbody class="bg-white divide-y divide-gray-200">
     <tr *ngFor="let pending of pendingData" class="hover:bg-gray-100" (click)="getUserDetails(pending._id)">
       <td class="px-6 py-4 whitespace-no-wrap">{{ pending.username }}</td>
-      <td class="px-6 py-4 whitespace-no-wrap">{{ pending.email }}</td>
+      <td class="px-6 py-4 whitespace-no-wrap hidden md:flex">{{ pending.email }}</td>
       <td class="px-6 py-4 whitespace-no-wrap">
         <button (click)="showApproveDiv($event,pending.userId)" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2">Approve</button>
         <button (click)="showDeclineDiv($event,pending.userId)" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Decline</button>
