@@ -40,4 +40,7 @@ export class AdminService {
   pendingDecline(userId:any):Observable<any>{
     return this.http.delete(`${this.adminApi}/declineUser/${userId}`)
   }
+  changeSongBlockStatus(songId:any):Observable<any>{
+    return this.http.patch(`${this.adminApi}/changeSongBlockStatus`,{ songId })
+  }
 }

@@ -2,7 +2,8 @@
 
   <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
     <div *ngFor="let user of userData" class="flex flex-col items-center">
-      <img [src]="user?.profile[0]?.imageUrl ? user?.profile[0]?.imageUrl : '../../../../../assets/images/account.png'" class="h-28 w-28 rounded-full border-4 border-blue-400" alt="Profile Picture">
+      <img [src]="user?.profile[0]?.imageUrl ? user?.profile[0]?.imageUrl : '../../../../../assets/images/account.png'"
+        class="h-28 w-28 rounded-full border-4 border-blue-400" alt="Profile Picture">
       <h3 class="text-xl font-bold text-gray-800 mt-2">{{ user?.username }}</h3>
       <p class="text-gray-600 text-sm text-center">{{ user?.profile[0]?.bio }}</p>
       <div class="mt-2 text-center">
@@ -15,16 +16,29 @@
           </div>
         </ng-container>
       </div>
-      
-      <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600" (click)="sendMsg(user?._id)">Message</button>
+
+      <button
+        class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+        (click)="sendMsg(user?._id)">Message</button>
     </div>
-    
+
   </div>
-  <ul class="list-none space-y-2" *ngFor="let song of userSongs">
-    <li class="flex items-center cursor-pointer" (click)="playSong(song?.songUrl)">
-      <p class="text-gray-800 line-clamp-2">{{ song?.title }}</p>
-      <p class="text-gray-600 text-sm ml-2"> {{ song?.artist }}</p>
+  <ul class="list-none space-y-4">
+    <li *ngFor="let song of userSongs" class="rounded-lg bg-gray-100 transition-colors duration-300 hover:bg-gray-200">
+      <div class="flex cursor-pointer items-center p-3" (click)="playSong(song?.songUrl)">
+        <div class="w-full items-center flex justify-between">
+          <div>
+            <p class="font-semibold text-gray-800">{{ song?.title }}</p>
+          </div>
+          <div><button *ngIf="role=='admin'" (click)="blockUnblockSong($event,song?._id)"
+              class="px-4 py-2 w-20 mt-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg focus:outline-none transition-colors duration-300">
+              <span *ngIf="!song.isBlocked" class="font-semibold">Block</span>
+              <span *ngIf="song.isBlocked" class="font-semibold">Unblock</span>
+            </button></div>
+        </div>
+      </div>
     </li>
+
   </ul>
 
 </div>

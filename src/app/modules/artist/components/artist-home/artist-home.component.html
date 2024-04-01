@@ -1,15 +1,15 @@
 <p class="font-bold text-3xl gradient-text mb-7">hey, {{artistDetails?.username}}</p>
-<div class="w-screen sm:flex flex justify-center items-center flex-col gap-5">
+<div class="w-screen flex justify-center items-center sm:flex-row flex-col  gap-5">
   <div class="h-36 w-36 border card1 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
-    [routerLink]="'/artist/followingList'">following 
+    [routerLink]="'/artist/followingList'">following
     {{ artistDetails?.following?.length}}
   </div>
   <div class="h-36 w-36 border card2 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
-    [routerLink]="'/artist/followersList'">followers 
+    [routerLink]="'/artist/followersList'">followers
     {{artistDetails?.followers?.length}}
   </div>
   <div class="h-36 w-36 border card3 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
-    [routerLink]="'/artist/songs'">songs 
+    [routerLink]="'/artist/songs'">songs
     {{artistDetails?.songs?.length}}
   </div>
 </div>

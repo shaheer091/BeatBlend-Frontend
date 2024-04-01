@@ -65,7 +65,6 @@ export class MusicPlayerComponent implements OnInit, AfterViewInit {
       this.audioPlayer.nativeElement.src = this.songUrl;
       this.audioPlayer.nativeElement.load();
       this.audioPlayer.nativeElement.play();
-      console.log(this.audioPlayer.nativeElement.paused);
     }
   }
 }
