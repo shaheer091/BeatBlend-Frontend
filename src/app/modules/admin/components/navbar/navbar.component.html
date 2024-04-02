@@ -1,18 +1,47 @@
-<nav class="bg-gray-800 p-4">
+<nav class="bg-gray-800 p-4 text-white">
     <div class="flex justify-between items-center">
-        <!-- Brand/logo -->
         <div class="flex items-center">
             <span class="text-white text-lg font-bold">Admin Dashboard</span>
         </div>
+        <div class="flex md:hidden">
+            <img (click)="showSideBar()" class="h-10 cursor-pointer" src="../../../../../../assets/images/more.png" alt="">
+        </div>
+        <div *ngIf="showSide" class="bg-black bg-opacity-50 w-screen translate-y-36 -translate-x-4 absolute md:hidden">
+            <div class="">
+                <ul class="text-center mt-2 space-y-2">
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+                        [routerLink]="'/admin/home'">Home</li>
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+                        [routerLink]="'/admin/userList'">Users</li>
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+                        [routerLink]="'/admin/artistList'">Artists</li>
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+                        [routerLink]="'/admin/adminList'">Admins</li>
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+                        [routerLink]="'/admin/pendingUsersList'">Pending Request</li>
+                    <li class="hover:-translate-y-1 cursor-pointer transition text-lg" (click)="onLogout()">Logout</li>
 
-        <!-- Navigation links -->
-        <div class="flex items-center space-x-6">
+                </ul>
+            </div>
+        </div>
+
+        <div class="md:flex hidden items-center space-x-6">
             <a [routerLink]="'/admin/home'" class="text-white hover:text-gray-300 cursor-pointer">Home</a>
             <a [routerLink]="'/admin/userList'" class="text-white hover:text-gray-300 cursor-pointer">Users</a>
             <a [routerLink]="'/admin/artistList'" class="text-white hover:text-gray-300 cursor-pointer">Artists</a>
             <a [routerLink]="'/admin/adminList'" class="text-white hover:text-gray-300 cursor-pointer">Admins</a>
-            <a [routerLink]="'/admin/pendingUsersList'" class="text-white hover:text-gray-300 cursor-pointer">Pending Requests</a>
+            <a [routerLink]="'/admin/pendingUsersList'" class="text-white hover:text-gray-300 cursor-pointer">Pending
+                Requests</a>
             <a (click)="onLogout()" class="text-white hover:text-gray-300 cursor-pointer">Logout</a>
         </div>
+
+        <div class="bg-white text-black flex justify-evenly items-center fixed bottom-0 left-0 w-full h-16 sm:hidden">
+            <img src="../../../../../assets/images/home.png" class="h-5 w-5 hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+              [routerLink]="'/admin/home'">
+            <img src="../../../../../assets/images/icons8-users-30.png" class="h-7 w-7 hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+              [routerLink]="'/admin/userList'">
+            <img src="../../../../../assets/images/power-off.png" class="h-5 w-5 hover:-translate-y-1 cursor-pointer transition text-lg" (click)="showSide=false"
+              [routerLink]="'/artist/settings'">
+          </div>
     </div>
 </nav>

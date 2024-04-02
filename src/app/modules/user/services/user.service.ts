@@ -1,13 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   constructor(private http: HttpClient) {}
-  userApi = 'http://localhost:3000/user';
+  userApi = `${environment.apiUrl}/user`;
 
   getUserProfile(): Observable<any> {
     return this.http.get(`${this.userApi}/profile`);
@@ -73,12 +74,20 @@ export class UserService {
     return this.http.get(`${this.userApi}/singlePlaylist/${playlistID}`)
   }
 
-  removeFromPlaylist(songId:any):Observable<any>{
-    return this.http.delete(`${this.userApi}/removeFromPlaylist/${songId}`)
+  getSinglePlaylistData(playlistId:any):Observable<any>{
+    return this.http.get(`${this.userApi}/getPlaylistData/${playlistId}`)
+  }
+
+  removeFromPlaylist(songId:any,playlistId:any):Observable<any>{
+    return this.http.patch(`${this.userApi}/removeFromPlaylist`,{songId,playlistId})
   }
 
   deletePlaylist(playlistId:any):Observable<any>{
     return this.http.delete(`${this.userApi}/deletePlaylist/${playlistId}`)
+  }
+
+  editPlaylist(playlistId:any,data:any):Observable<any>{
+    return this.http.patch(`${this.userApi}/editPlaylist/${playlistId}`,data)
   }
 
   likeAndUnlikeSong(songId:any):Observable<any>{

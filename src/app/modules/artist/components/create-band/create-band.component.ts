@@ -1,18 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ArtistService } from '../../services/artist.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-create-band',
   templateUrl: './create-band.component.html',
   styleUrls: ['./create-band.component.css'],
 })
-export class CreateBandComponent implements OnInit {
+export class CreateBandComponent implements OnInit,OnDestroy {
   bandForm!: FormGroup;
   artists: any;
   selectedArtists: any[] = [];
   formData = new FormData();
+  createBand$ = new Subscription()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,7 +37,7 @@ export class CreateBandComponent implements OnInit {
           this.artists = res.artists;
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message)
         },
       });
     }
@@ -51,11 +53,6 @@ export class CreateBandComponent implements OnInit {
   }
   changing(event: any) {
     const files = event.target.files;
-    // if (files.length > 0) {
-    //   this.bandForm.patchValue({
-    //     file: files[0],
-    //   });
-    // }
     this.formData.append('bandImage',files[0])
   }
 
@@ -67,20 +64,22 @@ export class CreateBandComponent implements OnInit {
       this.selectedArtists.forEach((artistId) => {
         this.formData.append('artistid[]', artistId);
       });
-      this.artistServ.createBand(this.formData).subscribe({
+      this.createBand$=this.artistServ.createBand(this.formData).subscribe({
         next: (res) => {
-          console.log(res);
           if(res.message){
             localStorage.setItem('isInBand','true')
             this.router.navigate(['/artist/home'])
           }
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message)
         },
       });
     } else {
-      console.error('Enter the form details correctly');
+      alert('Enter the form details correctly');
     }
+  }
+  ngOnDestroy(): void {
+    this.createBand$.unsubscribe()
   }
 }

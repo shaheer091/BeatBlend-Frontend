@@ -1,4 +1,12 @@
-<button [routerLink]="'/user/home'" class="border px-3 py-1 bg-black text-white">switch to user</button>
-<button [routerLink]="'/artist/profile'" class="border px-3 py-1 bg-black text-white">profile</button>
-<button *ngIf="!isInBand" [routerLink]="'/artist/createBand'" class="border px-3 py-1 bg-black text-white">create band</button>
-<button *ngIf="isInBand" [routerLink]="'/band/home'" class="border px-3 py-1 bg-black text-white">access band</button>
+<div class="flex justify-center py-8">
+  <div class="flex flex-col space-y-4 max-w-sm">
+    <a routerLink="/user/home" class="button">Switch to User</a>
+    <a routerLink="/artist/profile" class="button">Profile</a>
+    <div *ngIf="!isInBand">
+      <a routerLink="/artist/createBand" class="button">Create Band</a>
+    </div>
+    <div *ngIf="isInBand">
+      <a routerLink="/band/home" class="button">Access Band</a>
+    </div>
+  </div>
+</div>

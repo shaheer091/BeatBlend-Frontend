@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +10,15 @@ export class SharedServiceService {
 
   songUrlSource = new BehaviorSubject<string>('');
   songUrl$ = this.songUrlSource.asObservable();
-
   constructor(private http:HttpClient) { }
 
-  api='http://localhost:3000'
+  api=`${environment.apiUrl}`;
 
   // role=localStorage.getItem('role')
 
 
-  parseJwt(token: any) {
+  parseJwt() {
+    const token = localStorage.getItem('token')
     if (!token) {
       return;
     }
@@ -53,6 +54,10 @@ export class SharedServiceService {
 
   declineInvitation(bandId:any):Observable<any>{
     return this.http.patch(`${this.api}/artist/decllineBandInvitation`,{bandId})
+  }
+
+  getMessage():Observable<any>{
+    return this.http.get(`${this.api}/chat/userMessages`)
   }
   
 }

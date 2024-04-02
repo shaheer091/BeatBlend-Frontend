@@ -61,7 +61,7 @@ export class ArtistAddSongComponent implements OnInit, OnDestroy {
           }
         },
         error: (err) => {
-          console.error(err);
+          alert(err);
         },
       });
     } else {

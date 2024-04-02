@@ -1,0 +1,10 @@
+.container {
+  width: 50%;
+  height: 50%;
+}
+.gradient-text {
+  background-image: linear-gradient(to right, #7177c1, #ff0048);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}

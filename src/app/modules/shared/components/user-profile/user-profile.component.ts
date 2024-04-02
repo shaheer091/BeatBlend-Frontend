@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { SharedServiceService } from '../../services/shared-service.service';
 import { Subscription } from 'rxjs';
+import { AdminService } from 'src/app/modules/admin/services/admin.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -13,12 +14,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   id: any;
   userData: any;
   userSongs: any;
-  role = localStorage.getItem('role');
+  role = this.commonServ.role;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private commonServ: CommonService,
-    private sharedServ: SharedServiceService
+    private sharedServ: SharedServiceService,
+    private adminServ: AdminService
   ) {}
 
   getSingleUser$ = new Subscription();
@@ -26,9 +29,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.route.params.subscribe({
       next: (res) => {
         this.id = res['id'];
+        this.getUserProfile();
       },
     });
-    this.getUserProfile();
   }
   getUserProfile() {
     this.getSingleUser$ = this.commonServ.getSingleUser(this.id).subscribe({
@@ -37,16 +40,29 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.userSongs = res[0]?.songs;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
   playSong(songUrl: any) {
     this.sharedServ.setSongUrl(songUrl);
   }
+  blockUnblockSong(event:any,songId: any) {
+    event.stopPropagation()
+    console.log(songId);
+    this.adminServ.changeSongBlockStatus(songId).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getUserProfile()
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
-  getBandDetails(bandId:any){
-    this.router.navigate([`/user/band-profile/${bandId}`])
+  getBandDetails(bandId: any) {
+    this.router.navigate([`/user/band-profile/${bandId}`]);
   }
   ngOnDestroy(): void {
     this.getSingleUser$?.unsubscribe();

@@ -9,6 +9,7 @@ import { PendingUsersListComponent } from './components/pending-users-list/pendi
 import { AdminsListComponent } from './components/admins-list/admins-list.component';
 import { AdminComponent } from './admin.component';
 import { UserProfileComponent } from '../shared/components/user-profile/user-profile.component';
+import { ChattingComponent } from '../shared/components/chatting/chatting.component';
 
 const routes: Routes = [
   {
@@ -36,7 +37,8 @@ const routes: Routes = [
         path: 'adminList',
         component: AdminsListComponent,
       },
-      { path: 'user-profile', component: UserProfileComponent },
+      { path: 'chats/:id', component: ChattingComponent },
+      { path: 'user-profile/:id', component: UserProfileComponent },
       { path: '', redirectTo: '/admin/home', pathMatch: 'full' },
     ],
   },

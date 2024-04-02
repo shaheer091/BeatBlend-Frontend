@@ -1,0 +1,20 @@
+<div class="text-center mt-10">
+    <p class="text-4xl font-bold mb-6">Welcome, {{username}}</p>
+    <div class="flex flex-col md:flex-row justify-center gap-8">
+        <div [routerLink]="'/admin/userList'"
+            class="border rounded-lg cursor-pointer p-6 hover:shadow-lg transform transition duration-300 hover:scale-105">
+            <p class="text-2xl font-bold mb-4">Total Users</p>
+            <p class="text-3xl font-bold">{{users?.length}}</p>
+        </div>
+        <div [routerLink]="'/admin/artistList'"
+            class="border rounded-lg cursor-pointer p-6 hover:shadow-lg transform transition duration-300 hover:scale-105">
+            <p class="text-2xl font-bold mb-4">Total Artists</p>
+            <p class="text-3xl font-bold">{{artists?.length}}</p>
+        </div>
+        <div [routerLink]="'/admin/pendingUsersList'"
+            class="border rounded-lg cursor-pointer p-6 hover:shadow-lg transform transition duration-300 hover:scale-105">
+            <p class="text-2xl font-bold mb-4">Pending Requests</p>
+            <p class="text-3xl font-bold">{{pendingUsers?.length}}</p>
+        </div>
+    </div>
+</div>

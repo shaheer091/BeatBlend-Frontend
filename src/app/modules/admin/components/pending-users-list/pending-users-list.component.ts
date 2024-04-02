@@ -41,7 +41,7 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -67,7 +67,7 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
           this.getPending();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
     // this.showPopUp=false;
@@ -83,7 +83,7 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
           this.getPending();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
     this.approve = false;

@@ -38,7 +38,7 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
         this.username = res.username;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -49,16 +49,15 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
         .artistDeleteSong(this.idSong)
         .subscribe({
           next: (res) => {
-            console.log(res);
+            this.getSong();
           },
           error: (err) => {
-            console.log(err);
+            alert(err.error.message);
           },
         });
-      this.getSong();
       this.showDeleteDiv = false;
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   }
 

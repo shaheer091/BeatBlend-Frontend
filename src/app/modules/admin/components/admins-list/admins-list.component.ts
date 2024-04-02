@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import { Subscription } from 'rxjs';
+import { SharedServiceService } from 'src/app/modules/shared/services/shared-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admins-list',
@@ -8,12 +10,17 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./admins-list.component.css'],
 })
 export class AdminsListComponent implements OnInit, OnDestroy {
-  constructor(private adminServ: AdminService) {}
+  constructor(
+    private adminServ: AdminService,
+    private sharedServ: SharedServiceService,
+    private router: Router
+  ) {}
   adminData: any;
   message: any;
   success: any;
 
   getAdmins$ = new Subscription();
+  userId: any = this.sharedServ.parseJwt();
 
   ngOnInit(): void {
     this.getAdmins$ = this.adminServ.getAllAdmin().subscribe({
@@ -26,9 +33,12 @@ export class AdminsListComponent implements OnInit, OnDestroy {
         }
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
+  }
+  chatWith(userId: any) {
+    this.router.navigate([`/user/chats/${userId}`]);
   }
   ngOnDestroy(): void {
     this.getAdmins$?.unsubscribe();

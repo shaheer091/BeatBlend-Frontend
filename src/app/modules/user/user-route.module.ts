@@ -16,6 +16,7 @@ import { FollowersListComponent } from '../shared/components/followers-list/foll
 import { NotificationComponent } from '../shared/components/notification/notification.component';
 import { ChattingComponent } from '../shared/components/chatting/chatting.component';
 import { BandProfileComponent } from '../shared/components/band-profile/band-profile.component';
+import { PremiumComponent } from 'src/app/modules/user/components/premium/premium.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,8 @@ const routes: Routes = [
       { path: 'notification', component: NotificationComponent },
       { path: 'band-profile/:id', component: BandProfileComponent },
       { path: 'chats/:id', component: ChattingComponent },
+      { path: 'premium', component: PremiumComponent },
+      { path: 'editPlaylist/:id', component: CreatePlaylistComponent },
       { path: '', redirectTo: '/user/home', pathMatch: 'full' },
     ],
   },

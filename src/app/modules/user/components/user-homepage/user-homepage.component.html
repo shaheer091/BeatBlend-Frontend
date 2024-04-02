@@ -1,29 +1,8 @@
-<!-- <app-side-bar></app-side-bar> -->
-<!-- <div class="w-10/12 h-[470px] overflow-auto float-end border p-10">
-    <h3 class="text-xl font-bold mb-4">hey, {{username}}</h3>
+<div class="sm:w-10/12 w-full h-32 sm:float-right p-10">
+    <h3 class="text-xl font-bold mb-4 gradient-text">welcome, {{username}}</h3>
     <p *ngIf="message">{{message}}</p>
     <div *ngFor="let song of songs" (click)="playSong(song.songUrl)"
-        class="h-1/6 w-2/3 cursor-pointer border flex flex-col justify-around">
-        <div>
-            <p>{{song.artistUsername}}</p>
-        </div>
-        <div class="flex items-center justify-between">
-            <div>
-                <p>{{song.title}}</p>
-            </div>
-            <div>
-                <img (click)="favAndUnfav($event,song)" class="cursor-pointer h-5 w-5"
-                    [src]="favBtn ? '../../../../../assets/images/star.png' : '../../../../../assets/images/starborder.png'"
-                    alt="">
-            </div>
-        </div>
-    </div>
-</div> -->
-<div class="w-10/12 float-right border p-10">
-    <h3 class="text-xl font-bold mb-4">welcome, {{username}}</h3>
-    <p *ngIf="message">{{message}}</p>
-    <div *ngFor="let song of songs" (click)="playSong(song.songUrl)"
-        class="mb-5 rounded-2xl border-black h-40 w-1/2 cursor-pointer border flex flex-col p-5 gap-5">
+        class="mb-5 rounded-2xl h-40 md:w-1/2 cursor-pointer border flex flex-col p-5 gap-5">
         <div class="flex justify-between">
             <div class="flex  hover:scale-105 hover:font-bold transition-all gap-5 items-center justify-center"
                 (click)="userProfile($event, song.userId)">
@@ -33,9 +12,6 @@
                 <div class="">
                     <p>{{song.artistUsername}}</p>
                 </div>
-            </div>
-            <div>
-                <img src="../../../../../assets/images/more (1).png" class="h-5 w-5" alt="">
             </div>
         </div>
         <div>

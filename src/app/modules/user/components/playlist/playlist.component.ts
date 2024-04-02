@@ -23,7 +23,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         this.playlist = res;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }

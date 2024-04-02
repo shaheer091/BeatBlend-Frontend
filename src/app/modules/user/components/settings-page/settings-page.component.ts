@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-settings-page',
@@ -9,9 +10,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
-  data: any;
-
-  constructor(private userServ: UserService, private router: Router) {}
+  
+  constructor(private userServ: UserService, private router: Router,private commonServ:CommonService) {}
+  user: any;
   showDiv: Boolean = false;
   socialMediaLink: string = '';
   message: string = '';
@@ -21,12 +22,13 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   followers: number = 0;
   image: any;
   imgBool: Boolean = false;
+  profile:any;
 
   artistVerification$ = new Subscription();
   getSettings$ = new Subscription();
 
   ngOnInit(): void {
-    this.role = localStorage.getItem('role');
+    this.role = this.commonServ.role;
     if (this.role == 'artist') this.isArtist = true;
     this.getSettingsPage();
   }
@@ -46,6 +48,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
           this.artistVerification$ = this.userServ
             .artistVerification(this.socialMediaLink)
             .subscribe();
+            this.showDiv=false;
         } else {
           this.message = 'the provided link is not valid';
         }
@@ -56,21 +59,21 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
         this.message = '';
       }, 2000);
     } catch (err) {
-      console.log('setting page', err);
+      alert(err)
     }
   }
 
   getSettingsPage() {
     this.getSettings$ = this.userServ.getSettingsPage().subscribe({
       next: (res) => {
-        if (res.imageUrl) {
-          this.imgBool = true;
-          this.image = res.imageUrl;
+        this.user = res.user;
+        this.profile=res.profile;
+        if(this.profile.imageUrl){
+          this.imgBool=true;
         }
-        this.data = res;
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message)
       },
     });
   }

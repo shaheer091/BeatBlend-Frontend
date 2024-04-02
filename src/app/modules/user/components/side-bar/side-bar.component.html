@@ -1,21 +1,36 @@
-<div class="fixed h-screen sm:w-1/12 md:w-2/12  border-4 shadow-md z-50 flex flex-col justify-between p-4 md:p-8">
-  <div class="flex flex-col space-y-5">
+<div
+  class="fixed z-0 bg-gradient-to-t from-[#b4b5c4] to-[#ba9f9f] overflow-hidden h-screen sm:w-1/12 md:w-2/12 md:min-w-2/12 shadow-md hidden sm:flex flex-col justify-between p-4 md:p-6">
+  <div class="flex flex-col space-y-2">
     <div *ngFor="let items of navBarItems" (click)="navigation(items.title)"
-      class="py-2 flex items-center space-x-4 hover:-translate-y-1 transition-all hover:bg-gray-100 rounded-lg cursor-pointer">
-      <img class="h-6 w-6" [src]="items.logo" alt="">
-      <p class="hidden md:flex text-gray-700 font-medium">{{items.title}}</p>
+      class="py-2 flex items-center space-x-2 hover:-translate-y-1 transition-all rounded-lg cursor-pointer">
+      <img class="h-5 w-5" [src]="items.logo" alt="">
+      <p class="hidden md:flex  text-white font-medium">{{items.title}}</p>
     </div>
 
   </div>
-  <div class="flex flex-col space-y-5">
+  <div class="flex flex-col -translate-y-[54px]">
     <div [routerLink]="'/user/settings'"
-      class="py-2 flex items-center space-x-4 hover:-translate-y-1 transition-all hover:bg-gray-100 rounded-lg cursor-pointer">
-      <img class="h-6 w-6" src="../../../../../assets/images/settings.png" alt="">
-      <p class="hidden md:flex text-gray-700 font-medium">Settings</p>
+      class="py-2 flex items-center space-x-2 hover:-translate-y-1 transition-all rounded-lg cursor-pointer">
+      <img class="h-5 w-5" src="../../../../../assets/images/settings.png" alt="">
+      <p class="hidden md:flex  text-white font-medium">Settings</p>
     </div>
-    <div (click)="logout()" class="py-2 flex hover:-translate-y-1 transition-all items-center space-x-4 hover:bg-gray-100 rounded-lg cursor-pointer">
-      <img class="h-6 w-6" src="../../../../../assets/images/power-off.png" alt="">
-      <p class="hidden md:flex text-gray-700 font-medium">Logout</p>
+    <div (click)="logout()"
+      class="py-2 flex hover:-translate-y-1 transition-all items-center space-x-2 rounded-lg cursor-pointer">
+      <img class="h-5 w-5" src="../../../../../assets/images/power-off.png" alt="">
+      <p class="hidden md:flex  text-white font-medium">Logout</p>
     </div>
+  </div>
+</div>
+
+<div class="sm:hidden flex w-full h-16 border-2 fixed bg-white justify-evenly items-center z-50 bottom-0">
+  <div *ngFor="let items of mobileScreenNavBar">
+    <img (click)="mobileNavigation(items.title)" [src]="items.logo" class="cursor-pointer h-5 w-5" alt="">
+  </div>
+  <div *ngIf="showMore"
+    class="border flex flex-col justify-evenly items-center h-36 w-36 bg-white absolute right-0 bottom-[60px] ">
+    <div (click)="showMore=false" [routerLink]="'/user/settings'">Settings</div>
+    <div (click)="showMore=false" [routerLink]="'/user/notification'">Notification</div>
+    <div (click)="showMore=false" [routerLink]="'/user/playlist'">Playlist</div>
+    <div (click)="logout()">Logout</div>
   </div>
 </div>

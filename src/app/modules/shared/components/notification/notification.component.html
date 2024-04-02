@@ -1,17 +1,24 @@
-<div class="w-10/12 float-end p-16">
-    <div *ngIf="bandInvitation?.length > 0">
-        <div *ngFor="let invitation of bandInvitation">
-            <p>{{invitation?.bandAdminInfo[0]?.username}} invited you to join {{invitation?.bandName}} band</p>
-            <p>would you like to accept the request</p>
-            <button (click)="acceptInvite(invitation?._id)" class="text-green-500">yes</button>
-            <button (click)="declineInvite(invitation?._id)" class="text-red-500">no</button>
+<div class="md:w-10/12 w-full md:float-end p-16">
+    <p class="text-2xl font-serif font-bold">Notifications</p>
+    <div *ngIf="bandInvitation?.length > 0" class="mt-8">
+        <div *ngFor="let invitation of bandInvitation" class="bg-white rounded-lg shadow-md p-6 mb-4">
+          <p class="text-lg font-semibold">{{invitation?.bandAdminInfo[0]?.username}} invited you to join {{invitation?.bandName}} band</p>
+          <p class="text-gray-600 mt-2">Would you like to accept the request?</p>
+          <div class="flex mt-4">
+            <button (click)="acceptInvite(invitation?._id)" class="bg-green-500 text-white py-2 px-4 mr-4 rounded hover:bg-green-600 focus:outline-none">Yes</button>
+            <button (click)="declineInvite(invitation?._id)" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 focus:outline-none">No</button>
+          </div>
         </div>
-    </div>
-    <div *ngIf="newSongs?.length > 0">
-        <div *ngFor="let songs of newSongs">
-            <p>{{songs?.artist?.username}} uploaded {{songs?.title}}</p>
+      </div>
+      
+      <div *ngIf="newSongs?.length > 0" class="mt-8">
+        <div *ngFor="let songs of newSongs" class="flex items-center gap-2 bg-white rounded-lg shadow-md p-4 mb-4 hover:bg-gray-100 transition-colors">
+          <p (click)="userProfile($event, songs?.artist?._id)" class="cursor-pointer hover:font-bold text-blue-500">{{songs?.artist?.username}}</p>
+          <p class="text-gray-600">uploaded</p>
+          <p (click)="playSong(songs?.songUrl)" class="cursor-pointer hover:font-bold text-blue-500">{{songs?.title}}</p>
         </div>
-    </div>
+      </div>
+      
     <div *ngIf="message">
         <p class="font-bold text-2xl">{{message}}</p>
     </div>

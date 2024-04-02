@@ -1,6 +1,15 @@
-<div class="w-screen">
-  <p class="font-bold text-3xl">hey, {{artistDetails?.username}}</p>
-  <div class="h-20 w-20 border cursor-pointer" [routerLink]="'/artist/followingList'">following <span>{{artistDetails?.following?.length}}</span></div>
-  <div class="h-20 w-20 border cursor-pointer" [routerLink]="'/artist/followersList'">followers <span>{{artistDetails?.followers?.length}}</span></div>
-  <div class="h-20 w-20 border cursor-pointer" [routerLink]="'/artist/songs'">songs <span>{{artistDetails?.songs?.length}}</span></div>
+<p class="font-bold text-3xl gradient-text mb-7">hey, {{artistDetails?.username}}</p>
+<div class="w-screen flex justify-center items-center sm:flex-row flex-col  gap-5">
+  <div class="h-36 w-36 border card1 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
+    [routerLink]="'/artist/followingList'">following
+    {{ artistDetails?.following?.length}}
+  </div>
+  <div class="h-36 w-36 border card2 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
+    [routerLink]="'/artist/followersList'">followers
+    {{artistDetails?.followers?.length}}
+  </div>
+  <div class="h-36 w-36 border card3 text-white flex items-center justify-center cursor-pointer rounded-xl uppercase"
+    [routerLink]="'/artist/songs'">songs
+    {{artistDetails?.songs?.length}}
+  </div>
 </div>

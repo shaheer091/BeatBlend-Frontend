@@ -5,17 +5,17 @@
     <div class="flex md:hidden">
         <img (click)="showSideBar()" class="h-10" src="../../../../../../assets/images/more.png" alt="">
     </div>
-    <div *ngIf="showSide" class="w-full  bg-black absolute translate-y-[185px] -translate-x-10  md:hidden">
+    <div *ngIf="showSide" class="w-full bg-opacity-50 bg-black absolute translate-y-[185px] -translate-x-10  md:hidden">
         <div class="">
             <ul class="text-center mt-2 space-y-2">
-                <li class="hover:-translate-y-1 transition text-lg">Home</li>
-                <li class="hover:-translate-y-1 transition text-lg">About</li>
-                <li class="hover:-translate-y-1 transition text-lg">Pages</li>
-                <li class="hover:-translate-y-1 transition text-lg">News</li>
-                <li class="hover:-translate-y-1 transition text-lg">Contact</li>
-                <li class="hover:-translate-y-1 transition text-lg">Help</li>
-                <li class="hover:-translate-y-1 transition text-lg" [routerLink]="'/login'">Login</li>
-                <li class="hover:-translate-y-1 transition text-lg" [routerLink]="'/signup'">Signup</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer">Home</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer">About</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer">Pages</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer">News</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer">Contact</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer">Help</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer" [routerLink]="'/login'">Login</li>
+                <li class="hover:-translate-y-1 transition text-lg cursor-pointer" [routerLink]="'/signup'">Signup</li>
             </ul>
         </div>
     </div>

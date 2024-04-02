@@ -1,18 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { SharedServiceService } from '../modules/shared/services/shared-service.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
-  api = 'http://localhost:3000';
-  role: String | null = localStorage.getItem('role');
+  api = environment.apiUrl;
+  decodedToken = this.sharedServ.parseJwt();
+  role: any = this.decodedToken?.role ? this.decodedToken?.role : '';
   toggleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     !!localStorage.getItem('token')
   );
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private sharedServ: SharedServiceService
+  ) {}
 
   // Signup function
   apiCall(data: any): Observable<any> {
@@ -40,15 +46,19 @@ export class CommonService {
   }
 
   isUser() {
-    return this.role == 'user';
+    return this.role ? this.role == 'user' : this.decodedToken.role === 'user';
   }
 
   isAdmin() {
-    return this.role == 'admin';
+    return this.role
+      ? this.role == 'admin'
+      : this.decodedToken.role === 'admin';
   }
 
   isArtist() {
-    return this.role == 'artist';
+    return this.role
+      ? this.role == 'artist'
+      : this.decodedToken.role === 'artist';
   }
   isBand() {
     const isInBand = localStorage.getItem('isInBand');

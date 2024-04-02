@@ -1,36 +1,22 @@
-<!-- <div class="flex justify-center items-center h-full w-full">
-    <div class="h-5/6 w-5/12 border">
-        <div  class="border">
-            <input type="text">
-            <button>send</button>
+<div class="md:float-end flex flex-col items-center justify-center w-full h-[480px] text-gray-800 p-10">
+    <!-- <p>{{ who.username }}</p> -->
+
+    <div class="flex flex-col flex-grow w-full md:w-6/12 bg-white shadow-xl rounded-lg overflow-hidden">
+        <div class="flex items-center justify-start p-3 border-b">
+            <img [src]="receiverImg" class="h-6 w-6 rounded-full" alt="">
+            <p>{{ receiverName }}</p>
         </div>
-    </div>
-    <p class="border" *ngFor="let message of recievedMsg">
-        {{message.message}}
-    </p>
-    <input type="text" class="border" [(ngModel)]="message" (keyup.enter)="send()">
-    <button (click)="send()">Send</button>
-
-</div> -->
-
-
-<body class="flex flex-col items-center justify-center w-full h-[480px] text-gray-800 p-10">
-
-    <div class="flex flex-col flex-grow w-4/12 bg-white shadow-xl rounded-lg overflow-hidden">
-        <div class="flex flex-col flex-grow h-0 p-4 overflow-auto">
-            <div class="flex w-full mt-2 space-x-3 max-w-xs" *ngFor="let message of recievedMsg">
-                <div
-                    [ngClass]="{'sentMessage': message.sender === senderId.userId, 'receivedMessage': message.sender !== senderId.userId}">
+        <div class="flex flex-col flex-grow p-4 overflow-auto">
+            <div class="flex flex-col space-y-2" *ngFor="let message of recievedMsg">
+                <div [ngClass]="{'sentMessage': message.sender === senderId.userId, 'receivedMessage': message.sender !== senderId.userId}">
                     <p class="text-sm">{{ message.message }}</p>
-                    <p class="text-sm">{{ message.date }}</p>
+                    <p class="text-xs text-gray-50">{{ message.timeDisplay }}</p>
                 </div>
             </div>
-
-
         </div>
         <div class="bg-gray-300 p-4">
-            <input class="flex items-center h-10 w-full rounded px-3 text-sm" [(ngModel)]="message" type="text"
+            <input class="w-full h-10 rounded px-3 text-sm" [(ngModel)]="message" type="text"
                 (keyup.enter)="send()" placeholder="Type your message…">
         </div>
     </div>
-</body>
+</div>

@@ -58,7 +58,7 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
         );
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -84,7 +84,7 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
             }, 3000);
           },
           error: (err) => {
-            console.log(err);
+            alert(err.error.message);
           },
         });
     } else {

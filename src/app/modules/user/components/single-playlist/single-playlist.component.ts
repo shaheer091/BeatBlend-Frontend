@@ -20,11 +20,9 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
   playlistDetails: any;
   songs: any;
   songLink: any;
-  userId: any;
   singlePlaylist$ = new Subscription();
   removeFromPlaylist$ = new Subscription();
   deletePlaylist$ = new Subscription();
-  favAndUnfav$ = new Subscription();
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -38,43 +36,42 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
       .getSinglePlaylist(this.playlistId)
       .subscribe({
         next: (res) => {
-          this.userId = res.userId;
-          this.playlistDetails = res[0];
-          if (res[0]?.songs) {
-            this.songs = res[0]?.songs
-            console.log(this.songs);
+          this.playlistDetails = res?.playlist[0];
+          if (res?.playlist[0]?.songs) {
+            this.songs = res?.playlist[0]?.songs;
           }
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
   }
 
-  removeFromPlaylist(event: any, songId: any) {
+  getArtist(userId:any){
+    this.router.navigate([`/user/user-profile/${userId}`]);
+  }
+
+  removeFromPlaylist(event: any, songId: any, playlistId: any) {
     event.stopPropagation();
     this.removeFromPlaylist$ = this.userServ
-      .removeFromPlaylist(songId)
+      .removeFromPlaylist(songId, playlistId)
       .subscribe({
         next: (res) => {
-          console.log(res);
+          this.getSinglePlaylist();
         },
         error: (err) => {
-          console.log(err);
+          alert(err.error.message);
         },
       });
-    this.getSinglePlaylist();
   }
 
   deletePlaylist(playlistId: any) {
-    console.log(playlistId);
     this.deletePlaylist$ = this.userServ.deletePlaylist(playlistId).subscribe({
       next: (res) => {
-        console.log(res);
         this.router.navigate(['/user/playlist']);
       },
       error: (err) => {
-        console.log(err);
+        alert(err.error.message);
       },
     });
   }
@@ -89,20 +86,7 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     this.sharedServ.setSongUrl(songUrl);
   }
 
-  favSong(event: any, songId: any) {
-    event.stopPropagation();
-    this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-
   editPlaylist(playlistId: any) {
-    console.log(playlistId);
     this.router.navigate([`/user/editPlaylist/${playlistId}`]);
   }
 
@@ -110,6 +94,5 @@ export class SinglePlaylistComponent implements OnInit, OnDestroy {
     this.singlePlaylist$?.unsubscribe();
     this.removeFromPlaylist$?.unsubscribe();
     this.deletePlaylist$?.unsubscribe();
-    this.favAndUnfav$?.unsubscribe();
   }
 }

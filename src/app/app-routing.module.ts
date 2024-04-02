@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: '', component: HomepageComponent },
   { path: 'login', canActivate: [LoginService], component: LoginComponent },
   { path: 'signup', canActivate: [LoginService], component: SignupComponent },
-  // { path: 'chats/:id', component: ChattingComponent },
   {
     path: 'user',
     canActivate: [AuthService],
