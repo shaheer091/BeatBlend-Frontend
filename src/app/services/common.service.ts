@@ -18,7 +18,10 @@ export class CommonService {
   constructor(
     private http: HttpClient,
     private sharedServ: SharedServiceService
-  ) {}
+  ) {
+    console.log(this.api);
+    
+  }
 
   // Signup function
   apiCall(data: any): Observable<any> {
@@ -30,6 +33,10 @@ export class CommonService {
   }
 
   apiLogin(data: any): Observable<any> {
+    console.log(this.api);
+    console.log('anuzzzzzz');
+    
+    
     return this.http.post(`${this.api}/login`, data);
   }
 
