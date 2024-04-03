@@ -49,7 +49,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
   blockUnblockSong(event:any,songId: any) {
     event.stopPropagation()
-    console.log(songId);
     this.adminServ.changeSongBlockStatus(songId).subscribe({
       next: (res) => {
         console.log(res);

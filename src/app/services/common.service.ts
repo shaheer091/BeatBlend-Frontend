@@ -19,7 +19,6 @@ export class CommonService {
     private http: HttpClient,
     private sharedServ: SharedServiceService
   ) {
-    console.log(this.api);
     
   }
 
@@ -33,10 +32,6 @@ export class CommonService {
   }
 
   apiLogin(data: any): Observable<any> {
-    console.log(this.api);
-    console.log('anuzzzzzz');
-    
-    
     return this.http.post(`${this.api}/login`, data);
   }
 
