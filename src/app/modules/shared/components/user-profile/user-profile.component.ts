@@ -4,6 +4,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { SharedServiceService } from '../../services/shared-service.service';
 import { Subscription } from 'rxjs';
 import { AdminService } from 'src/app/modules/admin/services/admin.service';
+import { UserService } from 'src/app/modules/user/services/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -15,13 +16,17 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   userData: any;
   userSongs: any;
   role = this.commonServ.role;
+  userId = this.sharedServ.parseJwt();
+  followers:any;
+  isFollowing:any;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private commonServ: CommonService,
     private sharedServ: SharedServiceService,
-    private adminServ: AdminService
+    private adminServ: AdminService,
+    private userServ: UserService,
   ) {}
 
   getSingleUser$ = new Subscription();
@@ -38,6 +43,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.userData = res;
         this.userSongs = res[0]?.songs;
+        this.followers=this.userData[0].followers;
+        this.isFollowing = this.followers.some((e: any) => {
+          return e == this.userId.userId;
+        });
       },
       error: (err) => {
         alert(err.error.message);
@@ -58,6 +67,18 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         console.log(err);
       },
     });
+  }
+  followUnfollowUser(userId:any){
+    this.userServ
+      .followAndUnfollowUser(userId)
+      .subscribe({
+        next: (res) => {
+          this.getUserProfile()
+        },
+        error: (err) => {
+          alert(err.error.message);
+        },
+      });
   }
 
   getBandDetails(bandId: any) {

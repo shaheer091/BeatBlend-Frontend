@@ -59,7 +59,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
         }
       },
       error: (err) => {
-        alert(err.error.message);
+        console.log(err.error);
       },
     });
   }

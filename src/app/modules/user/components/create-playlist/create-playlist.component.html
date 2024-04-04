@@ -10,7 +10,7 @@
 
     <div class="flex items-center space-x-2">
       <label for="playlistImage" class="text-sm text-gray-600">Image URL:</label>
-      <input (change)="change($event)" type="file" id="playlistImage" name="playlistImage"
+      <input (change)="change($event)" accept="image/*" type="file" id="playlistImage" name="playlistImage"
         class="w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:border-sky-500">
     </div>
 

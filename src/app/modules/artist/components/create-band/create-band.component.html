@@ -2,7 +2,7 @@
     <form [formGroup]="bandForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto mt-8">
         <div class="mb-4">
             <label for="bandImage" class="block text-gray-700">Upload Band Image</label>
-            <input (change)="changing($event)" type="file" id="bandImage" formControlName="bandImage" class="form-input mt-1 block w-full">
+            <input (change)="changing($event)" type="file" accept="image/*" id="bandImage" formControlName="bandImage" class="form-input mt-1 block w-full">
             <div *ngIf="bandForm.get('bandImage')?.invalid && bandForm.get('bandImage')?.touched" class="text-red-500">
                 Image is required</div>
         </div>

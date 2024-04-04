@@ -10,8 +10,11 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./settings-page.component.css'],
 })
 export class SettingsPageComponent implements OnInit, OnDestroy {
-  
-  constructor(private userServ: UserService, private router: Router,private commonServ:CommonService) {}
+  constructor(
+    private userServ: UserService,
+    private router: Router,
+    private commonServ: CommonService
+  ) {}
   user: any;
   showDiv: Boolean = false;
   socialMediaLink: string = '';
@@ -22,7 +25,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   followers: number = 0;
   image: any;
   imgBool: Boolean = false;
-  profile:any;
+  profile: any;
 
   artistVerification$ = new Subscription();
   getSettings$ = new Subscription();
@@ -47,8 +50,14 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
         if (this.isValidLink(this.socialMediaLink)) {
           this.artistVerification$ = this.userServ
             .artistVerification(this.socialMediaLink)
-            .subscribe();
-            this.showDiv=false;
+            .subscribe({
+              next: (res) => {
+              },
+              error: (err) => {
+                alert(err.error.message);
+              },
+            });
+          this.showDiv = false;
         } else {
           this.message = 'the provided link is not valid';
         }
@@ -58,8 +67,8 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.message = '';
       }, 2000);
-    } catch (err) {
-      alert(err)
+    } catch (err: any) {
+      alert(err);
     }
   }
 
@@ -67,13 +76,13 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
     this.getSettings$ = this.userServ.getSettingsPage().subscribe({
       next: (res) => {
         this.user = res.user;
-        this.profile=res.profile;
-        if(this.profile.imageUrl){
-          this.imgBool=true;
+        this.profile = res.profile;
+        if (this.profile.imageUrl) {
+          this.imgBool = true;
         }
       },
       error: (err) => {
-        alert(err.error.message)
+        alert(err.error.message);
       },
     });
   }

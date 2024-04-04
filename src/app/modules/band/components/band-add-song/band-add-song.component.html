@@ -4,7 +4,7 @@
     <div class="mb-4">
         <label for="songFile" class="block text-gray-700 text-sm font-bold mb-2">Song File: <span><sup
                     class="text-red-500 -z-10">*required</sup></span></label>
-        <input type="file" id="songFile" formControlName="songFile"
+        <input type="file" accept="audio/*" id="songFile" formControlName="songFile"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             (change)="changing($event)">
         <div *ngIf="songForm.get('songFile')?.invalid && songForm.get('songFile')?.touched"

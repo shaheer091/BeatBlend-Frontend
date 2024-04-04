@@ -44,23 +44,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   getData() {
     this.getUserProfile$ = this.userServ.getUserProfile().subscribe({
-      next: (res) => {
-        const { userProfile } = res;
-        const { userDetails } = userProfile[0];
-
-        this.userData = userProfile[0];
-        this.userDetails = userDetails[0];
-
-        const { username, email } = this.userData;
-        const { bio, phoneNumber, dateOfBirth, gender } = this.userDetails;
+      next: (res) => {        
+        const userProfile = res.userProfile[0];
 
         const controls = this.myForm.controls;
-        controls['username']?.patchValue(username);
-        controls['email']?.patchValue(email);
-        controls['bio']?.patchValue(bio);
-        controls['phoneNumber']?.patchValue(phoneNumber);
-        controls['date']?.patchValue(dateOfBirth);
-        controls['gender']?.patchValue(gender);
+        controls['username']?.patchValue(userProfile?.username);
+        controls['email']?.patchValue(userProfile?.email);
+        controls['bio']?.patchValue(userProfile?.bio);
+        controls['phoneNumber']?.patchValue(userProfile?.phoneNumber);
+        controls['date']?.patchValue(userProfile?.dateOfBirth);
+        controls['gender']?.patchValue(userProfile?.gender);
       },
       error: (err) => {
         alert(err.error.message);
