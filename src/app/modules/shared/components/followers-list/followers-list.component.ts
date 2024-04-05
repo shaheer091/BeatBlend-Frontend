@@ -16,14 +16,21 @@ export class FollowersListComponent implements OnInit, OnDestroy {
   ) {}
   userList: any;
   followersList$ = new Subscription();
+  showLoading: any;
+
   ngOnInit(): void {
     this.getFollowersList();
+    this.showLoading = true;
+
   }
 
   getFollowersList() {
     this.followersList$ = this.sharedServ.getFollowersList().subscribe({
       next: (res) => {
+        if(res){
         this.userList = res;
+        this.showLoading=false;
+        }
       },
       error: (err) => {
         alert(err.error.message)

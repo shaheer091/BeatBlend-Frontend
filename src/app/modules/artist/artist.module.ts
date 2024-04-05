@@ -11,6 +11,7 @@ import { ArtistComponent } from './artist.component';
 import { SharedModule } from '../shared/shared.module';
 import { ArtistEditSongComponent } from './components/artist-edit-song/artist-edit-song.component';
 import { ArtistSettingsComponent } from './components/artist-settings/artist-settings.component';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ArtistSettingsComponent } from './components/artist-settings/artist-set
     ArtistRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    LoadingComponent
   ],
 })
 export class ArtistModule {}

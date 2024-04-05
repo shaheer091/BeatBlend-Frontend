@@ -1,3 +1,5 @@
+<app-loading *ngIf="showLoading"></app-loading>
+
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="flex flex-col p-5 space-y-3">
     <div class="mb-2 flex items-center">
         <label for="file" class="w-32 text-right">File Upload</label>

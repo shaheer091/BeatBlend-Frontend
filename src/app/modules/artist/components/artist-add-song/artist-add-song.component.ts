@@ -16,6 +16,7 @@ export class ArtistAddSongComponent implements OnInit, OnDestroy {
   success: any;
   reqMsg: any;
   formData = new FormData();
+  showLoading:any;
 
   addSong$ = new Subscription();
 
@@ -44,6 +45,7 @@ export class ArtistAddSongComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.songForm.valid) {
+      this.showLoading=true;
       const value = this.songForm.value;
       this.formData.append('title', value.title);
       this.formData.append('artist', value.artist);
@@ -54,6 +56,7 @@ export class ArtistAddSongComponent implements OnInit, OnDestroy {
 
       this.addSong$ = this.artistServ.artistAddSong(this.formData).subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.message = res.message;
           this.description = res.description;
           this.success = res.success;

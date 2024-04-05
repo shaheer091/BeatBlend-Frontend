@@ -1,3 +1,5 @@
+<app-loading *ngIf="showLoading"></app-loading>
+
 <div *ngFor="let song of songs" class="border flex justify-between items-center" (click)="playSong(song.songUrl)">
     <div class="flex-grow flex flex-col">
         <div class="">

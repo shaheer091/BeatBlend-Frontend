@@ -14,6 +14,7 @@ export class CreateBandComponent implements OnInit,OnDestroy {
   artists: any;
   selectedArtists: any[] = [];
   formData = new FormData();
+  showLoading:any;
   createBand$ = new Subscription()
 
   constructor(
@@ -58,6 +59,7 @@ export class CreateBandComponent implements OnInit,OnDestroy {
 
   onSubmit(): void {
     if (this.bandForm.valid) {
+      this.showLoading=true;
       const val = this.bandForm.value;
       // this.formData.append('bandImage', val.bandImage);
       this.formData.append('bandName', val.bandName);
@@ -66,6 +68,7 @@ export class CreateBandComponent implements OnInit,OnDestroy {
       });
       this.createBand$=this.artistServ.createBand(this.formData).subscribe({
         next: (res) => {
+          this.showLoading=false;
           if(res.message){
             localStorage.setItem('isInBand','true')
             this.router.navigate(['/artist/home'])

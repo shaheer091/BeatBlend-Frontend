@@ -17,8 +17,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   userSongs: any;
   role = this.commonServ.role;
   userId = this.sharedServ.parseJwt();
-  followers:any;
-  isFollowing:any;
+  followers: any;
+  isFollowing: any;
+  showLoading: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,11 +27,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private commonServ: CommonService,
     private sharedServ: SharedServiceService,
     private adminServ: AdminService,
-    private userServ: UserService,
+    private userServ: UserService
   ) {}
 
   getSingleUser$ = new Subscription();
   ngOnInit(): void {
+    this.showLoading = true;
+
     this.route.params.subscribe({
       next: (res) => {
         this.id = res['id'];
@@ -41,12 +44,15 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   getUserProfile() {
     this.getSingleUser$ = this.commonServ.getSingleUser(this.id).subscribe({
       next: (res) => {
-        this.userData = res;
-        this.userSongs = res[0]?.songs;
-        this.followers=this.userData[0].followers;
-        this.isFollowing = this.followers.some((e: any) => {
-          return e == this.userId.userId;
-        });
+        if (res) {
+          this.showLoading = false;
+          this.userData = res;
+          this.userSongs = res[0]?.songs;
+          this.followers = this.userData[0].followers;
+          this.isFollowing = this.followers.some((e: any) => {
+            return e == this.userId.userId;
+          });
+        }
       },
       error: (err) => {
         alert(err.error.message);
@@ -56,29 +62,31 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   playSong(songUrl: any) {
     this.sharedServ.setSongUrl(songUrl);
   }
-  blockUnblockSong(event:any,songId: any) {
-    event.stopPropagation()
+  blockUnblockSong(event: any, songId: any) {
+    this.showLoading=true;
+    event.stopPropagation();
     this.adminServ.changeSongBlockStatus(songId).subscribe({
       next: (res) => {
+        this.showLoading=false;
         console.log(res);
-        this.getUserProfile()
+        this.getUserProfile();
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
-  followUnfollowUser(userId:any){
-    this.userServ
-      .followAndUnfollowUser(userId)
-      .subscribe({
-        next: (res) => {
-          this.getUserProfile()
-        },
-        error: (err) => {
-          alert(err.error.message);
-        },
-      });
+  followUnfollowUser(userId: any) {
+    this.showLoading=true;
+    this.userServ.followAndUnfollowUser(userId).subscribe({
+      next: (res) => {
+        this.showLoading=false;
+        this.getUserProfile();
+      },
+      error: (err) => {
+        alert(err.error.message);
+      },
+    });
   }
 
   getBandDetails(bandId: any) {

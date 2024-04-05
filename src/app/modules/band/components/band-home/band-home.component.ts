@@ -12,12 +12,15 @@ export class BandHomeComponent implements OnInit, OnDestroy {
   bandHome$ = new Subscription();
   bandDetails: any;
   isBandAdmin: any = Boolean(localStorage.getItem('isInBand'));
+  showLoading:any;
   ngOnInit(): void {
+    this.showLoading=true;
     this.getBandDetails();
   }
   getBandDetails() {
     this.bandHome$ = this.bandServ.bandGetHome().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.bandDetails = res[0];
       },
       error: (err) => {

@@ -16,16 +16,19 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   songLink: string = '';
   favSongs: any;
   message: any;
+  showLoading:any;
 
   getFavSongs$ = new Subscription();
   favAndUnfav$ = new Subscription();
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.getFavSong();
   }
   getFavSong() {
     this.getFavSongs$ = this.userServ.getFavSongs().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.message = res.message;
         this.favSongs = res.favSongs;
       },
@@ -35,9 +38,11 @@ export class FavoritesComponent implements OnInit, OnDestroy {
     });
   }
   unFavSong(event: any, songId: any) {
+    this.showLoading=true;
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(songId).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.getFavSong();
       },
       error: (err) => {

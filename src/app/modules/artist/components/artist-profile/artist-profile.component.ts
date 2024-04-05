@@ -15,6 +15,7 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
   artistDetails: any;
   message: string = '';
   showSavingDiv: Boolean = false;
+  showLoading:any;
 
   getProfile$ = new Subscription();
   updateProfile$ = new Subscription();
@@ -26,6 +27,7 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.profileForm = this.fb.group({
       username: [''],
       email: ['', Validators.email],
@@ -36,6 +38,7 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
     });
     this.getProfile$ = this.artistServ.artistGetProfile().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.artistProfile = res.artistProfile[0].profile[0];
         this.artistDetails = res.user;
         this.profileForm.controls['username'].setValue(
@@ -65,10 +68,12 @@ export class ArtistProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.profileForm.valid) {
+      this.showLoading=true
       this.updateProfile$ = this.artistServ
         .artistUpdateProfile(this.profileForm.value)
         .subscribe({
           next: (res) => {
+            this.showLoading=false;
             this.showSavingDiv = true;
             setTimeout(() => {
               this.message = res.message;

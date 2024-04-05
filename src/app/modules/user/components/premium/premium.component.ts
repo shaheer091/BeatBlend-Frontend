@@ -13,6 +13,7 @@ export class PremiumComponent {
   constructor(private paymentServ: PaymentService) {}
   orderId: any;
   data: any;
+  showLoading: any;
   pricing = [
     {
       name: 'Free',
@@ -53,8 +54,10 @@ export class PremiumComponent {
   ];
 
   buyNow(price: Number) {
+    this.showLoading = true;
     this.paymentServ.order(price).subscribe({
       next: (res) => {
+        this.showLoading = false;
         this.orderId = res.id;
         const options = {
           key: environment.razorPayKey,
@@ -79,8 +82,7 @@ export class PremiumComponent {
   paymentResponseHandler(response: any) {
     this.data = response;
     this.paymentServ.successPayent(this.data).subscribe({
-      next: (res) => {
-      },
+      next: (res) => {},
       error: (err) => {
         alert(err.error.message);
       },

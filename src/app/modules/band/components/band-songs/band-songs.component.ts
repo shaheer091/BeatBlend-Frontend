@@ -13,6 +13,7 @@ export class BandSongsComponent implements OnInit {
   songs: any;
   showDeleteDiv: Boolean = false;
   idSong: any;
+  showLoading:any;
   constructor(
     private bandServ: BandService,
     private sharedServ: SharedServiceService,
@@ -22,12 +23,14 @@ export class BandSongsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.getBandSongs();
   }
 
   getBandSongs() {
     this.bandServ.getBandSongs().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.songs = res;
       },
       error: (err) => {
@@ -48,8 +51,10 @@ export class BandSongsComponent implements OnInit {
   }
 
   deleteSong() {
+    this.showLoading=true;
     this.artistServ.artistDeleteSong(this.idSong).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.getBandSongs();
         this.showDeleteDiv=false;
       },

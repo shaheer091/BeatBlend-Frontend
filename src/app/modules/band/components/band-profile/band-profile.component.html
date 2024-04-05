@@ -1,3 +1,5 @@
+<app-loading *ngIf="showLoading"></app-loading>
+
 <form [formGroup]="bandProfileForm" (ngSubmit)="submitForm()">
     <div class="mb-4">
         <label for="bandName" class="block text-sm font-bold mb-2">Band Name</label>

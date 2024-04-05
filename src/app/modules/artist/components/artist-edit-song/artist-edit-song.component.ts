@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 export class ArtistEditSongComponent implements OnInit, OnDestroy {
   songId!: number;
   editSongForm!: FormGroup;
+  showLoading:any;
 
   getSongDetails$ = new Subscription();
   editSongDetails$ = new Subscription();
@@ -24,6 +25,7 @@ export class ArtistEditSongComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.route.params.subscribe((params) => {
       this.songId = params['id'];
     });
@@ -36,6 +38,7 @@ export class ArtistEditSongComponent implements OnInit, OnDestroy {
       .artistGetSongDetails(this.songId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.editSongForm.patchValue({
             title: res.title,
             artist: res.artist,
@@ -61,11 +64,13 @@ export class ArtistEditSongComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
+    this.showLoading=true;
     const editedSongData = this.editSongForm.value;
     this.editSongDetails$ = this.artistServ
       .artistEditSongDetails(this.songId, editedSongData)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           if (res.message) {
             setTimeout(() => {
               this.router.navigate(['/artist/songs']);

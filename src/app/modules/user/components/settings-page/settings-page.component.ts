@@ -26,11 +26,13 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   image: any;
   imgBool: Boolean = false;
   profile: any;
+  showLoading:any;
 
   artistVerification$ = new Subscription();
   getSettings$ = new Subscription();
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.role = this.commonServ.role;
     if (this.role == 'artist') this.isArtist = true;
     this.getSettingsPage();
@@ -75,6 +77,7 @@ export class SettingsPageComponent implements OnInit, OnDestroy {
   getSettingsPage() {
     this.getSettings$ = this.userServ.getSettingsPage().subscribe({
       next: (res) => {
+        this.showLoading=false
         this.user = res.user;
         this.profile = res.profile;
         if (this.profile.imageUrl) {

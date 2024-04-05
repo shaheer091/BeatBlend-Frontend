@@ -25,8 +25,10 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
 
   searchSong$ = new Subscription();
   createPlaylist$ = new Subscription();
+  showLoading: any;
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.route.params.subscribe((id) => {
       this.playlistId = id['id'];
     });
@@ -38,6 +40,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
   getPlaylistData() {
     this.userServ.getSinglePlaylistData(this.playlistId).subscribe({
       next: (res) => {
+        this.showLoading=false
         this.playlistData = res[0];
         if (this.playlistData) {
           this.playlistName = this.playlistData.playlistName;
@@ -50,8 +53,10 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
     });
   }
   searchSong() {
+    this.showLoading = true;
     this.searchSong$ = this.userServ.searchSong(this.searchText).subscribe({
       next: (res) => {
+        this.showLoading = false;
         if (res.songs) {
           this.songs = res.songs;
         } else {
@@ -60,6 +65,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
       },
       error: (err) => {
         console.log(err.error);
+        this.showLoading = false;
       },
     });
   }
@@ -83,6 +89,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
 
   onSubmit() {
     if (this.playlistName && this.songId.length > 0) {
+      this.showLoading=true;
       this.formData.append('playlistName', this.playlistName);
       this.formData.append('playlistImage', this.file);
       this.songId.forEach((id) => {
@@ -92,7 +99,8 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
         .createPlaylist(this.formData)
         .subscribe({
           next: (res) => {
-                this.router.navigate(['/user/playlist']);
+            this.showLoading=false;
+            this.router.navigate(['/user/playlist']);
           },
           error: (err) => {
             alert(err.error.message);
@@ -104,6 +112,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
   }
 
   onEditPlaylist() {
+    this.showLoading=true
     this.formData.append('playlistName', this.playlistName);
     this.formData.append('playlistImage', this.file);
     this.songId.forEach((id) => {
@@ -111,6 +120,7 @@ export class CreatePlaylistComponent implements OnDestroy, OnInit {
     });
     this.userServ.editPlaylist(this.playlistData._id, this.formData).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.router.navigate(['/user/playlist']);
       },
       error: (err) => {

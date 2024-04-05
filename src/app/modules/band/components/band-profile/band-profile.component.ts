@@ -12,6 +12,7 @@ export class BandProfileComponent implements OnInit {
   bandProfileForm!: FormGroup;
   formData = new FormData();
   bandProfile: any;
+  showLoading:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -20,6 +21,7 @@ export class BandProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.initForm();
     this.bandGetProfile();
   }
@@ -27,6 +29,7 @@ export class BandProfileComponent implements OnInit {
   bandGetProfile() {
     this.bandServ.bandGetProfile().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.bandProfile = res[0];
         if (this.bandProfile) {
           this.bandProfileForm.patchValue({
@@ -54,6 +57,7 @@ export class BandProfileComponent implements OnInit {
 
   submitForm() {
     if (this.bandProfileForm.valid) {
+      this.showLoading=true;
       const value = this.bandProfileForm.value;
       this.formData.append('bandName', value.bandName);
       this.formData.append('bandBio', value.bandBio);
@@ -61,6 +65,7 @@ export class BandProfileComponent implements OnInit {
       this.formData.append('bandImage', value.bandImage);
       this.bandServ.bandAddProfile(this.formData).subscribe({
         next: (res) => {
+          this.showLoading=false;
         },
         error: (err) => {
         alert(err.error.message)

@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   otpMessage: any;
   arr: File[] = [];
   formdata = new FormData();
+  showLoading:any;
 
   getUserProfile$ = new Subscription();
   updateProfile$ = new Subscription();
@@ -31,6 +32,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.myForm = this.formBuilder.group({
       file: [''],
       bio: [''],
@@ -44,7 +46,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   getData() {
     this.getUserProfile$ = this.userServ.getUserProfile().subscribe({
-      next: (res) => {        
+      next: (res) => {    
+        this.showLoading=false;
         const userProfile = res.userProfile[0];
 
         const controls = this.myForm.controls;
@@ -73,6 +76,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   message: string = '';
   onSubmit(): void {
     if (this.myForm.valid) {
+      this.showLoading=true
       const formdata = new FormData();
       const value = this.myForm.value;
       formdata.append('bio', value.bio);
@@ -85,6 +89,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       this.updateProfile$ = this.userServ.updateProfile(formdata).subscribe({
         next: (res) => {
+          this.showLoading=false
           setTimeout(() => {
             this.message = res.message;
           }, 1000);
@@ -104,10 +109,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
   verifyPhone() {
     try {
+      this.showLoading=true;
       this.verifyPhone$ = this.userServ
         .verifyPhone(this.myForm.value.phoneNumber)
         .subscribe({
           next: (res) => {
+            this.showLoading=false
             this.showOtp = true;
           },
           error: (err) => {
@@ -121,10 +128,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onVerify() {
     try {
+      this.showLoading=true;
       this.verifyOtp$ = this.userServ
         .verifyPhoneOtp(this.otp, this.myForm.value.phoneNumber)
         .subscribe({
           next: (res) => {
+            this.showLoading=false;
             this.otpMessage = res.message;
             setTimeout(() => {
               this.showOtp = false;

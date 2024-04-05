@@ -10,6 +10,7 @@ import { ArtistListComponent } from './components/artist-list/artist-list.compon
 import { PendingUsersListComponent } from './components/pending-users-list/pending-users-list.component';
 import { AdminsListComponent } from './components/admins-list/admins-list.component';
 import { AdminComponent } from './admin.component';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,9 @@ import { AdminComponent } from './admin.component';
     PendingUsersListComponent,
     AdminsListComponent,
     AdminComponent,
+
   ],
-  imports: [FormsModule, HttpClientModule, CommonModule, AdminRoutingModule],
+  imports: [FormsModule, HttpClientModule, CommonModule, AdminRoutingModule,LoadingComponent],
   exports: [],
 })
 export class AdminModule {}

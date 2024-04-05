@@ -21,10 +21,13 @@ export class AdminsListComponent implements OnInit, OnDestroy {
 
   getAdmins$ = new Subscription();
   userId: any = this.sharedServ.parseJwt();
+  showLoading:any;
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.getAdmins$ = this.adminServ.getAllAdmin().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.success = res.success;
         if (this.success) {
           this.adminData = res.admin;

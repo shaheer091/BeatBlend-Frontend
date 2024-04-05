@@ -12,8 +12,6 @@ import { Subscription } from 'rxjs';
 export class SearchComponent implements OnDestroy {
   constructor(
     private userServ: UserService,
-    private commonServ: CommonService,
-    private route: ActivatedRoute,
     private router: Router
   ) {}
   searchText!: string;
@@ -21,13 +19,15 @@ export class SearchComponent implements OnDestroy {
   userId: any;
   following: any;
   message: any;
-
+  showLoading:any;
   searchUser$ = new Subscription();
   followAndUnfollow$ = new Subscription();
 
   search() {
+    this.showLoading=true;
     this.searchUser$ = this.userServ.searchUser(this.searchText).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.user = res.users;
         this.userId = res.userId;
         this.message = res.message;
@@ -45,11 +45,13 @@ export class SearchComponent implements OnDestroy {
     });
   }
   followUser(event: any, userId: any) {
+    this.showLoading=true;
     event.stopPropagation();
     this.followAndUnfollow$ = this.userServ
       .followAndUnfollowUser(userId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.search();
         },
         error: (err) => {

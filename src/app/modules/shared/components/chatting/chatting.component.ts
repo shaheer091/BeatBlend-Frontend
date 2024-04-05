@@ -22,6 +22,7 @@ export class ChattingComponent implements OnInit, OnDestroy {
   receiverName: any;
   receiverImg: any;
   who: any;
+  showLoading:any;
 
   constructor(
     private chatServ: SocketService,
@@ -31,10 +32,11 @@ export class ChattingComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.senderId = this.sharedServ.parseJwt();
-    
+    this.showLoading=true;
 
     this.route.params.subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.receiver = res['id'];
         this.getUserProfile();
       },
@@ -62,8 +64,10 @@ export class ChattingComponent implements OnInit, OnDestroy {
   
 
   getUserProfile() {
+    this.showLoading=true;
     this.commonServ.getSingleUser(this.receiver).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.receiverName = res[0]?.username;
         this.receiverImg = res[0]?.profile[0]?.imageUrl;
       },

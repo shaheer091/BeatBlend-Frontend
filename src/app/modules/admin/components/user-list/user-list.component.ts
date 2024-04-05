@@ -26,12 +26,16 @@ export class UserListComponent implements OnInit, OnDestroy {
   userId: any;
   showDelDiv: Boolean = false;
   togle = false;
+  showLoading:any;
+
   ngOnInit(): void {
+    this.showLoading=true;
     this.getUser();
   }
   getUser() {
     this.getAllUser$ = this.adminServ.getAllUsers().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.success = res.success;
         if (this.success) {
           this.userData = res.user;
@@ -53,10 +57,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   confirmDelete() {
+    this.showLoading=true;
     this.changeDeleteStatus$ = this.adminServ
       .changeDeleteStatus(this.userId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.getUser();
         },
         error: (err) => {
@@ -71,11 +77,13 @@ export class UserListComponent implements OnInit, OnDestroy {
   }
 
   blockUser(event: any, userId: any) {
+    this.showLoading=true;
     event.stopPropagation();
     this.changeBlockStatus$ = this.adminServ
       .changeBlockStatus(userId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.getUser();
         },
         error: (err) => {

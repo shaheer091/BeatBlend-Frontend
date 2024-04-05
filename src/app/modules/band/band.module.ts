@@ -9,6 +9,7 @@ import { BandAddSongComponent } from './components/band-add-song/band-add-song.c
 import { BandProfileComponent } from './components/band-profile/band-profile.component';
 import { ManageMembersComponent } from './components/manage-members/manage-members.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 
 
@@ -26,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     BandRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingComponent
   ]
 })
 export class BandModule { }

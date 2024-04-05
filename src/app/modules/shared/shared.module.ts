@@ -10,6 +10,7 @@ import { NotificationComponent } from './components/notification/notification.co
 import { ChattingComponent } from './components/chatting/chatting.component';
 import { FormsModule } from '@angular/forms';
 import { BandProfileComponent } from './components/band-profile/band-profile.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { BandProfileComponent } from './components/band-profile/band-profile.com
     ChattingComponent,
     BandProfileComponent,
   ],
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule,LoadingComponent],
   exports: [MusicPlayerComponent],
 })
 export class SharedModule {}

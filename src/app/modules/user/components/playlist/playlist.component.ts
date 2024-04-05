@@ -11,15 +11,18 @@ import { Subscription } from 'rxjs';
 export class PlaylistComponent implements OnInit, OnDestroy {
   constructor(private userServ: UserService, private router: Router) {}
   playlist: any;
+  showLoading: any;
 
   getPlaylist$ = new Subscription();
   ngOnInit(): void {
+    this.showLoading = true;
     this.getPlaylist();
   }
 
   getPlaylist() {
     this.getPlaylist$ = this.userServ.getPlaylist().subscribe({
       next: (res) => {
+        this.showLoading = false;
         this.playlist = res;
       },
       error: (err) => {

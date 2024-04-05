@@ -31,8 +31,12 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   getSong$ = new Subscription();
   favAndUnfav$ = new Subscription();
   likeUnlikeSong$ = new Subscription();
+  showLoading: any;
+
 
   ngOnInit(): void {
+    this.showLoading = true;
+
     this.getSong();
   }
 
@@ -44,6 +48,7 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   getSong() {
     this.getSong$ = this.userServ.userGetSong().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.userId = res.userId;
         this.artistDetails = res;
         this.username = res.username;
@@ -64,9 +69,11 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   }
 
   favAndUnfav(event: any, song: any) {
+    this.showLoading=true;
     event.stopPropagation();
     this.favAndUnfav$ = this.userServ.favAndUnfav(song._id).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.getSong();
       },
       error: (err) => {
@@ -81,9 +88,11 @@ export class UserHomepageComponent implements OnInit, OnDestroy {
   }
 
   likeSong(event: any, songId: any) {
+    this.showLoading=true;
     event.stopPropagation();
     this.likeUnlikeSong$ = this.userServ.likeAndUnlikeSong(songId).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.getSong();
       },
       error: (err) => {

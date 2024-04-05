@@ -17,7 +17,11 @@ export class BandProfileComponent implements OnInit,OnDestroy {
     private router:Router,
   ) {}
   bandId: any;
+  showLoading: any;
+
   ngOnInit(): void {
+    this.showLoading = true;
+
     this.route.params.subscribe({
       next: (params) => {
         this.bandId = params['id'];
@@ -30,6 +34,7 @@ export class BandProfileComponent implements OnInit,OnDestroy {
     this.singleBand$=this.commonServ.getSingleBand(this.bandId).subscribe({
       next: (res) => {
         if(res){
+          this.showLoading=false;
           this.bandDetail=res;
         }
       },

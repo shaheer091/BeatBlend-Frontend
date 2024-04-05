@@ -18,7 +18,9 @@ export class AdminHomeComponent implements OnInit, OnDestroy {
   artists: any;
   pendingUsers: any;
   getHome$ = new Subscription();
+  showLoading:any;
   ngOnInit(): void {
+    this.showLoading=true;
     const decodedToken = this.sharedServ.parseJwt();
     this.username = decodedToken.username;
     this.getHome();
@@ -27,6 +29,7 @@ export class AdminHomeComponent implements OnInit, OnDestroy {
   getHome() {
     this.getHome$ = this.adminServ.getAdminHome().subscribe({
       next: (res) => {
+        this.showLoading=false;
         if (res?.pendingUsers) {
           this.pendingUsers = res?.pendingUsers;
         }

@@ -18,6 +18,7 @@ import { CreateBandComponent } from '../artist/components/create-band/create-ban
 import { SinglePlaylistComponent } from './components/single-playlist/single-playlist.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { PremiumComponent } from './components/premium/premium.component';
+import { LoadingComponent } from '../shared/components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { PremiumComponent } from './components/premium/premium.component';
     CommonModule,
     UserRoutingModule,
     SharedModule,
-
+    LoadingComponent
   ],
   providers: [],
   exports: [],

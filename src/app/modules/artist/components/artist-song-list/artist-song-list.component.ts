@@ -17,6 +17,7 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
   success!: Boolean;
   showDeleteDiv: Boolean = false;
   showSongEditForm: Boolean = false;
+  showLoading:any;
 
   getSong$ = new Subscription();
   deleteSong$ = new Subscription();
@@ -27,11 +28,13 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
     private sharedServ: SharedServiceService
   ) {}
   ngOnInit(): void {
+    this.showLoading=true;
     this.getSong();
   }
   getSong() {
     this.getSong$ = this.artistServ.artistGetSongs().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.songs = res.songs;
         this.message = res.message;
         this.success = res.success;
@@ -45,10 +48,12 @@ export class ArtistSongListComponent implements OnInit, OnDestroy {
 
   deleteSong() {
     try {
+      this.showLoading=true;
       this.deleteSong$ = this.artistServ
         .artistDeleteSong(this.idSong)
         .subscribe({
           next: (res) => {
+            this.showLoading=false;
             this.getSong();
           },
           error: (err) => {

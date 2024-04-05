@@ -1,3 +1,5 @@
+<app-loading *ngIf="showLoading"></app-loading>
+
 <form [formGroup]="editSongForm" (ngSubmit)="onSubmit()"
     style="background-color: #e0f2f1; padding: 20px; border-radius: 5px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
 

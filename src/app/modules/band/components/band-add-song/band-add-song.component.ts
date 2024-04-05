@@ -19,6 +19,7 @@ export class BandAddSongComponent {
   addSong$ = new Subscription();
   songId: any;
   songDetails: any;
+  showLoading:any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,12 +29,14 @@ export class BandAddSongComponent {
   ) {}
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.route.params.subscribe((id) => {
       this.songId = id['id'];
     });
     if (this.songId) {
       this.bandServ.getBandSingleSong(this.songId).subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.songDetails = res;
           if (this.songDetails) {
             this.setSongFormValues(this.songDetails);
@@ -73,6 +76,7 @@ export class BandAddSongComponent {
 
   onSubmit() {
     if (this.songForm.valid) {
+      this.showLoading=true;
       const value = this.songForm.value;
       this.formData.append('title', value.title);
       this.formData.append('album', value.album);
@@ -82,6 +86,7 @@ export class BandAddSongComponent {
 
       this.addSong$ = this.bandServ.bandAddSong(this.formData).subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.message = res.message;
           this.description = res.description;
           this.success = res.success;
@@ -107,8 +112,10 @@ export class BandAddSongComponent {
   }
 
   updateSong(songId: any) {
+    this.showLoading=true;
     this.bandServ.bandEditSong(this.songForm.value, songId).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.success = res.success;
         this.message = res.message;
         this.description = res.discription;

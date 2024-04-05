@@ -21,18 +21,21 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
   // showPopUp:Boolean=false;
   approve: Boolean = false;
   decline: Boolean = false;
+  showLoading:any;
 
   getPendingUser$ = new Subscription();
   approve$ = new Subscription();
   decline$ = new Subscription();
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.getPending();
   }
 
   getPending() {
     this.getPendingUser$ = this.adminServ.getAllPending().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.success = res.success;
         if (this.success) {
           this.pendingData = res.pending;
@@ -60,10 +63,12 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
   }
 
   approveUser() {
+    this.showLoading=true;
     this.approve$ = this.adminServ
       .pendingApproval(this.pendingUserId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.getPending();
         },
         error: (err) => {
@@ -76,10 +81,12 @@ export class PendingUsersListComponent implements OnInit, OnDestroy {
   }
 
   declineUser() {
+    this.showLoading=true;
     this.decline$ = this.adminServ
       .pendingDecline(this.pendingUserId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.getPending();
         },
         error: (err) => {

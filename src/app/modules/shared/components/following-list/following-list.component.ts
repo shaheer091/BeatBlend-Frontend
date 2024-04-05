@@ -9,24 +9,32 @@ import { Router } from '@angular/router';
   templateUrl: './following-list.component.html',
   styleUrls: ['./following-list.component.css'],
 })
-export class FollowingListComponent implements OnInit,OnDestroy {
-  constructor(private sharedServ: SharedServiceService,private userServ:UserService,private router:Router) {}
+export class FollowingListComponent implements OnInit, OnDestroy {
+  constructor(
+    private sharedServ: SharedServiceService,
+    private userServ: UserService,
+    private router: Router
+  ) {}
 
-  userList:any;
-  followingList$=new Subscription()
-  unfollowUser$=new Subscription()
+  userList: any;
+  followingList$ = new Subscription();
+  unfollowUser$ = new Subscription();
+  showLoading: any;
   ngOnInit(): void {
+    this.showLoading = true;
     this.getFollowingList();
   }
-  
+
   getFollowingList() {
-    this.followingList$=this.sharedServ.getFollowingList().subscribe({
+    this.followingList$ = this.sharedServ.getFollowingList().subscribe({
       next: (res) => {
-        this.userList=res;
+        if (res) {
+          this.showLoading = false;
+          this.userList = res;
+        }
       },
       error: (err) => {
-        alert(err.error.message)
-
+        alert(err.error.message);
       },
     });
   }
@@ -34,15 +42,23 @@ export class FollowingListComponent implements OnInit,OnDestroy {
     this.router.navigate([`/user/user-profile/${userId}`]);
   }
 
-  unfollowUser(userId:any){
-    this.unfollowUser$=this.userServ.followAndUnfollowUser(userId).subscribe()
+  unfollowUser(userId: any) {
+    this.showLoading = true;
+    this.unfollowUser$ = this.userServ.followAndUnfollowUser(userId).subscribe({
+      next: (res) => {
+        this.showLoading = false;
+      },
+      error: (err) => {
+        this.showLoading = false;
+      },
+    });
   }
 
-  getSingleUser(userId:any){
+  getSingleUser(userId: any) {
     this.router.navigate([`/user/user-profile/${userId}`]);
   }
   ngOnDestroy(): void {
-    this.followingList$.unsubscribe()
-    this.unfollowUser$.unsubscribe()
+    this.followingList$.unsubscribe();
+    this.unfollowUser$.unsubscribe();
   }
 }

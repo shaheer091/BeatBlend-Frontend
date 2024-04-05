@@ -22,13 +22,16 @@ export class ArtistListComponent implements OnInit, OnDestroy {
 
   getArtist$ = new Subscription();
   changeDeleteStatus$ = new Subscription();
+  showLoading:any;
 
   ngOnInit(): void {
+    this.showLoading=true;
     this.getArtist();
   }
   getArtist() {
     this.getArtist$ = this.adminServ.getAllArtist().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.success = res.success;
         if (res.success) {
           this.artistData = res.artist;
@@ -49,10 +52,12 @@ export class ArtistListComponent implements OnInit, OnDestroy {
   }
 
   deleteUser() {
+    this.showLoading=true;
     this.changeDeleteStatus$ = this.adminServ
       .changeDeleteStatus(this.artistId)
       .subscribe({
         next: (res) => {
+          this.showLoading=false;
           this.deleteDiv = false;
           this.getArtist();
         },

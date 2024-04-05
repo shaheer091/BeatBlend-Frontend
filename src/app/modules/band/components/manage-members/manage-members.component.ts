@@ -16,17 +16,21 @@ export class ManageMembersComponent implements OnInit {
   artists: any;
   selectedArtists: any[] = [];
   role:any;
+  showLoading:any;
+
   constructor(
     private bandServ: BandService,
     private router: Router,
-    private sharedServ: SharedServiceService
   ) {}
+
   ngOnInit(): void {
+    this.showLoading=true;
     this.getBandMembers();
   }
   getBandMembers() {
     this.bandServ.bandGetMembers().subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.bandDetails = res.band[0];
       },
       error: (err) => {
@@ -75,8 +79,10 @@ export class ManageMembersComponent implements OnInit {
   }
 
   removeMembers(userId: any) {
+    this.showLoading=true;
     this.bandServ.removeBandMember(userId).subscribe({
       next: (res) => {
+        this.showLoading=false;
         this.getBandMembers();
       },
       error: (err) => {

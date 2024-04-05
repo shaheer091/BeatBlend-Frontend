@@ -1,4 +1,4 @@
-
+<app-loading *ngIf="showLoading"></app-loading>
 
 <form [formGroup]="songForm" class="p-10"  (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <div class="mb-4">

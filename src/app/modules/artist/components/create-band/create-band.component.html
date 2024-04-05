@@ -1,3 +1,5 @@
+<app-loading *ngIf="showLoading"></app-loading>
+
 <div class="w-10/12 float-right">
     <form [formGroup]="bandForm" (ngSubmit)="onSubmit()" class="max-w-sm mx-auto mt-8">
         <div class="mb-4">
